@@ -24,7 +24,6 @@ export class CkeditorComponent {
   ngOnInit() {}
 
   ngOnChanges(changes) {
-    console.log(changes);
     //une fois que le champ est activé
     if(this.disabled===false && changes.disabled !== undefined) {
       //on charge CKEDITOR, mais dans un setTimeout, pour que la reconstruction des template ai eu le temp d'afficher les ngIf
