@@ -1,5 +1,6 @@
 /// <reference path="../../../../../node_modules/@types/ckeditor/index.d.ts" />
 import {Component, EventEmitter} from '@angular/core';
+import { StaticLoaderService } from "../../../_core/_services/static-loader";
 
 @Component({
   selector: 'ckeditor',
@@ -23,28 +24,38 @@ export class CkeditorComponent {
   ngOnInit() {}
 
   ngOnChanges(changes) {
+    console.log(changes);
+    //une fois que le champ est activé
     if(this.disabled===false && changes.disabled !== undefined) {
-      if(this.config)
-        CKEDITOR.replace(this.id,this.config);
-      else
-        CKEDITOR.replace(this.id);
-
-      this.instance = CKEDITOR.instances[this.id];
-      this.instance.on('change', this.textChanged, this);
-      this.instance.on('drop', (evt) => {
-          evt.stop();
-          evt.component = this;
-          this.drop.emit(evt);
-          return false;
-      },this)
-      this.isLoaded= true;
+      //on charge CKEDITOR, mais dans un setTimeout, pour que la reconstruction des template ai eu le temp d'afficher les ngIf
+      StaticLoaderService.getInstance().require_once([
+          '/utils/static/ckeditor/ckeditor.js'
+        ]).then(() => {
+          CKEDITOR.basePath = "/utils/static/ckeditor/";
+          this.initCKeditor();
+        });
     }
     else if (changes.disabled && changes.disabled.currentValue === true && changes.disabled.previousValue === false) {
       this.instance.destroy();
     }
   }
 
+  private initCKeditor(){
+    if(this.config)
+      CKEDITOR.replace(this.id,this.config);
+    else
+      CKEDITOR.replace(this.id);
 
+    this.instance = CKEDITOR.instances[this.id];
+    this.instance.on('change', this.textChanged, this);
+    this.instance.on('drop', (evt) => {
+        evt.stop();
+        evt.component = this;
+        this.drop.emit(evt);
+        return false;
+    },this)
+    this.isLoaded= true;
+  }
 
   public textChanged() {
     this.content = this.instance.getData();
