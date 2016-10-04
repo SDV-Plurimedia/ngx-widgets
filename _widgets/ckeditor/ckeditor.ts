@@ -1,6 +1,5 @@
 /// <reference path="../../../../../node_modules/@types/ckeditor/index.d.ts" />
 import {Component, EventEmitter} from '@angular/core';
-import { StaticLoaderService } from "../../../_core/_services/static-loader";
 
 @Component({
   selector: 'ckeditor',
@@ -24,28 +23,21 @@ export class CkeditorComponent {
   ngOnInit() {}
 
   ngOnChanges(changes) {
-    console.log("changes", changes);
     if(this.disabled===false && changes.disabled !== undefined) {
-      StaticLoaderService.getInstance().require_once([
-        '/includes/ckeditor/ckeditor.js'
-      ]).then(() => {
-        CKEDITOR.basePath = '/includes/ckeditor/';
+      if(this.config)
+        CKEDITOR.replace(this.id,this.config);
+      else
+        CKEDITOR.replace(this.id);
 
-        if(this.config)
-          CKEDITOR.replace(this.id,this.config);
-        else
-          CKEDITOR.replace(this.id);
-
-        this.instance = CKEDITOR.instances[this.id];
-        this.instance.on('change', this.textChanged, this);
-        this.instance.on('drop', (evt) => {
-            evt.stop();
-            evt.component = this;
-            this.drop.emit(evt);
-            return false;
-        },this)
-        this.isLoaded= true;
-      });
+      this.instance = CKEDITOR.instances[this.id];
+      this.instance.on('change', this.textChanged, this);
+      this.instance.on('drop', (evt) => {
+          evt.stop();
+          evt.component = this;
+          this.drop.emit(evt);
+          return false;
+      },this)
+      this.isLoaded= true;
     }
     else if (changes.disabled && changes.disabled.currentValue === true && changes.disabled.previousValue === false) {
       this.instance.destroy();
