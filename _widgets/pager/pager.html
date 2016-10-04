@@ -1,0 +1,14 @@
+<div class="simple-pager" *ngIf="nbPage > 1">
+  <!-- Première page. -->
+  <button *ngIf="!isFirstPage()" (click)="goToPage(1)" title="Première Page" class="btn btn-primary"><i class="glyphicon glyphicon-menu-left"></i><i class="glyphicon glyphicon-menu-left"></i></button>
+  <!-- Précédent. -->
+  <button *ngIf="!isFirstPage()" (click)="goToPage(currentPage - 1)" title="Page précédente" class="btn btn-primary"><i class="glyphicon glyphicon-menu-left"></i></button>
+
+  <!-- Liste de pages -->
+  <button *ngFor="let page of pageInterval" (click)="goToPage(page)" class="btn btn-default" [class.btn-primary]="isCurrentPage(page)" >{{page}}</button>
+
+  <!-- suivant -->
+  <button *ngIf="!isLastPage()" (click)="goToPage(currentPage + 1)" title="Page suivante" class="btn btn-primary"><i class="glyphicon glyphicon-menu-right"></i></button>
+  <!-- Dernière page. -->
+  <button *ngIf="!isLastPage()" (click)="goToPage(nbPage)" title="Dernière Page" class="btn btn-primary"><i class="glyphicon glyphicon-menu-right"></i><i class="glyphicon glyphicon-menu-right"></i></button>
+</div>

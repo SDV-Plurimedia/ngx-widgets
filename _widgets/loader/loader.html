@@ -1,0 +1,18 @@
+<div *ngIf="!condition" [ngSwitch]="type">
+  <template [ngSwitchCase]="'list'">
+    <div class="main-menu">
+      <ul><li><a href="javascript:void(null)">
+        <span class="fa fa-spinner fa-lg fa-pulse"></span> Chargement en cours...
+      </a></li></ul>
+    </div>
+  </template>
+  <template [ngSwitchCase]="'panel'">
+    <div class="panel-body">
+      <span class="fa fa-spinner fa-lg fa-pulse"></span> Chargement en cours...
+    </div>
+  </template>
+  <template ngSwitchDefault>
+    <span class="fa fa-spinner fa-2x fa-lg fa-pulse"></span> Chargement en cours...
+  </template>
+</div>
+<ng-content *ngIf="condition" ></ng-content>

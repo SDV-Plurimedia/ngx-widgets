@@ -1,0 +1,18 @@
+<!-- http://bootsnipp.com/snippets/featured/update-cards -->
+
+  <div class="block-update-card" *ngIf="data">
+    <div class="v-status {{data.type}}"></div>
+    <div class="update-card-body">
+      <h4>{{data.title}}</h4>
+      <p [innerHTML]="data.content"></p>
+    </div>
+    <!-- <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
+      <div class="btn-group fa fa-mobile"></div>
+      <div class="btn-group fa fa-newspaper-o"></div>
+      <div class="btn-group fa fa-tablet"></div>
+      <div class="btn-group fa fa-desktop"></div>
+      <div class="btn-group fa fa-facebook"></div>
+      <div class="btn-group fa fa-google"></div>
+      <div class="btn-group fa fa-feed"></div>
+    </div> -->
+</div>

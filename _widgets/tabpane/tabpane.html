@@ -1,0 +1,22 @@
+<link href="/app/_shared/_widgets/tabpane/tabpane.css" rel="stylesheet" type="text/css">
+<div [ngClass]="{'panel': panel_mode, 'with-nav-tabs': panel_mode, 'panel-default': panel_mode, 'card': panel_mode}" >
+  <div [ngClass]="{'panel-heading': panel_mode, 'card-header': panel_mode}">
+    <!-- HEADER -->
+    <ul class="nav nav-tabs tab-bar grey-tab" role="tablist">
+      <template ngFor let-tab [ngForOf]="tabs">
+        <li class="nav-item"  [class.active]="tab.active">
+          <a class="nav-link" [class.active]="tab.active" data-toggle="tab" role="tab" (click)="selectTab(tab)">{{tab.title}}</a>
+        </li>
+      </template>
+    </ul>
+
+  </div>
+
+  <div [ngClass]="{'panel-body': panel_mode, 'card-block': panel_mode}" >
+    <!-- CONTENU  -->
+    <div class="tab-content">
+      <ng-content></ng-content>
+    </div>
+
+  </div>
+</div>

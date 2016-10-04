@@ -1,0 +1,18 @@
+<div tabindex="1" (keyup)="onKey($event)" [ngClass]="{'chosen-container-active chosen-with-drop': isActive}" class="chosen-container chosen-container-single" style="width: 1319px;" title="">
+    <div [class.input-group]="icon">
+        <a (click)="toggleDropdown()" class="form-control" tabindex="-1"><span class="spanClick">{{placeholder}}</span>
+      </a>
+        <div class="input-group-addon" *ngIf="icon"><span class="fa fa-{{icon}}"></span></div>
+    </div>
+    <div class="chosen-drop">
+        <div class="chosen-search">
+            <input type="text" name="value" autocomplete="off" [(ngModel)]="inputValue" class="form-control inputField">
+        </div>
+
+        <ul class="chosen-results">
+            <template ngFor let-item [ngForOf]="reduceResultList(inputValue)" let-i="index" let-isfirst="first">
+                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[config.fieldName] }}</li>
+            </template>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+/*CSS*/
+.indent {
+    /*margin-left: 15px;
+    margin-right: 15px;*/
+	margin-left: 20px;
+}
+
+.row.list-group-item{
+  margin-right: 0px;
+}
+
+.icon {
+  /*margin-right: 15px;*/
+  margin-right: 3px;
+  width:15px;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.list-group .list-group-item {	/*endless.css*/
+    /*padding: 10px 15px;*/
+	padding: 10px 0px 10px 0px;
+}
+.list-group .list-group-item:hover {
+		background-color: #f1f5fc;
+		border-color: #fff;
+    color: #777;
+	}
+.btn {	/*bootstrap.css*/
+    /*padding: 6px 12px;*/
+    padding: 3px 6px;
+}

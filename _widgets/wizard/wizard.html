@@ -1,0 +1,10 @@
+<div class="container" style="width:100%; margin: 10px auto;">
+   <div class="row multistep" >
+        <div *ngFor="let step of steps"  class="col-xs-{{step.XSsize}} multistep-step {{step.state}}" >
+          <div class="text-center multistep-stepname">{{step.title}}</div>
+          <progress class="progress" value="{{step.value}}" max="100">0%</progress>
+          <a href="#" class="multistep-dot" (click)="selectStep(step, $event)"></a>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</div>

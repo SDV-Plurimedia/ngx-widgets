@@ -1,0 +1,34 @@
+<table class='table table-striped table-bordered' cellspacing='0' width='100%' #table>
+<thead *ngIf="header">
+    <tr>
+      <template ngFor let-champ [ngForOf]="structure">
+        <th>{{champ.label}}</th>
+      </template>
+      <th *ngIf="buttons"></th>
+    </tr>
+</thead>
+<tfoot *ngIf="footer">
+    <tr>
+      <template ngFor let-champ [ngForOf]="structure">
+        <th>{{champ.label}}</th>
+      </template>
+      <th *ngIf="buttons"></th>
+    </tr>
+
+</tfoot>
+<tbody>
+    <template ngFor let-ligne [ngForOf]="data" >
+      <tr class="dt-body-row" >
+        <template ngFor let-champ [ngForOf]="structure">
+          <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
+          <td *ngIf="!champ.template">{{ getValue(ligne, champ.id)}}</td>
+        </template>
+        <td *ngIf="buttons">
+          <template ngFor let-button [ngForOf]="buttons">
+            <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])">{{button.text}}</button>
+          </template>
+        </td>
+      </tr>
+    </template>
+  </tbody>
+</table>

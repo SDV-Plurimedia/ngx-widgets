@@ -1,0 +1,19 @@
+/*CSS*/
+.menu-header{
+  font-size: 17px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+@media (min-width: 768px) {
+  .mini-menu {
+    width: 60px!important;
+  }
+}
+@media (max-width: 768px){
+  .mini-menu {
+    display:none;
+  }
+}

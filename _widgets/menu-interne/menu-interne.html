@@ -1,0 +1,24 @@
+<div class="bg-primary custom-grid menu-grid" [class.mini-menu]="!open">
+	<div class="menu-header">
+		<span (click)="toggleState()"><i class="fa fa-bars">&nbsp;</i> <span *ngIf="open">{{title}}</span></span>
+		<a *ngIf="open" class="btn btn-sm pull-right" (click)="button.emit(true)" data-toggle="modal" title='{{tooltip}}'><i class="fa fa-{{icon}}"></i></a>
+	</div>
+	<ul class="inbox-menu" id="inboxMenu">
+		<li *ngFor="let item of items; let i = index;" [class.active]="item.active">
+			<a *ngIf="!item.subitems" (click)="selectItem(item)">
+				<i class="fa fa-{{item.icon}} fa-lg"></i>
+				<span *ngIf="open" class="m-left-xs">{{item.title}}</span>
+				<span *ngIf="item.badge&&open" class="badge badge-{{item.badge.class}} pull-right">{{item.badge.number}}</span>
+			</a>
+
+      <a *ngIf="item.subitems&&open" class="collapsed" href="#secondLevel{{i}}" data-toggle="collapse">
+				{{item.title}} <span class="m-left-xs"><i class="fa fa-chevron-down"></i></span>
+			</a>
+			<ul *ngIf="item.subitems" class="collapse submenu" id="secondLevel{{i}}">
+        <i class="fa fa-{{item.icon}} fa-lg"></i>
+				<li *ngFor="let subitem of item.subitems" [class.active]="subitem.active"><a (click)="selectItem(subitem,item)">{{subitem.title}}<span *ngIf="subitem.badge" class="badge badge-{{subitem.badge.class}} pull-right">{{subitem.badge.number}}</span></a></li>
+			</ul>
+
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,3 @@
+<div *ngIf="disabled" [innerHTML]="content"></div>
+
+<textarea name="{{id}}" id="{{id}}" rows="{{rows}}" [(ngModel)]="content" [disabled]="disabled" *ngIf="!disabled" (keyup)="textChanged()"></textarea>

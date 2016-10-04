@@ -1,0 +1,6 @@
+/*CSS*/
+.switcher .bootstrap-switch .bootstrap-switch-handle-on,
+.switcher .bootstrap-switch .bootstrap-switch-handle-off,
+.switcher .bootstrap-switch .bootstrap-switch-label {
+  height: auto;
+}

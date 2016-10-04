@@ -1,0 +1,92 @@
+/*CSS*/
+
+/*Pour les valeurs  inférieurs à 10%*/
+.progress-pulse[value^="0"], .progress-pulse[value^="1"] {
+  color: #efac4d;
+}
+.progress-pulse[value^="0"]::-webkit-progress-value {
+  background-color: #efac4d;
+}
+.progress-pulse[value^="1"]::-webkit-progress-value {
+  background-color: #efac4d;
+}
+.progress-pulse[value^="0"]::-moz-progress-value {
+  background-color: #efac4d;
+}
+.progress-pulse[value^="1"]::-moz-progress-value {
+  background-color: #efac4d;
+}
+
+/*Pour les valeurs  inférieurs à 30%*/
+.progress-pulse[value^="2"], .progress-pulse[value^="3"] {
+  color: #e2d953;
+}
+.progress-pulse[value^="2"]::-webkit-progress-value {
+  background-color: #e2d953;
+}
+.progress-pulse[value^="3"]::-webkit-progress-value {
+  background-color: #e2d953;
+}
+.progress-pulse[value^="2"]::-moz-progress-value {
+  background-color: #e2d953;
+}
+.progress-pulse[value^="3"]::-moz-progress-value {
+  background-color: #e2d953;
+}
+
+/*Pour les valeurs  inférieurs à 50%*/
+.progress-pulse[value^="4"], .progress-pulse[value^="5"] {
+  color: #afd357;
+}
+.progress-pulse[value^="4"]::-webkit-progress-value {
+  background-color: #afd357;
+}
+.progress-pulse[value^="5"]::-webkit-progress-value {
+  background-color: #afd357;
+}
+.progress-pulse[value^="4"]::-moz-progress-value {
+  background-color: #afd357;
+}
+.progress-pulse[value^="5"]::-moz-progress-value {
+  background-color: #afd357;
+}
+
+/*Pour les valeurs  inférieurs à 75%*/
+.progress-pulse[value^="6"], .progress-pulse[value^="7"] {
+  color: #80c65a;
+}
+.progress-pulse[value^="6"]::-webkit-progress-value {
+  background-color: #80c65a;
+}
+.progress-pulse[value^="7"]::-webkit-progress-value {
+  background-color: #80c65a;
+}
+.progress-pulse[value^="6"]::-moz-progress-value {
+  background-color: #80c65a;
+}
+.progress-pulse[value^="7"]::-moz-progress-value {
+  background-color: #80c65a;
+}
+
+/*Pour les valeurs à 100%*/
+.progress-pulse[value="8"], .progress-pulse[value^="9"], .progress-pulse[value="100"] {
+  color: #5cbb5c;
+}
+.progress-pulse[value^="8"]::-webkit-progress-value {
+  background-color: #5cbb5c;
+}
+.progress-pulse[value^="9"]::-webkit-progress-value {
+  background-color: #5cbb5c;
+}
+.progress-pulse[value="100"]::-webkit-progress-value {
+  background-color: #5cbb5c;
+}
+.progress-pulse[value^="8"]::-moz-progress-value {
+  background-color: #5cbb5c;
+}
+.progress-pulse[value^="9"]::-moz-progress-value {
+  background-color: #5cbb5c;
+}
+.progress-pulse[value="100"]::-moz-progress-value {
+  background-color: #5cbb5c;
+}

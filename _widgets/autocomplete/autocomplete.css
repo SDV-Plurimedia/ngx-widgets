@@ -1,0 +1,19 @@
+.chosen-container-single .chosen-drop {
+  margin-top : -3px;
+}
+
+.chosen-container .chosen-drop {
+  border-color : #ccc;
+}
+
+.chosen-container .form-control:focus {
+  border-color: #ccc;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.chosen-container .chosen-results li:hover{
+  color: white;
+  background-color: #7fa7e6;
+}
