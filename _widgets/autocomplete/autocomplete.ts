@@ -41,7 +41,7 @@ export class AutocompleteComponent {
         this.results = [];
         if (value && value.length >= this.config.begin) {
             this.data.forEach((item, index) => {
-                if (item[this.config.fieldName].substring(0, value.length).toLowerCase() == value.toLowerCase()) {
+                if (this.getDisplayLabel(item).substring(0, value.length).toLowerCase() == value.toLowerCase()) {
                     this.results.push(item);
                 }
             });
@@ -66,6 +66,21 @@ export class AutocompleteComponent {
             return item[this.config.fieldValue];
         else
             return item;
+    }
+
+    getDisplayLabel(item) {
+      let res = ""
+      if(this.config.fieldName.constructor === Array) {
+        this.config.fieldName.forEach(field => {
+          if(res == "")
+            res += item[field];
+          else res += " - "+item[field];
+        });
+      }
+      else {
+        res = item[this.config.fieldName];
+      }
+      return res;
     }
 
     valideItem(item) {

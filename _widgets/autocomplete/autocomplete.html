@@ -11,7 +11,7 @@
 
         <ul class="chosen-results">
             <template ngFor let-item [ngForOf]="reduceResultList(inputValue)" let-i="index" let-isfirst="first">
-                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[config.fieldName] }}</li>
+                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ getDisplayLabel(item) }}</li>
             </template>
         </ul>
     </div>
