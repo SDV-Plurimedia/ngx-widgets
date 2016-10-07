@@ -88,7 +88,7 @@ export class AutocompleteComponent {
         this.toggleDropdown();
         this.inputValue = "";
         this.setCursorPosition(0);
-        this.placeholder = item[this.config.fieldName];
+        this.placeholder = this.getDisplayLabel(item);//item[this.config.fieldName];
     }
 
     //GESTION DU CLIC EN DEHORS DU CHAMP
