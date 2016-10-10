@@ -1,4 +1,4 @@
-/// <reference path="../../../../../node_modules/@types/jquery/index.d.ts"/>
+/// <reference path="../../node_modules/@types/jquery/index.d.ts"/>
 
 import {Component, Injectable} from '@angular/core';
 import {WizartStepComponent} from "./step";
