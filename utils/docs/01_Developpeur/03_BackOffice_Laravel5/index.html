@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BackOffice Laravel5 - Lea Pulse</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "BackOffice Laravel5";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="icon icon-home"> Lea Pulse</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../index.html">Accueil</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide Developpeur</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../00_Introduction/index.html">Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../01_BackOffice_Angular2/index.html">BackOffice Angular2</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../02_BackOffice_Legacy/index.html">BackOffice Legacy</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="index.html">BackOffice Laravel5</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#modules">Modules</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#commands">Commands</a></li>
+                
+                    <li><a class="toctree-l4" href="#imports">Imports</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#publication">Publication</a></li>
+                
+                    <li><a class="toctree-l4" href="#evenements">Evenements</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#controllers">Controllers</a></li>
+                
+                    <li><a class="toctree-l4" href="#config">Config</a></li>
+                
+                    <li><a class="toctree-l4" href="#topic">Topic</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#services">Services</a></li>
+                
+                    <li><a class="toctree-l4" href="#cache">Cache</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#elasticsearch">Elasticsearch</a></li>
+                
+                    <li><a class="toctree-l4" href="#installation-et-configuration">Installation et Configuration</a></li>
+                
+                    <li><a class="toctree-l4" href="#clusters-nodes-shards-et-indices">Clusters, nodes, shards et indices</a></li>
+                
+                    <li><a class="toctree-l4" href="#indexation-et-mapping">Indexation et mapping</a></li>
+                
+                    <li><a class="toctree-l4" href="#connexion-laravel-5-elasticsearch">Connexion Laravel 5 / Elasticsearch</a></li>
+                
+                    <li><a class="toctree-l4" href="#sandbox-sur-laravel-5">Sandbox sur Laravel 5</a></li>
+                
+                    <li><a class="toctree-l4" href="#communication-laravel-5-elasticsearch">Communication Laravel 5 / Elasticsearch</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#metadata">Metadata</a></li>
+                
+                    <li><a class="toctree-l4" href="#representation-simplifiee-du-modele-de-donnees-du-systeme-de-meta">Représentation simplifiée du modèle de données du système de meta</a></li>
+                
+                    <li><a class="toctree-l4" href="#declaration-dune-meta">Déclaration d'une Meta</a></li>
+                
+                    <li><a class="toctree-l4" href="#description-du-champ-settings">Description du champ settings</a></li>
+                
+                    <li><a class="toctree-l4" href="#collecte-et-acheminement-des-donnees">Collecte et acheminement des données</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../04_FrontOffice_Engine/index.html">FrontOffice Engine</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../05_FrontOffice_Templating/index.html">FrontOffice Templating</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide Utilisateur</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../02_Utilisateur/00_Introduction/index.html">Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../02_Utilisateur/01_Saisie_Article/index.html">Saisie Article</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../02_Utilisateur/02_Image_et_assets/index.html">Image et assets</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../02_Utilisateur/03_Topic/index.html">Topic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../02_Utilisateur/04_Publication_Export/index.html">Publication et Export</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Lea Pulse</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Guide Developpeur &raquo;</li>
+        
+      
+    
+    <li>BackOffice Laravel5</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>BackOffice Laravel5</p>
+<p>Nous vous recommandons d'avoir fait les premiers tutoriaux Laravel5 avant de poursuivre <a href="https://laravel.com/docs/5.2/quickstart">Tuto First Start</a> à SDV vous pouvez aussi consulter les vidéos laracasts</p>
+<p>Le backoffice Laravel5 fait le lien entre les services du BO Angular2 et du BO Legacy.
+Il permet également les requêtes sur les collection de MongoDB.</p>
+<p>Sommaire</p>
+<div class="toc">
+<ul>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#commands">Commands</a><ul>
+<li><a href="#imports">Imports</a></li>
+</ul>
+</li>
+<li><a href="#publication">Publication</a><ul>
+<li><a href="#evenements">Evenements</a></li>
+</ul>
+</li>
+<li><a href="#controllers">Controllers</a><ul>
+<li><a href="#config">Config</a></li>
+<li><a href="#topic">Topic</a></li>
+</ul>
+</li>
+<li><a href="#services">Services</a><ul>
+<li><a href="#cache">Cache</a></li>
+</ul>
+</li>
+<li><a href="#elasticsearch">Elasticsearch</a><ul>
+<li><a href="#installation-et-configuration">Installation et Configuration</a><ul>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#etat-du-serveur-es">État du serveur ES</a></li>
+</ul>
+</li>
+<li><a href="#clusters-nodes-shards-et-indices">Clusters, nodes, shards et indices</a></li>
+<li><a href="#indexation-et-mapping">Indexation et mapping</a><ul>
+<li><a href="#indexation-es">Indexation ES</a></li>
+<li><a href="#indexation-des-documents">Indexation Des documents</a></li>
+</ul>
+</li>
+<li><a href="#connexion-laravel-5-elasticsearch">Connexion Laravel 5 / Elasticsearch</a></li>
+<li><a href="#sandbox-sur-laravel-5">Sandbox sur Laravel 5</a></li>
+<li><a href="#communication-laravel-5-elasticsearch">Communication Laravel 5 / Elasticsearch</a></li>
+</ul>
+</li>
+<li><a href="#metadata">Metadata</a><ul>
+<li><a href="#representation-simplifiee-du-modele-de-donnees-du-systeme-de-meta">Représentation simplifiée du modèle de données du système de meta</a></li>
+<li><a href="#declaration-dune-meta">Déclaration d'une Meta</a></li>
+<li><a href="#description-du-champ-settings">Description du champ settings</a></li>
+<li><a href="#collecte-et-acheminement-des-donnees">Collecte et acheminement des données</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="modules">Modules</h2>
+<p>Pour ajouter des modules à votre installation de laravel, ceux-ci devront etre dans app/Modules et seront loadé en psr4.
+Il faudra simplement faire un composer dump-autoload pour qu'il soit pris en compte.</p>
+<p>Vous pouvez inclure aussi des routes, grace au fichier app/Http/modules.routes.php</p>
+<h2 id="commands">Commands</h2>
+<h3 id="imports">Imports</h3>
+<p>Les scripts d'import doivent fonctionner en mode authentifié, pour cela il est nécessaire de connaitre un user (en général 'import').</p>
+<pre><code>use Illuminate\Support\Facades\Auth;
+use ApiPulse\Models\Lea\sfGuardUser;
+...
+$user_import = sfGuardUser::where('username','import')-&gt;first();
+//on s'authentifie en tant que ce user
+Auth::login($user_import);
+
+//plus tard dans le script on pourra retrouver ce user grâce à:
+$user = Auth::user();
+</code></pre>
+<h2 id="publication">Publication</h2>
+<p>La publication est basé sur le systeme d'evenement de Laravel et sur les files de Redis.</p>
+<p>Principe de base, lors de l'enregistrement d'un article (c'est aussi valable pour les blocs, colonnes etc..):</p>
+<ul>
+<li>On mets à jours les données back de l'article (les principales dans mysql, les metas dans mongo)</li>
+<li>On insere l'ID de cet article dans une file redis (dans Legacy avec SdvRedisClient et dans L5 avec Predis)</li>
+<li>Ceci mets fin à la partie synchrone de l'enregistrement</li>
+<li>En paralélle, un daemon lancé avec "artisan redis:subscribe <channel>" va dépiler cette file</li>
+<li>Pour chaque ID récupérer, il va créer un evenement d'une classe spécial lié à cette file</li>
+<li>Chacun de ces evenements est lié à un ou plusieurs listeners, qui vont chacun etre exécuté</li>
+<li>Les listeners définissent quels traitements sont à faire pour la publication (ceci permet de pouvoir definir plusieurs réaction pour une seul evenement)</li>
+</ul>
+<h3 id="evenements">Evenements</h3>
+<p>Les évenements sont définies dans ApiPulse/Events, ou dans des modules Modules/Nom_Module/Events.</p>
+<p>Les listeners sont dans ApiPulse/Listeners, ou dans des modules Modules/Nom_Module/Listeners.</p>
+<p>Les liaisons entre les 2 sont dans Providers/EventServiceProvider.php ou dans les modules Modules/Nom_Module/Providers/EventServiceProvider.php.</p>
+<h2 id="controllers">Controllers</h2>
+<h3 id="config">Config</h3>
+<p>Le controller config permet de stocker des infos de configuration dans la collection <strong>config</strong> de la base <strong>lea_pulse_back</strong>.</p>
+<p>Deux fonctions sont définies dans le controller:</p>
+<ul>
+<li><strong>get($type)</strong> : permet de récupérer le document dont le type correspond</li>
+<li><strong>set($type, Request $req)</strong> : permet de créer ou mettre un jour un document correspondant au type donné.</li>
+</ul>
+<h3 id="topic">Topic</h3>
+<p>Le controller de Topic permet d'accéder aux informations concernant les topics en lecture.</p>
+<p>On peut :</p>
+<ul>
+<li>accéder à la liste des topics en entier (avec une mise en cache des données) via <strong>getTopicList()</strong>.</li>
+<li>récupérer les informations d'un seul topic via <strong>getTopic($id)</strong>.</li>
+<li>récupérer un liste paginée d'articles liés au topic demandé via <strong>getTopicElements($id, $type = null, $perPage=20)</strong><ul>
+<li><strong>$id</strong> correcpond à l'identifant de la hiérarchie,</li>
+<li><strong>$type</strong> correcpond à la version des articles voulus (en ligne, brouillon, ...),</li>
+<li><strong>$perPage</strong> est le nombre d'article qui nous sont retourné par page.</li>
+</ul>
+</li>
+<li>récupérer la configuration du topic et les veleurs associées pour le paramétrage de celui-ci via <strong>getMetas($id)</strong>.</li>
+</ul>
+<h2 id="services">Services</h2>
+<h3 id="cache">Cache</h3>
+<p>Il est possible de mettre en cache certaines données de la base MySQL dans la base Mongo.
+Le fonctionnement de la fonction <em>get()</em> du service de cache est de chercher des données récentes dans la collection de cache, de les mettre à jour si la date de dernier update du contenu n'est pas suffisamment récente ou de créer un nouveau document si le cache n'existe pas.</p>
+<p>La syntaxe est la suivante:</p>
+<pre><code>use ApiPulse\Services\cacheService as Cache;
+
+Cache::get($id, $max_minute, $request);
+</code></pre>
+<ul>
+<li><strong>$id</strong>: <em>String</em> - Identifiant du document dans lequel chercher, mettre à jour ou créer le cache.</li>
+<li><strong>$max_minute</strong>: <em>Int</em> - Nombre de minutes maximum de dernière update du cache avant qu'il ne soit considéré comme périmé (ce qui entraine une nouvelle requête MySQL)</li>
+<li><strong>$request</strong>: <em>Request</em> - Requête à effectuée sur la base MySQL (dans le cas de création/mise à jour)</li>
+</ul>
+<p>Exemple:</p>
+<pre><code>Cache::get("TopicList", 5, Topic::select('id_hierarchie', 'titre', 'path', 'uri'));
+</code></pre>
+<h2 id="elasticsearch">Elasticsearch</h2>
+<h3 id="installation-et-configuration">Installation et Configuration</h3>
+<h4 id="docker">Docker</h4>
+<p>L’instance Elasticsearch (‘ES’ pour la suite de la documentation) docker est basée sur <a href="https://hub.docker.com/_/elasticsearch/">l’image officielle 2.3</a>
+Le docker file est dans <em>/data/builds/elasticsearch</em>
+Les configs (générale et logs) se situent dans le sous-dossier ‘conf’.</p>
+<p>Une fois le docker-compose lancé le conteneur doit être mappé comme suit :
+<strong>0.0.0.0:9200-&gt;9200/tcp, 9300/tcp</strong> et doit porter le nom suivant : <strong>lea_pulse_elasticsearch</strong></p>
+<h4 id="etat-du-serveur-es">État du serveur ES</h4>
+<p>Pour vérifier que le serveur répond bien, il suffit d’exécuter : ‘<em>curl localhost:9200</em>’. Ou simplement d’y accéder via votre navigateur préféré.</p>
+<pre><code>  {
+    name: &quot;lea-pulse-node-01&quot;,
+    cluster_name: &quot;lea-pulse-dev&quot;,
+    version: 
+    {
+      number: &quot;2.3.3&quot;,
+      build_hash: &quot;218bdf10790eef486ff2c41a3df5cfa32dadcfde&quot;,
+      build_timestamp: &quot;2016-05-17T15:40:04Z&quot;,
+      build_snapshot: false,
+      lucene_version: &quot;5.5.0&quot;
+  },
+    tagline: &quot;You Know, for Search&quot;
+  }
+</code></pre>
+
+<p>Si la réponse ressemble à la sortie ci dessus alors le serveur répond correctement.
+Si les requêtes simples ES peuvent être effectuées en get via curl ou via un navigateur nous utiliserons l’extension ‘<a href="https://chrome.google.com/webstore/detail/sense-beta/lhjgkmllcaadmopgmanpapmpjgmfcfig?hl=fr">Sense</a>’ de Chrome pour les requêtes avancées.</p>
+<h3 id="clusters-nodes-shards-et-indices">Clusters, nodes, shards et indices</h3>
+<p>L’écosystème ES foisonne de termes très spécifiques, sans entrer dans les détails nous listerons les principaux avant de présenter le fonctionnement global d’ES.</p>
+<ul>
+<li>
+<p><strong>Node</strong> : Un node est un instance Elasticsearch. Le plus simple et de le visualiser comme un serveur dédié.</p>
+</li>
+<li>
+<p><strong>Cluster</strong> : Un cluster est un ensemble de nodes. Cela permet de scaler horizontalement ES qui est par nature une application d’architecture distribuée. Un node peut être ‘master’ ou ‘worker’ Le master s’occupe du CRUD d’index (index au sens ‘base de données’ ES) ainsi que de la gestion d’ajout retrait de node au sein du cluster. Il est important de noter qu’une fois un cluster en place, l’attribution master / worker se fait de façon automatique. En d’autres termes si le node master tombe, le système attribuera automatiquement ce rôle à un autre node. Le node master permet aussi d’effectuer des recherches ES sur les documents indexés. Une application ES peut donc n’avoir qu’un seul node.</p>
+</li>
+<li>
+<p><strong>Shard</strong> : Un shard est une simple instance de Lucène au sein d’un node. On parle aussi de ‘worker de bas niveau’. Il n’y a pas grand-chose à retenir de ces éléments dans un premier temps si ce n’est qu’un shard peut être de type primaire (<strong>primary</strong>) ou réplica (<strong>replica</strong>).  c’est dans un shard primaire que sont stockés les documents indexés,  un shard réplica n’est qu’une copie en lecture seule d’un shard primaire pour assurer la pérennité des données lors du crash d’un node.
+Par défaut ES créé 5 shards par node. Lors de la création d’un index on peut modifier ce chiffre.</p>
+</li>
+<li>
+<p><strong>Index</strong> (<em>plur</em>. indices) : L’index (au niveau d’un instance ES) est l’équivalent d’une base de données dans le modèle relationnel. Des documents de différents types (articles, commentaires, utilisateurs) peuvent tout à fait être indexés dans un même index.</p>
+</li>
+</ul>
+<p>Pour consulter l’état d’un cluster ils suffit de s’y connecter via <a href="http://localhost:9200/_plugin/head/">http://localhost:9200/_plugin/head/</a>. (Plugin ajouté à l’image ES).</p>
+<p><img alt="plugin head" src="../../img/l5/es/sante-cluster.png" title="Santé du Cluster" /></p>
+<ul>
+<li><strong>Cluster</strong> : lea-pulse-dev</li>
+<li><strong>Indices</strong> : 1 seul index ici, lea-pulse-front-01-06-16</li>
+<li><strong>Nodes</strong> : lea-pulse-node-01 (<strong>master</strong>) lea-pulse-node-02 (<strong>worker</strong>)</li>
+<li><strong>Shards</strong> : 3 shards primaires (encadrés en vert gras) et 3 shards de type réplica.</li>
+<li>Autres infos, l’index pèse 10,8M et 1 000 documents sont indexés.</li>
+</ul>
+<h3 id="indexation-et-mapping">Indexation et mapping</h3>
+<p>Il est important de ne pas confondre l’indexation Elasticsearch (équivalent  à une base de données) avec l’indexation de documents et de champs.</p>
+<h4 id="indexation-es">Indexation ES</h4>
+<p>Un index est pré-configuré dans bo_api_l5/config/elasticsearch.php.
+On indique entre autre le nom, le nombre de shards primaires et le nombre de shards réplicas. Inutile d’assigner des réplicas dans le cas d’un cluster à un seul node, ces derniers ne pourront pas être assignés. Note importante : 1 réplica ne signifie pas un shard de type réplica mais 1 x le nombre de shards primaires. C’est à dire que si on indique 3 shards primaires et 2 replicas, le système tentera d’affecter 6 shards de type réplica. Il faudra donc au moins 3 nodes pour tout assigner.</p>
+<h4 id="indexation-des-documents">Indexation Des documents</h4>
+<p>Pour l’indexation des documents, il existe deux méthodes. L’indexation ‘<em>Fast &amp; Furious</em>’ et l’indexation ‘<em>Délicate</em>’ (ce nommage n’implique que l’auteur de cette documentation).
+Dans le premier cas, on envoie simplement une représentation json d’un objet que l’on souhaite indexer et ES s’occupe de tout.
+Exemple (inspiré de la doc officielle)</p>
+<pre><code>  PUT /lea-pulse-front-01-06-16/employee/1
+  {
+      &quot;first_name&quot; : &quot;John&quot;,
+      &quot;last_name&quot; :  &quot;Smith&quot;,
+      &quot;age&quot; :        25,
+      &quot;about&quot; :      &quot;I love to go rock climbing&quot;,
+      &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]
+  }
+</code></pre>
+
+<ul>
+<li><strong>lea-pulse-front-01-06-16</strong>: Nom de l’index sur lequel on souhaite envoyer le document.</li>
+<li><strong>Employee</strong>: type de document.</li>
+<li><strong>1</strong>: id du document, le plus simple étant en règle générale de récupérer celui de la base de données de laquelle est issu le document.</li>
+</ul>
+<p>Et baaam le document est indexé ! Pas besoin de se prendre la tête sur les champs envoyés et leur interprétation lors du stockage ou lors de la recherche. On se moque du Mapping, ES le fait pour nous.</p>
+<p>Le problème est évidement que pour une utilisation fine et optimale de ES, cette méthode ne suffit pas. Prenons un exemple : Un article A qui traite de la crise financière en Europe se verra associer à une rubrique ‘Crise financière’. Si un internaute cherche ‘crise’ ou ‘finance’, alors on s’attend à ce que toute association avec ‘Crise financière’ pondère le score de pertinence vers le haut. Cela ne peut se faire que si le champ est indexé comme étant du texte (analysé, parsé, tokenizé selon les spécificités propres à la langue de l’utilisateur qui effectue la recherche). Le mapping automatique sélectionnera sans doute un tel comportement. En revanche, si dans un formulaire un minimum dynamique, l’utilisateur ne choisit que les articles de type en lien avec ‘Crise financière’ alors pour dispenser à la volée le nombre d’articles concernés, (la ou en sql on imagine where rubrique = ‘Crise financiere’) l’indexation full-text n’est absolument pas adaptée. Il faut dans ce cas un mapping particulier qui permet d’indexer un champ de 2 façons différentes, une pour la recherche texte, l’autre pour la recherche filtrée par des critères précis.
+Plus d’infos sur le mapping à cette adresse : <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-intro.html">https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-intro.html</a></p>
+<h3 id="connexion-laravel-5-elasticsearch">Connexion Laravel 5 / Elasticsearch</h3>
+<ul>
+<li>
+<p><strong>Client Elasticsearch PHP</strong>:
+La connexion se fait par la librairie client PHP officielle de ES.</p>
+</li>
+<li>
+<p><strong>Provider</strong>:
+Le provider développé pour le bo_appi <em>app/Providers/ElasticsearchServiceProvider.php</em> se charge de l’instanciation du client en utilisant les paramètres de configuration. Ce provider permet aussi de bénéficier de l’injection de dépendance afin de simplifier son utilisation dans les controlers et repo de l’application Laravel.</p>
+</li>
+<li>
+<p><strong>Controller</strong>:
+Toutes les interactions avec ES doivent passer par le controller <em>app/ApiPulse/Controllers/ESController.php</em>.</p>
+</li>
+<li>
+<p><strong>Repository</strong>:
+Les requêtes et traitements avancés ES sont effectués dans le repo <em>app/ApiPulse/Repositories/ElasticsearchRepository.php</em>.</p>
+</li>
+<li>
+<p><strong>Service</strong>:
+Interface entre le client officiel et l’app Laravel.</p>
+</li>
+<li>
+<p><strong>Console</strong>:
+Les scripts de console sont situés dans <em>app/Console/Commands</em>.
+Liste des scripts <strong>esearch</strong>:</p>
+<ul>
+<li><strong>esearch:*create-index</strong><em>: Création du ou des index décrits dans </em>config/elasticsearch.php*</li>
+<li><strong>esearch:*delete-index</strong><em>: Suppression d'un index (</em>config/elasticsearch.php*)</li>
+<li><strong>esearch:*populate</strong>*: Indexation d'éléments (en cours de dev)</li>
+<li><strong>esearch:*update-index</strong><em>: Mise à jour d'un index (</em>config/elasticsearch.php*)</li>
+</ul>
+</li>
+</ul>
+<h3 id="sandbox-sur-laravel-5">Sandbox sur Laravel 5</h3>
+<p>Afin de faciliter les développements et les tests de requêtes déclenchées par les formulaires de recherche, une interface sur l’appli Laravel 5 est accessible.</p>
+<p><img alt="formulaire de recherche" src="../../img/l5/es/sandbox-form.png" title="Formulaire de recherche sandbox" /></p>
+<p>Ce formulaire reprend peu ou prou celui de front Angular 2. Les données transmises en POST utilisent le même endpoint.</p>
+<p><img alt="formulaire de recherche" src="../../img/l5/es/list-result.png" title="Formulaire de recherche sandbox" /></p>
+<ul>
+<li><strong>1</strong>: score de pertinence ES.
+Le rendu est modifiable dans <em>ressources/elastic/search.blade.php</em>.</li>
+</ul>
+<h3 id="communication-laravel-5-elasticsearch">Communication Laravel 5 / Elasticsearch</h3>
+<p>Toutes les communications avec ES se font en REST. Le CRUD sur les indices ES (config index + mapping), le CRUD sur les documents ES au sein d’un index et les recherches de document ‘<em><a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/intro.html">You Know, for Search</a></em>’ comme ils disent.</p>
+<p>Ce qu’il faut donc retenir c’est qu’une fois un cluster et ses nodes en place, tout est entièrement gérable et paramétrable via L5 grâce à la lib client PHP.</p>
+<p><strong>Requetes DSL (Domain Specific Language)</strong>:
+Il s’agit simplement d’un système de requête envoyées en JSON. Nous n’entrerons pas ici dans le détail des requêtes, la doc officielle le fera bien mieux. Nous retiendrons simplement que nous devrons mettre en place l’équivalent de la requête JSON attendue sous forme d’un tableau php indexé. Voici la structure de base que nous utilisons.</p>
+<pre><code>  $params = [
+          #Index Sur lequel porte la requête.
+          'index' =&gt; env('ELASTICSEARCH_INDEX', 'lea-pulse-front-01-06-16'),
+          #Type de 'collection'.
+          'type'  =&gt; 'element',
+          #Structure de base pour une requête avancée.
+          'body'  =&gt; [
+              #offset
+               'from' =&gt; $from,
+             #nombre d’éléments max à retourner.
+               'size' =&gt; $size,
+               #Requête principale.
+             'query' =&gt; [
+                'bool' =&gt; [
+                     #matchings de critères qui doivent être pris en compte pour qu’un ou plusieurs résultat remontent.
+                   'must'   =&gt; [],
+                      #matchings de critères facultatifs qui augmenterons le score de pertinence.
+                    'should' =&gt; [],
+                      #Critères discriminants
+                    'must_not' =&gt; [],
+                      #Critères de filtres n’impactant pas le score. Exemple : ‘publié’.
+                    'filter' =&gt; []
+                  ]
+            ],
+            #Le filtrage avec date est le cas le plus utilisé on l'initialise donc ici.
+            'sort'  =&gt; [
+              ['date_modification' =&gt; ['order' =&gt; 'desc']],
+              ['_score'            =&gt; ['order' =&gt; 'desc']]
+            ],
+          ]
+        ];
+</code></pre>
+
+<p><strong>Exemple concret</strong>: Une fois (sortie JSON du client PHP).
+On recherche ici tous les éléments (articles) comportant ‘hollande’ dans le titre ou le texte (must) voir si possible (should) dans les topics et dont l’état est publié (99). On limite la recherche aux 10 éléments les + pertinents.</p>
+<pre><code>&quot;query&quot;: {
+  &quot;bool&quot;: {
+    &quot;must&quot;: [
+              {
+      &quot;multi_match&quot;: {
+        &quot;query&quot;: &quot;hollande&quot;,
+        &quot;fields&quot;: [&quot;titre&quot;, &quot;texte&quot;]
+      }
+    }],
+          &quot;should&quot;: [{
+        &quot;match&quot;: {
+        &quot;topics&quot;: &quot;hollande&quot;
+      }
+    }],
+    &quot;filter&quot;: [{
+              &quot;term&quot;: {
+                  &quot;etat&quot;: &quot;99&quot;
+              }
+    }]
+  }
+},
+  &quot;size&quot;: &quot;10&quot;,
+  &quot;from&quot;: &quot;0&quot;
+}
+</code></pre>
+
+<p><strong>Réponse</strong> (1 seule occurence pour la doc):</p>
+<pre><code>{
+   &quot;took&quot;: 18,
+   &quot;timed_out&quot;: false,
+   &quot;_shards&quot;: {
+      &quot;total&quot;: 3,
+      &quot;successful&quot;: 3,
+      &quot;failed&quot;: 0
+   },
+   &quot;hits&quot;: {
+      &quot;total&quot;: 71,
+      &quot;max_score&quot;: 0.5805197,
+      &quot;hits&quot;: [
+         {
+            &quot;_index&quot;: &quot;lea-pulse-front-01-06-16&quot;,
+            &quot;_type&quot;: &quot;element&quot;,
+            &quot;_id&quot;: &quot;2005235&quot;,
+            &quot;_score&quot;: 0.5805197,
+            &quot;_source&quot;: {
+               &quot;id_article&quot;: 2005235,
+               &quot;id_element&quot;: 2005236,
+               &quot;titre&quot;: &quot;Le président français François Hollande en visite d'Etat en Egypte&quot;,
+               &quot;chapeau&quot;: &quot;&quot;,
+               &quot;texte&quot;: &quot;Le président français François Hollande est arrivé dimanche au Caire pour réaffirmer son soutien à son homologue Abdel Fattah al-Sissi qui dirige l'Egypte d'une main de fer, une visite centrée sur la sécurité au Moyen-Orient mais avec un important volet commercial.M. Hollande a atterri au Caire en milieu d'après-midi en provenance du Liban, première étape d'une tournée au Moyen-Orient devant aussi le conduire en Jordanie après deux jours d'une visite d'Etat en Egypte, a constaté une journaliste de l'AFP à l'aéroport. Il a été accueilli par M. Sissi qui l'a embrassé à la descente d'avion.Les deux hommes doivent s'entretenir notamment de la question israélo-palestinienne, de la guerre en Syrie, de la tension en Libye et de la lutte contre l'organisation jihadiste Etat islamique (EI), selon la présidence française.M. Hollande est accompagné d'une trentaine de chefs de grands groupes français mais aussi de petites et moyennes entreprises (PME), qui doivent prendre part à un \&quot;forum d'affaires\&quot; franco-égyptien et assister à la signature de divers \&quot;accord sectoriels\&quot;, notamment dans les domaines des transports urbains, de l'énergie renouvelable et de la formation professionnelle, selon la présidence française.  La question des droits de l'Homme devrait également affleurer durant cette visite. La France a très tôt manifesté son soutien et conclu d'importants contrats d'armement après la destitution en 2013 par M. Sissi, alors chef de l'armée, du président islamiste élu Mohamed Morsi. Le pouvoir réprime depuis très violemment toute forme d'opposition. Avant le voyage, la Fédération internationale des Droits de l'Homme (FIDH), Amnesty international et Human Rights Watch (HRW) notamment ont dénoncé le \&quot;silence assourdissant\&quot; de la France sur la \&quot;gravité de la répression contre la société civile, au prix d'une augmentation vertigineuse de la pratique de la torture, des incarcérations abusives, des disparitions forcées et des violences (...) sans précédent dans l'histoire récente de l'Egypte\&quot;. L’entourage de M. Hollande a assuré que le président entendait sur ces sujets porter des \&quot;messages\&quot; de façon \&quot;discrète et efficace\&quot; au Caire.Source : AFP&quot;,
+               &quot;etat&quot;: 99,
+               &quot;date_creation&quot;: 1460904629,
+               &quot;date_modification&quot;: 1460906069,
+               &quot;topics&quot;: [
+                  &quot;ACTU FRANCE-MONDE&quot;
+               ],
+               &quot;utilisateur_creation&quot;: 8,
+               &quot;source&quot;: &quot;flux externes&quot;,
+               &quot;payant&quot;: false,
+               &quot;utilisateur_assign&quot;: null,
+               &quot;versions&quot;: [],
+               &quot;image&quot;: &quot;5713ad62a43f5e3625dc11b7&quot;
+            }
+         }
+       }
+     }
+</code></pre>
+
+<h2 id="metadata">Metadata</h2>
+<h3 id="representation-simplifiee-du-modele-de-donnees-du-systeme-de-meta">Représentation simplifiée du modèle de données du système de meta</h3>
+<p><img alt="schéma général des metas" src="../../img/l5/metadata/metadata-main.svg" title="Schéma général" /></p>
+<p>Cela reste schématique et ne représente en rien la base Mongo. Ce qu’il faut retenir ici c’est simplement que la classe Meta et Data ne sont pas liées entre elles. En effet <strong>Meta sert de description</strong>, c’est dans cette classe qu’on déclarera et décrira chaque champ supplémentaire. <strong>1 meta = 1 champ de formulaire</strong>.
+La classe data elle gère le stockage des données d’un champ meta pour une entité donnée.</p>
+<p><strong>Exemple</strong> : On souhaite rajouter un champ texte ‘<em>Notes de l’auteur</em>’ sur les entités de type Element. il faudra donc décrire ce champ dans la Meta (titre, type de champ, valeur par défaut etc etc.) puis une fois le champ déclarer il apparaîtra sur les formulaires de saisie d’entités de type Element. Dès qu’un utilisateur enregistrera des notes sur un article (Element), elles seront stockées dans ‘Data’.</p>
+<h3 id="declaration-dune-meta">Déclaration d'une Meta</h3>
+<p>Les champs de base d’une meta sont les suivants.</p>
+<ul>
+<li><strong>Name</strong> : nom machine de la meta</li>
+<li><strong>subject</strong> : types d’entités auxquelles s’applique la meta.</li>
+<li><strong>Condition</strong> : (à redéfinir / non exploitée pour le moment)</li>
+<li><strong>settings</strong> : Objet JSON décrivant le champ à ajouter.</li>
+</ul>
+<h3 id="description-du-champ-settings">Description du champ settings</h3>
+<ul>
+<li>En place</li>
+<li>A integrer au niveau du meta-handler NG2 ou du template de rendu associé</li>
+<li>A discuter / évoluer</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Clé</th>
+<th align="center">Obligatoire</th>
+<th align="right">Description</th>
+<th align="right">Valeurs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>type</strong></td>
+<td align="center">oui</td>
+<td align="right">Type d'entrée de formulaire</td>
+<td align="right">Text, radios, checkbox, checkboxes, select, textarea</td>
+</tr>
+<tr>
+<td><strong>title</strong></td>
+<td align="center">oui</td>
+<td align="right">Titre du champ</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>default_value</strong></td>
+<td align="center">oui</td>
+<td align="right">Valeur par défaut</td>
+<td align="right">Chaine de caractères ou tableau dans le cas de champs à valeurs multiples</td>
+</tr>
+<tr>
+<td><strong>value</strong></td>
+<td align="center">non</td>
+<td align="right">Valeur fixe non modifiable</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td align="center">non</td>
+<td align="right">Text descriptif pouvant apparâitre sur le rendu final du formulaire</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>placeholder</strong></td>
+<td align="center">non</td>
+<td align="right">Le placeholder quoi !</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>access</strong></td>
+<td align="center">non</td>
+<td align="right">-À voir si on conserve- par exemple tableau listant les droits d’accèsCRUD à ce champ par rôle.</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td align="center">non</td>
+<td align="right">Détermine si un champ est obligatoire ou non.</td>
+<td align="right">booléen</td>
+</tr>
+<tr>
+<td><strong>options</strong></td>
+<td align="center">non</td>
+<td align="right">Paramètrages de sous niveau pour les champs multiples (radios, checkboxes)</td>
+<td align="right">Tableau assoc  &#8595; exemple en dessous &#8595;</td>
+</tr>
+<tr>
+<td><strong>disabled</strong></td>
+<td align="center">non</td>
+<td align="right">Permet de mettre un champ en lecture seule</td>
+<td align="right">booléen</td>
+</tr>
+</tbody>
+</table>
+<pre><code>{
+    &quot;value&quot;: &quot;TW&quot;,
+    &quot;label&quot;: &quot;Twitter&quot;
+},
+{
+    &quot;value&quot;: &quot;FB&quot;,
+    &quot;label&quot;: &quot;Facebook&quot;
+},
+{
+    &quot;value&quot;: &quot;GO&quot;,
+    &quot;label&quot;: &quot;Google +&quot;
+}
+</code></pre>
+
+<h3 id="collecte-et-acheminement-des-donnees">Collecte et acheminement des données</h3>
+<p>Récupération des données</p>
+<p><img alt="collecte et acheminement" src="../../img/l5/metadata/metadata-collect.svg" title="collecte et acheminement" /></p>
+<p>Enregistrement / Publication</p>
+<p><img alt="Enregistrement Publication" src="../../img/l5/metadata/metadata-save.svg" title="Publication d'une entité" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../04_FrontOffice_Engine/index.html" class="btn btn-neutral float-right" title="FrontOffice Engine"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../02_BackOffice_Legacy/index.html" class="btn btn-neutral" title="BackOffice Legacy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>&copy; SdV Plurimédia</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../02_BackOffice_Legacy/index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../04_FrontOffice_Engine/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

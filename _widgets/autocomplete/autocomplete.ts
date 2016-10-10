@@ -4,7 +4,7 @@ import {Component, Input, Output, EventEmitter, ElementRef}     from '@angular/c
 @Component({
     selector: 'autocomplete',
     templateUrl: './autocomplete.html',
-    styleUrls: ['../../../../assets/endless/css/chosen/chosen.min.css', './autocomplete.css'],
+    styleUrls: ['./chosen.min.css', './autocomplete.css'],
     host: { '(document:click)': 'onClick($event)' }//ici on capture le click en dehors de l'autocomplete, pour savoir quand fermer la popup
 })
 export class AutocompleteComponent {

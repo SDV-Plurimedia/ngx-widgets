@@ -1,0 +1,8 @@
+.wy-menu-vertical li ul li.toctree-l3 a{
+  font-weight: bold;
+  color: black;
+}
+
+em{
+  color: darkblue;
+}
