@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "files": [
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "runtime",
+    "assets",
+    "utils"
+  ]
+}
