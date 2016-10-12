@@ -19,9 +19,7 @@ import { CkeditorComponent } from "./_widgets/ckeditor/ckeditor";
 import { CornerButtonComponent } from "./_widgets/corner-button/corner-button";
 import { DatatableComponent } from "./_widgets/datatable/datatable";
 import { DatepickerComponent } from "./_widgets/datepicker/datepicker";
-import { FileUploadComponent } from "./_widgets/file-upload/file-upload";
 import { HierarchieListComponent } from "./_widgets/hierarchie-list/hierarchie-list";
-import { IbpSearchComponent } from "./_widgets/ibp-search/ibp-search";
 import { LoaderComponent } from "./_widgets/loader/loader";
 import { MenuInterneComponent } from "./_widgets/menu-interne/menu-interne";
 import { PagerComponent } from "./_widgets/pager/pager";
@@ -43,9 +41,7 @@ var widgets =  [
   CornerButtonComponent,
   DatatableComponent,
   DatepickerComponent,
-  FileUploadComponent,
   HierarchieListComponent,
-  IbpSearchComponent,
   LoaderComponent,
   MenuInterneComponent,
   PagerComponent,

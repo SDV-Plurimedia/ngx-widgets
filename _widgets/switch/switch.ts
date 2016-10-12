@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 /// <reference path="../../../node_modules/@types/bootstrap-switch/index.d.ts"/>
-import { StaticLoaderService } from "../../../_core/_services/static-loader";
+import { StaticLoaderService } from "../../_services/static-loader";
 
 @Component({
   selector: 'switch',

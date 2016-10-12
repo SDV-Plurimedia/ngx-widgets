@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/@types/ckeditor/index.d.ts" />
 import {Component, EventEmitter} from '@angular/core';
-import { StaticLoaderService } from "../../../_core/_services/static-loader";
+import { StaticLoaderService } from "../../_services/static-loader";
 
 @Component({
   selector: 'ckeditor',

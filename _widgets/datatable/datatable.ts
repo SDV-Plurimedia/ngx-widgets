@@ -1,7 +1,7 @@
 /// <reference path="./datatable.d.ts"/>
 import {Component, ElementRef, Renderer, DoCheck, IterableDiffers} from '@angular/core';
-import { StaticLoaderService } from "../../../_core/_services/static-loader";
-import { LoaderService } from "../../../_core/_services/loader";
+import { StaticLoaderService } from "../../_services/static-loader";
+import { LoaderService } from "../../_services/loader";
 
 
 @Component({

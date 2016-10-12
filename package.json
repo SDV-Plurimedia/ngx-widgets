@@ -7,6 +7,7 @@
     "url": "git+git://git@gitlab.sdv.fr:rnd/ng2-endless-widgets.git"
   },
   "scripts": {
+    "start": "tsc",
     "build": "tsc"
   },
   "license": "UNLICENSED",
@@ -14,12 +15,14 @@
     "@angular/common": "^2.0.1",
     "@angular/compiler": "^2.0.1",
     "@angular/core": "^2.0.1",
-    "@angular/http": "^2.0.1",
     "@angular/forms": "^2.0.1",
-    "@angular/router": "^3.0.1",
+    "@angular/http": "^2.0.1",
     "@angular/platform-browser": "^2.0.1",
     "@angular/platform-browser-dynamic": "^2.0.1",
+    "@angular/router": "^3.0.1",
     "@angular/upgrade": "^2.0.1",
+    "@types/bootbox": "^4.4.29",
+    "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
     "@types/es6-shim": "^0.31.32",
     "@types/jquery": "^2.0.33",
@@ -31,6 +34,5 @@
   "bugs": {
     "url": "https://gitlab.sdv.fr/rnd/ng2-endless-widgets/issues"
   },
-  "homepage": "https://github.com/cstefanache/angular2-img-cropper#readme",
   "author": "R&D @ SDV Plurimédia"
 }

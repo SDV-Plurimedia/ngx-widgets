@@ -4,7 +4,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgModel } from '@angular/forms
 
 declare var moment: any;
 
-interface CalendarDate {
+export interface CalendarDate {
     day: number;
     month: number;
     year: number;
