@@ -77,6 +77,14 @@ var pipes = [
   BootstrapClassPipe
 ];
 
+import { StaticLoaderService } from "./_services/static-loader";
+import { LoaderService } from "./_services/loader";
+
+var services = [
+  StaticLoaderService,
+  LoaderService
+];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -102,6 +110,9 @@ var pipes = [
     ReactiveFormsModule,
     HttpModule,
     JsonpModule
+  ],
+  providers: [
+    ...services
   ]
 })
 export class EndlessWidgetsModule {
