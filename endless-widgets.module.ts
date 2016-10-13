@@ -21,8 +21,8 @@ import { DatatableComponent } from "./_widgets/datatable/datatable";
 import { DatepickerComponent } from "./_widgets/datepicker/datepicker";
 import { HierarchieListComponent } from "./_widgets/hierarchie-list/hierarchie-list";
 import { LoaderComponent } from "./_widgets/loader/loader";
-import { MenuInterneComponent } from "./_widgets/menu-interne/menu-interne";
-import { PagerComponent } from "./_widgets/pager/pager";
+import { MenuInterneComponent, MenuItem, MenuItemBadge } from "./_widgets/menu-interne/menu-interne";
+import { PagerComponent, Pager } from "./_widgets/pager/pager";
 import { ProgressBarComponent } from "./_widgets/progress-bar/progress-bar";
 import { StatusBarComponent } from "./_widgets/status-bar/status-bar";
 import { SwitchComponent } from "./_widgets/switch/switch";
@@ -43,8 +43,8 @@ var widgets =  [
   DatepickerComponent,
   HierarchieListComponent,
   LoaderComponent,
-  MenuInterneComponent,
-  PagerComponent,
+  MenuInterneComponent, MenuItem, MenuItemBadge,
+  PagerComponent, Pager,
   ProgressBarComponent,
   StatusBarComponent,
   SwitchComponent,

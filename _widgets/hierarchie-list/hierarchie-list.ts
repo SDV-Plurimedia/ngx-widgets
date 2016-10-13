@@ -114,16 +114,16 @@ export class HierarchieListComponent {
 
 }
 
+export interface HierarchieButton {
+    text: string;
+    class?: string;
+    action: (any) => void;
+}
+
 export interface HierarchieList {
     name_column: string;
     primary_key: string;
     scope: any;
     root_id: string;
     buttons?: Array<HierarchieButton>;
-}
-
-export interface HierarchieButton {
-    text: string;
-    class?: string;
-    action: (any) => void;
 }
