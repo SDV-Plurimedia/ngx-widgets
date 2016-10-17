@@ -24,7 +24,6 @@
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
-    "@types/es6-shim": "^0.31.32",
     "@types/jquery": "^2.0.33",
     "moment": "^2.15.1",
     "rxjs": "^5.0.0-beta.12",
