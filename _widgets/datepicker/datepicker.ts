@@ -1,4 +1,3 @@
-/// <reference path="../../node_modules/moment/moment.d.ts" />
 import {Component, ViewContainerRef, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgModel } from '@angular/forms';
 
