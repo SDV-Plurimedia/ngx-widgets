@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 export declare class StaticLoaderService {
     private static instance;
     private static isCreating;

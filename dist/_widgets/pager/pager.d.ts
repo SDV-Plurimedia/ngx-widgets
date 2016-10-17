@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 export declare class PagerComponent {
     pager: Pager;
     pageInterval: Array<any>;

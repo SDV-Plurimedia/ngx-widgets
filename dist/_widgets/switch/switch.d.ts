@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 /// <reference types="bootstrap-switch" />
 export declare class SwitchComponent {
     switch: Switch;

@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 import { ElementRef, Renderer } from '@angular/core';
 import { TouchButtonLinkComponent } from "./link";
 export declare class TouchButtonComponent {
