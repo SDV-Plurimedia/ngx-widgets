@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@types/jquery/index.d.ts"/>
 import {Directive, ElementRef, Renderer, Input} from '@angular/core';
 
 @Directive({
