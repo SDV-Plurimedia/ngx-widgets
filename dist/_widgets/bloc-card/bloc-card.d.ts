@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 export declare class BlocCardComponent {
     data: {
         type: String;

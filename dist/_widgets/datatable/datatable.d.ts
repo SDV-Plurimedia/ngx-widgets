@@ -1,5 +1,4 @@
 /// <reference path="../../../_widgets/datatable/datatable.d.ts" />
-/// <reference types="es6-shim" />
 import { ElementRef, Renderer, DoCheck, IterableDiffers } from '@angular/core';
 export declare class DatatableComponent implements DoCheck {
     private _element;

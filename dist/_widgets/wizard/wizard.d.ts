@@ -1,4 +1,3 @@
-/// <reference types="es6-shim" />
 import { WizartStepComponent } from "./step";
 export declare class WizardComponent {
     dependenciesAreLoaded: boolean;
