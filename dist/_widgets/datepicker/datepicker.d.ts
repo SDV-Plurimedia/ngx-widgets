@@ -1,4 +1,3 @@
-/// <reference path="../../../node_modules/moment/moment.d.ts" />
 import { ViewContainerRef, EventEmitter, AfterViewInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 export interface CalendarDate {
