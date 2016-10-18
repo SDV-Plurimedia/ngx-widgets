@@ -89,14 +89,7 @@ var EndlessWidgetsModule = (function () {
                 http_1.JsonpModule
             ],
             declarations: widgets.concat(pipes, directives),
-            exports: widgets.concat(pipes, directives, [
-                common_1.CommonModule,
-                router_1.RouterModule,
-                forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
-                http_1.HttpModule,
-                http_1.JsonpModule
-            ]),
+            exports: widgets.concat(pipes, directives),
             providers: services.slice()
         }), 
         __metadata('design:paramtypes', [])

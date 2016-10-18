@@ -102,14 +102,7 @@ var services = [
   exports: [
     ...widgets,
     ...pipes,
-    ...directives,
-    //export des modules générique..
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    JsonpModule
+    ...directives
   ],
   providers: [
     ...services
