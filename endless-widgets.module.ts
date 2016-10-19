@@ -19,6 +19,7 @@ import { CkeditorComponent } from "./_widgets/ckeditor/ckeditor";
 import { CornerButtonComponent } from "./_widgets/corner-button/corner-button";
 import { DatatableComponent } from "./_widgets/datatable/datatable";
 import { DatepickerComponent } from "./_widgets/datepicker/datepicker";
+import { GraphComponent } from "./_widgets/graph/graph";
 import { HierarchieListComponent } from "./_widgets/hierarchie-list/hierarchie-list";
 import { LoaderComponent } from "./_widgets/loader/loader";
 import { MenuInterneComponent, MenuItem, MenuItemBadge } from "./_widgets/menu-interne/menu-interne";
@@ -41,6 +42,7 @@ var widgets =  [
   CornerButtonComponent,
   DatatableComponent,
   DatepickerComponent,
+  GraphComponent,
   HierarchieListComponent,
   LoaderComponent,
   MenuInterneComponent,

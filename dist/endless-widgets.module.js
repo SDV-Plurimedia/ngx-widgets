@@ -21,6 +21,7 @@ var ckeditor_1 = require("./_widgets/ckeditor/ckeditor");
 var corner_button_1 = require("./_widgets/corner-button/corner-button");
 var datatable_1 = require("./_widgets/datatable/datatable");
 var datepicker_1 = require("./_widgets/datepicker/datepicker");
+var graph_1 = require("./_widgets/graph/graph");
 var hierarchie_list_1 = require("./_widgets/hierarchie-list/hierarchie-list");
 var loader_1 = require("./_widgets/loader/loader");
 var menu_interne_1 = require("./_widgets/menu-interne/menu-interne");
@@ -42,6 +43,7 @@ var widgets = [
     corner_button_1.CornerButtonComponent,
     datatable_1.DatatableComponent,
     datepicker_1.DatepickerComponent,
+    graph_1.GraphComponent,
     hierarchie_list_1.HierarchieListComponent,
     loader_1.LoaderComponent,
     menu_interne_1.MenuInterneComponent,

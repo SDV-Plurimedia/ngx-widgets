@@ -1,0 +1,16 @@
+/*CSS*/
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+#articles_chart {
+    margin: 0 auto;
+}
+
