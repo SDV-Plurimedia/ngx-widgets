@@ -21,10 +21,7 @@ export class GraphComponent {
     this.graph_height = this.graph.height + 'px';
     this.graph_width = this.graph.width + 'px';
     //on construit dans un timeout, pour ne pas appeler Morrisou D" avabt que la div existe vraiment
-    //setTimeout(this.graph.loadGraph,1,this.graph);
+    setTimeout((scope)=>{scope.loadGraph()},1,this.graph);
   }
 
-  ngAfterViewChecked(){
-    this.graph.loadGraph();
-  }
 }
