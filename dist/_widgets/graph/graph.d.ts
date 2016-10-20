@@ -8,4 +8,5 @@ export declare class GraphComponent {
     graph_height: any;
     constructor(element: ElementRef, renderer: Renderer);
     ngOnInit(): void;
+    ngAfterViewChecked(): void;
 }

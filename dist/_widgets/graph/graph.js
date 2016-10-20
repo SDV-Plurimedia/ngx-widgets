@@ -17,6 +17,8 @@ var GraphComponent = (function () {
     GraphComponent.prototype.ngOnInit = function () {
         this.graph_height = this.graph.height + 'px';
         this.graph_width = this.graph.width + 'px';
+    };
+    GraphComponent.prototype.ngAfterViewChecked = function () {
         this.graph.loadGraph();
     };
     GraphComponent = __decorate([
