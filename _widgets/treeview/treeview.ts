@@ -35,6 +35,7 @@ export class TreeviewComponent {
             }
             this.indents[data[this.params.primary_key]] = this.getDeepIndent(data[this.params.primary_key]);
         });
+        this.sorted_datas = [];
         this.sortDatas(this.root_id);
         this.parent_scope = this.params.scope;
         this.buttons = this.params.buttons;
