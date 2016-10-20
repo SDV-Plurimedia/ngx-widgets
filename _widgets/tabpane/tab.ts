@@ -7,11 +7,7 @@ import {TabpaneComponent} from './tabpane';
         'title:tabtitle',
         'active'
     ],
-    styles: [`
-    .hidden{
-      display:none;
-    }
-  `],
+    styleUrls: ["./tabpane.css"],
     template: `
     <div [class.hidden]="!active" class="class-pane" role="tabpanel">
       <ng-content></ng-content>

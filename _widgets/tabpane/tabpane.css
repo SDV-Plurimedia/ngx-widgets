@@ -7,3 +7,7 @@
 .nav-item{
   cursor: pointer;
 }
+
+.hidden{
+  display:none;
+}
