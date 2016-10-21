@@ -17,3 +17,9 @@
   color: white;
   background-color: #7fa7e6;
 }
+
+
+a {
+  overflow: hidden;
+  line-height: 1.5;
+}

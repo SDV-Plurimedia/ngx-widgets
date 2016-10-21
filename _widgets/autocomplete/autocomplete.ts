@@ -19,6 +19,7 @@ export class AutocompleteComponent {
     private inputValue: string = "";
     public isActive: boolean = false;
     private inputForm;
+    private removeData: any;
 
     //autocompleteForm: ControlGroup;
     //autoControl: AbstractControl;
@@ -31,17 +32,33 @@ export class AutocompleteComponent {
     }
 
     ngOnInit() {
+        this.addRemovalData();
         this.placeholder = this.config.placeholder;
         if (this.config.defaultValue !== "")
             this.inputValue = this.config.defaultValue;
+        this.reduceResultList();
+    }
+
+    addRemovalData() {
+      this.removeData = {};
+      if(this.config.fieldName.constructor === Array) {
+        this.config.fieldName.forEach((field, index) => {
+          if(index == 0)
+            this.removeData[field] = "Aucun";
+          else this.removeData[field] = null;
+        });
+      }
+      else {
+        this.removeData[this.config.fieldName] = "Aucun";
+      }
     }
 
     //reduit le nombre de resultat, en fonction de la valeur tapé
-    reduceResultList(value: string) {
+    reduceResultList() {
         this.results = [];
-        if (value && value.length >= this.config.begin) {
+        if (this.inputValue && this.inputValue.length >= this.config.begin) {
             this.data.forEach((item, index) => {
-                if (this.getDisplayLabel(item).substring(0, value.length).toLowerCase() == value.toLowerCase()) {
+                if (this.getDisplayLabel(item).substring(0, this.inputValue.length).toLowerCase() == this.inputValue.toLowerCase()) {
                     this.results.push(item);
                 }
             });
@@ -72,9 +89,11 @@ export class AutocompleteComponent {
       let res = ""
       if(this.config.fieldName.constructor === Array) {
         this.config.fieldName.forEach(field => {
-          if(res == "")
-            res += item[field];
-          else res += " - "+item[field];
+          if(item[field] != null){
+            if(res == "")
+              res += item[field];
+            else res += " - "+item[field];
+          }
         });
       }
       else {
