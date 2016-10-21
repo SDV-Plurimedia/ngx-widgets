@@ -63,7 +63,13 @@ export class AutocompleteComponent {
                 }
             });
         }
-        return this.results;
+        else if(this.config.begin == 0){
+          this.results = this.data
+        }
+
+        if(this.results.length > 0) {
+          this.results.splice(0,0, this.removeData);
+        }
     }
 
     //change l'etat du menu deroulant
