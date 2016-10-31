@@ -1,9 +1,10 @@
 <div class="m-right-md m-left-md">
   <template  ngFor let-lvl [ngForOf]="level" let-i="index" let-next="index+1">
 
-    <div class="list-group col-md-3" *ngIf="lvl && level_displayed.indexOf(lvl)>=0">
+    <div class="list-group col-md-3" *ngIf="lvl && level_displayed.indexOf(lvl)>=0" id="list_{{lvl}}">
         <template ngFor let-data [ngForOf]="datas_level[i]">
-            <div class="row list-group-item" [class.active]="level[next] && level[next]==data[params.primary_key]" (click)="getNextLevel(next, data[params.primary_key])">
+            <div class="row list-group-item" [class.active]="level[next] && level[next]==data[params.primary_key]"
+                        id="item_{{data[params.primary_key]}}" (click)="getNextLevel(next, data[params.primary_key])">
                 <div class="col-md-4" *ngIf="buttons && buttons.length > 0">
                   <template ngFor let-button [ngForOf]="buttons">
                     <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>

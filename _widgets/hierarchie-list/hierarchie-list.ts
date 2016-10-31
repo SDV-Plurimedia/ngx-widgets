@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, Renderer} from '@angular/core';
 
 @Component({
     selector: 'hierarchie-list',
@@ -22,7 +22,7 @@ export class HierarchieListComponent {
     public last_selected_level: any;
 
 
-    constructor() { }
+    constructor(private _el: ElementRef, private _renderr: Renderer) { }
 
     ngOnInit() {
         this.root_id = this.params.root_id;
@@ -92,6 +92,14 @@ export class HierarchieListComponent {
           this.datas_level = datas_level;
         }
         this.getDisplayedLevel();
+        setTimeout(() => {
+          let top  = this._el.nativeElement.querySelector('#item_'+id).offsetTop
+                      + this._el.nativeElement.querySelector('#item_'+id).parentElement.offsetTop;
+          let list = this._el.nativeElement.querySelector('#list_'+id);
+          if(list) {
+            list.style.top = top+'px';
+          }
+        }, 0);
       }
     }
 
