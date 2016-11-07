@@ -97,7 +97,7 @@ export class HierarchieListComponent {
                       + this._el.nativeElement.querySelector('#item_'+id).parentElement.offsetTop;
           let list = this._el.nativeElement.querySelector('#list_'+id);
           if(list) {
-            list.style.top = top+'px';
+            list.style.marginTop = top+'px';
           }
         }, 0);
       }
