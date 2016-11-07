@@ -95,17 +95,39 @@ export class AutocompleteComponent {
       let res = ""
       if(this.config.fieldName.constructor === Array) {
         this.config.fieldName.forEach(field => {
-          if(item[field] != null){
-            if(res == "")
-              res += item[field];
-            else res += " - "+item[field];
+          if(item[field] != "Aucun"){
+            let val = this.getLabelValue(item, field);
+            if(val) {
+              if(res == "")
+                res += val;
+              else res += " - "+val;
+            }
+          }
+          else {
+            res = 'Aucun';
           }
         });
       }
       else {
-        res = item[this.config.fieldName];
+        res = this.getLabelValue(item, this.config.fieldName);
       }
       return res;
+    }
+
+    getLabelValue(item, field) {
+      if(field.indexOf('.') == -1){
+        return item[field];
+      }
+      else {
+        let parts = field.split('.');
+        let value = item;
+        parts.forEach(part => {
+          if(value[part])
+            value = value[part];
+          else value = "Indéfini";
+        });
+        return value;
+      }
     }
 
     valideItem(item) {
