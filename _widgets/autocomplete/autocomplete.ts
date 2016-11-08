@@ -58,18 +58,22 @@ export class AutocompleteComponent {
         this.results = [];
         if (this.inputValue && this.inputValue.length >= this.config.begin) {
             this.data.forEach((item, index) => {
-                if (this.getDisplayLabel(item).substring(0, this.inputValue.length).toLowerCase() == this.inputValue.toLowerCase()) {
+                if (this.getDisplayLabel(item).indexOf(this.inputValue.toLowerCase()) != -1 ) {
                     this.results.push(item);
                 }
             });
+            if(this.results.length > 0) {
+              this.results.splice(0,0, this.removeData);
+            }
         }
         else if(this.config.begin == 0){
-          this.results = this.data
+          if(this.data[0] != this.removeData) {
+            this.data.splice(0,0, this.removeData);
+          }
+          this.results = this.data;
         }
 
-        if(this.results.length > 0) {
-          this.results.splice(0,0, this.removeData);
-        }
+
     }
 
     //change l'etat du menu deroulant
