@@ -110,5 +110,5 @@ var services = [
     ...services
   ]
 })
-export class EndlessWidgetsModule {
+export class SDVNg2WidgetsModule {
  }

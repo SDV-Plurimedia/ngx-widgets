@@ -1,1 +1,1 @@
-export * from './endless-widgets.module';
+export * from './sdv-ng2-widgets.module';
