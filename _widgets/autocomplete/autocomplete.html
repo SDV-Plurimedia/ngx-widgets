@@ -6,12 +6,13 @@
     </div>
     <div class="chosen-drop">
         <div class="chosen-search">
-            <input type="text" name="value" autocomplete="off" [(ngModel)]="inputValue" (keyup)="reduceResultList()" class="form-control inputField">
+            <input type="text" name="value" autocomplete="off" [ngModel]="inputValue"
+                  (ngModelChange)="onInputChange($event)" class="form-control inputField">
         </div>
 
         <ul class="chosen-results">
             <template ngFor let-item [ngForOf]="results" let-i="index" let-isfirst="first">
-                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ getDisplayLabel(item) }}</li>
+                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[config.fieldDisplayed] }}</li>
             </template>
         </ul>
     </div>

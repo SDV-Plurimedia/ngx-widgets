@@ -1,6 +1,8 @@
 import {Component, Input, Output, EventEmitter, ElementRef}     from '@angular/core';
 //import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import {Observable, Subject} from 'rxjs/Rx';
+
 @Component({
     selector: 'autocomplete',
     templateUrl: './autocomplete.html',
@@ -21,6 +23,16 @@ export class AutocompleteComponent {
     private inputForm;
     private removeData: any;
 
+    private nb_threads = 1;
+    private searchStream = new Subject<string>();
+    private items: Observable<string[]> = this.searchStream
+      .debounceTime(400) //Temporisation en millisecondes.
+      .distinctUntilChanged()
+      .switchMap((subject: string) => {
+        //Execution de la requete Elasticsearch.
+        this.reduceResultList();
+        return []
+      });
     //autocompleteForm: ControlGroup;
     //autoControl: AbstractControl;
 
@@ -32,24 +44,29 @@ export class AutocompleteComponent {
     }
 
     ngOnInit() {
-        this.addRemovalData();
+        this.removeData = {};
+        this.removeData[this.config.fieldSearch] = "Aucun";
+        this.removeData[this.config.fieldDisplayed] = "Aucun";
         this.placeholder = this.config.placeholder;
         if (this.config.defaultValue !== "")
             this.inputValue = this.config.defaultValue;
+
         this.reduceResultList();
+        this.items.subscribe();
     }
 
-    addRemovalData() {
-      this.removeData = {};
-      if(this.config.fieldName.constructor === Array) {
-        this.config.fieldName.forEach((field, index) => {
-          if(index == 0)
-            this.removeData[field] = "Aucun";
-          else this.removeData[field] = null;
-        });
+    ngOnChanges(changes) {
+      if(changes.data) {
+
+        this.nb_threads = Math.floor(this.data.length/1000) + 1;
+        console.log('nb de threads ', this.nb_threads);
       }
-      else {
-        this.removeData[this.config.fieldName] = "Aucun";
+    }
+
+    onInputChange(input) {
+      this.inputValue= input;
+      if (this.inputValue.length >= this.config.begin) {
+        this.searchStream.next(input);
       }
     }
 
@@ -57,11 +74,17 @@ export class AutocompleteComponent {
     reduceResultList() {
         this.results = [];
         if (this.inputValue && this.inputValue.length >= this.config.begin) {
-            this.data.forEach((item, index) => {
-                if (this.getDisplayLabel(item).toLowerCase().indexOf(this.inputValue.toLowerCase()) != -1 ) {
-                    this.results.push(item);
-                }
-            });
+            //this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
+            for(let i = 0; i<this.nb_threads; i++){
+              let slice = this.data.slice(i*1000, (i+1)*1000);
+              let sub = new Observable(observer => {
+                let res = slice.filter(item => item[this.config.fieldSearch].toLowerCase().includes(this.inputValue.toLowerCase()));
+                observer.next(res);
+                observer.complete();
+              }).subscribe((res: Array<any>) => {
+                res.forEach(item => this.results.push(item));
+              });
+            }
             if(this.results.length > 0) {
               this.results.splice(0,0, this.removeData);
             }
@@ -72,7 +95,6 @@ export class AutocompleteComponent {
           }
           this.results = this.data;
         }
-
 
     }
 
@@ -95,51 +117,12 @@ export class AutocompleteComponent {
             return item;
     }
 
-    getDisplayLabel(item) {
-      let res = ""
-      if(this.config.fieldName.constructor === Array) {
-        this.config.fieldName.forEach(field => {
-          if(item[field] != "Aucun"){
-            let val = this.getLabelValue(item, field);
-            if(val) {
-              if(res == "")
-                res += val;
-              else res += " - "+val;
-            }
-          }
-          else {
-            res = 'Aucun';
-          }
-        });
-      }
-      else {
-        res = this.getLabelValue(item, this.config.fieldName);
-      }
-      return res;
-    }
-
-    getLabelValue(item, field) {
-      if(field.indexOf('.') == -1){
-        return item[field];
-      }
-      else {
-        let parts = field.split('.');
-        let value = item;
-        parts.forEach(part => {
-          if(value[part])
-            value = value[part];
-          else value = "Indéfini";
-        });
-        return value;
-      }
-    }
-
     valideItem(item) {
         this.valid.emit(this.getValue(item));
         this.toggleDropdown();
         this.inputValue = "";
         this.setCursorPosition(0);
-        this.placeholder = this.getDisplayLabel(item);//item[this.config.fieldName];
+        this.placeholder = item[this.config.fieldSearch];//item[this.config.fieldName];
     }
 
     //GESTION DU CLIC EN DEHORS DU CHAMP
