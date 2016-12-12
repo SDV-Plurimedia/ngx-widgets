@@ -12,15 +12,14 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "@angular/common": "^2.1.0",
-    "@angular/compiler": "^2.1.0",
-    "@angular/core": "^2.1.0",
-    "@angular/forms": "^2.1.0",
-    "@angular/http": "^2.1.0",
-    "@angular/platform-browser": "^2.1.0",
-    "@angular/platform-browser-dynamic": "^2.1.0",
-    "@angular/router": "^3.0.1",
-    "@angular/upgrade": "^2.1.0",
+    "@angular/common": "2.2.1",
+    "@angular/compiler": "2.2.1",
+    "@angular/core": "2.2.1",
+    "@angular/forms": "2.2.1",
+    "@angular/http": "2.2.1",
+    "@angular/platform-browser": "2.2.1",
+    "@angular/platform-browser-dynamic": "2.2.1",
+    "@angular/router": "3.2.1",
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
@@ -35,6 +34,11 @@
     "typescript": "^2.0.2",
     "zone.js": "^0.6.23"
   },
+  "devDependencies": {
+    "angular-cli": "^1.0.0-beta.20-2",
+    "tslint": "3.13.0",
+    "typescript": "2.0.10"
+  }
   "bugs": {
     "url": "https://github.com/SDV-Plurimedia/sdv-ng2-widgets/issues"
   },

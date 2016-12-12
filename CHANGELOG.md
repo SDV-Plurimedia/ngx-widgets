@@ -4,7 +4,7 @@
 
 * WIP : FIX bug sur autocomplete
 * WIP : Deploy avec travis
-* ADD: documentation
+* ADD: documentation sur pages
 * WIP: example presentant les widgets et leur intégration
 * ADD: widget de dropdown
 
