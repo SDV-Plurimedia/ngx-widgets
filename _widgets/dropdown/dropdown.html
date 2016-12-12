@@ -1,0 +1,10 @@
+<li class="dropdown" >
+    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="fa fa-font"></i>&nbsp;<span class="current-font">{{value[config.champ_label]}}</span>&nbsp;<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <template ngFor let-choix [ngForOf]="data">
+        <li><a>{{choix[config.champ_label]}}</a></li>
+      </template>
+    </ul>
+</li>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SDV NG2 Widgets est un pack de widgets pour angular2 avec bootstrap">
+  
+  
+  <title>SDV NG2 Widgets</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  <link href="./css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/index.html";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> SDV NG2 Widgets</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="index.html">Accueil</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#autocomplete">Autocomplete</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bloc-card">Bloc-Card</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#breadcrumb-fil-dariane">BreadCrumb ( Fil d'ariane )</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#button-3d">Button 3D</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#chevron">Chevron</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#ckeditor">CKEditor</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#corner-button">Corner button</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#datatable">Datatable</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#datepicker">DatePicker</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#dropdown">DropDown</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#graph">Graph</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#hierarchie-list">Hierarchie List</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#loader">Loader</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#menu-interne">Menu interne</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#pager">Pager</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#progress-bar">Progress Bar</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#status-bar">Status Bar</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#switch">Switch</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#tabpane-onglets">TabPane ( Onglets )</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#touch-button">Touch Button</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#treeview">Treeview</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">SDV NG2 Widgets</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Accueil</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><strong>SDV</strong> Ng2 Widget est un pack de widget adapté pour bootstrap en angular2</p>
+<p>Les widgets génériques sont définis dans le paquet <a href="https://gitlab.sdv.fr/rnd/sdv-ng2-widgets">sdv-ng2-widgets</a></p>
+<h1 id="autocomplete">Autocomplete</h1>
+<p><img alt="Champ d'autocomplete" src="./img/autocomplete.png" /></p>
+<p>Le composant d'autocomplete doit être appelé de la façon suivante:</p>
+<pre><code>&lt;autocomplete [config]='...' [data]='...' (valid)="function($event)"&gt;&lt;/autocomplete&gt;
+</code></pre>
+<ul>
+<li><strong>[data]</strong>: <em>Array</em> - tableau contenant les données à traiter par l'autocomplete</li>
+<li><strong>[config]</strong>: <em>Object</em> - permet la config du widget, doit contenir:<ul>
+<li><strong>fieldName</strong>: <em>String|Array</em> - nom du ou des attributs du tableau <em>data</em> qui sont utilisés à l'affichage dans le champ</li>
+<li><strong>fieldValue</strong>: <em>String</em> - nom de l'attribut du tableau <em>data</em> qui fait office de valeur de retour par le widget (si vide, on renvoi l'objet complet)</li>
+<li><strong>begin</strong>: <em>Number</em> - nombre de caractères à entrer dans le champ avant que l'autocomplete ne se lance</li>
+<li><strong>defaultValue</strong>: <em>String</em> - valeur par défaut à insérer dans l'input d'autocompletion</li>
+<li><strong>placeholder</strong>: <em>String</em> - Placeholder du champ</li>
+</ul>
+</li>
+<li><strong>(valid)</strong>: <em>Function</em> - fonction appelée lorsque le champ est valide</li>
+</ul>
+<h1 id="bloc-card">Bloc-Card</h1>
+<p>Bloc de contenu sous forme de carte</p>
+<p><img alt="Bloc Card" src="./img/bloccard.png" /></p>
+<pre><code>&lt;bloc-card class="col-lg-4" [data]="{type:'divers', title:'Titre de mon paragraphe', content:'Ici on peut raconter plein de chose'}"&gt;&lt;/bloc-card&gt;
+</code></pre>
+<ul>
+<li><strong>title</strong>: pour changer le titre du bloc</li>
+<li><strong>content</strong>: pour changer le contenu du bloc</li>
+<li><strong>type</strong>: peut prendre la valeur: paragraphe, image, divers, autre2, autre3 (ceci le fera changer de couleur)</li>
+</ul>
+<h1 id="breadcrumb-fil-dariane">BreadCrumb ( Fil d'ariane )</h1>
+<p>Ce widget ne doit s'intégrer qu'une fois dans la page.
+Pour son utilisation voir à travers le service <a href="#breadcrumb-fil-dariane_1">BreadCrumb</a></p>
+<h1 id="button-3d">Button 3D</h1>
+<p>Permet de faire des boutons poussoir en 3d</p>
+<p><img alt="Bouton 3D" src="./img/button3d.png" /></p>
+<p>Utilisation :</p>
+<pre><code>&lt;button3d [icon]="'check'" [class]="'success'" [size]="'btn-sm'" (click)="afficheBootbox('alert')" &gt; Valider&lt;/button3d&gt;
+&lt;button3d [icon]="'code-fork'" [class]="'danger'" (click)="afficheBootbox('alert')" &gt; Pousser en prod&lt;/button3d&gt;
+&lt;button3d [icon]="'cloud'" [class]="'primary'" [size]="'btn-lg'" (click)="afficheBootbox('alert')" &gt; Envoyer dans le cloud&lt;/button3d&gt;
+</code></pre>
+<h1 id="chevron">Chevron</h1>
+<p>Le widget chevron permet de cacher facilement le contenu d'un bloc</p>
+<p><img alt="Chevron" src="./img/chevron.png" /></p>
+<ul>
+<li><strong>hidden</strong> : Input/Ouput: Etat ouvert/fermé du bloc lié (boolean)</li>
+</ul>
+<p>Exemple1: Utilisation avec une var locale et le display hidden (caché par la css) :</p>
+<pre><code>&lt;h3&gt;
+  &lt;chevron [(hidden)]='contenu.hidden' class="pull-right"&gt;&lt;/chevron&gt;
+  Titre
+&lt;/h3&gt;
+&lt;div #contenu&gt;
+  Mon contenu a cacher
+&lt;/div&gt;
+</code></pre>
+<p>Exemple2: Utilisation avec une var typescript et ngIf (caché par le dom/js):</p>
+<p><code>public mavar: boolean = false;</code></p>
+<pre><code>&lt;h3&gt;
+  &lt;chevron [(hidden)]='mavar' class="pull-right"&gt;&lt;/chevron&gt;
+  Titre
+&lt;/h3&gt;
+&lt;div *ngIf='mavar'&gt;
+  Mon contenu à cacher
+&lt;/div&gt;
+</code></pre>
+<h1 id="ckeditor">CKEditor</h1>
+<p>Le widget ckeditor permet d'intégrer l'éditeur de texte simplement.</p>
+<p><img alt="CKEditor" src="./img/ckeditor.png" /></p>
+<p>Utilisation :</p>
+<pre><code>&lt;ckeditor [(content)]="article.chapeau" [id]="'chapeau_text'"
+          [rows]="4" [disabled]="false" [config]="config1"&gt;&lt;/ckeditor&gt;
+</code></pre>
+<ul>
+<li><strong>content</strong> : Le texte contenu par l'éditeur, lié dans les deux sens afin de  mettre à jour automatiquement la variable dans le composant appelant</li>
+<li><strong>id</strong>: Un identifiant unique pour l'éditeur.</li>
+<li><strong>row</strong>: Permet de définir la hauteur de l'éditeur.</li>
+<li><strong>disabled</strong>: Si il est à true, le ckeditor est remplacé par une div affichant juste le contenu.
+                S'il est passé à false par la suite, le ckeditor apparaitra.</li>
+<li><strong>config</strong>: La configuration de l'éditeur (choix des actions possibles ou non).</li>
+</ul>
+<p>Exemple de conf, voir le fichier site/bo_spa/src/app/article/edit/edit.ts</p>
+<h1 id="corner-button">Corner button</h1>
+<p>A documenter</p>
+<h1 id="datatable">Datatable</h1>
+<p><img alt="DataTable" src="./img/datatable.png" /></p>
+<p>Exemple de template:</p>
+<pre><code>&lt;loader [condition]="data_tab"&gt;
+  &lt;datatable [data]="data_tab" [structure]="structure" [buttons]="buttons" [parent_scope]="scope"&gt;&lt;/datatable&gt;
+&lt;/loader&gt;`
+</code></pre>
+<p>Exemple de component:</p>
+<pre><code>public structure = [
+    { id: "id", label: "ID"},
+    { id: "name", label: "Nom du champ"}
+];
+
+public buttons = [
+  {
+      text: 'Editer',
+      action: this.edit,
+      class: "btn btn-warning"
+  },
+  {
+      text: 'Supprimer',
+      action: this.confirmDelete,
+      class: "btn btn-danger"
+  }
+];
+//scope sur lequel appliquer les fonctions des boutons
+public scope = this;
+
+//un exemple de données
+public data_tab = [{id: 1, name: "Antoine"}];
+</code></pre>
+<h1 id="datepicker">DatePicker</h1>
+<p>Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.</p>
+<p><img alt="DatePicker" src="./img/datepicker.png" /></p>
+<p>Utilisation :</p>
+<pre><code>&lt;datepicker [(ngModel)]="date_publi" view-format="DD/MM/YYYY" model-format="YYYY-MM-DD"
+            first-week-day-sunday="false"&gt;&lt;/datepicker&gt;
+</code></pre>
+<ul>
+<li><strong>ngModel</strong>: La valeur de le date.</li>
+<li><strong>view-format</strong>: Le format de date tel qu'il sera affiché dans le champ de texte.</li>
+<li><strong>model-format</strong>: Le format de la date tel qu'il est dans la variable.</li>
+<li><strong>first-week-day-sunday</strong>: Un booléen permettant de préciser pour l'affichage du calendrier si les semaines doivent commencer le dimanche (true) ou le lundi (false).</li>
+</ul>
+<h1 id="dropdown">DropDown</h1>
+<p>A documenter</p>
+<h1 id="graph">Graph</h1>
+<p>A documenter</p>
+<h1 id="hierarchie-list">Hierarchie List</h1>
+<p>Ce widget permet de faire une hierarchisation d'éléments en plusieurs volets qui s'ouvrent l'un à côté de l'autre.</p>
+<p>Utilisation:</p>
+<p><code>&lt;hierarchie-list #treeview [datas]="current_topics" [params]="params" &gt;&lt;/hierarchie-list&gt;</code></p>
+<p><img alt="HierarchieList" src="./img/hierarchielist.png" /></p>
+<ul>
+<li><strong>datas</strong> sont les données à mettre en forme dans le widget</li>
+<li><strong>params</strong> sert à configurer l'arbre :<ul>
+<li><strong>name_column</strong>: le nom de l'attribut qui sera affiché</li>
+<li><strong>primary_key</strong>: l'attribut servant d'identifiant</li>
+<li><strong>root_id</strong>: l'identifiant de l'élément servant de racine à l'arbre</li>
+<li><strong>scope</strong>: Le contexte d'appel pour les fonctions utilisées dans les boutons et checkboxes</li>
+<li><strong>buttons</strong>: un tableau de boutons affichés pour chaque élément de l'arbre<ul>
+<li><strong>class</strong>: Les classes à affecter au bouton</li>
+<li><strong>text</strong>: Le texte (ou html) qui sera affiché dans le bouton</li>
+<li><strong>action</strong>: L'action à effectuer au clic sur le bouton</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="loader">Loader</h1>
+<p>Le widget loader permet de cacher facilement le contenu d'un bloc durant son chargement</p>
+<p><img alt="Loader" src="./img/loader.png" /></p>
+<ul>
+<li><strong>condition</strong> : condition d'affichage de la roue de chargement, quand la condition est vrai on affiche le ng-content,mais tant que la condition est false on affiche le loader</li>
+<li><strong>type</strong> : Facultatif, Type de template d'affichage pour le widget, de base est une div, mais peut etre de type <strong>list</strong> ou <strong>panel</strong></li>
+</ul>
+<p>Exemple:</p>
+<pre><code>&lt;loader [condition]="!ready" [type]="'panel'"&gt;
+  Mon Contenu
+&lt;/loader&gt;
+</code></pre>
+<h1 id="menu-interne">Menu interne</h1>
+<p>Ce widget permet d'ajouter un second niveau de navigation, à l'intérieur d'un widge de page.</p>
+<p><img alt="Menu Interne" src="./img/menu_interne.png" /></p>
+<p>Il se définit en lui fournissant au moins une liste d'item, exemple:</p>
+<pre><code>    import {MenuItem, MenuItemBadge} from &quot;sdv-ng2-widgets&quot;;
+    ...
+    private menu_items = [
+      new MenuItem({
+        icon: &quot;inbox&quot;,
+        title: &quot;Inbox&quot;,
+        badge: new MenuItemBadge({
+          class: &quot;success&quot;,
+          number: 19
+        })
+      }),
+      new MenuItem({
+        icon: &quot;star&quot;,
+        title: &quot;Starred&quot;,
+        badge: new MenuItemBadge({
+          class: &quot;warning&quot;,
+          number: 2
+        })
+      }),
+      new MenuItem({
+        icon: &quot;star&quot;,
+        title: &quot;More&quot;,
+        subitems: [
+          new MenuItem({
+            title: &quot;Spam&quot;,
+            badge: new MenuItemBadge({
+              class: &quot;warning&quot;,
+              number: 2
+            })
+          }),
+          new MenuItem({
+            title: &quot;Trash&quot;
+          })
+        ]
+      })
+    ];
+</code></pre>
+
+<p>et dans la template:</p>
+<pre><code>    &lt;menu_interne
+      [items]=&quot;menu_items&quot;
+      [title]=&quot;'Gestion Multi-Média'&quot;
+      (select)=&quot;menuClick($event)&quot;
+      [icon]=&quot;'plus'&quot;
+      [tooltip]=&quot;'Exporter vers un media'&quot;
+      (button)=&quot;newMedia($event)&quot;
+      (toggle)=&quot;menuToggle($event)&quot;&gt;
+    &lt;/menu_interne&gt;
+</code></pre>
+
+<ul>
+<li><strong>[items]</strong>: <em>Array<MenuItem></em> - Une entrée du tableau correspond à un element de la liste, on peut y ajouter des 'subitems' pour un niveau supplémentaire</li>
+<li><strong>[title]</strong>: <em>string</em> - Titre du menu</li>
+<li><strong>(select)</strong>: <em>EventEmitter<MenuItem></em> - renvoie l'item selectionné lors d'un clic</li>
+<li><strong>[icon]</strong>: <em>string</em> - classe d'icône du bouton de droite</li>
+<li><strong>[tooltip]</strong>: <em>string</em> - texte au survol du bouton de droite</li>
+<li><strong>(button)</strong>: <em>EventEmitter<boolean></em> - renvoie true lors d'un click sur le bouton de droite</li>
+<li><strong>(toggle)</strong>: <em>EventEmitter<boolean></em> - renvoie l'état (true= ouvert, false= fermé) du menu lorsqu'on le ferme/ouvre</li>
+</ul>
+<h1 id="pager">Pager</h1>
+<p>Utilisation:
+<code>&lt;pager [pager]="pager"&gt;&lt;/pager&gt;</code></p>
+<ul>
+<li><strong>pager</strong>: L'objet contenant la configuration du pager a appelé en utilisant le constructeur du Pager<ul>
+<li><strong>scope</strong>: Le contexte d'appel du pager</li>
+<li><strong>quantity</strong>: Le nombre d'éléments total</li>
+<li><strong>per_page</strong>: Le nombre d'éléments par page</li>
+<li><strong>delta</strong>: Le nombre de boutons de numéros de page affichés</li>
+<li><strong>actionCallback</strong>: La fonction à appeler au clic sur  un des boutons du pager</li>
+</ul>
+</li>
+</ul>
+<h1 id="progress-bar">Progress Bar</h1>
+<p>Permet d'afficher facilement une barre de progression qui change de couleur en fonction du taux d'avancement</p>
+<p>Utilisation:</p>
+<pre><code>  &lt;progress-bar [datas]="{
+        value : article.avancement,
+        min_value : 0,
+        max_value : 100
+    }" [class]="'progress-bar-striped'" class="col-md-8 control-label"&gt;&lt;/progress-bar&gt;
+</code></pre>
+<ul>
+<li><strong>datas</strong>: Un objet comprenant la valeur de la progress-bar, ainsi que ses valeurs minimum et maximum</li>
+<li><strong>class</strong>: Des classes particulières à ajouter à la progress-bar</li>
+</ul>
+<h1 id="status-bar">Status Bar</h1>
+<p>Permet de faire une notification de status ressemblant à growl</p>
+<p><img alt="Status bar" src="./img/status-bar.png" /></p>
+<p>Utilisation :</p>
+<pre><code>&lt;status-bar [icon]="'refresh'" &gt; Mise à jour disponible &lt;/status-bar&gt;
+&lt;status-bar [icon]="'folder-open-o'" [class]="'info'" &gt; Mise à jour disponible &lt;/status-bar&gt;
+&lt;status-bar [icon]="'warning'" [class]="'warning'" &gt; Mise à jour importante disponible &lt;/status-bar&gt;
+&lt;status-bar [icon]="'warning'" [class]="'danger'" &gt; Mise à jour critique disponible &lt;/status-bar&gt;
+</code></pre>
+<h1 id="switch">Switch</h1>
+<p>A documenter</p>
+<h1 id="tabpane-onglets">TabPane ( Onglets )</h1>
+<p><img alt="Onglets" src="./img/tabpane.png" /></p>
+<p>Le composant doit figurer dans le template  de la façon suivante :</p>
+<pre><code> &lt;tabpane&gt;
+     &lt;tab [tabtitle]="..."&gt;
+       &lt;mon-autre-component&gt;&lt;/mon-autre-component&gt;
+     &lt;/tab&gt;
+     &lt;tab [tabtitle]="..."&gt;
+       code html
+     &lt;/tab&gt;
+ &lt;/tabpane&gt;
+</code></pre>
+<ul>
+<li><strong>tabpane</strong> sert à encadrer la liste des onglets qui seront regroupés</li>
+<li><strong>tab</strong> sert à définir un onglet en particulier<ul>
+<li><strong>[tabtitle]</strong> est le titre que portera l'onglet</li>
+<li>Chaque balise tab peut contenir du html ou des composants Angular</li>
+</ul>
+</li>
+</ul>
+<h1 id="touch-button">Touch Button</h1>
+<p>Permet de créer un bouton flottant de style "polymere", contenant plusieurs autres boutons</p>
+<p><img alt="TouchButton__" src="./img/touch-button.png" /></p>
+<p>Utilisation:
+    <touch-button>
+       <tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
+       <tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
+      <tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
+     </touch-button></p>
+<h1 id="treeview">Treeview</h1>
+<p>Le treeview permet d'avoir un vue hierarchique d'élement sous forme d'arbre dépliable.</p>
+<p>Utilisation:
+<code>&lt;treeview [datas]="menu" [params]="params"&gt;&lt;/treeview&gt;</code></p>
+<ul>
+<li><strong>datas</strong> sont les données à mettre en forme dans l'arbre</li>
+<li><strong>params</strong> sert à configurer l'arbre :<ul>
+<li><strong>name_column</strong>: le nom de l'attribut qui sera affiché</li>
+<li><strong>primary_key</strong>: l'attribut servant d'identifiant</li>
+<li><strong>root_id</strong>: l'identifiant de l'élément servant de racine à l'arbre</li>
+<li><strong>scope</strong>: Le contexte d'appel pour les fonctions utilisées dans les boutons et checkboxes</li>
+<li><strong>buttons</strong>: un tableau de boutons affichés pour chaque élément de l'arbre</li>
+<li><strong>checkbox</strong>: un objet permettant de configurer une checkbox devant chaque élément de l'arbre :<ul>
+<li><strong>column_value</strong>: La valeur utilisée pour la checkbox</li>
+<li><strong>checked</strong>: un liste d'identifiant d'éléments déjà cochés</li>
+<li><strong>action_on_change</strong>: une fonction à appeler quand on coche ou décoche une checkbox</li>
+<li><strong>action_validate</strong>: une fonction à appeler quand on valide les cases cochées</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p># Wizard</p>
+<p>a documenter</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>&copy; SdV Plurimédia</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2016-12-12 17:15:43.912022
+-->

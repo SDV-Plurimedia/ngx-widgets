@@ -1,0 +1,10 @@
+site_name: SDV NG2 Widgets
+site_description: SDV NG2 Widgets est un pack de widgets pour angular2 avec bootstrap
+copyright: "&copy; SdV Plurimédia"
+theme: readthedocs
+site_dir: ./dist
+use_directory_urls: false
+extra_css:
+  - css/extra.css
+pages:
+    - 'Accueil': 'index.md'
