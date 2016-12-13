@@ -57,7 +57,8 @@ export class AutocompleteComponent {
 
     ngOnChanges(changes) {
       if(changes.data) {
-
+        console.log("datas",this.data);
+        console.log('changes', changes.data);
         this.nb_threads = Math.floor(this.data.length/1000) + 1;
         console.log('nb de threads ', this.nb_threads);
       }
@@ -78,7 +79,7 @@ export class AutocompleteComponent {
             for(let i = 0; i<this.nb_threads; i++){
               let slice = this.data.slice(i*1000, (i+1)*1000);
               let sub = new Observable(observer => {
-                let res = slice.filter(item => item[this.config.fieldSearch].toLowerCase().includes(this.inputValue.toLowerCase()));
+                let res = slice.filter(item => this.slugify(item[this.config.fieldSearch]).includes(this.slugify(this.inputValue)));
                 observer.next(res);
                 observer.complete();
               }).subscribe((res: Array<any>) => {
@@ -182,6 +183,21 @@ export class AutocompleteComponent {
                 this.setCursorPosition(pos + 1);
             }
         }
+    }
+
+    slugify(str: string) {
+      return str.toLowerCase()
+                .replace(/[\u00C0-\u00C5]/ig,'a') //remplace les 'a accentués
+                .replace(/[\u00C8-\u00CB]/ig,'e') //remplace les 'e' accentués
+                .replace(/[\u00CC-\u00CF]/ig,'i') //remplace les 'i' accentués
+                .replace(/[\u00D2-\u00D6]/ig,'o') //remplace les 'o' accentués
+                .replace(/[\u00D9-\u00DC]/ig,'u') //remplace les 'u' accentués
+                .replace(/[\u00D1]/ig,'n') //remplace les '~n' accentués
+                .replace(/[^a-z0-9 ]+/gi,'')
+                .trim().replace(/ /g,'-')
+                .replace(/[\-]{2}/g,'')
+                .replace(/[^a-z\- ]*/gi,'');
+
     }
 
 }
