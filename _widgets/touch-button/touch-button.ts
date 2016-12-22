@@ -1,9 +1,9 @@
-import {Component,ElementRef, Renderer} from '@angular/core';
+import {Component, ElementRef, Renderer} from "@angular/core";
 import {TouchButtonLinkComponent} from "./link";
 
 @Component({
-  selector: 'touch-button',
-  templateUrl: './touch-button.html',
+  selector: "touch-button",
+  templateUrl: "./touch-button.html",
   styleUrls: ["./touch-button.css"]
 })
 export class TouchButtonComponent {
@@ -19,18 +19,18 @@ export class TouchButtonComponent {
       this.dependenciesAreLoaded = true;
   }
 
-  openTouchBtn(){
+  openTouchBtn() {
     console.log("open");
-    this.state = (this.state == "closed")?"open":"closed";
+    this.state = (this.state == "closed") ? "open" : "closed";
 
-    //this.renderer.setElementClass(this.element,"open",true);
-    $(this.element.nativeElement).toggleClass('open');
-    $(this.element.nativeElement).find('.option').toggleClass('scale-on');
+    // this.renderer.setElementClass(this.element,"open",true);
+    $(this.element.nativeElement).toggleClass("open");
+    $(this.element.nativeElement).find(".option").toggleClass("scale-on");
   }
 
-  addLink(link){
+  addLink(link) {
     this.links.push(link);
-    link.index = this.links.length;//index commence à 1
+    link.index = this.links.length; // index commence à 1
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class TouchButtonComponent {
     //
     // changes is an object of the format:
     // {
-    //   'prop': PropertyUpdate
+    //   "prop": PropertyUpdate
     // }
   }
   ngAfterContentInit() {

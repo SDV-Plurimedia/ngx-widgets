@@ -4,11 +4,11 @@ Le module shared contient les widgets,directives et pipes qui peuvent etre utili
 
 */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule }   from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule }   from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpModule, JsonpModule } from "@angular/http";
 
 //les widgets
 import { AutocompleteComponent } from "./_widgets/autocomplete/autocomplete";
@@ -30,7 +30,7 @@ import { SwitchComponent } from "./_widgets/switch/switch";
 import { TabpaneComponent } from "./_widgets/tabpane/tabpane";
 import { TabComponent } from "./_widgets/tabpane/tab";
 import { TouchButtonComponent } from "./_widgets/touch-button/touch-button";
-import { TouchButtonLinkComponent } from "./widgets/touch-button/link";
+import { TouchButtonLinkComponent } from "./_widgets/touch-button/link";
 import { TreeviewComponent } from "./_widgets/treeview/treeview";
 import { WizardComponent } from "./_widgets/wizard/wizard";
 
