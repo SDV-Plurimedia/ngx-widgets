@@ -2,6 +2,8 @@
 
 Pack de widgets pour Angular2 / bootstrap
 
+![Widgets](https://raw.githubusercontent.com/SDV-Plurimedia/sdv-ng2-widgets/develop/documentation/dist/img/widgets.png)
+
 ## Documentation
 
 https://sdv-plurimedia.github.io/sdv-ng2-widgets/
