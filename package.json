@@ -1,6 +1,6 @@
 {
   "name": "sdv-ng2-widgets",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Angular2 - SDV Widgets",
   "repository": {
     "type": "git",
@@ -8,18 +8,19 @@
   },
   "scripts": {
     "start": "tsc",
+    "lint": "tslint \"_*/**/*.ts\"",
     "build": "tsc"
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "@angular/common": "2.2.1",
-    "@angular/compiler": "2.2.1",
-    "@angular/core": "2.2.1",
-    "@angular/forms": "2.2.1",
-    "@angular/http": "2.2.1",
-    "@angular/platform-browser": "2.2.1",
-    "@angular/platform-browser-dynamic": "2.2.1",
-    "@angular/router": "3.2.1",
+    "@angular/common": "~2.4.1",
+    "@angular/compiler": "~2.4.1",
+    "@angular/core": "~2.4.1",
+    "@angular/forms": "~2.4.1",
+    "@angular/http": "~2.4.1",
+    "@angular/platform-browser": "~2.4.1",
+    "@angular/platform-browser-dynamic": "~2.4.1",
+    "@angular/router": "~3.4.1",
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
@@ -32,10 +33,9 @@
     "moment": "^2.15.1",
     "rxjs": "^5.0.0-beta.12",
     "typescript": "^2.0.2",
-    "zone.js": "^0.6.23"
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
-    "angular-cli": "^1.0.0-beta.20-2",
     "tslint": "3.13.0",
     "typescript": "2.0.10"
   },

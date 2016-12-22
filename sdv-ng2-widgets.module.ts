@@ -30,6 +30,7 @@ import { SwitchComponent } from "./_widgets/switch/switch";
 import { TabpaneComponent } from "./_widgets/tabpane/tabpane";
 import { TabComponent } from "./_widgets/tabpane/tab";
 import { TouchButtonComponent } from "./_widgets/touch-button/touch-button";
+import { TouchButtonLinkComponent } from "./widgets/touch-button/link";
 import { TreeviewComponent } from "./_widgets/treeview/treeview";
 import { WizardComponent } from "./_widgets/wizard/wizard";
 
@@ -53,6 +54,7 @@ var widgets =  [
   TabpaneComponent,
   TabComponent,
   TouchButtonComponent,
+  TouchButtonLinkComponent,
   TreeviewComponent,
   WizardComponent
 ];

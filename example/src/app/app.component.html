@@ -1,7 +1,39 @@
 <h1>
   {{title}}
-
-  <bloc-card class="col-lg-4" [data]="{type:'divers', title:'Titre de mon paragraphe', content:'Ici on peut raconter plein de chose'}"></bloc-card>
-
-  
 </h1>
+
+<div class="row">
+  <bloc-card class="col-lg-4" [data]="{type:'divers', title:'Titre de mon paragraphe', content:'Ici on peut raconter plein de chose'}"></bloc-card>
+</div>
+
+  <div class="row">
+  <button3d [icon]="'check'" [class]="'success'" [size]="'btn-sm'" (click)="afficheBootbox('alert')" > Valider</button3d>
+  <button3d [icon]="'code-fork'" [class]="'danger'" (click)="afficheBootbox('alert')" > Pousser en prod</button3d>
+  <button3d [icon]="'cloud'" [class]="'primary'" [size]="'btn-lg'" (click)="afficheBootbox('alert')" > Envoyer dans le cloud</button3d>
+</div>
+
+<div class="row">
+  <progress-bar [datas]="{
+        value : 50,
+        min_value : 0,
+        max_value : 100
+    }" [class]="'progress-bar-striped'" class="col-md-8 control-label"></progress-bar>
+</div>
+
+<div class="row">
+  <status-bar [icon]="'refresh'" > Mise à jour disponible </status-bar>
+  <status-bar [icon]="'folder-open-o'" [class]="'info'" > Mise à jour disponible </status-bar>
+  <status-bar [icon]="'warning'" [class]="'warning'" > Mise à jour importante disponible </status-bar>
+  <status-bar [icon]="'warning'" [class]="'danger'" > Mise à jour critique disponible </status-bar>
+</div>
+
+<div class="row">
+<!--
+  <touch-button>
+     <tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
+     <tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
+    <tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
+   </touch-button>
+   <br/>
+-->
+</div>

@@ -1,5 +1,10 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.5.0 - 22/12/2016
+ * ADD: npm run lint
+ * UDP: angular passe en 2.4.1
+ * WIP: ajout sur les examples
+
 ## 0.4.2 - 19/12/2016
  * FIX: Correction de l'erreur de compilation sur les css de l'autocomplete
  * ADD: Possibilité de mettre du HTML sur les titres des tabpane.

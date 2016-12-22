@@ -334,11 +334,11 @@ Permet de créer un bouton flottant de style "polymere", contenant plusieurs aut
 ![TouchButton__](./img/touch-button.png)
 
 Utilisation:
-    <touch-button>
-       <tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
-       <tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
-      <tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
-     </touch-button>
+```<touch-button>
+<tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
+<tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
+<tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
+</touch-button>```
 
 
 # Treeview
@@ -361,6 +361,6 @@ Utilisation:
         * **action_on_change**: une fonction à appeler quand on coche ou décoche une checkbox
         * **action_validate**: une fonction à appeler quand on valide les cases cochées
 
-  # Wizard
+# Wizard
 
   a documenter
