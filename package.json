@@ -11,7 +11,7 @@
     "lint": "tslint \"_*/**/*.ts\"",
     "build": "tsc"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@angular/common": "~2.4.1",
     "@angular/compiler": "~2.4.1",
