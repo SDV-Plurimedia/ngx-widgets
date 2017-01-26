@@ -9,7 +9,7 @@ import {Component, ElementRef, Renderer} from '@angular/core';
 
 export class HierarchieListComponent {
 
-    public params: HierarchieList;
+    public params: HierarchieList = null;
     public datas: any[];
     public root_id: string;
     public name_column: string;
@@ -25,15 +25,17 @@ export class HierarchieListComponent {
     constructor(private _el: ElementRef, private _renderr: Renderer) { }
 
     ngOnInit() {
+      if(this.params !== null){
         this.root_id = this.params.root_id;
         this.name_column = this.params.name_column;
         this.parent_scope = this.params.scope;
         this.buttons = this.params.buttons;
-        this.level = [];
-        this.datas_level = [];
-        this.level[0] = this.root_id;
-        this.datas_level[0] = this.getListLevel(0);
-        this.getDisplayedLevel();
+      }
+      this.level = [];
+      this.datas_level = [];
+      this.level[0] = this.root_id;
+      this.datas_level[0] = this.getListLevel(0);
+      this.getDisplayedLevel();
 
     }
 
