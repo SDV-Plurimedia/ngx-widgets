@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.5.1 - 30/01/2017
+ * ADD: Possibilité de surcharger la valeur insérée dans le champ de l'autocomplete après un clic sur l'un des résultats
+
 ## 0.5.0 - 22/12/2016
  * ADD: npm run lint
  * UDP: angular passe en 2.4.1
