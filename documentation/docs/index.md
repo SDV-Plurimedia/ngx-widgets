@@ -14,6 +14,7 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
 * **[config]**: *Object* - permet la config du widget, doit contenir:
     * **fieldName**: *String|Array* - nom du ou des attributs du tableau *data* qui sont utilisés à l'affichage dans le champ
     * **fieldValue**: *String* - nom de l'attribut du tableau *data* qui fait office de valeur de retour par le widget (si vide, on renvoi l'objet complet)
+    * **fieldInsert**: *String* - nom de l'attribut du tableau *data* à insérer dans le champ après un clic sur l'un des résultats de l'autocomplete
     * **begin**: *Number* - nombre de caractères à entrer dans le champ avant que l'autocomplete ne se lance
     * **defaultValue**: *String* - valeur par défaut à insérer dans l'input d'autocompletion
     * **placeholder**: *String* - Placeholder du champ
