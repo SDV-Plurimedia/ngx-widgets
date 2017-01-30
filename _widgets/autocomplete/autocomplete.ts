@@ -123,7 +123,7 @@ export class AutocompleteComponent {
         this.toggleDropdown();
         this.inputValue = "";
         this.setCursorPosition(0);
-        this.placeholder = item[this.config.fieldSearch];//item[this.config.fieldName];
+        this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldSearch];
     }
 
     //GESTION DU CLIC EN DEHORS DU CHAMP
