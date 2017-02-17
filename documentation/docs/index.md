@@ -137,7 +137,39 @@ Exemple de component:
 
     //un exemple de données
     public data_tab = [{id: 1, name: "Antoine"}];
+    
+Il est également possible de fournir du contenu HTML généré dynamiquement, pour ce faire :
 
+ - La définition de la structure est la suivante :
+ 
+ 
+    public structure = [
+        { id: "id", label: "ID"},
+        { id: "liste_lapin", label: "Mes Lapins", inputHTML: true}
+    ];
+    
+ - Ensuite, dans mon model :
+        1) Ajouter la propriété "liste_lapin".
+        2) Générer le HTML qui corresponds.
+        3) L'affecter à cette propriété.
+
+        
+    # dans mon model :
+    public lapins: Lapin[]; // Les différents objets Lapin
+    public liste_lapin:string = '';
+     
+    # Dans le constructeur du model :
+    this.lapins      = obj && obj.lapins     || null;
+    this.liste_lapin = (obj && obj.lapins ? this.getListeLapin() : '');
+      
+    getListeLapin() {
+        let ul = '<ul>';
+        for(let lapin in this.lapins) {
+            ul += '<li>' + lapin.name + '</li>';
+        }
+        return ul + '</ul>';
+    }
+    
 # DatePicker
 
 Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.

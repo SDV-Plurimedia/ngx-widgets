@@ -1,34 +1,35 @@
 <table class='table table-striped table-bordered' cellspacing='0' width='100%' #table>
-<thead *ngIf="header">
+    <thead *ngIf="header">
     <tr>
-      <template ngFor let-champ [ngForOf]="structure">
-        <th>{{champ.label}}</th>
-      </template>
-      <th *ngIf="buttons"></th>
+        <ng-container *ngFor=" let champ of structure">
+            <th>{{champ.label}}</th>
+        </ng-container>
+        <th *ngIf="buttons"></th>
     </tr>
-</thead>
-<tfoot *ngIf="footer">
+    </thead>
+    <tfoot *ngIf="footer">
     <tr>
-      <template ngFor let-champ [ngForOf]="structure">
-        <th>{{champ.label}}</th>
-      </template>
-      <th *ngIf="buttons"></th>
+        <ng-container *ngFor="let champ of structure">
+            <th>{{champ.label}}</th>
+        </ng-container>
+        <th *ngIf="buttons"></th>
     </tr>
 
-</tfoot>
-<tbody>
-    <template ngFor let-ligne [ngForOf]="data" >
-      <tr class="dt-body-row" >
-        <template ngFor let-champ [ngForOf]="structure">
-          <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
-          <td *ngIf="!champ.template">{{ getValue(ligne, champ.id)}}</td>
-        </template>
-        <td *ngIf="buttons">
-          <template ngFor let-button [ngForOf]="buttons">
-            <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])">{{button.text}}</button>
-          </template>
-        </td>
-      </tr>
-    </template>
-  </tbody>
+    </tfoot>
+    <tbody>
+    <ng-container *ngFor="let ligne of data" >
+        <tr class="dt-body-row" >
+            <ng-container *ngFor="let champ of structure">
+                <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
+                <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id)"></td>
+                <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
+            </ng-container>
+            <td *ngIf="buttons">
+                <ng-container *ngFor="let button of buttons">
+                    <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])">{{button.text}}</button>
+                </ng-container>
+            </td>
+        </tr>
+    </ng-container>
+    </tbody>
 </table>
