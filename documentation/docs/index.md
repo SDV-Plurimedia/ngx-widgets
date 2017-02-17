@@ -145,7 +145,7 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
  
     public structure = [
         { id: "id", label: "ID"},
-        { id: "liste_lapin", label: "Mes Lapins", inputHTML: true}
+        { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
     ];
     
  - Ensuite, dans mon model :
@@ -156,13 +156,11 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
         
     # dans mon model :
     public lapins: Lapin[]; // Les différents objets Lapin
-    public liste_lapin:string = '';
      
     # Dans le constructeur du model :
     this.lapins      = obj && obj.lapins     || null;
-    this.liste_lapin = (obj && obj.lapins ? this.getListeLapin() : '');
       
-    getListeLapin() {
+    public get liste_lapins() {
         let ul = '<ul>';
         for(let lapin in this.lapins) {
             ul += '<li>' + lapin.name + '</li>';
