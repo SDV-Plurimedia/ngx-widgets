@@ -103,6 +103,29 @@ Exemple de conf, voir le fichier site/bo_spa/src/app/article/edit/edit.ts
 
 A documenter
 
+# Data-Autocomplete
+Ce widget récupère à son instanciation tous les objets qui correspondent au services passés. Puis, lors de la 
+validation d'un item via l'autocomplétion, ajoute celui-ci en base de données et dans l'autocomplete.
+
+Pour utilise ce widget :
+    
+    <data-autocomplete [config]="config" (valid)="maFonctionDeRecup($event)"></data-autocomplete>
+
+Attention, il faut que dans les modèles utilisés l'attribut "alreadyIn" soit présent.
+
+Config est un tableau pouvant contenir les propriétés suivantes : 
+    
+    config = {
+        _service     = "Le service utilisé pour récupérer les données."
+        fieldName    = "Le nom du champ qu'on affiche dans la liste déroulante";
+        presentItems = {}, // tableau d'objets qui correspond aux différents items déjà présent.
+        begin        = 3, // À partir de combien de caractères on veut lancer la recherche
+        placeholder  = 'Le "nom" de l'autocomplete.'
+    }
+    
+Ce widget renvoie lors de l'ajout ou de la suppression d'un element le tableau "presentItems", qui contient les différents
+élements ajoutés.
+
 # Datatable
 
 ![DataTable](./img/datatable.png)
@@ -137,6 +160,14 @@ Exemple de component:
 
     //un exemple de données
     public data_tab = [{id: 1, name: "Antoine"}];
+    
+
+On peut également passer du HTML qui sera directement intégré dans une colonne.
+
+    public structure = [
+        { id: "nameHTML", label: "Nom du champ", inputHTML: true }
+    ]
+    public data_tab = [{ id:1, nameHTML="<h1>USER</h1>" }]
 
 # DatePicker
 
