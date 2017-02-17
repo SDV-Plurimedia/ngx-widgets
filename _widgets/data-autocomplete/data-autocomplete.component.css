@@ -1,0 +1,49 @@
+.chosen-container-single .chosen-drop {
+    margin-top : -3px;
+}
+
+.chosen-container .chosen-drop {
+    border-color : #ccc;
+}
+
+.chosen-container .form-control:focus {
+    border-color: #ccc;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.chosen-container .chosen-results li:hover{
+    color: white;
+    background-color: #7fa7e6;
+}
+
+a {
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+#auto-conteneur_input {
+    width:100%;
+}
+
+
+.mon-badge {
+    display: inline-block;
+    padding: .2em .6em .3em;
+    font-size: 90%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.hover {
+    cursor:pointer;
+}
+
+.chosen-results {
+    background-color: white;
+}

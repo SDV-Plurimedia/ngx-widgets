@@ -1,0 +1,28 @@
+<div tabindex="1" (keyup)="onKey($event)" [ngClass]="{'chosen-container-active chosen-with-drop': isActive}" class="chosen-container chosen-container-single" title="">
+    <div [class.input-group]="icon">
+        <a (click)="toggleDropdown()" class="form-control" tabindex="-1"><span class="spanClick">{{placeholder}}</span>
+        </a>
+        <template ngFor let-item [ngForOf]="presentItems">
+            <span class="label-primary mon-badge">{{ item.name }}&nbsp;&nbsp;&nbsp;<span (click)="deleteItem(item)" class="fa fa-times hover"></span></span>
+        </template>
+        <div class="input-group-addon" *ngIf="icon"><span class="fa fa-{{icon}}"></span></div>
+    </div>
+
+
+    <div class="chosen-drop" style="border-top:1px solid #aaa; height:36px">
+        <div class="input-group" id="auto-conteneur_input">
+
+            <span class="input-group-btn" style="width:2%;">
+                <button (click)="addItem()" id="btnAdd" class="btn btn-secondary" type="button"><span class="fa fa-plus-square"></span></button>
+            </span>
+            <input type="text" name="value" autocomplete="off" [ngModel]="inputValue"
+                   (ngModelChange)="onInputChange($event)" class="form-control" id="inputField" style="border:0; border-radius:0;">
+        </div>
+
+        <ul class="chosen-results">
+            <template ngFor let-item [ngForOf]="results" let-i="index" let-isfirst="first">
+                <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[this.fieldName] }}</li>
+            </template>
+        </ul>
+    </div>
+</div>
