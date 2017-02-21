@@ -33,6 +33,7 @@ import { TouchButtonComponent } from "./_widgets/touch-button/touch-button";
 import { TouchButtonLinkComponent } from "./_widgets/touch-button/link";
 import { TreeviewComponent } from "./_widgets/treeview/treeview";
 import { WizardComponent } from "./_widgets/wizard/wizard";
+import { WizardStepComponent } from "./_widgets/wizard/step";
 
 var widgets =  [
   AutocompleteComponent,
@@ -56,7 +57,8 @@ var widgets =  [
   TouchButtonComponent,
   TouchButtonLinkComponent,
   TreeviewComponent,
-  WizardComponent
+  WizardComponent,
+  WizardStepComponent
 ];
 
 //les directives

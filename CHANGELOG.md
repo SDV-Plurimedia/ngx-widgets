@@ -1,9 +1,13 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.6.1 - 21/02/2017
+* FIX: Naming et Export des WizardStepComponent pour la compilation AOT
+
 ## 0.6.0 - 21/02/2017
  * ADD: L'autocomplete émet des créations d'objet
  * FIX: L'autocomplete n'envoi plus de valeur null quand on choisie aucun
  * UPD: La page d'example inclus un autocomplete
+ * ADD: Datatable peut gérer des templates html dans les colonnes
 
 ## 0.5.2 - 30/01/2017
  * ADD: Possibilité de surcharger la valeur insérée dans le champ de l'autocomplete après un clic sur l'un des résultats

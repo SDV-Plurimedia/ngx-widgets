@@ -8,7 +8,7 @@ import {WizardComponent} from "./wizard";
   selector: 'wizard-step',
   inputs: ['state','title']
 })
-export class WizartStepComponent {
+export class WizardStepComponent {
   public title: string;
   public state: string;
   public active: boolean = false;
