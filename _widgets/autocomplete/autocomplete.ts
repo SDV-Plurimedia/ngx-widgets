@@ -4,7 +4,7 @@ import {Observable, Subject} from 'rxjs';
 @Component({
     selector: 'autocomplete',
     templateUrl: './autocomplete.html',
-    styleUrls: ['./chosen.min.css', './autocomplete.css'],
+    styleUrls: ['./chosen.scss', './autocomplete.css'],
     host: { '(document:click)': 'onClick($event)' }// ici on capture le click en dehors de l'autocomplete, pour savoir quand fermer la popup
 })
 export class AutocompleteComponent {

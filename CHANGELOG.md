@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.6.2 - 21/02/2017
+* FIX: AutoComplete avait des images manquantes (pour passer une compilation AOT pour angular/cli 32)
+
 ## 0.6.1 - 21/02/2017
 * FIX: Naming et Export des WizardStepComponent pour la compilation AOT
 
