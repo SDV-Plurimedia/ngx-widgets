@@ -1,6 +1,6 @@
 {
   "name": "sdv-ng2-widgets",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Angular2 - SDV Widgets",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "tsc",
     "lint": "tslint \"_*/**/*.ts\"",
+    "copy2test": "cp -r _* example/node_modules/sdv-ng2-widgets/",
     "build": "tsc"
   },
   "license": "MIT",

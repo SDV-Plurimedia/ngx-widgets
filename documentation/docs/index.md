@@ -12,13 +12,15 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
 
 * **[data]**: *Array* - tableau contenant les données à traiter par l'autocomplete
 * **[config]**: *Object* - permet la config du widget, doit contenir:
-    * **fieldName**: *String|Array* - nom du ou des attributs du tableau *data* qui sont utilisés à l'affichage dans le champ
+    * **fieldDisplayed**: *String|Array* - nom du ou des attributs du tableau *data* qui sont utilisés à l'affichage dans le champ
+    * **fieldSearch**: *String* - nom de l'attribut du tableau *data* dans lequel effectuer la recherche (si vide, on prend le fieldDisplayed)
     * **fieldValue**: *String* - nom de l'attribut du tableau *data* qui fait office de valeur de retour par le widget (si vide, on renvoi l'objet complet)
-    * **fieldInsert**: *String* - nom de l'attribut du tableau *data* à insérer dans le champ après un clic sur l'un des résultats de l'autocomplete
+    * **fieldInsert**: *String* - nom de l'attribut du tableau *data* qui remplacera le placeholder après un clic sur l'un des résultats (si vide, on insert le fieldDisplayed)
     * **begin**: *Number* - nombre de caractères à entrer dans le champ avant que l'autocomplete ne se lance
     * **defaultValue**: *String* - valeur par défaut à insérer dans l'input d'autocompletion
     * **placeholder**: *String* - Placeholder du champ
-* **(valid)**: *Function* - fonction appelée lorsque le champ est valide
+* **(valid)**: *Function* - fonction appelée lorsque le champ est validé sur un resultat existant
+* **(create)**: *Function* - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant
 
 # Bloc-Card
 
@@ -137,29 +139,29 @@ Exemple de component:
 
     //un exemple de données
     public data_tab = [{id: 1, name: "Antoine"}];
-    
+
 Il est également possible de fournir du contenu HTML généré dynamiquement, pour ce faire :
 
  - La définition de la structure est la suivante :
- 
- 
+
+
     public structure = [
         { id: "id", label: "ID"},
         { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
     ];
-    
+
  - Ensuite, dans mon model :
         1) Ajouter la propriété "liste_lapin".
         2) Générer le HTML qui corresponds.
         3) L'affecter à cette propriété.
 
-        
+
     # dans mon model :
     public lapins: Lapin[]; // Les différents objets Lapin
-     
+
     # Dans le constructeur du model :
     this.lapins      = obj && obj.lapins     || null;
-      
+
     public get liste_lapins() {
         let ul = '<ul>';
         for(let lapin in this.lapins) {
@@ -167,7 +169,7 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
         }
         return ul + '</ul>';
     }
-    
+
 # DatePicker
 
 Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.

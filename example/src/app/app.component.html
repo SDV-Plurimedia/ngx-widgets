@@ -33,6 +33,12 @@
   </div>
 
   <div class="row">
+    <h2>AutoComplete</h2>
+    <autocomplete [data]="prenoms_liste"  [config]='{fieldSearch: "label",fieldDisplayed: "label", begin: 1, placeholder: "Ajouter vos valeurs"}' (valid)="valider($event)" (create)="creer($event)"></autocomplete>
+    Resultats: <span *ngFor="let prenom of prenoms"> {{prenom.label}} </span>
+  </div>
+
+  <div class="row">
     <h2>Touch Button</h2>
     <touch-button>
        <tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>

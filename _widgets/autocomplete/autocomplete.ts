@@ -1,19 +1,18 @@
 import {Component, Input, Output, EventEmitter, ElementRef}     from '@angular/core';
-//import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import {Observable, Subject} from 'rxjs/Rx';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
     selector: 'autocomplete',
     templateUrl: './autocomplete.html',
     styleUrls: ['./chosen.min.css', './autocomplete.css'],
-    host: { '(document:click)': 'onClick($event)' }//ici on capture le click en dehors de l'autocomplete, pour savoir quand fermer la popup
+    host: { '(document:click)': 'onClick($event)' }// ici on capture le click en dehors de l'autocomplete, pour savoir quand fermer la popup
 })
 export class AutocompleteComponent {
-    @Input() data; //Tableau de données dans lequel l'autocomplete va rechercher
+    @Input() data; // Tableau de données dans lequel l'autocomplete va rechercher
     @Input() config;
     @Input() icon = "";
-    @Output() valid = new EventEmitter(); //Variable remplie lorsque le champ d'autocomplétion est validé
+    @Output() valid = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un existant
+    @Output() create = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un texte inexistant
 
     private results: Array<string> = [];
     private placeholder: string = "";
@@ -26,21 +25,16 @@ export class AutocompleteComponent {
     private nb_threads = 1;
     private searchStream = new Subject<string>();
     private items: Observable<string[]> = this.searchStream
-      .debounceTime(400) //Temporisation en millisecondes.
+      .debounceTime(400) // Temporisation en millisecondes.
       .distinctUntilChanged()
       .switchMap((subject: string) => {
-        //Execution de la requete Elasticsearch.
+        // Execution de la requete Elasticsearch.
         this.reduceResultList();
         return []
       });
-    //autocompleteForm: ControlGroup;
-    //autoControl: AbstractControl;
 
-    constructor(/*fb: FormBuilder,*/ private _eref: ElementRef) {
-        /*this.autocompleteForm = fb.group({
-            'auto': ['', Validators.required]
-        });
-        this.autoControl = this.autocompleteForm.controls['auto'];*/
+    constructor( private _eref: ElementRef ) {
+        //
     }
 
     ngOnInit() {
@@ -57,10 +51,8 @@ export class AutocompleteComponent {
 
     ngOnChanges(changes) {
       if(changes.data) {
-        console.log("datas",this.data);
-        console.log('changes', changes.data);
         this.nb_threads = Math.floor(this.data.length/1000) + 1;
-        console.log('nb de threads ', this.nb_threads);
+        // console.log('nb de threads ', this.nb_threads);
       }
     }
 
@@ -71,15 +63,19 @@ export class AutocompleteComponent {
       }
     }
 
-    //reduit le nombre de resultat, en fonction de la valeur tapé
+    // reduit le nombre de resultat, en fonction de la valeur tapé
     reduceResultList() {
         this.results = [];
         if (this.inputValue && this.inputValue.length >= this.config.begin) {
-            //this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
+            // filtre simple
+            // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
             for(let i = 0; i<this.nb_threads; i++){
               let slice = this.data.slice(i*1000, (i+1)*1000);
               let sub = new Observable(observer => {
-                let res = slice.filter(item => this.slugify(item[this.config.fieldSearch]).includes(this.slugify(this.inputValue)));
+                let res = slice.filter(item => {
+                  let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
+                  return this.slugify(searchable_text).includes(this.slugify(this.inputValue))
+                });
                 observer.next(res);
                 observer.complete();
               }).subscribe((res: Array<any>) => {
@@ -110,7 +106,7 @@ export class AutocompleteComponent {
             this.isActive = false;
     }
 
-    //retourne le type de donnée voulue
+    // retourne le type de donnée voulue
     getValue(item) {
         if (typeof this.config.fieldValue !== 'undefined' && typeof item[this.config.fieldValue] !== 'undefined')
             return item[this.config.fieldValue];
@@ -118,15 +114,23 @@ export class AutocompleteComponent {
             return item;
     }
 
-    valideItem(item) {
+    // aucun item n'existe, donc on envoi la chaine (si quelqu'un veut ecouter pour en cree un)
+    private newItem(){
+      this.create.emit(this.inputValue);
+      this.toggleDropdown();
+      this.setCursorPosition(0);
+    }
+
+    // emet l'item selectionné
+    private valideItem(item) {
         this.valid.emit(this.getValue(item));
         this.toggleDropdown();
         this.inputValue = "";
         this.setCursorPosition(0);
-        this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldSearch];
+        this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
     }
 
-    //GESTION DU CLIC EN DEHORS DU CHAMP
+    // GESTION DU CLIC EN DEHORS DU CHAMP
     onClick(event) {
         let spanElement = this._eref.nativeElement.querySelector('.spanClick');
         let inputElement = this._eref.nativeElement.querySelector('.inputField');
@@ -137,7 +141,7 @@ export class AutocompleteComponent {
         }
     }
 
-    //fixe la position du curseur
+    // fixe la position du curseur
     private setCursorPosition(pos: number) {
         let current = this._eref.nativeElement.querySelector('.elem' + pos);
         if (current != null) {
@@ -146,13 +150,13 @@ export class AutocompleteComponent {
         }
     }
 
-    //retire les classes css aux anciennes positions
+    // retire les classes css aux anciennes positions
     private removeHighlight(pos: number) {
         let className = "elem" + (pos);
         this._eref.nativeElement.querySelector('.' + className).setAttribute("class", "active-result " + className);
     }
 
-    //recupere la position courante du curseur
+    // recupere la position courante du curseur
     private getCurrentPosition() {
         let pos = 0;
         let elem = this._eref.nativeElement.querySelector('.highlighted');
@@ -165,19 +169,26 @@ export class AutocompleteComponent {
     onKey(event) {
         let pos = this.getCurrentPosition();
 
-        if (event.keyCode == 27) //ESC
+        if (event.keyCode === 27) // ESC
             this.toggleDropdown();
-        else if (event.keyCode == 13) //ENTER
+        else if (event.keyCode === 13) // ENTER
         {
-            this.valideItem(this.results[pos]);
+            if(pos > 0 && typeof this.results[pos] !== "undefined"){
+              this.valideItem(this.results[pos]);
+            }
+            else{
+              //si on est sur la position 0 (Aucun), on envoi la valeur du champ au cas où il faut créer
+              this.newItem();
+            }
+
         }
-        else if (event.keyCode == 38) { //UP
+        else if (event.keyCode === 38) { // UP
             if (pos > 0) {
                 this.removeHighlight(pos);
                 this.setCursorPosition(pos - 1);
             }
         }
-        else if (event.keyCode == 40) { //DOWN
+        else if (event.keyCode === 40) { // DOWN
             if (pos < (this.results.length - 1)) {
                 this.removeHighlight(pos);
                 this.setCursorPosition(pos + 1);
