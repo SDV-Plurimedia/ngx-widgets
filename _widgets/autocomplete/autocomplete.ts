@@ -47,6 +47,10 @@ export class AutocompleteComponent {
 
         this.reduceResultList();
         this.items.subscribe();
+
+        if(typeof this.config.modifyPlaceholder === "undefined") {
+            this.config.modifyPlaceholder = true;
+        }
     }
 
     ngOnChanges(changes) {
@@ -128,6 +132,9 @@ export class AutocompleteComponent {
         this.inputValue = "";
         this.setCursorPosition(0);
         this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
+        if(this.config.modifyPlaceholder) {
+            this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
+        }
     }
 
     // GESTION DU CLIC EN DEHORS DU CHAMP
