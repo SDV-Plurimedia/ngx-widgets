@@ -11,27 +11,30 @@ export class AutocompleteComponent {
     @Input() data; // Tableau de données dans lequel l'autocomplete va rechercher
     @Input() config;
     @Input() icon = "";
+    @Input() displayItems; // Tableau qui contient les différents élements à afficher.
+
     @Output() valid = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un existant
     @Output() create = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un texte inexistant
+    @Output() delete = new EventEmitter(); // Evenement émit lors de la suppression.
 
     private results: Array<string> = [];
     private placeholder: string = "";
 
     private inputValue: string = "";
-    public isActive: boolean = false;
+    public  isActive: boolean = false;
     private inputForm;
     private removeData: any;
 
     private nb_threads = 1;
     private searchStream = new Subject<string>();
     private items: Observable<string[]> = this.searchStream
-      .debounceTime(400) // Temporisation en millisecondes.
-      .distinctUntilChanged()
-      .switchMap((subject: string) => {
-        // Execution de la requete Elasticsearch.
-        this.reduceResultList();
-        return []
-      });
+        .debounceTime(400) // Temporisation en millisecondes.
+        .distinctUntilChanged()
+        .switchMap((subject: string) => {
+            // Execution de la requete Elasticsearch.
+            this.reduceResultList();
+            return []
+        });
 
     constructor( private _eref: ElementRef ) {
         //
@@ -48,23 +51,29 @@ export class AutocompleteComponent {
         this.reduceResultList();
         this.items.subscribe();
 
+        // Pour modifier le nom de l'autocomplete lors de la selection d'un champs
         if(typeof this.config.modifyPlaceholder === "undefined") {
             this.config.modifyPlaceholder = true;
+        }
+
+        // Pour afficher les items séléctionnés à droite du placeholder.
+        if(typeof this.config.displayAddedItem === "undefined") {
+            this.config.displayAddedItem = false;
         }
     }
 
     ngOnChanges(changes) {
-      if(changes.data) {
-        this.nb_threads = Math.floor(this.data.length/1000) + 1;
-        // console.log('nb de threads ', this.nb_threads);
-      }
+        if(changes.data) {
+            this.nb_threads = Math.floor(this.data.length/1000) + 1;
+            // console.log('nb de threads ', this.nb_threads);
+        }
     }
 
     onInputChange(input) {
-      this.inputValue= input;
-      if (this.inputValue.length >= this.config.begin) {
-        this.searchStream.next(input);
-      }
+        this.inputValue= input;
+        if (this.inputValue.length >= this.config.begin) {
+            this.searchStream.next(input);
+        }
     }
 
     // reduit le nombre de resultat, en fonction de la valeur tapé
@@ -74,35 +83,34 @@ export class AutocompleteComponent {
             // filtre simple
             // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
             for(let i = 0; i<this.nb_threads; i++){
-              let slice = this.data.slice(i*1000, (i+1)*1000);
-              let sub = new Observable(observer => {
-                let res = slice.filter(item => {
-                  let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
-                  return this.slugify(searchable_text).includes(this.slugify(this.inputValue))
+                let slice = this.data.slice(i*1000, (i+1)*1000);
+                let sub = new Observable(observer => {
+                    let res = slice.filter(item => {
+                        let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
+                        return this.slugify(searchable_text).includes(this.slugify(this.inputValue))
+                    });
+                    observer.next(res);
+                    observer.complete();
+                }).subscribe((res: Array<any>) => {
+                    res.forEach(item => this.results.push(item));
                 });
-                observer.next(res);
-                observer.complete();
-              }).subscribe((res: Array<any>) => {
-                res.forEach(item => this.results.push(item));
-              });
             }
             if(this.results.length > 0) {
-              this.results.splice(0,0, this.removeData);
+                this.results.splice(0,0, this.removeData);
             }
         }
         else if(this.config.begin == 0){
-          if(this.data[0] != this.removeData) {
-            this.data.splice(0,0, this.removeData);
-          }
-          this.results = this.data;
+            if(this.data[0] != this.removeData) {
+                this.data.splice(0,0, this.removeData);
+            }
+            this.results = this.data;
         }
-
     }
 
     //change l'etat du menu deroulant
     toggleDropdown() {
         if (!this.isActive) {
-            this.inputForm = this._eref.nativeElement.querySelector('.form-control');
+            this.inputForm = this._eref.nativeElement.querySelector('.inputField');
             this.isActive = true;
             this.inputForm.focus();
         }
@@ -120,9 +128,10 @@ export class AutocompleteComponent {
 
     // aucun item n'existe, donc on envoi la chaine (si quelqu'un veut ecouter pour en cree un)
     private newItem(){
-      this.create.emit(this.inputValue);
-      this.toggleDropdown();
-      this.setCursorPosition(0);
+        this.create.emit(this.inputValue);
+        this.toggleDropdown();
+        this.inputValue = "";
+        this.setCursorPosition(0);
     }
 
     // emet l'item selectionné
@@ -131,10 +140,14 @@ export class AutocompleteComponent {
         this.toggleDropdown();
         this.inputValue = "";
         this.setCursorPosition(0);
-        this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
         if(this.config.modifyPlaceholder) {
             this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
         }
+    }
+
+    // Renvoie l'item que l'on veut supprimer.
+    deleteItem(item) {
+        this.delete.emit(this.getValue(item));
     }
 
     // GESTION DU CLIC EN DEHORS DU CHAMP
@@ -181,11 +194,12 @@ export class AutocompleteComponent {
         else if (event.keyCode === 13) // ENTER
         {
             if(pos > 0 && typeof this.results[pos] !== "undefined"){
-              this.valideItem(this.results[pos]);
+                this.removeHighlight(pos);
+                this.valideItem(this.results[pos]);
             }
             else{
-              //si on est sur la position 0 (Aucun), on envoi la valeur du champ au cas où il faut créer
-              this.newItem();
+                //si on est sur la position 0 (Aucun), on envoi la valeur du champ au cas où il faut créer
+                this.newItem();
             }
 
         }
@@ -204,18 +218,17 @@ export class AutocompleteComponent {
     }
 
     slugify(str: string) {
-      return str.toLowerCase()
-                .replace(/[\u00C0-\u00C5]/ig,'a') //remplace les 'a accentués
-                .replace(/[\u00C8-\u00CB]/ig,'e') //remplace les 'e' accentués
-                .replace(/[\u00CC-\u00CF]/ig,'i') //remplace les 'i' accentués
-                .replace(/[\u00D2-\u00D6]/ig,'o') //remplace les 'o' accentués
-                .replace(/[\u00D9-\u00DC]/ig,'u') //remplace les 'u' accentués
-                .replace(/[\u00D1]/ig,'n') //remplace les '~n' accentués
-                .replace(/[^a-z0-9 ]+/gi,'')
-                .trim().replace(/ /g,'-')
-                .replace(/[\-]{2}/g,'')
-                .replace(/[^a-z\- ]*/gi,'');
+        return str.toLowerCase()
+            .replace(/[\u00C0-\u00C5]/ig,'a') //remplace les 'a accentués
+            .replace(/[\u00C8-\u00CB]/ig,'e') //remplace les 'e' accentués
+            .replace(/[\u00CC-\u00CF]/ig,'i') //remplace les 'i' accentués
+            .replace(/[\u00D2-\u00D6]/ig,'o') //remplace les 'o' accentués
+            .replace(/[\u00D9-\u00DC]/ig,'u') //remplace les 'u' accentués
+            .replace(/[\u00D1]/ig,'n') //remplace les '~n' accentués
+            .replace(/[^a-z0-9 ]+/gi,'')
+            .trim().replace(/ /g,'-')
+            .replace(/[\-]{2}/g,'')
+            .replace(/[^a-z\- ]*/gi,'');
 
     }
-
 }
