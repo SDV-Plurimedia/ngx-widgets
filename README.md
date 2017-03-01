@@ -1,5 +1,9 @@
 # SDV NG2 Widgets
 
+[![npm download](https://img.shields.io/npm/dt/sdv-ng2-widgets.svg)]()
+[![npm version](https://img.shields.io/npm/v/sdv-ng2-widgets.svg)]()
+[![npm license](https://img.shields.io/npm/l/sdv-ng2-widgets.svg)]()
+
 Pack de widgets pour Angular2 / bootstrap
 
 ![Widgets](https://raw.githubusercontent.com/SDV-Plurimedia/sdv-ng2-widgets/develop/documentation/dist/img/widgets.png)
