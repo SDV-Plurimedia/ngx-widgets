@@ -1,5 +1,10 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.7.0 - 02/03/2017
+* FIX: Autocomplete: coloration bleu sur l'ajout au clavier
+* ADD: Autocomplete: evenement d'ajout et de suppression d'element
+* ADD: Autocomplete: affichage d'une liste d'element
+
 ## 0.6.2 - 21/02/2017
 * FIX: AutoComplete avait des images manquantes (pour passer une compilation AOT pour angular/cli 32)
 
