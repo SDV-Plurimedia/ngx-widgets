@@ -16,6 +16,7 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
     * **fieldSearch**: *String* - nom de l'attribut du tableau *data* dans lequel effectuer la recherche (si vide, on prend le fieldDisplayed)
     * **fieldValue**: *String* - nom de l'attribut du tableau *data* qui fait office de valeur de retour par le widget (si vide, on renvoi l'objet complet)
     * **fieldInsert**: *String* - nom de l'attribut du tableau *data* qui remplacera le placeholder après un clic sur l'un des résultats (si vide, on insert le fieldDisplayed)
+    * **fieldDefault**: *String* - La chaîne affichée lorsque aucune valeur n'est sélectionnée. Vaut Aucun par défault
     * **begin**: *Number* - nombre de caractères à entrer dans le champ avant que l'autocomplete ne se lance
     * **defaultValue**: *String* - valeur par défaut à insérer dans l'input d'autocompletion
     * **placeholder**: *String* - Placeholder du champ
