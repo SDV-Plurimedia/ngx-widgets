@@ -42,8 +42,8 @@ export class AutocompleteComponent {
 
     ngOnInit() {
         this.removeData = {};
-        this.removeData[this.config.fieldSearch] = "Aucun";
-        this.removeData[this.config.fieldDisplayed] = "Aucun";
+        this.removeData[this.config.fieldSearch] = this.config.fieldDefault ? this.config.fieldDefault : "Aucun";
+        this.removeData[this.config.fieldDisplayed] = this.config.fieldDefault ? this.config.fieldDefault : "Aucun";
         this.placeholder = this.config.placeholder;
         if (this.config.defaultValue !== "")
             this.inputValue = this.config.defaultValue;
