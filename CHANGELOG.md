@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.8.0 - 06/03/2017
+* ADD: Autocomplete: choisir une valeur par défaut quand aucun item n'est selectionné
+
 ## 0.7.0 - 02/03/2017
 * FIX: Autocomplete: coloration bleu sur l'ajout au clavier
 * ADD: Autocomplete: evenement d'ajout et de suppression d'element
