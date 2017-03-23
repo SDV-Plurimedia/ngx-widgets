@@ -101,6 +101,26 @@ Exemple de structure :
     
 ![BigDatatable__](./img/big-datatable.png)
 
+Pour l'instancier :
+
+    import {BigDatatable} from 'sdv-ng2-widgets/_widgets/big-datatable/big-datatable.component';
+    [...]
+    this.bigdata = new BigDatatable(this.config, this.structure, this.scope);
+
+Les données qui sont postées côté serveur sont un tableau associatif contenant :
+
+array(
+    'filter' =>  toutes les données du filtre.
+    'pagination' => toute la pagination.
+);
+
+Le serveur doit impérativement renvoyer un tableau JSON sous cette forme :
+    
+    array('filter' => $filter['filter'],
+          'objects' => $res['shortcuts'], 
+          'pagination' => $filter['pagination']
+          )
+
 # Bloc-Card
 
 Bloc de contenu sous forme de carte
