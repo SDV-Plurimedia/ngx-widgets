@@ -34,6 +34,9 @@ import { TouchButtonLinkComponent } from "./_widgets/touch-button/link";
 import { TreeviewComponent } from "./_widgets/treeview/treeview";
 import { WizardComponent } from "./_widgets/wizard/wizard";
 import { WizardStepComponent } from "./_widgets/wizard/step";
+import { FilterComponent, Filter } from "./_widgets/filter/filter.component";
+import { PaginationComponent } from "./_widgets/pagination/pagination.component";
+import { BigDatatableComponent, BigDatatable } from "./_widgets/big-datatable/big-datatable.component";
 
 var widgets =  [
   AutocompleteComponent,
@@ -58,7 +61,11 @@ var widgets =  [
   TouchButtonLinkComponent,
   TreeviewComponent,
   WizardComponent,
-  WizardStepComponent
+  WizardStepComponent,
+  PaginationComponent,
+  FilterComponent,
+  BigDatatableComponent
+
 ];
 
 //les directives
@@ -76,11 +83,13 @@ var directives = [
 import { StringShortenedPipe } from "./_pipes/string-shortened";
 import { TimestampToDatePipe } from "./_pipes/timestamp-to-date";
 import { BootstrapClassPipe } from "./_pipes/bootstrap-class";
+import { KeysPipe } from "./_pipes/keys";
 
 var pipes = [
   StringShortenedPipe,
   TimestampToDatePipe,
-  BootstrapClassPipe
+  BootstrapClassPipe,
+  KeysPipe,
 ];
 
 import { StaticLoaderService } from "./_services/static-loader";

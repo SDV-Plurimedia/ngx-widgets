@@ -1,0 +1,95 @@
+.th_datatable {
+    position:relative;
+    cursor:pointer;
+}
+
+.th_datatable span {
+    position:absolute;
+    right: 0;
+}
+
+/**
+     Les différentes tailles de cellules possible.
+ */
+.th_1 {
+    width:1%;
+}
+
+.th_2 {
+    width:2%;
+}
+
+.th_3 {
+    width:3%;
+}
+
+.th_5 {
+    width:5%;
+}
+
+.th_7 {
+    width:7%;
+}
+
+.th_10 {
+    width:10%;
+}
+
+.th_11 {
+    width:11%;
+}
+
+.th_15 {
+    width:15%;
+}
+
+.th_20 {
+    width:20%;
+}
+
+.th_25 {
+    width:25%;
+}
+
+.th_action {
+    width:7%;
+}
+
+#global_search {
+    width:25%;
+    height: 30px;
+    display: inline-block;
+}
+
+.custom-input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    white-space: nowrap;
+    vertical-align: middle;
+    height:30px;
+    display: inline-block;
+    border-left:0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.custom-input-group {
+    position: relative;
+    display: inline-block;
+    border-collapse: separate;
+    width: 50%;
+}
+
+.form-control-bonus {
+    float:left;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
