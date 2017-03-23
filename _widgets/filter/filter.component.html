@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <ng-container *ngIf="filter.config.advanced_mode">
+            <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container" (click)="filter.changeFilterMode()"></span>
+            &nbsp;&nbsp;&nbsp;Filtres
+        </ng-container>
+
+        <ng-container *ngIf="!filter.config.advanced_mode">
+            <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container" (click)="filter.changeFilterMode()"></span>
+            &nbsp;&nbsp;&nbsp;Filtres&nbsp;&nbsp;&nbsp;
+            <div class="custom-input-group">
+                <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text" [(ngModel)]="filter.config.global_search" />
+                <span class="custom-input-group-addon hover" (click)="filter.btnFilter()"><span class="iconclasses fa fa-search"></span></span>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="form-horizontal">
+        <div id="filter_container" class="collapse{{filter.collapse_class}}">
+            <div class="panel-body">
+
+                <ng-container *ngFor="let bootstrap_class of filter.config_column; let numero_column = index">
+                    <div class="col-lg-{{ bootstrap_class }}">
+                        <ng-container *ngFor="let field of filter.property | keys">
+                            <ng-container *ngIf="field.column === numero_column">
+                                <ng-container *ngIf="field.type !== 'autocomplete'">
+                                    <div class="form-group">
+                                        <label for="{{ field.id }}" class="col-lg-4 control-label">{{ field.label }}</label>
+                                        <div class="col-lg-8">
+
+                                            <ng-container *ngIf="field.type === 'text'">
+                                                <input id="{{ field.id }}" class="form-control" [(ngModel)]="filter.property[field.key]['value']" type="text"/>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="field.type === 'number'">
+                                                <input id="{{ field.id }}" class="form-control" [(ngModel)]="filter.property[field.key]['value']" type="number" min="{{ field.min ? field.min : ''}}" max="{{ field.max ? field.max : ''}}"/>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="field.type === 'select'">
+                                                <select id="{{ field.id }}" [(ngModel)]="filter.property[field.key]['value']" class="form-control" [ngModelOptions]="{standalone: true}">
+
+                                                    <ng-container *ngIf="(field.default_value == 0 || field.default_value) && field.default_label">
+                                                        <option value="{{ field.default_value }}">{{ field.default_label }}</option>
+                                                    </ng-container>
+                                                    <option *ngFor="let propositon of filter.property[field.key]['propositions']" value="{{propositon.id}}">
+                                                        {{propositon.label}}
+                                                    </option>
+                                                </select>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="field.type === 'date'">
+                                                <datepicker id="{{ field.id }}"
+                                                            [(ngModel)]="filter.property[field.key]['value']"
+                                                            view-format="DD/MM/YYYY"
+                                                            model-format="YYYY-MM-DD"
+                                                            first-week-day-sunday="false"
+                                                            [init-date]="filter.property[field.key]['value']"
+                                                ></datepicker>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="field.type === 'date-intervale'">
+                                                <datepicker id="{{ field.id }}"
+                                                            [(ngModel)]="filter.property[field.key]['value']['min']"
+                                                            view-format="DD/MM/YYYY"
+                                                            model-format="YYYY-MM-DD"
+                                                            first-week-day-sunday="false"
+                                                            [init-date]="filter.property[field.key]['value']['min']"
+                                                ></datepicker>
+                                                et
+                                                <datepicker
+                                                        [(ngModel)]="filter.property[field.key]['value']['max']"
+                                                        view-format="DD/MM/YYYY"
+                                                        model-format="YYYY-MM-DD"
+                                                        first-week-day-sunday="false"
+                                                        [init-date]="filter.property[field.key]['value']['max']"
+                                                ></datepicker>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="field.type === 'autocomplete'">
+                                    <autocomplete [config]='field.config'
+                                                  [data]='filter.property[field.key].data'
+                                                  [displayItems]='filter.property[field.key].value'
+                                                  (delete)="field.delete.apply(filter.parent_scope, [$event])"
+                                                  (valid)="field.add.apply(filter.parent_scope, [$event])">
+                                    </autocomplete>
+                                    <br/><br/><br/><br/><br/><br/><br/>
+                                </ng-container>
+
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn btn-info"(click)="filter.btnFilter()">Appliquer</button>
+            </div>
+
+        </div>
+    </div>
+</div>

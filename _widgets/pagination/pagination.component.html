@@ -1,0 +1,21 @@
+<ul class="pagination ma-pagination">
+    <li [ngClass]="{ 'disabled': page == 1 }" (click)="gotoFirst()">
+        <span aria-hidden="true">&laquo;&laquo;</span>
+    </li>
+    <li [ngClass]="{ 'disabled': page == 1 }" (click)="gotoPrevious()">
+        <span aria-hidden="true">&laquo;</span>
+    </li>
+    <!--<ng-container *ngIf="Shortcut_tab">-->
+        <ng-container *ngFor="let page of pagination">
+            <li [ngClass]="{ 'disabled': page.disabled, 'active': page.active }" (click)="goto(page.page)">
+                <span aria-hidden="true">{{ page.page }}</span>
+            </li>
+        </ng-container>
+    <!--</ng-container>-->
+    <li [ngClass]="{ 'disabled': page === max_page || max_page === 0 }" (click)="gotoNext()">
+        <span aria-hidden="true">&raquo;</span>
+    </li>
+    <li [ngClass]="{ 'disabled': page === max_page || max_page === 0 }" (click)="gotoLast()">
+        <span aria-hidden="true">&raquo;&raquo;</span>
+    </li>
+</ul>

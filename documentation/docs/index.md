@@ -28,6 +28,79 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
 * **(create)**: *Function* - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant.
 * **(delete)**: *Function* - fonction appelée lors de la suppression d'un résultat.
 
+# BigDatatable
+Ce composant est une solution alternative au composant Datatable. Il permet de gérer une grande quantité de données.
+Il utilise le composant **Pagination** et le composant **Filtre**, cependant il peut fonctionner sans ceux-ci.
+Il est possible de le configurer de tel sorte qu'un filtre soit présent en haut de page, qu'une pagination soit présente en bas et/ou haut de page.
+Pour un bon fonctionnement de ce composant, il est néanmois conseillé de disposer d'au moins une pagination.
+
+Ce composant renvoie en valeur de output : (message), qui vaut success ou error selon si on a réussit ou non à récupérer les informations côté serveur.
+
+La configuration est la suivante : 
+
+* **bigdata**
+    * **_service** : Le service qui s'occupera d'aller chercher les données sur le serveur.
+    * **_service_method : La fonction qui est appellée par le **_service** pour récupérer les données.
+    * **filter_has_display_items** - **boolean** - **default = false** : Si true, alors on peut changer le nombre d'élement par page dans le filtre
+    * **display_items_name** - **string** - **default = display_items** : Nom du champs qui contient le nombre d'élement par page dans le filtre (sa **key**).
+    * **is_filter** - **boolean** - **default = true** : Si false, alors on a pas de filtre.
+    
+    * **filter_config** - **Array** : Correspond à **config** de **Filtre**. Voir sa configuration.
+    
+    * **pagination_config** - **Array** - **FACULTATIF** : Si non renseignée, la pagination par défaut sera appliquée.
+        * **pagination_top** - **boolean** - **default = false** : Si true, alors on aura une pagination en haut de page.
+        * **pagination_bottom** - **boolean** - **default = true** : Si true, alors on aura une pagination en bas de page.
+        * **page** - **number** - **default = 1**: La page courante.
+        * **max_page** - **number** - **default = 1** : Le nombre de page qu'il y a en tous.
+        * **delta** - **number** - **default = 5** : Le nombre de page précédent et suivant **page** que l'on vera à l'écran.
+        * **item_per_page** - **number** - **default = 10** : Le nombre d'élement que l'on veut afficher sur chaque page.
+        
+    * **buttons** - **Array** - **FACULTATIF**: Tableau de tableau contenant les boutons. Un tableau se compose de la façon suivante :
+        * **text** - **string** : Le texte qui sera dans le boutons, peut être du HTML.
+        * **class** - **string** : La classe qui sera associé au bouton.
+        * **action** : La méthode qui sera appellée lors du clic sur le bouton. Sera appliquée sur **parent_scope**
+        
+* **parent_scope** : Le composant parent.
+
+* **structure** - **Array** : Correspond à la structure des colonnes. Chaque colonne peut être configurée différement,
+plusieurs types de colonne existent, pour les différencier un attribut **state** a été mit en place. Cet attribut peut avoir plusieurs valeurs :
+* 1 est l'état "normal", ou le contenu sera affiché tel quel dans la cellule.
+* 2 est l'état "html", ou le contenu est sous forme HTML.
+* 3 est l'état "avancé", une fonction est déclenché lors du clic sur l'élement.
+
+Chaque colonne est matérialisée par un tableau dans **structure**, les propriétés communes pour ces tableaux sont les suivantes :
+* **id** - **string** : Correspond à la propriété de l'objet qui sera contenu dans la big-datatable.
+* **label** - **label** : Correspond au titre de la colonne.
+* **size** - **number** - **FACULTATIF** : Correspond à la taille en % de la colonne (attention seul les valeurs 1,2,3,5,7,15,20,25 sont mises en place).
+* **state** - **number** - **default = 1** : Correspond à l'état de la celulle tel que décris ci-dessus.
+
+Propriété supplémentaire selon l'état : 
+* **state == 1 || state == 2** : On peut lui passer une pipe en paramètre, pour ce faire :
+    * **pipe** : C'est l'objet Pipe qu'on lui passe.
+    * **params** : C'est les paramètres à passer à **pipe**.
+    
+* **state == 3** : On peut lui passer une fonction qui se déclenchera lors du clic sur lui et également split la value de la cellule.
+    * **function_type** - **string** : Vaut soit 'normal', soit 'split'. Si split, on doit passer un separator en paramètre :
+    * **separator** - **string** - **OBLIGATOIRE SI function_type == 'split'**: Le séparateur pour le split sur la valeur de la celulle.
+    * **class** - **string** : Une classe CSS à appliquer sur le contenu de la celulle.
+    * **function** : La fonction à appliquer lors du clic sur le(s) élement(s) de la celulle.
+    
+Exemple de structure : 
+
+        structure:                                              // La structure du tableau.
+        [
+            // Champs avec une pipe :
+            { id: "url_source",        label: "URL Source",    size: 15, pipe: new TruncateWithTooltipPipe, params: 50, state: 2},
+
+            // Champs "normale" :
+            { id: 'redirection_label', label: 'Redirection',   size: 11},
+
+            // Champs avec function :
+            { id: 'tags_list',         label: 'Tag(s)',        size: 10, function_type: 'split', separator:',', class:'tag_list hover', function: this.addFilterTag, state:3},
+        ],
+    
+![BigDatatable__](./img/big-datatable.png)
+
 # Bloc-Card
 
 Bloc de contenu sous forme de carte
@@ -196,6 +269,72 @@ Utilisation :
 
 A documenter
 
+# Filtre
+Ce composant permet de générer un filtre. Ce filtre possède deux états :
+ * un état simple, où seulement un champs de recherche est présent.
+ * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.
+
+La configuration est la suivante : 
+* **config**
+    * **advanced_mode** - **boolean** - **default = false** : Si true, alors le filtre sera dans l'état "Filtre avancé".
+    * **global_search** - **string** - **default = ''** : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
+    * **callback**      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur **parent_scope**
+    * **parent_scope**  : Le composant parent qui contient la méthode **callback**.
+    * **order_by_column** - **string** - **default = id** : Le champs en base sur lequel l'order by sera appliqué.
+    * **order_by_type**   - **string** - **default = ASC** : Si l'order by est croissant ou décroissant.
+    * **config_column** - **Array<number>** : Tableau contenant la taille bootstrap des différentes colonnes.
+                                              Par exemple [4,8] => On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
+                                              **Attention le maxium des sommes des colonnes doit faire 12 !!!**
+    
+    * **property** - **Array** : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
+
+**property** est un tableau associatif, qui est formé de la manière suivante : 
+    * **key** : **data (Array)** : **key** est le nom du champ tel qu'il l'est en BDD.
+    
+**data** est un tableau contenant les différentes configurations pour le champs **key**. La configuration diffèrent selon le type de champ.
+Actuellement les différents champs possible sont :
+ * text
+ * number
+ * autocomplete
+ * select
+ * date
+ * intervalle de date
+ 
+ Pour chacun de ces types, data doit contenir :
+ * **id** - **string** : C'est l'id du champs. 
+ * **label** - **string** : C'est le label du champs.
+ * **type** - **string** : C'est le type du champs. Ce type est un de ceux décrit ci-dessus.
+ * **value** - **<any>** : La valeur par défaut de ce champ. Peut être une chaîne, un nombre, un tableau....
+ * **column** - **number** : Le numéro de la colonne dans lequel ce champ se trouvera.
+ 
+ Configuration de data supplémentaire pour **data.type ==**:
+ * **text** : AUCUNE.
+ 
+ * **number** :
+    * **min** - **number** - **FACULTATIF** : La valeur minimum possible pour ce champ.
+    * **max** - **number** - **FACULTATIF** : La valeur maximal possible pour ce champ.
+    
+ * **autocomplete** :
+    * **config** - **Array** =====> Se référer à la documation concernant le widget "Autocomplete".
+    * **delete** : La méthode qui sera délenchée lors de la suppression d'un élement de l'autocomplete.
+                   Cette méthode sera appliquée sur **parent_scope** (celui du filtre).
+    * **add** : La méthode qui sera déclenchée lors de l'ajout d'un élement de l'autocomplete.
+                Cette méthode sera appliquée sur **parent_scope** (celui du filtre).
+    * **data** : Les données qui seront fournies à l'autocomplete.
+    
+ * **select** :
+    * **propositions** - **Array** - Tableau d'objet qui contient les différents élements à insérer dans le select.
+                                     Ce tableau doit correspondre au format suivant : { label: 'label', id : 'id' }, où id est la value.
+    * **default_label** - **string** - **FACULTATIF** : Le label de la proposition par défaut.
+    * **default_value** - **any**    - **FACULTATIF** : La valeur de l'option par défaut.
+
+ * **date** : Aucune, par contre **value** doit être une date au format **YYYY-MM-DD** !
+ 
+ * **date-intervale** : Aucune, par contre **value** doit être composé comme ça :
+    * **{'min' : '2000-01-01', 'max': '2015-05-05'}** où **min** et **max** sont au format **YYYY-MM-DD**.
+
+![Filtre__](./img/filtre.png)
+
 # Graph
 
 A documenter
@@ -314,6 +453,28 @@ Utilisation:
     * **delta**: Le nombre de boutons de numéros de page affichés
     * **actionCallback**: La fonction à appeler au clic sur  un des boutons du pager
 
+# Pagination 
+
+La pagination permet de générer une pagination. 
+ * **item_per_page** - **number** - **default = 10** : Le nombre d'élement que l'on veut afficher sur chaque page.
+ * **page** - **number** - **default = 1** : La page courante.
+ * **max_page** - **number** - **default = 1** : Le nombre de page qu'il y a en tous.
+ * **callback** : La fonction à appeller en cas de changement de page, cette fonction sera appellée sur **parent_scope**.
+ * **parent_scope** : L'élement sur lequel la fonction **callback** va s'appliquer.
+ * **delta** - **number** - **default = 5** : Le nombre de page précédent et suivant **page** que l'on vera à l'écran.
+ 
+![Pagination__](./img/pagination.png)
+
+Exemple d'appel dans un template :
+
+    <pagination [max_page]="max_page"
+                [item_per_page]="item_per_page"
+                [page]="page"
+                [delta]="delta"
+                [parent_scope]="scope"
+                [callback]="callback">
+    </pagination>
+
 # Progress Bar
 
 Permet d'afficher facilement une barre de progression qui change de couleur en fonction du taux d'avancement
@@ -373,11 +534,11 @@ Permet de créer un bouton flottant de style "polymere", contenant plusieurs aut
 ![TouchButton__](./img/touch-button.png)
 
 Utilisation:
-```<touch-button>
+<touch-button>
 <tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
 <tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
 <tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
-</touch-button>```
+</touch-button>
 
 
 # Treeview

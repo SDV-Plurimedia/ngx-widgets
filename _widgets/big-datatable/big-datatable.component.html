@@ -1,0 +1,124 @@
+<ng-container *ngIf="bigdata.is_filter">
+    <filter [filter]="bigdata.filter"></filter>
+</ng-container>
+
+<table class="table table-hover">
+    <thead>
+    <!-- top pagination -->
+    <ng-container *ngIf="bigdata.pagination_top">
+        <tr>
+            <th [attr.colspan]="bigdata.colspan" class="th_pagination">
+                <pagination [max_page]="bigdata.pagination_config.max_page"
+                            [item_per_page]="bigdata.pagination_config.item_per_page"
+                            [page]="bigdata.pagination_config.page"
+                            [delta]="bigdata.pagination_config.delta"
+                            [parent_scope]="bigdata.scope"
+                            [callback]="bigdata.pagination_config.callback">
+                </pagination>
+            </th>
+        </tr>
+    </ng-container>
+
+    <!-- L'entête des colonnes -->
+    <tr>
+        <ng-container *ngFor="let column of bigdata.structure">
+            <th [ngClass]="'th_datatable th_' + (column.size ? column.size : 0)" (click)="bigdata.filter.changeOrderBy(column.id)">
+                {{ column.label }}
+                <span [ngClass]="bigdata.filter_config.order_by_column == column.id ? bigdata.filter_config.order_by_type == 'DESC' ? 'iconclasses fa fa-long-arrow-down' : 'iconclasses fa fa-long-arrow-up' : 'iconclasses fa fa-long-arrow-up'"></span>
+            </th>
+        </ng-container>
+        <ng-container *ngIf="bigdata.buttons">
+            <th class="th_action">Actions</th>
+        </ng-container>
+    </tr>
+
+    </thead>
+
+    <tbody>
+        <ng-container *ngIf="bigdata.data">
+            <ng-container *ngFor="let object of bigdata.data">
+                <tr>
+                    <!-- Les propriétés "normales" -->
+                    <ng-container *ngFor="let column of bigdata.structure;">
+                        <!-- NORMAL -->
+                        <ng-container *ngIf="column.state == 1">
+                            <ng-container *ngIf="!column.pipe">
+                                <th class="th_{{ (column.size ? column.size : 0) }}">{{ object[column.id] }}</th>
+                            </ng-container>
+
+                            <ng-container *ngIf="column.pipe">
+                                <th class="th_{{ (column.size ? column.size : 0) }}">{{ column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.pipe ? column.pipe : null))}}</th>
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- HTML -->
+                        <ng-container *ngIf="column.state == 2">
+                            <ng-container *ngIf="!column.pipe">
+                                <th class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></th>
+                            </ng-container>
+
+                            <ng-container *ngIf="column.pipe;">
+                                <th class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.pipe ? column.pipe : null))"></th>
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- AVEC FONCTION -->
+                        <ng-container *ngIf="column.state == 3">
+                            <ng-container *ngIf="column.function_type == 'split'">
+                                <th class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id]">
+                                        <ng-container *ngFor="let item of object[column.id].split(column.separator); let last = last">
+                                            <span class="{{ column.class ? column.class : '' }}" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
+                                            <ng-container *ngIf="!last">,&nbsp;</ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                </th>
+                            </ng-container>
+                            <ng-container *ngIf="column.function_type == 'normal'">
+                                <th class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id]">
+                                            <span [ngClass]="column.class ? column.class : ''" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
+                                    </ng-container>
+                                </th>
+                            </ng-container>
+                        </ng-container>
+
+                    </ng-container>
+
+                    <!-- Les boutons -->
+                    <ng-container *ngIf="bigdata.buttons">
+                        <th class="th_action">
+                            <div class="row">
+                                <ng-container *ngFor="let button of bigdata.buttons">
+                                    <button class="{{button.class}}" (click)="button.action.apply(bigdata.parent_scope,[object])" [innerHTML]="button.text"></button>
+                                </ng-container>
+                            </div>
+                        </th>
+                    </ng-container>
+                </tr>
+
+            </ng-container>
+        </ng-container>
+
+    <ng-container *ngIf="bigdata.data.length === 0">
+        <tr><td [attr.colspan]="bigdata.colspan" align="center">Aucun résultat trouvé.</td></tr>
+    </ng-container>
+    </tbody>
+
+    <!-- Pagination bottom -->
+    <ng-container *ngIf="bigdata.pagination_bottom">
+        <tfoot>
+        <tr>
+            <th [attr.colspan]="bigdata.colspan" class="th_pagination">
+                <pagination [max_page]="bigdata.pagination_config.max_page"
+                            [item_per_page]="bigdata.pagination_config.item_per_page"
+                            [page]="bigdata.pagination_config.page"
+                            [delta]="bigdata.pagination_config.delta"
+                            [parent_scope]="bigdata.scope"
+                            [callback]="bigdata.pagination_config.callback">
+                </pagination>
+            </th>
+        </tr>
+        </tfoot>
+    </ng-container>
+</table>
