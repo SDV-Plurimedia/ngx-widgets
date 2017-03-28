@@ -4,16 +4,16 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgModel } from '@angular/forms
 declare var moment: any;
 
 export interface CalendarDate {
-    day: number;
-    month: number;
-    year: number;
-    enabled: boolean;
+  day: number;
+  month: number;
+  year: number;
+  enabled: boolean;
 }
 
 @Component({
-    selector: 'datepicker',
-    templateUrl: './datepicker.html',
-    styleUrls: ['./datepicker.css']
+  selector: 'datepicker',
+  templateUrl: './datepicker.html',
+  styleUrls: ['./datepicker.css']
 })
 export class DatepickerComponent implements AfterViewInit {
   public isOpened: boolean;
@@ -28,12 +28,14 @@ export class DatepickerComponent implements AfterViewInit {
   private onTouched: Function;
   private cd: any;
   private cannonical: number;
+  private dateSave: string;
 
   @Input('model-format') modelFormat: string;
   @Input('view-format') viewFormat: string;
   @Input('init-date') initDate: string;
   @Input('first-week-day-sunday') firstWeekDaySunday: boolean;
   @Input('static') isStatic: boolean;
+  @Input('reset') reset: boolean;
 
   @Output() changed: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -47,6 +49,9 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if(this.reset) {
+      this.dateSave = this.initDate;
+    }
     this.initValue();
   }
 
@@ -183,5 +188,9 @@ export class DatepickerComponent implements AfterViewInit {
     this.generateDayNames();
     this.generateCalendar(this.date);
     this.initMouseEvents();
+  }
+
+  public resetDate(): void {
+    this.setValue(moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD'));
   }
 }
