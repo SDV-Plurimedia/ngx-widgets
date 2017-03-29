@@ -8,13 +8,7 @@
     <ng-container *ngIf="bigdata.pagination_top">
         <tr>
             <th [attr.colspan]="bigdata.colspan" class="th_pagination">
-                <pagination [max_page]="bigdata.pagination_config.max_page"
-                            [item_per_page]="bigdata.pagination_config.item_per_page"
-                            [page]="bigdata.pagination_config.page"
-                            [delta]="bigdata.pagination_config.delta"
-                            [parent_scope]="bigdata.scope"
-                            [callback]="bigdata.pagination_config.callback">
-                </pagination>
+                <pager *ngIf="bigdata.pager" [pager]="bigdata.pager"></pager>
             </th>
         </tr>
     </ng-container>
@@ -22,9 +16,15 @@
     <!-- L'entête des colonnes -->
     <tr>
         <ng-container *ngFor="let column of bigdata.structure">
-            <th [ngClass]="'th_datatable th_' + (column.size ? column.size : 0)" (click)="bigdata.filter.changeOrderBy(column.id)">
+            <th [ngClass]="'clickable th_datatable th_' + (column.size ? column.size : 0)" (click)="bigdata.changeTri(column.id)" *ngIf="bigdata.can_sort">
                 {{ column.label }}
-                <span [ngClass]="bigdata.filter_config.order_by_column == column.id ? bigdata.filter_config.order_by_type == 'DESC' ? 'iconclasses fa fa-long-arrow-down' : 'iconclasses fa fa-long-arrow-up' : 'iconclasses fa fa-long-arrow-up'"></span>
+                <i class="fa pull-right m-right-xs"
+                    [class.fa-sort]="bigdata.sort.field!=column.id"
+                    [class.fa-sort-asc]="bigdata.sort.field==column.id && bigdata.sort.asc"
+                    [class.fa-sort-desc]="bigdata.sort.field==column.id && !bigdata.sort.asc"></i>
+            </th>
+            <th [ngClass]="'th_datatable th_' + (column.size ? column.size : 0)" *ngIf="!bigdata.can_sort">
+                {{ column.label }}
             </th>
         </ng-container>
         <ng-container *ngIf="bigdata.buttons">
@@ -43,43 +43,64 @@
                         <!-- NORMAL -->
                         <ng-container *ngIf="column.state == 1">
                             <ng-container *ngIf="!column.pipe">
-                                <th class="th_{{ (column.size ? column.size : 0) }}">{{ object[column.id] }}</th>
+                                <td class="th_{{ (column.size ? column.size : 0) }}">{{ object[column.id] }}</td>
                             </ng-container>
 
                             <ng-container *ngIf="column.pipe">
-                                <th class="th_{{ (column.size ? column.size : 0) }}">{{ column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.pipe ? column.pipe : null))}}</th>
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                  {{ column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))}}
+                                </td>
                             </ng-container>
                         </ng-container>
 
                         <!-- HTML -->
                         <ng-container *ngIf="column.state == 2">
                             <ng-container *ngIf="!column.pipe">
-                                <th class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></th>
+                                <td class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></td>
                             </ng-container>
 
                             <ng-container *ngIf="column.pipe;">
-                                <th class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.pipe ? column.pipe : null))"></th>
+                                <ng-container *ngIf="column?.pipe_async">
+                                  <ng-container *ngIfv2="(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))| async); else loading; let item">
+                                    <td  class="th_{{ (column.size ? column.size : 0) }}" *ngIf="column.pipe_async_field">{{item[column.pipe_async_field]}}</td>
+                                    <td class="th_{{ (column.size ? column.size : 0) }}" *ngIf="!column.pipe_async_field">{{item}}</td>
+                                  </ng-container>
+                                  <template #loading>
+                                    <td class="th_{{ (column.size ? column.size : 0) }}" >{{object[column.id]}}</td>
+                                  </template>
+                                </ng-container>
+                                <ng-container  *ngIf="!column.pipe_async">
+                                  <td class="th_{{ (column.size ? column.size : 0) }}"
+                                      [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))"></td>
+                                </ng-container>
                             </ng-container>
                         </ng-container>
 
                         <!-- AVEC FONCTION -->
                         <ng-container *ngIf="column.state == 3">
                             <ng-container *ngIf="column.function_type == 'split'">
-                                <th class="th_{{ (column.size ? column.size : 0) }}">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
                                     <ng-container *ngIf="object[column.id]">
                                         <ng-container *ngFor="let item of object[column.id].split(column.separator); let last = last">
                                             <span class="{{ column.class ? column.class : '' }}" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
                                             <ng-container *ngIf="!last">,&nbsp;</ng-container>
                                         </ng-container>
                                     </ng-container>
-                                </th>
+                                </td>
                             </ng-container>
                             <ng-container *ngIf="column.function_type == 'normal'">
-                                <th class="th_{{ (column.size ? column.size : 0) }}">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
                                     <ng-container *ngIf="object[column.id]">
-                                            <span [ngClass]="column.class ? column.class : ''" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
+                                            <span [ngClass]="column.class ? column.class : ''" (click)="column.function.apply(bigdata.parent_scope, [object[column.id]])" >{{ object[column.id] }}</span>
                                     </ng-container>
-                                </th>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="column.function_type == 'content'">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id]">
+                                            <span [ngClass]="column.class ? column.class : ''" [innerHTML]="column.function.apply(bigdata.parent_scope, [object])" ></span>
+                                    </ng-container>
+                                </td>
                             </ng-container>
                         </ng-container>
 
@@ -87,13 +108,13 @@
 
                     <!-- Les boutons -->
                     <ng-container *ngIf="bigdata.buttons">
-                        <th class="th_action">
+                        <td class="th_action">
                             <div class="row">
                                 <ng-container *ngFor="let button of bigdata.buttons">
                                     <button class="{{button.class}}" (click)="button.action.apply(bigdata.parent_scope,[object])" [innerHTML]="button.text"></button>
                                 </ng-container>
                             </div>
-                        </th>
+                        </td>
                     </ng-container>
                 </tr>
 
@@ -110,13 +131,14 @@
         <tfoot>
         <tr>
             <th [attr.colspan]="bigdata.colspan" class="th_pagination">
-                <pagination [max_page]="bigdata.pagination_config.max_page"
+                <!-- <pagination [max_page]="bigdata.pagination_config.max_page"
                             [item_per_page]="bigdata.pagination_config.item_per_page"
                             [page]="bigdata.pagination_config.page"
                             [delta]="bigdata.pagination_config.delta"
                             [parent_scope]="bigdata.scope"
                             [callback]="bigdata.pagination_config.callback">
-                </pagination>
+                </pagination> -->
+                <pager *ngIf="bigdata.pager" [pager]="bigdata.pager"></pager>
             </th>
         </tr>
         </tfoot>

@@ -1,19 +1,18 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading clearfix">
 
-        <ng-container *ngIf="filter.config.advanced_mode">
-            <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container" (click)="filter.changeFilterMode()"></span>
-            &nbsp;&nbsp;&nbsp;Filtres
-        </ng-container>
+            <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container"
+                    (click)="filter.changeFilterMode()" *ngIf="filter.config.advanced_mode">&nbsp;&nbsp;&nbsp;Filtres</span>
+            <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container"
+                    (click)="filter.changeFilterMode()" *ngIf="!filter.config.advanced_mode && filter.property?.length > 0">&nbsp;&nbsp;&nbsp;Filtres</span>
 
-        <ng-container *ngIf="!filter.config.advanced_mode">
-            <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container" (click)="filter.changeFilterMode()"></span>
-            &nbsp;&nbsp;&nbsp;Filtres&nbsp;&nbsp;&nbsp;
-            <div class="custom-input-group">
-                <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text" [(ngModel)]="filter.config.global_search" />
-                <span class="custom-input-group-addon hover" (click)="filter.btnFilter()"><span class="iconclasses fa fa-search"></span></span>
+            <div class="custom-input-group pull-right">
+                <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text"
+                        [(ngModel)]="filter.config.global_search" />
+                <span class="custom-input-group-addon hover" (click)="filter.btnFilter()">
+                  <span class="iconclasses fa fa-search"></span>
+                </span>
             </div>
-        </ng-container>
     </div>
 
     <div class="form-horizontal">

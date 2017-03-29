@@ -72,11 +72,13 @@ var widgets =  [
 //import { CollapseDirective } from "./_directives/collapse";
 import { DNDDirective } from "./_directives/dnd";
 import { LazyloadDirective } from "./_directives/lazyload";
+import { NgIfv2Directive } from './_directives/ngIfv2.directive';
 //import { TooltipDirective } from "./_directives/tooltip";
 
 var directives = [
   DNDDirective,
-  LazyloadDirective
+  LazyloadDirective,
+  NgIfv2Directive
 ];
 
 //les pipes

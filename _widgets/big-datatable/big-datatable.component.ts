@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Filter} from "../filter/filter.component";
+import {Pager} from '../pager/pager';
 
 @Component({
     selector: 'big-datatable',
@@ -112,6 +113,10 @@ export class BigDatatable {
     public filter_config;                 // La configuration du filtre.
     public is_filter:boolean = true;      // Si true, alors le filtre est présent. Sinon on laisse juste en place une pagination basique.
 
+    // Le tri
+    public sort: any;                      // Les parametres du tri
+    public can_sort: boolean = true;        // Si true, alors les flèches de tri s'affichent
+
     // Config de la datatable.
     public structure;                     // Les noms des champs.
     public data = [];                     // Les données qui vont être affichées.
@@ -128,6 +133,8 @@ export class BigDatatable {
         page:1,
     };
 
+    public pager: Pager = null;
+
     constructor(config, structure, scope) {
         this.config = config;
         this.structure = structure;
@@ -139,12 +146,31 @@ export class BigDatatable {
         // On récupère la config de la pagination.
         if(!this.config.pagination_config) this.config.pagination_config = this.default_pagination;
         this.pagination_config = this.config.pagination_config;
-        this.pagination_config.callback = this.pageChange;
+      //  this.pagination_config.callback = this.pageChange;
 
         // On récupère la config du filtre.
         if(this.config.filter_config) this.filter_config = this.config.filter_config;
         if(this.config.filter_config) this.filter_config.callback = this.postFilter;
         if(this.config.is_filter) this.is_filter = this.config.is_filter;
+
+        //On prépare le tri
+        if (this.config.can_sort !== undefined) {
+          this.can_sort = this.config.can_sort;
+        }
+        if (this.can_sort) {
+          if (this.config.sort) {
+            this.sort = {
+              field: this.config.sort.field || null,
+              asc: this.config.sort.asc || true
+            };
+          }
+          else {
+            this.sort = {
+              field: null,
+              asc: true
+            };
+          }
+        }
 
         // Le service & sa méthode.
         this._service = this.config._service;
@@ -163,16 +189,21 @@ export class BigDatatable {
         if(this.config.buttons) this.buttons = this.config.buttons;
 
         // Création du filtre.
-        this.filter = new Filter(this.scope, this.filter_config);
+        if (this.filter_config) {
+          this.filter = new Filter(this.scope, this.filter_config);
+        }
     }
 
     /**
      * La fonction de callback de la pagination.
      * @param page
      */
-    public pageChange(page: number) {
-        this.pagination_config.page = page;
-        this.postFilter();
+    public pageChange(from, to: number) {
+        let page = Math.floor(from / this.pagination_config.per_page);
+        if( page !== this.pagination_config.current_page) {
+          this.pagination_config.current_page = page+1;
+          this.postFilter();
+        }
     }
 
     /**
@@ -186,13 +217,16 @@ export class BigDatatable {
                 this.pagination_config.item_per_page = this.filter_config.property[this.config.display_items_name].value;
             }
         }
-        let toPost = { 'filter': this.filter_config, 'pagination': this.pagination_config };
-        let sub = this._service_method.apply(this._service, [toPost]).subscribe(
+        let sub = this._service_method.apply(this._service, [this.filter_config, this.sort, this.pagination_config.current_page]).subscribe(
             result => {
                 this.data = [];
-                this.pagination_config = result['pagination'];
-                this.pagination_config.callback = this.pageChange;
-                for(let object of result['objects']) {
+                this.pagination_config = result['meta']['pagination'];
+                //this.pagination_config.callback = this.pageChange;
+                // On instancie le pager si ce n'est pas encore fait
+                if(this.pager === null) {
+                  this.pager = new Pager(this, result.total, result.per_page, 5, this.pageChange);
+                }
+                for(let object of result['data']) {
                     this.data.push(object);
                 }
                 this.message.emit('success');
@@ -202,6 +236,19 @@ export class BigDatatable {
             }
         );
         this.subscriptions.push(sub);
+    }
+
+    /**
+     * Change le critere de tri du tatableau
+    **/
+    public changeTri(column_id) {
+      if(this.sort.field != column_id) {
+        this.sort.field = column_id;
+        this.sort.asc = true;
+      } else {
+        this.sort.asc = !this.sort.asc
+      }
+      this.postFilter();
     }
 
     /**

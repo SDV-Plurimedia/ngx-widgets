@@ -1,5 +1,5 @@
 #global_search {
-    width:25%;
+    width:80%;
     height: 30px;
     display: inline-block;
 }
@@ -28,7 +28,7 @@
     position: relative;
     display: inline-block;
     border-collapse: separate;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .form-control-bonus {
