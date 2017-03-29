@@ -1,23 +1,28 @@
-<input type="text"
-         class="ng-datepicker-input form-control input-sm"
-         name="date"
-         (focus)="openDatepicker()"
-         [value]="viewValue"
-         [hidden]="isStatic"
-         readonly>
+<div class="{{ reset ? 'input-group' : ''}}">
+    <input type="text"
+           class="ng-datepicker-input form-control input-sm"
+           name="date"
+           (focus)="openDatepicker()"
+           [value]="viewValue"
+           [hidden]="isStatic"
+           readonly>
+    <ng-container *ngIf="reset">
+        <span class="input-group-addon" role="button" (click)="resetDate()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+    </ng-container>
+</div>
 <div class="ng-datepicker" *ngIf="isStatic || isOpened" [ngClass]="{ static: isStatic }">
     <div class="controls">
-      <div class="left">
-        <i class="fa fa-backward prev-year-btn" (click)="prevYear()"></i>
-        <i class="fa fa-angle-left prev-month-btn" (click)="prevMonth()"></i>
-      </div>
-      <span class="date">
+        <div class="left">
+            <i class="fa fa-backward prev-year-btn" (click)="prevYear()"></i>
+            <i class="fa fa-angle-left prev-month-btn" (click)="prevMonth()"></i>
+        </div>
+        <span class="date">
         {{ dateValue }}
       </span>
-      <div class="right">
-        <i class="fa fa-angle-right next-month-btn" (click)="nextMonth()"></i>
-        <i class="fa fa-forward next-year-btn" (click)="nextYear()"></i>
-      </div>
+        <div class="right">
+            <i class="fa fa-angle-right next-month-btn" (click)="nextMonth()"></i>
+            <i class="fa fa-forward next-year-btn" (click)="nextYear()"></i>
+        </div>
     </div>
     <div class="day-names">
       <span *ngFor="let dn of dayNames">
@@ -31,4 +36,4 @@
         </span>
       </span>
     </div>
-  </div>
+</div>
