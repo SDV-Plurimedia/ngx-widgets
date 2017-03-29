@@ -130,7 +130,7 @@ export class BigDatatable {
     private default_pagination = {        // Les propriétés de la pagination de base si on en a pas précisé.
         delta:5,
         max_page:1,
-        page:1,
+        current_page:1,
     };
 
     public pager: Pager = null;
@@ -150,14 +150,17 @@ export class BigDatatable {
 
         // On récupère la config du filtre.
         if(this.config.filter_config) this.filter_config = this.config.filter_config;
-        if(this.config.filter_config) this.filter_config.callback = this.postFilter;
-        if(this.config.is_filter) this.is_filter = this.config.is_filter;
+        if(this.config.filter_config) this.filter_config.callback = this.triggerSearch;
+        if(typeof this.config.is_filter === 'boolean') this.is_filter = this.config.is_filter;
 
         //On prépare le tri
         if (this.config.can_sort !== undefined) {
+          console.log("on a un param ", this.config);
           this.can_sort = this.config.can_sort;
+          console.log("nouvelle valeur ", this.can_sort);
         }
         if (this.can_sort) {
+          console.log("on peut trier");
           if (this.config.sort) {
             this.sort = {
               field: this.config.sort.field || null,
@@ -189,9 +192,7 @@ export class BigDatatable {
         if(this.config.buttons) this.buttons = this.config.buttons;
 
         // Création du filtre.
-        if (this.filter_config) {
-          this.filter = new Filter(this.scope, this.filter_config);
-        }
+        this.filter = new Filter(this.scope, this.filter_config);
     }
 
     /**
@@ -199,17 +200,25 @@ export class BigDatatable {
      * @param page
      */
     public pageChange(from, to: number) {
-        let page = Math.floor(from / this.pagination_config.per_page);
+        let page = Math.floor(from / this.pagination_config.per_page)+1;
         if( page !== this.pagination_config.current_page) {
-          this.pagination_config.current_page = page+1;
+          this.pagination_config.current_page = page;
           this.postFilter();
         }
+    }
+
+
+    /**
+     * Lance la recherche depuis les filtres
+     */
+    public triggerSearch() {
+      this.postFilter(true);
     }
 
     /**
      * La fonction qui s'occupe de poster le filtre & la pagination.
      */
-    public postFilter() {
+    public postFilter(reset_pager: boolean = false) {
 
         if(this.config.filter_has_display_items) {
             // Pas besoin de vérifier du côté serveur qu'on divise par un nombre négatif ou par 0.
@@ -223,8 +232,8 @@ export class BigDatatable {
                 this.pagination_config = result['meta']['pagination'];
                 //this.pagination_config.callback = this.pageChange;
                 // On instancie le pager si ce n'est pas encore fait
-                if(this.pager === null) {
-                  this.pager = new Pager(this, result.total, result.per_page, 5, this.pageChange);
+                if(this.pager === null || reset_pager) {
+                  this.pager = new Pager(this, this.pagination_config.total, this.pagination_config.per_page, 5, this.pageChange);
                 }
                 for(let object of result['data']) {
                     this.data.push(object);
@@ -248,7 +257,7 @@ export class BigDatatable {
       } else {
         this.sort.asc = !this.sort.asc
       }
-      this.postFilter();
+      this.postFilter(true);
     }
 
     /**

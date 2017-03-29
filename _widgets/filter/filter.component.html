@@ -4,7 +4,7 @@
             <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container"
                     (click)="filter.changeFilterMode()" *ngIf="filter.config.advanced_mode">&nbsp;&nbsp;&nbsp;Filtres</span>
             <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container"
-                    (click)="filter.changeFilterMode()" *ngIf="!filter.config.advanced_mode && filter.property?.length > 0">&nbsp;&nbsp;&nbsp;Filtres</span>
+                    (click)="filter.changeFilterMode()" *ngIf="!filter.config.advanced_mode && filter.property != null">&nbsp;&nbsp;&nbsp;Filtres</span>
 
             <div class="custom-input-group pull-right">
                 <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text"
