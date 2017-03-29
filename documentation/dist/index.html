@@ -7,33 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="SDV NG2 Widgets est un pack de widgets pour angular2 avec bootstrap">
   
-  
-  <title>SDV NG2 Widgets</title>
-  
-
   <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
+  <title>Accueil - SDV NG2 Widgets</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="./css/highlight.css">
   <link href="./css/extra.css" rel="stylesheet">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "None";
+    var mkdocs_page_name = "Accueil";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = "/index.html";
   </script>
   
   <script src="./js/jquery-2.1.1.min.js"></script>
   <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
 </head>
 
@@ -53,7 +45,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
           
             <li>
     <li class="toctree-l1 current">
@@ -62,6 +54,9 @@
             <ul>
             
                 <li class="toctree-l3"><a href="#autocomplete">Autocomplete</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bigdatatable">BigDatatable</a></li>
                 
             
                 <li class="toctree-l3"><a href="#bloc-card">Bloc-Card</a></li>
@@ -85,10 +80,19 @@
                 <li class="toctree-l3"><a href="#datatable">Datatable</a></li>
                 
             
+                <li class="toctree-l3"><a href="#dans-mon-model">dans mon model :</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#dans-le-constructeur-du-model">Dans le constructeur du model :</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#datepicker">DatePicker</a></li>
                 
             
                 <li class="toctree-l3"><a href="#dropdown">DropDown</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#filtre">Filtre</a></li>
                 
             
                 <li class="toctree-l3"><a href="#graph">Graph</a></li>
@@ -104,6 +108,9 @@
                 
             
                 <li class="toctree-l3"><a href="#pager">Pager</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#pagination">Pagination</a></li>
                 
             
                 <li class="toctree-l3"><a href="#progress-bar">Progress Bar</a></li>
@@ -174,16 +181,131 @@
 <ul>
 <li><strong>[data]</strong>: <em>Array</em> - tableau contenant les données à traiter par l'autocomplete</li>
 <li><strong>[config]</strong>: <em>Object</em> - permet la config du widget, doit contenir:<ul>
-<li><strong>fieldName</strong>: <em>String|Array</em> - nom du ou des attributs du tableau <em>data</em> qui sont utilisés à l'affichage dans le champ</li>
+<li><strong>fieldDisplayed</strong>: <em>String|Array</em> - nom du ou des attributs du tableau <em>data</em> qui sont utilisés à l'affichage dans le champ</li>
+<li><strong>fieldSearch</strong>: <em>String</em> - nom de l'attribut du tableau <em>data</em> dans lequel effectuer la recherche (si vide, on prend le fieldDisplayed)</li>
 <li><strong>fieldValue</strong>: <em>String</em> - nom de l'attribut du tableau <em>data</em> qui fait office de valeur de retour par le widget (si vide, on renvoi l'objet complet)</li>
-<li><strong>fieldInsert</strong>: <em>String</em> - nom de l'attribut du tableau <em>data</em> à insérer dans le champ après un clic sur l'un des résultats de l'autocomplete</li>
+<li><strong>fieldInsert</strong>: <em>String</em> - nom de l'attribut du tableau <em>data</em> qui remplacera le placeholder après un clic sur l'un des résultats (si vide, on insert le fieldDisplayed)</li>
+<li><strong>fieldDefault</strong>: <em>String</em> - La chaîne affichée lorsque aucune valeur n'est sélectionnée. Vaut Aucun par défault</li>
 <li><strong>begin</strong>: <em>Number</em> - nombre de caractères à entrer dans le champ avant que l'autocomplete ne se lance</li>
 <li><strong>defaultValue</strong>: <em>String</em> - valeur par défaut à insérer dans l'input d'autocompletion</li>
 <li><strong>placeholder</strong>: <em>String</em> - Placeholder du champ</li>
+<li><strong>modifyPlaceholder</strong>: <em>Boolean</em> - Si true, alors le placeholder prends la valeur du champs sélectionné. Vaut true par défaut.</li>
+<li><strong>displayItem</strong>: <em>Boolean</em> - Si true, alors on affiche les différents élements que l'on ajoute à droite du placeholder. Vaut false par défaut.</li>
+<li><strong>displayItems</strong>: <em>Array</em> - Tableau qui contient les différents élements à ajouter à droite du placeholder.</li>
+<li><strong>displayItemClass</strong>: <em>String</em> - Classe CSS pour les élements à afficher à droite du placeholder.</li>
 </ul>
 </li>
-<li><strong>(valid)</strong>: <em>Function</em> - fonction appelée lorsque le champ est valide</li>
+<li><strong>(valid)</strong>: <em>Function</em> - fonction appelée lorsque le champ est validé sur un resultat existant.</li>
+<li><strong>(create)</strong>: <em>Function</em> - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant.</li>
+<li><strong>(delete)</strong>: <em>Function</em> - fonction appelée lors de la suppression d'un résultat.</li>
 </ul>
+<h1 id="bigdatatable">BigDatatable</h1>
+<p>Ce composant est une solution alternative au composant Datatable. Il permet de gérer une grande quantité de données.
+Il utilise le composant <strong>Pager</strong> et le composant <strong>Filtre</strong>, cependant il peut fonctionner sans ceux-ci.
+Il est possible de le configurer de tel sorte qu'un filtre soit présent en haut de page, qu'une pagination soit présente en bas et/ou haut de page.
+Pour un bon fonctionnement de ce composant, il est néanmois conseillé de disposer d'au moins une pagination.</p>
+<p>Ce composant renvoie en valeur de output : (message), qui vaut success ou error selon si on a réussit ou non à récupérer les informations côté serveur.</p>
+<p>La configuration est la suivante :</p>
+<ul>
+<li>
+<p><strong>bigdata</strong></p>
+<ul>
+<li><strong>_service</strong> : Le service qui s'occupera d'aller chercher les données sur le serveur.</li>
+<li><strong>_service_method : La fonction qui est appellée par le </strong>_service** pour récupérer les données.</li>
+<li><strong>filter_has_display_items</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors on peut changer le nombre d'élement par page dans le filtre</li>
+<li><strong>display_items_name</strong> - <strong>string</strong> - <strong>default = display_items</strong> : Nom du champs qui contient le nombre d'élement par page dans le filtre (sa <strong>key</strong>).</li>
+<li>
+<p><strong>is_filter</strong> - <strong>boolean</strong> - <strong>default = true</strong> : Si false, alors on a pas de filtre.</p>
+</li>
+<li>
+<p><strong>filter_config</strong> - <strong>Array</strong> : Correspond à <strong>config</strong> de <strong>Filtre</strong>. Voir sa configuration.</p>
+</li>
+<li>
+<p><strong>pagination_config</strong> - <strong>Array</strong> - <strong>FACULTATIF</strong> : Si non renseignée, la pagination par défaut sera appliquée.</p>
+<ul>
+<li><strong>pagination_top</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors on aura une pagination en haut de page.</li>
+<li><strong>pagination_bottom</strong> - <strong>boolean</strong> - <strong>default = true</strong> : Si true, alors on aura une pagination en bas de page.</li>
+<li><strong>page</strong> - <strong>number</strong> - <strong>default = 1</strong>: La page courante.</li>
+<li><strong>max_page</strong> - <strong>number</strong> - <strong>default = 1</strong> : Le nombre de page qu'il y a en tous.</li>
+<li><strong>delta</strong> - <strong>number</strong> - <strong>default = 5</strong> : Le nombre de page précédent et suivant <strong>page</strong> que l'on vera à l'écran.</li>
+<li><strong>item_per_page</strong> - <strong>number</strong> - <strong>default = 10</strong> : Le nombre d'élement que l'on veut afficher sur chaque page.</li>
+</ul>
+</li>
+<li>
+<p><strong>buttons</strong> - <strong>Array</strong> - <strong>FACULTATIF</strong>: Tableau de tableau contenant les boutons. Un tableau se compose de la façon suivante :</p>
+<ul>
+<li><strong>text</strong> - <strong>string</strong> : Le texte qui sera dans le boutons, peut être du HTML.</li>
+<li><strong>class</strong> - <strong>string</strong> : La classe qui sera associé au bouton.</li>
+<li><strong>action</strong> : La méthode qui sera appellée lors du clic sur le bouton. Sera appliquée sur <strong>parent_scope</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>parent_scope</strong> : Le composant parent.</p>
+</li>
+<li>
+<p><strong>structure</strong> - <strong>Array</strong> : Correspond à la structure des colonnes. Chaque colonne peut être configurée différement,
+plusieurs types de colonne existent, pour les différencier un attribut <strong>state</strong> a été mit en place. Cet attribut peut avoir plusieurs valeurs :</p>
+</li>
+<li>1 est l'état "normal", ou le contenu sera affiché tel quel dans la cellule.</li>
+<li>2 est l'état "html", ou le contenu est sous forme HTML.</li>
+<li>3 est l'état "avancé", une fonction est déclenché lors du clic sur l'élement.</li>
+</ul>
+<p>Chaque colonne est matérialisée par un tableau dans <strong>structure</strong>, les propriétés communes pour ces tableaux sont les suivantes :
+<em> <strong>id</strong> - <strong>string</strong> : Correspond à la propriété de l'objet qui sera contenu dans la big-datatable.
+</em> <strong>label</strong> - <strong>label</strong> : Correspond au titre de la colonne.
+<em> <strong>size</strong> - <strong>number</strong> - <strong>FACULTATIF</strong> : Correspond à la taille en % de la colonne (attention seul les valeurs 1,2,3,5,7,15,20,25 sont mises en place).
+</em> <strong>state</strong> - <strong>number</strong> - <strong>default = 1</strong> : Correspond à l'état de la cellule tel que décris ci-dessus.</p>
+<p>Propriété supplémentaire selon l'état :
+* <strong>state == 1 || state == 2</strong> : On peut lui passer une pipe en paramètre, pour ce faire :
+    * <strong>pipe</strong> : C'est l'objet Pipe qu'on lui passe.
+    * <strong>params</strong> : C'est les paramètres à passer à <strong>pipe</strong>.
+    * <strong>pipe_async</strong> - <strong>boolean</strong> : Permet de signifier qu'un pipe est asynchrones.
+    * <strong>pipe_async_field</strong>- <strong>string</strong> : Si le pipe asynchrone renvoie un objet, le champ précisé ici sera affiché.</p>
+<ul>
+<li><strong>state == 3</strong> : On peut lui passer une fonction qui se déclenchera lors du clic sur lui et également split la value de la cellule.<ul>
+<li><strong>function_type</strong> - <strong>string</strong> : Vaut soit 'normal', soit 'split', soit 'content'. Si split, on doit passer un separator en paramètre.</li>
+<li><strong>separator</strong> - <strong>string</strong> - <strong>OBLIGATOIRE SI function_type == 'split'</strong>: Le séparateur pour le split sur la valeur de la cellule.</li>
+<li><strong>class</strong> - <strong>string</strong> : Une classe CSS à appliquer sur le contenu de la cellule.</li>
+<li><strong>function</strong> :<ul>
+<li>Si function_type vaut 'split' ou 'normal', il s'agit de la fonction à appliquer lors du clic sur le(s) élement(s) de la cellule.</li>
+<li>Si function_type vaut 'content', il s'agit de la fonction à appliquer à l'affichage du contenu de la cellule.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Exemple de structure :</p>
+<pre><code>    structure:                                              // La structure du tableau.
+    [
+        // Champs avec une pipe :
+        { id: "url_source",        label: "URL Source",    size: 15, pipe: new TruncateWithTooltipPipe, params: 50, state: 2},
+
+        // Champs "normale" :
+        { id: 'redirection_label', label: 'Redirection',   size: 11},
+
+        // Champs avec function :
+        { id: 'tags_list',         label: 'Tag(s)',        size: 10, function_type: 'split', separator:',', class:'tag_list hover', function: this.addFilterTag, state:3},
+    ],
+</code></pre>
+<p><img alt="BigDatatable__" src="./img/big-datatable.png" /></p>
+<p>Pour l'instancier :</p>
+<pre><code>import {BigDatatable} from 'sdv-ng2-widgets/_widgets/big-datatable/big-datatable.component';
+[...]
+this.bigdata = new BigDatatable(this.config, this.structure, this.scope);
+</code></pre>
+<p>Les données qui sont postées côté serveur sont un tableau associatif contenant :</p>
+<p>array(
+    'filter' =&gt;  toutes les données du filtre.
+    'pagination' =&gt; toute la pagination.
+);</p>
+<p>Le serveur doit impérativement renvoyer un tableau JSON sous cette forme :</p>
+<pre><code>array('filter' =&gt; $filter['filter'],
+      'objects' =&gt; $res['shortcuts'],
+      'pagination' =&gt; $filter['pagination']
+      )
+</code></pre>
 <h1 id="bloc-card">Bloc-Card</h1>
 <p>Bloc de contenu sous forme de carte</p>
 <p><img alt="Bloc Card" src="./img/bloccard.png" /></p>
@@ -279,6 +401,33 @@ public scope = this;
 //un exemple de données
 public data_tab = [{id: 1, name: "Antoine"}];
 </code></pre>
+<p>Il est également possible de fournir du contenu HTML généré dynamiquement, pour ce faire :</p>
+<ul>
+<li>
+<p>La définition de la structure est la suivante :</p>
+<p>public structure = [
+    { id: "id", label: "ID"},
+    { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
+];</p>
+</li>
+<li>
+<p>Ensuite, dans mon model :
+        1) Ajouter la propriété "liste_lapin".
+        2) Générer le HTML qui corresponds.
+        3) L'affecter à cette propriété.</p>
+<h1 id="dans-mon-model">dans mon model :</h1>
+<p>public lapins: Lapin[]; // Les différents objets Lapin</p>
+<h1 id="dans-le-constructeur-du-model">Dans le constructeur du model :</h1>
+<p>this.lapins      = obj &amp;&amp; obj.lapins     || null;</p>
+<p>public get liste_lapins() {
+    let ul = '<ul>';
+    for(let lapin in this.lapins) {
+        ul += '<li>' + lapin.name + '</li>';
+    }
+    return ul + '</ul>';
+}</p>
+</li>
+</ul>
 <h1 id="datepicker">DatePicker</h1>
 <p>Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.</p>
 <p><img alt="DatePicker" src="./img/datepicker.png" /></p>
@@ -294,6 +443,80 @@ public data_tab = [{id: 1, name: "Antoine"}];
 </ul>
 <h1 id="dropdown">DropDown</h1>
 <p>A documenter</p>
+<h1 id="filtre">Filtre</h1>
+<p>Ce composant permet de générer un filtre. Ce filtre possède deux états :
+ * un état simple, où seulement un champs de recherche est présent.
+ * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.</p>
+<p>La configuration est la suivante :
+* <strong>config</strong>
+    * <strong>advanced_mode</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors le filtre sera dans l'état "Filtre avancé".
+    * <strong>global_search</strong> - <strong>string</strong> - <strong>default = ''</strong> : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
+    * <strong>callback</strong>      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur <strong>parent_scope</strong>
+    * <strong>parent_scope</strong>  : Le composant parent qui contient la méthode <strong>callback</strong>.
+    * <strong>order_by_column</strong> - <strong>string</strong> - <strong>default = id</strong> : Le champs en base sur lequel l'order by sera appliqué.
+    * <strong>order_by_type</strong>   - <strong>string</strong> - <strong>default = ASC</strong> : Si l'order by est croissant ou décroissant.
+    * <strong>config_column</strong> - <strong>Array<number></strong> : Tableau contenant la taille bootstrap des différentes colonnes.
+                                              Par exemple [4,8] =&gt; On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
+                                              <strong>Attention le maxium des sommes des colonnes doit faire 12 !!!</strong></p>
+<pre><code>* **property** - **Array** : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
+</code></pre>
+<p><strong>property</strong> est un tableau associatif, qui est formé de la manière suivante :
+    * <strong>key</strong> : <strong>data (Array)</strong> : <strong>key</strong> est le nom du champ tel qu'il l'est en BDD.</p>
+<p><strong>data</strong> est un tableau contenant les différentes configurations pour le champs <strong>key</strong>. La configuration diffèrent selon le type de champ.
+Actuellement les différents champs possible sont :
+ * text
+ * number
+ * autocomplete
+ * select
+ * date
+ * intervalle de date</p>
+<p>Pour chacun de ces types, data doit contenir :
+ * <strong>id</strong> - <strong>string</strong> : C'est l'id du champs.
+ * <strong>label</strong> - <strong>string</strong> : C'est le label du champs.
+ * <strong>type</strong> - <strong>string</strong> : C'est le type du champs. Ce type est un de ceux décrit ci-dessus.
+ * <strong>value</strong> - <strong><any></strong> : La valeur par défaut de ce champ. Peut être une chaîne, un nombre, un tableau....
+ * <strong>column</strong> - <strong>number</strong> : Le numéro de la colonne dans lequel ce champ se trouvera.</p>
+<p>Configuration de data supplémentaire pour <strong>data.type ==</strong>:
+ * <strong>text</strong> : AUCUNE.</p>
+<ul>
+<li>
+<p><strong>number</strong> :</p>
+<ul>
+<li><strong>min</strong> - <strong>number</strong> - <strong>FACULTATIF</strong> : La valeur minimum possible pour ce champ.</li>
+<li><strong>max</strong> - <strong>number</strong> - <strong>FACULTATIF</strong> : La valeur maximal possible pour ce champ.</li>
+</ul>
+</li>
+<li>
+<p><strong>autocomplete</strong> :</p>
+<ul>
+<li><strong>config</strong> - <strong>Array</strong> =====&gt; Se référer à la documation concernant le widget "Autocomplete".</li>
+<li><strong>delete</strong> : La méthode qui sera délenchée lors de la suppression d'un élement de l'autocomplete.
+               Cette méthode sera appliquée sur <strong>parent_scope</strong> (celui du filtre).</li>
+<li><strong>add</strong> : La méthode qui sera déclenchée lors de l'ajout d'un élement de l'autocomplete.
+            Cette méthode sera appliquée sur <strong>parent_scope</strong> (celui du filtre).</li>
+<li><strong>data</strong> : Les données qui seront fournies à l'autocomplete.</li>
+</ul>
+</li>
+<li>
+<p><strong>select</strong> :</p>
+<ul>
+<li><strong>propositions</strong> - <strong>Array</strong> - Tableau d'objet qui contient les différents élements à insérer dans le select.
+                                 Ce tableau doit correspondre au format suivant : { label: 'label', id : 'id' }, où id est la value.</li>
+<li><strong>default_label</strong> - <strong>string</strong> - <strong>FACULTATIF</strong> : Le label de la proposition par défaut.</li>
+<li><strong>default_value</strong> - <strong>any</strong>    - <strong>FACULTATIF</strong> : La valeur de l'option par défaut.</li>
+</ul>
+</li>
+<li>
+<p><strong>date</strong> : Aucune, par contre <strong>value</strong> doit être une date au format <strong>YYYY-MM-DD</strong> !</p>
+</li>
+<li>
+<p><strong>date-intervale</strong> : Aucune, par contre <strong>value</strong> doit être composé comme ça :</p>
+<ul>
+<li><strong>{'min' : '2000-01-01', 'max': '2015-05-05'}</strong> où <strong>min</strong> et <strong>max</strong> sont au format <strong>YYYY-MM-DD</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Filtre__" src="./img/filtre.png" /></p>
 <h1 id="graph">Graph</h1>
 <p>A documenter</p>
 <h1 id="hierarchie-list">Hierarchie List</h1>
@@ -405,6 +628,24 @@ public data_tab = [{id: 1, name: "Antoine"}];
 </ul>
 </li>
 </ul>
+<h1 id="pagination">Pagination</h1>
+<p>La pagination permet de générer une pagination.
+ * <strong>item_per_page</strong> - <strong>number</strong> - <strong>default = 10</strong> : Le nombre d'élement que l'on veut afficher sur chaque page.
+ * <strong>page</strong> - <strong>number</strong> - <strong>default = 1</strong> : La page courante.
+ * <strong>max_page</strong> - <strong>number</strong> - <strong>default = 1</strong> : Le nombre de page qu'il y a en tous.
+ * <strong>callback</strong> : La fonction à appeller en cas de changement de page, cette fonction sera appellée sur <strong>parent_scope</strong>.
+ * <strong>parent_scope</strong> : L'élement sur lequel la fonction <strong>callback</strong> va s'appliquer.
+ * <strong>delta</strong> - <strong>number</strong> - <strong>default = 5</strong> : Le nombre de page précédent et suivant <strong>page</strong> que l'on vera à l'écran.</p>
+<p><img alt="Pagination__" src="./img/pagination.png" /></p>
+<p>Exemple d'appel dans un template :</p>
+<pre><code>&lt;pagination [max_page]="max_page"
+            [item_per_page]="item_per_page"
+            [page]="page"
+            [delta]="delta"
+            [parent_scope]="scope"
+            [callback]="callback"&gt;
+&lt;/pagination&gt;
+</code></pre>
 <h1 id="progress-bar">Progress Bar</h1>
 <p>Permet d'afficher facilement une barre de progression qui change de couleur en fonction du taux d'avancement</p>
 <p>Utilisation:</p>
@@ -453,11 +694,11 @@ public data_tab = [{id: 1, name: "Antoine"}];
 <p>Permet de créer un bouton flottant de style "polymere", contenant plusieurs autres boutons</p>
 <p><img alt="TouchButton__" src="./img/touch-button.png" /></p>
 <p>Utilisation:
-<code>&lt;touch-button&gt;
-&lt;tb-link [icon]="'phone'" (tbclick)="notif('phone')"&gt;&lt;/tb-link&gt;
-&lt;tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"&gt;&lt;/tb-link&gt;
-&lt;tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"&gt;&lt;/tb-link&gt;
-&lt;/touch-button&gt;</code></p>
+<touch-button>
+<tb-link [icon]="'phone'" (tbclick)="notif('phone')"></tb-link>
+<tb-link [icon]="'envelope-o'" (tbclick)="notif('envelope-o')"></tb-link>
+<tb-link [icon]="'pencil'" (tbclick)="notif('pencil')"></tb-link>
+</touch-button></p>
 <h1 id="treeview">Treeview</h1>
 <p>Le treeview permet d'avoir un vue hierarchique d'élement sous forme d'arbre dépliable.</p>
 <p>Utilisation:
@@ -504,21 +745,22 @@ public data_tab = [{id: 1, name: "Antoine"}];
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
       
     </span>
 </div>
+    <script src="./js/theme.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.15.3
-Build Date UTC : 2017-02-02 13:48:04.252791
+MkDocs version : 0.16.0
+Build Date UTC : 2017-03-29 09:05:42
 -->
