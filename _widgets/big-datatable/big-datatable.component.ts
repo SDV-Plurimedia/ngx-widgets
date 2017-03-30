@@ -134,6 +134,7 @@ export class BigDatatable {
     };
 
     public pager: Pager = null;
+    public loading_datas = false;
 
     constructor(config, structure, scope) {
         this.config = config;
@@ -212,6 +213,7 @@ export class BigDatatable {
      * Lance la recherche depuis les filtres
      */
     public triggerSearch() {
+      this.pagination_config.current_page = 1;
       this.postFilter(true);
     }
 
@@ -226,6 +228,7 @@ export class BigDatatable {
                 this.pagination_config.item_per_page = this.filter_config.property[this.config.display_items_name].value;
             }
         }
+        this.loading_datas = true;
         let sub = this._service_method.apply(this._service, [this.filter_config, this.sort, this.pagination_config.current_page]).subscribe(
             result => {
                 this.data = [];
@@ -239,8 +242,11 @@ export class BigDatatable {
                     this.data.push(object);
                 }
                 this.message.emit('success');
+                this.loading_datas = false;
             },
             err => {
+                this.loading_datas = false;
+                this.data = [];
                 this.message.emit('error');
             }
         );

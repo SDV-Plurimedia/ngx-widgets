@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.9.1 - WIP
+* ADD: Loader lors de la récupération des données du big datatable
+
 ## 0.9.0 - 29/03/2017
 * ADD: Big Datatable : Composant permettant de gérer un datatable en ne récupérant qu'une page de résultat à la fois
 * ADD: Directive NgIfv2: Directive se basant sur la syntaxe ngIf d'angular4, permettant d'utiliser else
