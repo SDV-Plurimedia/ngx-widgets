@@ -46,6 +46,9 @@ La configuration est la suivante :
     * **is_filter** - **boolean** - **default = true** : Si false, alors on a pas de filtre.
 
     * **filter_config** - **Array** : Correspond à **config** de **Filtre**. Voir sa configuration.
+    * **tr** -Object** : Contient soit une propriété :
+        * **class** : La classe à appliquer sur les tr
+        * **function** : Une fonction qui sera appliquée sur **parent_scope** qui renvera la classe à appliquer sur le tr.
 
     * **pagination_config** - **Array** - **FACULTATIF** : Si non renseignée, la pagination par défaut sera appliquée.
         * **pagination_top** - **boolean** - **default = false** : Si true, alors on aura une pagination en haut de page.

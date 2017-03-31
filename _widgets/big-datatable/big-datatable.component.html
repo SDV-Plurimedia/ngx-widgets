@@ -20,9 +20,9 @@
                 <th [ngClass]="'clickable th_datatable th_' + (column.size ? column.size : 0)" (click)="bigdata.changeTri(column.id)" *ngIf="bigdata.can_sort">
                     {{ column.label }}
                     <i class="fa pull-right m-right-xs"
-                        [class.fa-sort]="bigdata.sort.field!=column.id"
-                        [class.fa-sort-asc]="bigdata.sort.field==column.id && bigdata.sort.asc"
-                        [class.fa-sort-desc]="bigdata.sort.field==column.id && !bigdata.sort.asc"></i>
+                       [class.fa-sort]="bigdata.sort.field!=column.id"
+                       [class.fa-sort-asc]="bigdata.sort.field==column.id && bigdata.sort.asc"
+                       [class.fa-sort-desc]="bigdata.sort.field==column.id && !bigdata.sort.asc"></i>
                 </th>
                 <th [ngClass]="'th_datatable th_' + (column.size ? column.size : 0)" *ngIf="!bigdata.can_sort">
                     {{ column.label }}
@@ -36,91 +36,91 @@
         </thead>
 
         <tbody>
-            <ng-container *ngIf="bigdata.data">
-                <ng-container *ngFor="let object of bigdata.data">
-                    <tr>
-                        <!-- Les propriétés "normales" -->
-                        <ng-container *ngFor="let column of bigdata.structure;">
-                            <!-- NORMAL -->
-                            <ng-container *ngIf="column.state == 1">
-                                <ng-container *ngIf="!column.pipe">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}">{{ object[column.id] }}</td>
-                                </ng-container>
-
-                                <ng-container *ngIf="column.pipe">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}">
-                                      {{ column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))}}
-                                    </td>
-                                </ng-container>
+        <ng-container *ngIf="bigdata.data">
+            <ng-container *ngFor="let object of bigdata.data">
+                <tr [ngClass]="bigdata.tr.function ? bigdata.tr.function.apply(bigdata.parent_scope, [object]) : bigdata.tr.class">
+                    <!-- Les propriétés "normales" -->
+                    <ng-container *ngFor="let column of bigdata.structure;">
+                        <!-- NORMAL -->
+                        <ng-container *ngIf="column.state == 1">
+                            <ng-container *ngIf="!column.pipe">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">{{ object[column.id] }}</td>
                             </ng-container>
 
-                            <!-- HTML -->
-                            <ng-container *ngIf="column.state == 2">
-                                <ng-container *ngIf="!column.pipe">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></td>
-                                </ng-container>
+                            <ng-container *ngIf="column.pipe">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                    {{ column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))}}
+                                </td>
+                            </ng-container>
+                        </ng-container>
 
-                                <ng-container *ngIf="column.pipe;">
-                                    <ng-container *ngIf="column?.pipe_async">
-                                      <ng-container *ngIfv2="(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))| async); else loading; let item">
+                        <!-- HTML -->
+                        <ng-container *ngIf="column.state == 2">
+                            <ng-container *ngIf="!column.pipe">
+                                <td class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></td>
+                            </ng-container>
+
+                            <ng-container *ngIf="column.pipe;">
+                                <ng-container *ngIf="column?.pipe_async">
+                                    <ng-container *ngIfv2="(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))| async); else loading; let item">
                                         <td  class="th_{{ (column.size ? column.size : 0) }}" *ngIf="column.pipe_async_field">{{item[column.pipe_async_field]}}</td>
                                         <td class="th_{{ (column.size ? column.size : 0) }}" *ngIf="!column.pipe_async_field">{{item}}</td>
-                                      </ng-container>
-                                      <template #loading>
+                                    </ng-container>
+                                    <template #loading>
                                         <td class="th_{{ (column.size ? column.size : 0) }}" >{{object[column.id]}}</td>
-                                      </template>
-                                    </ng-container>
-                                    <ng-container  *ngIf="!column.pipe_async">
-                                      <td class="th_{{ (column.size ? column.size : 0) }}"
-                                          [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))"></td>
-                                    </ng-container>
+                                    </template>
+                                </ng-container>
+                                <ng-container  *ngIf="!column.pipe_async">
+                                    <td class="th_{{ (column.size ? column.size : 0) }}"
+                                        [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))"></td>
                                 </ng-container>
                             </ng-container>
-
-                            <!-- AVEC FONCTION -->
-                            <ng-container *ngIf="column.state == 3">
-                                <ng-container *ngIf="column.function_type == 'split'">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}">
-                                        <ng-container *ngIf="object[column.id]">
-                                            <ng-container *ngFor="let item of object[column.id].split(column.separator); let last = last">
-                                                <span class="{{ column.class ? column.class : '' }}" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
-                                                <ng-container *ngIf="!last">,&nbsp;</ng-container>
-                                            </ng-container>
-                                        </ng-container>
-                                    </td>
-                                </ng-container>
-                                <ng-container *ngIf="column.function_type == 'normal'">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}">
-                                        <ng-container *ngIf="object[column.id]">
-                                                <span [ngClass]="column.class ? column.class : ''" (click)="column.function.apply(bigdata.parent_scope, [object[column.id]])" >{{ object[column.id] }}</span>
-                                        </ng-container>
-                                    </td>
-                                </ng-container>
-                                <ng-container *ngIf="column.function_type == 'content'">
-                                    <td class="th_{{ (column.size ? column.size : 0) }}">
-                                        <ng-container *ngIf="object[column.id]">
-                                                <span [ngClass]="column.class ? column.class : ''" [innerHTML]="column.function.apply(bigdata.parent_scope, [object])" ></span>
-                                        </ng-container>
-                                    </td>
-                                </ng-container>
-                            </ng-container>
-
                         </ng-container>
 
-                        <!-- Les boutons -->
-                        <ng-container *ngIf="bigdata.buttons">
-                            <td class="th_action">
-                                <div class="row">
-                                    <ng-container *ngFor="let button of bigdata.buttons">
-                                        <button class="{{button.class}}" (click)="button.action.apply(bigdata.parent_scope,[object])" [innerHTML]="button.text"></button>
+                        <!-- AVEC FONCTION -->
+                        <ng-container *ngIf="column.state == 3">
+                            <ng-container *ngIf="column.function_type == 'split'">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id]">
+                                        <ng-container *ngFor="let item of object[column.id].split(column.separator); let last = last">
+                                            <span class="{{ column.class ? column.class : '' }}" (click)="column.function.apply(bigdata.parent_scope, [item])" >{{ item }}</span>
+                                            <ng-container *ngIf="!last">,&nbsp;</ng-container>
+                                        </ng-container>
                                     </ng-container>
-                                </div>
-                            </td>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="column.function_type == 'normal'">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id]">
+                                        <span [ngClass]="column.class ? column.class : ''" (click)="column.function.apply(bigdata.parent_scope, [object[column.id]])" >{{ object[column.id] }}</span>
+                                    </ng-container>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="column.function_type == 'content'">
+                                <td class="th_{{ (column.size ? column.size : 0) }}">
+                                    <ng-container *ngIf="object[column.id] != 'undefined'">
+                                        <span [ngClass]="column.class ? column.class : ''" [innerHTML]="column.function.apply(bigdata.parent_scope, [object])" ></span>
+                                    </ng-container>
+                                </td>
+                            </ng-container>
                         </ng-container>
-                    </tr>
 
-                </ng-container>
+                    </ng-container>
+
+                    <!-- Les boutons -->
+                    <ng-container *ngIf="bigdata.buttons">
+                        <td class="th_action">
+                            <div class="row">
+                                <ng-container *ngFor="let button of bigdata.buttons">
+                                    <button class="{{button.class}}" (click)="button.action.apply(bigdata.parent_scope,[object])" [innerHTML]="button.text"></button>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </ng-container>
+                </tr>
+
             </ng-container>
+        </ng-container>
 
         <ng-container *ngIf="bigdata.data.length === 0">
             <tr><td [attr.colspan]="bigdata.colspan" align="center">Aucun résultat trouvé.</td></tr>
