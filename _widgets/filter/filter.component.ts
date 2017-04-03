@@ -127,12 +127,12 @@ export class Filter {
         this.callback = this.config.callback;
         this.config_column = this.config.config_column;
 
-        if(!this.config.order_by_column) this.config.order_by_column = 'id'; // Order By sur la colonne id par défaut.
-        if(!this.config.order_by_type) this.config.order_by_type = 'ASC';    // Order By croissant par défaut.
-        if(!this.config.advanced_mode) this.config.advanced_mode = false;    // Mode simplifié affiché par défaut.
-        if(this.config.advanced_mode) this.collapse_class = ' in';           // Pour ouvrir le collapse de base.
-        if(!this.config.global_search) this.config.global_search = '';       // Champs de texte pour la recherche simplifié vide par défaut.
-
+        if(!this.config.order_by_column) this.config.order_by_column = 'id';                // Order By sur la colonne id par défaut.
+        if(!this.config.order_by_type) this.config.order_by_type = 'ASC';                   // Order By croissant par défaut.
+        if(!this.config.advanced_mode) this.config.advanced_mode = false;                   // Mode simplifié affiché par défaut.
+        if(this.config.advanced_mode) this.collapse_class = ' in';                          // Pour ouvrir le collapse de base.
+        if(!this.config.global_search) this.config.global_search = '';                      // Champs de texte pour la recherche simplifié vide par défaut.
+        if(typeof this.config.hide_search === 'undefined') this.config.hide_search = false; // Si true, alors le champs de recherche sera caché en mode avancé.
         this.callback.apply(this.parent_scope, []);  // On lance le filtre !
     }
 

@@ -312,7 +312,7 @@ La configuration est la suivante :
     * **config_column** - **Array<number>** : Tableau contenant la taille bootstrap des différentes colonnes.
                                               Par exemple [4,8] => On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
                                               **Attention le maxium des sommes des colonnes doit faire 12 !!!**
-
+    * **hide_search** - **boolean** - **default = false** : Si true, alors le filtre de recherche globale sera caché lorsqu'on est en recherche avancé.
     * **property** - **Array** : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
 
 **property** est un tableau associatif, qui est formé de la manière suivante :

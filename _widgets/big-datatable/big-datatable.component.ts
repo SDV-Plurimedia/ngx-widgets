@@ -266,6 +266,7 @@ export class BigDatatable {
         } else {
             this.sort.asc = !this.sort.asc
         }
+        this.pagination_config.current_page = 1;
         this.postFilter(true);
     }
 
