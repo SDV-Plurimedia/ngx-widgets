@@ -239,7 +239,7 @@ export class BigDatatable {
                 //this.pagination_config.callback = this.pageChange;
                 // On instancie le pager si ce n'est pas encore fait
                 if(this.pager === null || reset_pager) {
-                    this.pager = new Pager(this, this.pagination_config.total, this.pagination_config.per_page, 5, this.pageChange);
+                    this.pager = new Pager(this, this.pagination_config.total, this.pagination_config.per_page, this.config.pagination_config.delta, this.pageChange);
                 }
                 for(let object of result['data']) {
                     this.data.push(object);
