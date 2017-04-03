@@ -117,6 +117,9 @@ export class BigDatatable {
     public sort: any;                      // Les parametres du tri
     public can_sort: boolean = true;        // Si true, alors les flèches de tri s'affichent
 
+    //Classe pour les tr.
+    public tr;
+
     // Config de la datatable.
     public structure;                     // Les noms des champs.
     public data = [];                     // Les données qui vont être affichées.
@@ -144,10 +147,13 @@ export class BigDatatable {
         // Si on a pas d'état dans les celules, alors on le mets à 1 par défaut.
         this.checkStructure();
 
+        if(this.config.tr) this.tr = this.config.tr;
+        else this.tr = { class: ''};
+
         // On récupère la config de la pagination.
         if(!this.config.pagination_config) this.config.pagination_config = this.default_pagination;
         this.pagination_config = this.config.pagination_config;
-      //  this.pagination_config.callback = this.pageChange;
+        //  this.pagination_config.callback = this.pageChange;
 
         // On récupère la config du filtre.
         if(this.config.filter_config) this.filter_config = this.config.filter_config;
@@ -156,24 +162,21 @@ export class BigDatatable {
 
         //On prépare le tri
         if (this.config.can_sort !== undefined) {
-          console.log("on a un param ", this.config);
-          this.can_sort = this.config.can_sort;
-          console.log("nouvelle valeur ", this.can_sort);
+            this.can_sort = this.config.can_sort;
         }
         if (this.can_sort) {
-          console.log("on peut trier");
-          if (this.config.sort) {
-            this.sort = {
-              field: this.config.sort.field || null,
-              asc: this.config.sort.asc || true
-            };
-          }
-          else {
-            this.sort = {
-              field: null,
-              asc: true
-            };
-          }
+            if (this.config.sort) {
+                this.sort = {
+                    field: this.config.sort.field || null,
+                    asc: this.config.sort.asc || true
+                };
+            }
+            else {
+                this.sort = {
+                    field: null,
+                    asc: true
+                };
+            }
         }
 
         // Le service & sa méthode.
@@ -203,8 +206,8 @@ export class BigDatatable {
     public pageChange(from, to: number) {
         let page = Math.floor(from / this.pagination_config.per_page)+1;
         if( page !== this.pagination_config.current_page) {
-          this.pagination_config.current_page = page;
-          this.postFilter();
+            this.pagination_config.current_page = page;
+            this.postFilter();
         }
     }
 
@@ -213,8 +216,8 @@ export class BigDatatable {
      * Lance la recherche depuis les filtres
      */
     public triggerSearch() {
-      this.pagination_config.current_page = 1;
-      this.postFilter(true);
+        this.pagination_config.current_page = 1;
+        this.postFilter(true);
     }
 
     /**
@@ -236,7 +239,7 @@ export class BigDatatable {
                 //this.pagination_config.callback = this.pageChange;
                 // On instancie le pager si ce n'est pas encore fait
                 if(this.pager === null || reset_pager) {
-                  this.pager = new Pager(this, this.pagination_config.total, this.pagination_config.per_page, 5, this.pageChange);
+                    this.pager = new Pager(this, this.pagination_config.total, this.pagination_config.per_page, this.config.pagination_config.delta, this.pageChange);
                 }
                 for(let object of result['data']) {
                     this.data.push(object);
@@ -255,15 +258,16 @@ export class BigDatatable {
 
     /**
      * Change le critere de tri du tatableau
-    **/
+     **/
     public changeTri(column_id) {
-      if(this.sort.field != column_id) {
-        this.sort.field = column_id;
-        this.sort.asc = true;
-      } else {
-        this.sort.asc = !this.sort.asc
-      }
-      this.postFilter(true);
+        if(this.sort.field != column_id) {
+            this.sort.field = column_id;
+            this.sort.asc = true;
+        } else {
+            this.sort.asc = !this.sort.asc
+        }
+        this.pagination_config.current_page = 1;
+        this.postFilter(true);
     }
 
     /**
