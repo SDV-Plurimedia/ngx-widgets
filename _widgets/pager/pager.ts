@@ -124,7 +124,7 @@ export class Pager{
           //Milieu d'intervalle.
           else{
             for(let i = this._current; i < this._current + this._delta; i++)
-            this._interval.push(i - d0);
+            this._interval.push(i - d0 + 1); // sinon si this._current = d0 alors on aura une page "0" à l'écran.
           }
         }
         //Début d'intervalle.
