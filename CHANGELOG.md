@@ -1,7 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
-## 0.9.1 - WIP
+## 0.9.1 - 04/04/2017
 * ADD: Loader lors de la récupération des données du big datatable
+* FIX: Page 0 du pager
+* FIX: Changement visuel pour filters
 
 ## 0.9.0 - 29/03/2017
 * ADD: Big Datatable : Composant permettant de gérer un datatable en ne récupérant qu'une page de résultat à la fois
