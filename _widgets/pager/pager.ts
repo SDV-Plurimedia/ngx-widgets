@@ -121,6 +121,11 @@ export class Pager{
             for(let i = this._pages - this._delta + 1; i <= this._pages; i++)
             this._interval.push(i);
           }
+          // tout début d'intervalle.
+          else if(this._current - d0 === 0){
+            for(let i = this._current; i < this._current + this._delta; i++)
+            this._interval.push(i - d0 + 1);
+          }
           //Milieu d'intervalle.
           else{
             for(let i = this._current; i < this._current + this._delta; i++)
