@@ -1,22 +1,44 @@
-<div class="panel panel-default">
-    <div class="panel-heading clearfix">
-
-            <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container"
-                    (click)="filter.changeFilterMode()" *ngIf="filter.config.advanced_mode">&nbsp;&nbsp;&nbsp;Filtres</span>
-            <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container"
-                    (click)="filter.changeFilterMode()" *ngIf="!filter.config.advanced_mode && filter.property != null">&nbsp;&nbsp;&nbsp;Filtres</span>
-
-            <div *ngIf="(filter.config.hide_search && !filter.config.advanced_mode) || !filter.config.hide_search" class="custom-input-group pull-right">
-                <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text"
-                        [(ngModel)]="filter.config.global_search" />
-                <span class="custom-input-group-addon hover" (click)="filter.btnFilter()">
-                  <span class="iconclasses fa fa-search"></span>
-                </span>
+<div class="m-bottom-md clearfix">
+    <div class="pull-right form-inline page-title-search">
+        <div class="input-group">
+            <input (keyup.enter)="filter.btnFilter()"  class="form-control" id="global_search" type="text" [(ngModel)]="filter.config.global_search"
+                  *ngIf="(filter.config.hide_search && !filter.config.advanced_mode) || !filter.config.hide_search"/>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-success" tabindex="-1" (click)="filter.btnFilter()"
+                      *ngIf="(filter.config.hide_search && !filter.config.advanced_mode) || !filter.config.hide_search">
+                    <i class="fa fa-search"></i>
+                </button>
+                <button type="button" class="btn btn-primary" tabindex="-1" (click)="filter.changeFilterMode()" title="Recherche avancée"
+                        *ngIf="!filter.config.advanced_mode && filter.property != null">
+                  <i class="fa fa-plus" ></i>
+                </button>
+                <button type="button" class="btn btn-primary" tabindex="-1" (click)="filter.changeFilterMode()" title="Recherche avancée"
+                        *ngIf="filter.config.advanced_mode">
+                  <i class="fa fa-minus" ></i>
+                </button>
             </div>
-    </div>
+        </div>
+          <!-- <span class="iconclasses fa fa-minus hover" data-toggle="collapse" data-target="#filter_container"
+                  (click)="filter.changeFilterMode()" *ngIf="filter.config.advanced_mode">&nbsp;&nbsp;&nbsp;Filtres</span>
+          <span class="iconclasses fa fa-plus hover" id="plus" data-toggle="collapse" data-target="#filter_container"
+                  (click)="filter.changeFilterMode()" *ngIf="!filter.config.advanced_mode && filter.property != null">&nbsp;&nbsp;&nbsp;Filtres</span> -->
 
+          <!-- <div *ngIf="(filter.config.hide_search && !filter.config.advanced_mode) || !filter.config.hide_search" class="custom-input-group pull-right">
+              <input (keyup.enter)="filter.btnFilter()"  class="form-control form-control-bonus" id="global_search" type="text"
+                      [(ngModel)]="filter.config.global_search" />
+              <span class="custom-input-group-addon hover" (click)="filter.btnFilter()">
+                <span class="iconclasses fa fa-search"></span>
+              </span>
+          </div> -->
+    </div>
+</div>
+
+<div class="panel panel-default"  class="collapse{{filter.collapse_class}}">
+    <div class="panel-heading clearfix">
+      Recherche avancée
+    </div>
     <div class="form-horizontal">
-        <div id="filter_container" class="collapse{{filter.collapse_class}}">
+        <div id="filter_container">
             <div class="panel-body">
 
                 <ng-container *ngFor="let bootstrap_class of filter.config_column; let numero_column = index">
