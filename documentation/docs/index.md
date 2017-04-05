@@ -290,7 +290,10 @@ Utilisation :
 * **ngModel**: La valeur de le date.
 * **view-format**: Le format de date tel qu'il sera affiché dans le champ de texte.
 * **model-format**: Le format de la date tel qu'il est dans la variable.
+* **init-date**: Date à placer dans le champ à l'initialisation
 * **first-week-day-sunday**: Un booléen permettant de préciser pour l'affichage du calendrier si les semaines doivent commencer le dimanche (true) ou le lundi (false).
+* **reset**: Booléen permettant d'afficher un bouton pour réinitialiser la valeur initiale du champ
+* **init-empty** : Un booléen permettant de ne pas mettre la date courante par défaut dans le champ si init-date est null
 
 # DropDown
 
