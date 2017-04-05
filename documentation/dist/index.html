@@ -79,11 +79,9 @@
             
                 <li class="toctree-l3"><a href="#datatable">Datatable</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#dans-mon-model">dans mon model :</a></li>
+                    <li><a class="toctree-l4" href="#dans-mon-model">dans mon model</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#dans-le-constructeur-du-model">Dans le constructeur du model :</a></li>
+                    <li><a class="toctree-l4" href="#dans-le-constructeur-du-mode">Dans le constructeur du mode</a></li>
                 
             
                 <li class="toctree-l3"><a href="#datepicker">DatePicker</a></li>
@@ -219,6 +217,13 @@ Pour un bon fonctionnement de ce composant, il est néanmois conseillé de dispo
 </li>
 <li>
 <p><strong>filter_config</strong> - <strong>Array</strong> : Correspond à <strong>config</strong> de <strong>Filtre</strong>. Voir sa configuration.</p>
+</li>
+<li>
+<p><strong>tr</strong> -Object** : Contient soit une propriété :</p>
+<ul>
+<li><strong>class</strong> : La classe à appliquer sur les tr</li>
+<li><strong>function</strong> : Une fonction qui sera appliquée sur <strong>parent_scope</strong> qui renvera la classe à appliquer sur le tr.</li>
+</ul>
 </li>
 <li>
 <p><strong>pagination_config</strong> - <strong>Array</strong> - <strong>FACULTATIF</strong> : Si non renseignée, la pagination par défaut sera appliquée.</p>
@@ -405,29 +410,34 @@ public data_tab = [{id: 1, name: "Antoine"}];
 <ul>
 <li>
 <p>La définition de la structure est la suivante :</p>
-<p>public structure = [
-    { id: "id", label: "ID"},
-    { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
-];</p>
+<p><code>{public structure = [
+  { id: "id", label: "ID"},
+  { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
+];</code></p>
 </li>
 <li>
-<p>Ensuite, dans mon model :
-        1) Ajouter la propriété "liste_lapin".
-        2) Générer le HTML qui corresponds.
-        3) L'affecter à cette propriété.</p>
-<h1 id="dans-mon-model">dans mon model :</h1>
-<p>public lapins: Lapin[]; // Les différents objets Lapin</p>
-<h1 id="dans-le-constructeur-du-model">Dans le constructeur du model :</h1>
-<p>this.lapins      = obj &amp;&amp; obj.lapins     || null;</p>
-<p>public get liste_lapins() {
-    let ul = '<ul>';
-    for(let lapin in this.lapins) {
-        ul += '<li>' + lapin.name + '</li>';
-    }
-    return ul + '</ul>';
-}</p>
+<p>Ensuite, dans mon model :</p>
+<ul>
+<li>Ajouter la propriété "liste_lapin".</li>
+<li>Générer le HTML qui corresponds.</li>
+<li>L'affecter à cette propriété.</li>
+</ul>
 </li>
 </ul>
+<h3 id="dans-mon-model">dans mon model</h3>
+<pre><code>public lapins: Lapin[]; // Les différents objets Lapin
+</code></pre>
+<h3 id="dans-le-constructeur-du-mode">Dans le constructeur du mode</h3>
+<pre><code>this.lapins      = obj &amp;&amp; obj.lapins     || null;
+
+public get liste_lapins() {
+    let ul = '&lt;ul&gt;';
+    for(let lapin in this.lapins) {
+        ul += '&lt;li&gt;' + lapin.name + '&lt;/li&gt;';
+    }
+    return ul + '&lt;/ul&gt;';
+}
+</code></pre>
 <h1 id="datepicker">DatePicker</h1>
 <p>Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.</p>
 <p><img alt="DatePicker" src="./img/datepicker.png" /></p>
@@ -439,7 +449,10 @@ public data_tab = [{id: 1, name: "Antoine"}];
 <li><strong>ngModel</strong>: La valeur de le date.</li>
 <li><strong>view-format</strong>: Le format de date tel qu'il sera affiché dans le champ de texte.</li>
 <li><strong>model-format</strong>: Le format de la date tel qu'il est dans la variable.</li>
+<li><strong>init-date</strong>: Date à placer dans le champ à l'initialisation</li>
 <li><strong>first-week-day-sunday</strong>: Un booléen permettant de préciser pour l'affichage du calendrier si les semaines doivent commencer le dimanche (true) ou le lundi (false).</li>
+<li><strong>reset</strong>: Booléen permettant d'afficher un bouton pour réinitialiser la valeur initiale du champ</li>
+<li><strong>init-empty</strong> : Un booléen permettant de ne pas mettre la date courante par défaut dans le champ si init-date est null</li>
 </ul>
 <h1 id="dropdown">DropDown</h1>
 <p>A documenter</p>
@@ -457,9 +470,9 @@ public data_tab = [{id: 1, name: "Antoine"}];
     * <strong>order_by_type</strong>   - <strong>string</strong> - <strong>default = ASC</strong> : Si l'order by est croissant ou décroissant.
     * <strong>config_column</strong> - <strong>Array<number></strong> : Tableau contenant la taille bootstrap des différentes colonnes.
                                               Par exemple [4,8] =&gt; On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
-                                              <strong>Attention le maxium des sommes des colonnes doit faire 12 !!!</strong></p>
-<pre><code>* **property** - **Array** : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
-</code></pre>
+                                              <strong>Attention le maxium des sommes des colonnes doit faire 12 !!!</strong>
+    * <strong>hide_search</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors le filtre de recherche globale sera caché lorsqu'on est en recherche avancé.
+    * <strong>property</strong> - <strong>Array</strong> : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.</p>
 <p><strong>property</strong> est un tableau associatif, qui est formé de la manière suivante :
     * <strong>key</strong> : <strong>data (Array)</strong> : <strong>key</strong> est le nom du champ tel qu'il l'est en BDD.</p>
 <p><strong>data</strong> est un tableau contenant les différentes configurations pour le champs <strong>key</strong>. La configuration diffèrent selon le type de champ.
@@ -762,5 +775,5 @@ Actuellement les différents champs possible sont :
 
 <!--
 MkDocs version : 0.16.0
-Build Date UTC : 2017-03-29 09:05:42
+Build Date UTC : 2017-04-05 12:14:30
 -->

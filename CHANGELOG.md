@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 0.9.2 - 05/04/2017
+* UPD: Ajout d'un paramètre pour initialiser le datepicker sans date
+
 ## 0.9.1 - 04/04/2017
 * ADD: Loader lors de la récupération des données du big datatable
 * FIX: Page 0 du pager

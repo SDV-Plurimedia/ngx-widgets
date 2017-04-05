@@ -248,24 +248,23 @@ Exemple de component:
 
 Il est également possible de fournir du contenu HTML généré dynamiquement, pour ce faire :
 
- - La définition de la structure est la suivante :
+- La définition de la structure est la suivante :
+
+    ```{public structure = [
+      { id: "id", label: "ID"},
+      { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
+    ];```
+
+- Ensuite, dans mon model :
+    - Ajouter la propriété "liste_lapin".
+    - Générer le HTML qui corresponds.
+    - L'affecter à cette propriété.
 
 
-    public structure = [
-        { id: "id", label: "ID"},
-        { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
-    ];
-
- - Ensuite, dans mon model :
-        1) Ajouter la propriété "liste_lapin".
-        2) Générer le HTML qui corresponds.
-        3) L'affecter à cette propriété.
-
-
-    # dans mon model :
+### dans mon model
     public lapins: Lapin[]; // Les différents objets Lapin
 
-    # Dans le constructeur du model :
+### Dans le constructeur du mode
     this.lapins      = obj && obj.lapins     || null;
 
     public get liste_lapins() {
