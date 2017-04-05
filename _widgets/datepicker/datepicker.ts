@@ -36,6 +36,7 @@ export class DatepickerComponent implements AfterViewInit {
   @Input('first-week-day-sunday') firstWeekDaySunday: boolean;
   @Input('static') isStatic: boolean;
   @Input('reset') reset: boolean;
+  @Input('init-empty') initEmpty: boolean;
 
   @Output() changed: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -152,16 +153,23 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   private setValue(value: any): void {
-    let val = moment(value, this.modelFormat || 'YYYY-MM-DD');
-    this.viewValue = val.format(this.viewFormat || 'Do MMMM YYYY');
-    this.cd.viewToModelUpdate(val.format(this.modelFormat || 'YYYY-MM-DD'));
-    this.cannonical = val.toDate().getTime();
+    if(value) {
+      let val = moment(value, this.modelFormat || 'YYYY-MM-DD');
+      this.viewValue = val.format(this.viewFormat || 'Do MMMM YYYY');
+      this.cd.viewToModelUpdate(val.format(this.modelFormat || 'YYYY-MM-DD'));
+      this.cannonical = val.toDate().getTime();
+    } else {
+      this.viewValue = "";
+      this.cannonical = null;
+      this.cd.viewToModelUpdate(null);
+    }
   }
 
   private initValue(): void {
     setTimeout(() => {
       if (!this.initDate) {
-        this.setValue(moment().format(this.modelFormat || 'YYYY-MM-DD'));
+        let val = this.initEmpty ? null : moment().format(this.modelFormat || 'YYYY-MM-DD');
+        this.setValue(val);
       } else {
         this.setValue(moment(this.initDate, this.modelFormat || 'YYYY-MM-DD'));
       }
@@ -191,6 +199,13 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   public resetDate(): void {
-    this.setValue(moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD'));
+    let val;
+    if(!this.dateSave) {
+      val = this.initEmpty ? null : moment().format(this.modelFormat || 'YYYY-MM-DD');
+    } else {
+      val = moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD');
+    }
+
+    this.setValue(val);
   }
 }
