@@ -199,9 +199,11 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   public resetDate(): void {
-    let val = null
-    if(this.dateSave) {
-      val = moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD')
+    let val;
+    if(!this.dateSave) {
+      val = this.initEmpty ? null : moment().format(this.modelFormat || 'YYYY-MM-DD');
+    } else {
+      val = moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD');
     }
 
     this.setValue(val);
