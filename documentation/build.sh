@@ -14,7 +14,7 @@ OUTPUT_DIR='./dist'
 printf "${RED}---------------------------------------------------------------------\n${NC}"
 
 # vérification si le binaire existe sur le poste
-command -v ${GENERATOR} >/dev/null 2>&1 || { echo >&2 "I require ${GENERATOR} but it's not installed. Check ${GENERATOR_URI}. Aborting."; exit 1; }
+command -v ${GENERATOR} >/dev/null 2>&1 || { echo >&2 "I require ${GENERATOR} but it's not installed. Check ${GENERATOR_URI} or use ./docker-build.sh ... Aborting."; exit 1; }
 
 # vérification de l'existant
 if [ -d ${OUTPUT_DIR} ]
