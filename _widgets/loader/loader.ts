@@ -1,23 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'loader',
   templateUrl: './loader.html',
-  styleUrls: ['./loader.css'],
-  inputs: ['condition', 'type', 'from']
+  styleUrls: ['./loader.css']
 })
 export class LoaderComponent {
-  public condition = false;
-  public type = "";
-  public from ="";
-  constructor(){
-  }
-
-  ngOnInit() {
-    // Properties are resolved
-  }
-
-  ngOnDestroy() {
-    // Speak now or forever hold your peace
-  }
+  @Input() condition = false;
+  @Input() type: string = '';
+  @Input() from: string = '';
+  constructor() { }
 }

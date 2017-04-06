@@ -1,16 +1,15 @@
-import {Component, ElementRef, Renderer} from '@angular/core';
+import {Component, ElementRef, Renderer, Input, OnInit, OnChanges} from '@angular/core';
 
 @Component({
     selector: 'hierarchie-list',
     templateUrl: './hierarchie-list.html',
-    styleUrls: ['./hierarchie-list.css'],
-    inputs: ['datas', 'params']
+    styleUrls: ['./hierarchie-list.css']
 })
 
-export class HierarchieListComponent {
+export class HierarchieListComponent implements OnInit, OnChanges {
 
-    public params: HierarchieList = null;
-    public datas: any[];
+    @Input() params: HierarchieList = null;
+    @Input() datas: any[];
     public root_id: string;
     public name_column: string;
     public parent_scope: any;
@@ -25,7 +24,7 @@ export class HierarchieListComponent {
     constructor(private _el: ElementRef, private _renderr: Renderer) { }
 
     ngOnInit() {
-      if(this.params !== null){
+      if (this.params !== null) {
         this.root_id = this.params.root_id;
         this.name_column = this.params.name_column;
         this.parent_scope = this.params.scope;
@@ -40,53 +39,52 @@ export class HierarchieListComponent {
     }
 
     ngOnChanges(changes) {
-        if (changes.datas && changes.datas.previousValue.length > 0)
-            this.datas = changes.datas.currentValue;
-        if (changes.params)
-            this.params = changes.params.currentValue;
-        this.root_id = this.params.root_id;
-        this.level = [];
-        this.datas_level = [];
-        this.level[0] = this.root_id;
-        this.datas_level[0] = this.getListLevel(0);
-        this.getDisplayedLevel();
+      if (changes.datas && changes.datas.previousValue.length > 0) {
+        this.datas = changes.datas.currentValue;
+      }
+      if (changes.params) {
+        this.params = changes.params.currentValue;
+      }
+      this.root_id = this.params.root_id;
+      this.level = [];
+      this.datas_level = [];
+      this.level[0] = this.root_id;
+      this.datas_level[0] = this.getListLevel(0);
+      this.getDisplayedLevel();
     }
 
-    public selectLevel(num, id){
-      if(num > 0){
-        this.selectLevel( (num - 1) , this.datas.filter(item =>{
-          return (item.id_hierarchie == id)
-        })[0].parent );
+    public selectLevel(num, id) {
+      if (num > 0) {
+        this.selectLevel((num - 1) , this.datas.filter(item => item.id_hierarchie === id)[0].parent);
       }
-      console.log('TODO -> selection du level ',num,id);
+      console.log('TODO -> selection du level ', num, id);
       this.getNextLevel(num, id);
     }
 
-    //recupere la liste des topics enfant
+    // recupere la liste des topics enfant
     private getListLevel(num: number) {
       let root = this.level[num];
-      let res = this.datas.filter(data => data.parent == root);
+      let res = this.datas.filter(data => data.parent === root);
       return res;
     }
 
-    //calcul le niveau suivant si existant
+    // calcul le niveau suivant si existant
     private getNextLevel(num: number, id: any) {
-      if(this.hasChildren(id)){
-
-        //j'enregistre la position
+      if (this.hasChildren(id)) {
+        // j'enregistre la position
         this.last_selected_level = {
-          "num": num,
-          "id": id
+          'num': num,
+          'id': id
         };
 
         this.level[num] = id;
         this.datas_level[num] = this.getListLevel(num);
 
-        if(this.level.length>num+1){
+        if (this.level.length > (num + 1)) {
           let level = [];
           let datas_level = [];
           let i = 0;
-          for (i=0; i<=num; i++) {
+          for (i = 0; i <= num; i++) {
             level[i] = this.level[i];
             datas_level[i] = this.datas_level[i];
           }
@@ -95,21 +93,21 @@ export class HierarchieListComponent {
         }
         this.getDisplayedLevel();
         setTimeout(() => {
-          let top  = this._el.nativeElement.querySelector('#item_'+id).offsetTop
-                      + this._el.nativeElement.querySelector('#item_'+id).parentElement.offsetTop;
-          let list = this._el.nativeElement.querySelector('#list_'+id);
-          if(list) {
-            list.style.marginTop = top+'px';
+          let top  = this._el.nativeElement.querySelector('#item_' + id).offsetTop
+                      + this._el.nativeElement.querySelector('#item_' + id).parentElement.offsetTop;
+          let list = this._el.nativeElement.querySelector('#list_' + id);
+          if (list) {
+            list.style.marginTop = top + 'px';
           }
         }, 0);
       }
     }
 
     getDisplayedLevel() {
-      if(this.level.length < 4)
+      if (this.level.length < 4) {
         this.level_displayed = this.level;
-      else {
-        this.level_displayed = this.level.slice(this.level.length-4);
+      } else {
+        this.level_displayed = this.level.slice(this.level.length - 4);
       }
     }
 
@@ -119,7 +117,7 @@ export class HierarchieListComponent {
     * @returns    True si l'élément a au moins un enfant, false sinon
     */
     hasChildren(id: string) {
-        return this.datas.filter(data => data.parent == id).length > 0 ? true : false;
+      return this.datas.filter(data => data.parent === id).length > 0 ? true : false;
     }
 
 }

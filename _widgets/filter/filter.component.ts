@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, AfterContentInit } from '@angular/core';
 
 /**
  * Configuration du filtre.
  * filter_config: {
-            config_column: [4, 8],          // Tableau contenant la taille de la classe bootstrap à utliser (la somme maximum doit faire 12).
+            config_column: [4, 8],          // Tableau contenant la taille de la classe bootstrap à utliser
+                                            //  (la somme maximum doit faire 12).
             callback: this.method,          // La méthode a appeller lorsque l'on veut appliquer le filtre.
             parent_scope: this,             // Le parent de ce composant. (celui qui contient la méthode callback.
             order_by_column: 'updated_at',  // FACULTATIF, DEFAULT = id : La colonne qui sera utilisée de base pour l'order by.
@@ -39,7 +40,8 @@ import { Component, OnInit } from '@angular/core';
                     type: 'select',
                     value: 0,
                     column: 0,
-                    propositions: this.redirections // Les différentes propositions. Tableau d'objet : { label : 'label', id: 'id' } (où id est la value).
+                    propositions: this.redirections // Les différentes propositions. Tableau d'objet :
+                                                    //  { label : 'label', id: 'id' } (où id est la value).
                     default_label: 'Toutes',        // FACULTATIF : Le label de la proposition par défaut
                     default_value: 0                // FACULTATIF : Sa value.
                 },
@@ -67,7 +69,8 @@ import { Component, OnInit } from '@angular/core';
 
             // AUTOCOMPLETE
                 tags: {
-                    config: { // La config de l'autocomplete fournit pas sdv-ng2-widgets. Liens vers la doc : https://sdv-plurimedia.github.io/sdv-ng2-widgets/index.html#autocomplete
+                    config: { // La config de l'autocomplete fournit pas sdv-ng2-widgets.
+                              // Lien vers la doc : https://sdv-plurimedia.github.io/sdv-ng2-widgets/index.html#autocomplete
                         'fieldSearch' : 'name',
                         'fieldDisplayed': 'name',
                         'begin' : 1,
@@ -88,26 +91,25 @@ import { Component, OnInit } from '@angular/core';
  */
 
 @Component({
-    selector: 'filter',
-    templateUrl: './filter.component.html',
-    inputs: ['filter'],
-    styleUrls: ['./filter.component.css']
+  selector: 'filter',
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.css']
 })
 
-export class FilterComponent implements OnInit {
+export class FilterComponent implements AfterContentInit {
 
-    public filter: Filter;
+  @Input() filter: Filter;
 
-    constructor() {}
+  constructor() {}
 
-    ngOnInit() {}
-
-    /**
-     * Si on est en mode avancé par défaut, on retire la classe collapse_class car on on en a plus besoin.
-     */
-    ngAfterContentInit() {
-        if(this.filter.config.advanced_mode) this.filter.collapse_class = '';
+  /**
+   * Si on est en mode avancé par défaut, on retire la classe collapse_class car on on en a plus besoin.
+   */
+  ngAfterContentInit() {
+    if (this.filter.config.advanced_mode) {
+      this.filter.collapse_class = '';
     }
+  }
 
 }
 
@@ -115,10 +117,10 @@ export class Filter {
 
     // Config global.
     public config;                // La config global du composant.
-    public callback:any;          // La fonction de callback a appeller.
-    public parent_scope:any;      // Le parent de ce composant.
+    public callback: any;          // La fonction de callback a appeller.
+    public parent_scope: any;      // Le parent de ce composant.
     public config_column;         // Les colonnes, tableau contenant uniquement leur "taille" bootstrap (la somme doit faire 12 au max!).
-    public collapse_class:string; // Si config.advanced_mode alors collapse_class = 'in'.
+    public collapse_class: string; // Si config.advanced_mode alors collapse_class = 'in'.
 
     constructor(parent_scope: any, config) {
         this.config = config;
@@ -127,12 +129,14 @@ export class Filter {
         this.callback = this.config.callback;
         this.config_column = this.config.config_column;
 
-        if(!this.config.order_by_column) this.config.order_by_column = 'id';                // Order By sur la colonne id par défaut.
-        if(!this.config.order_by_type) this.config.order_by_type = 'ASC';                   // Order By croissant par défaut.
-        if(!this.config.advanced_mode) this.config.advanced_mode = false;                   // Mode simplifié affiché par défaut.
-        if(this.config.advanced_mode) this.collapse_class = ' in';                          // Pour ouvrir le collapse de base.
-        if(!this.config.global_search) this.config.global_search = '';                      // Champs de texte pour la recherche simplifié vide par défaut.
-        if(typeof this.config.hide_search === 'undefined') this.config.hide_search = false; // Si true, alors le champs de recherche sera caché en mode avancé.
+        if (!this.config.order_by_column) { this.config.order_by_column = 'id'; } // Order By sur la colonne id par défaut.
+        if (!this.config.order_by_type) {this.config.order_by_type = 'ASC'; }     // Order By croissant par défaut.
+        if (!this.config.advanced_mode) {this.config.advanced_mode = false; }     // Mode simplifié affiché par défaut.
+        if (this.config.advanced_mode) {this.collapse_class = ' in'; }           // Pour ouvrir le collapse de base.
+        if (!this.config.global_search) {this.config.global_search = ''; } // Champs de texte pour la recherche simplifié vide par défaut.
+        if (typeof this.config.hide_search === 'undefined') { // Si true, alors le champs de recherche sera caché en mode avancé.
+          this.config.hide_search = false;
+        }
         this.callback.apply(this.parent_scope, []);  // On lance le filtre !
     }
 
@@ -140,8 +144,9 @@ export class Filter {
      * Inverse le type du filtre (avancé/simple).
      */
     public changeFilterMode() {
-        if(this.config.advanced_mode) this.config.advanced_mode = false;
-        else this.config.advanced_mode = true;
+        if (this.config.advanced_mode) {
+          this.config.advanced_mode = false;
+        } else {this.config.advanced_mode = true; }
     }
 
     /**
@@ -159,10 +164,13 @@ export class Filter {
      * @param attribute
      */
     public changeOrderBy(attribute) {
-        if(this.config.order_by_column === attribute) {
-            if(this.config.order_by_type === 'ASC') this.config.order_by_type = 'DESC';
-            else this.config.order_by_type = 'ASC';
-        }else {
+        if (this.config.order_by_column === attribute) {
+            if (this.config.order_by_type === 'ASC') {
+              this.config.order_by_type = 'DESC';
+            } else {
+              this.config.order_by_type = 'ASC';
+            }
+        } else {
             this.config.order_by_column = attribute;
             this.config.order_by_type   = 'DESC';
         }

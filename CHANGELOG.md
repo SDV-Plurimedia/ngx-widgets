@@ -1,5 +1,10 @@
 #Changelog SDV-NG2-Widgets
 
+
+## 1.0.0 - 06/04/2017
+* Passage à Angular4
+* Lint du projet
+
 ## 0.9.2 - 05/04/2017
 * UPD: Ajout d'un paramètre pour initialiser le datepicker sans date
 

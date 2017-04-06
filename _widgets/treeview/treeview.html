@@ -2,7 +2,7 @@
 
     <ul class="list-group">
 
-        <template ngFor let-data [ngForOf]="sorted_datas">
+        <ng-template ngFor let-data [ngForOf]="sorted_datas">
             <li class="row list-group-item deep{{ indents[data[params.primary_key]] }}" [class.hidden]="isHidden(data[params.primary_key])">
                 <div class="col-lg-1" *ngIf="checkbox">
                     <input type="checkbox" value="{{data[checkbox.column_value]}}" name="checkbox_{{data[params.primary_key]}}"
@@ -10,23 +10,23 @@
                     <span class="custom-checkbox"></span>
                 </div>
                 <div class="col-lg-11">
-                    <template [ngIf]="hasChildren(data[params.primary_key])">
+                    <ng-template [ngIf]="hasChildren(data[params.primary_key])">
                         <span class="indent-with-children icon glyphicon" [class.glyphicon-minus]="states[data[params.primary_key]] != null && states[data[params.primary_key]].open==true" [class.glyphicon-plus]="states[data[params.primary_key]] != null && states[data[params.primary_key]].open==false"
                             (click)="toggle(data[params.primary_key])">
                         </span>
-                    </template>
-                    <template [ngIf]="!hasChildren(data[params.primary_key])">
+                    </ng-template>
+                    <ng-template [ngIf]="!hasChildren(data[params.primary_key])">
                         <span class="indent"></span>
-                    </template>
+                    </ng-template>
                     <span>{{data[name_column]}}</span>
                 </div>
                 <div class="col-lg-1" *ngIf="buttons && buttons.length > 0">
-                    <template ngFor let-button [ngForOf]="buttons">
+                    <ng-template ngFor let-button [ngForOf]="buttons">
                         <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>
-                    </template>
+                    </ng-template>
                 </div>
             </li>
-        </template>
+        </ng-template>
     </ul>
 </div>
 

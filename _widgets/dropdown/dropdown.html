@@ -1,10 +1,10 @@
-<li class="dropdown" >
+<li class="dropdown" style="list-style:none; ">
     <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
-      <i class="fa fa-font"></i>&nbsp;<span class="current-font">{{value[config.champ_label]}}</span>&nbsp;<b class="caret"></b>
+      <i *ngIf="icon" class="fa fa-{{icon}}"></i>&nbsp;
+      <span class="current-font">{{selected_obj[config.champ_label]}}</span>&nbsp;
+      <b class="caret"></b>&nbsp;
     </a>
     <ul class="dropdown-menu">
-      <template ngFor let-choix [ngForOf]="data">
-        <li><a>{{choix[config.champ_label]}}</a></li>
-      </template>
+        <li *ngFor="let choix of data" ><a (click)="select(choix)">{{choix[config.champ_label]}}</a></li>
     </ul>
 </li>

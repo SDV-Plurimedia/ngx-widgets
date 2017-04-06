@@ -1,4 +1,4 @@
-declare var d3;
+declare let d3;
 
 import {ElementRef, Renderer} from '@angular/core';
 import {Graph, DataGraph, SimpleColor, Color} from './commun';
@@ -20,7 +20,7 @@ export class BarChart implements Graph {
     }
 
     getTick() {
-        var max = d3.max(this.datas, (d) => { return d.value; });
+        let max = d3.max(this.datas, (d) => { return d.value; });
         return Math.round(max / 10);
     }
 
@@ -37,13 +37,13 @@ export class BarChart implements Graph {
     }
 
     colorTransform(color: Color) {
-        var r = color.r.toString(16);
-        var g = color.g.toString(16);
-        var b = color.b.toString(16);
+        let r = color.r.toString(16);
+        let g = color.g.toString(16);
+        let b = color.b.toString(16);
 
-        r = (r.length == 1) ? "0" + r : r;
-        g = (g.length == 1) ? "0" + g : g;
-        b = (b.length == 1) ? "0" + b : b;
+        r = (r.length === 1) ? '0' + r : r;
+        g = (g.length === 1) ? '0' + g : g;
+        b = (b.length === 1) ? '0' + b : b;
         return '#' + r + g + b;
     }
 }

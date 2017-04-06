@@ -50,7 +50,7 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.reset) {
+    if (this.reset) {
       this.dateSave = this.initDate;
     }
     this.initValue();
@@ -86,7 +86,7 @@ export class DatepickerComponent implements AfterViewInit {
 
   public selectDate(e: MouseEvent, date: CalendarDate): void {
     e.preventDefault();
-    if (this.isSelected(date)) return;
+    if (this.isSelected(date)) { return; }
 
     let selectedDate = moment(date.day + '.' + date.month + '.' + date.year, 'DD.MM.YYYY');
     this.setValue(selectedDate);
@@ -141,7 +141,7 @@ export class DatepickerComponent implements AfterViewInit {
     let body = document.getElementsByTagName('body')[0];
 
     body.addEventListener('click', (e) => {
-      if (!this.isOpened || !e.target) return;
+      if (!this.isOpened || !e.target) { return; }
       if (this.el !== e.target && !this.el.contains(e.target)) {
         this.closeDatepicker();
       }
@@ -153,13 +153,13 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   private setValue(value: any): void {
-    if(value) {
+    if (value) {
       let val = moment(value, this.modelFormat || 'YYYY-MM-DD');
       this.viewValue = val.format(this.viewFormat || 'Do MMMM YYYY');
       this.cd.viewToModelUpdate(val.format(this.modelFormat || 'YYYY-MM-DD'));
       this.cannonical = val.toDate().getTime();
     } else {
-      this.viewValue = "";
+      this.viewValue = '';
       this.cannonical = null;
       this.cd.viewToModelUpdate(null);
     }
@@ -177,7 +177,7 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   writeValue(value: string): void {
-    if (!value) return;
+    if (!value) { return; }
     this.setValue(value);
   }
 
@@ -200,7 +200,7 @@ export class DatepickerComponent implements AfterViewInit {
 
   public resetDate(): void {
     let val;
-    if(!this.dateSave) {
+    if (!this.dateSave) {
       val = this.initEmpty ? null : moment().format(this.modelFormat || 'YYYY-MM-DD');
     } else {
       val = moment(this.dateSave, this.modelFormat || 'YYYY-MM-DD');

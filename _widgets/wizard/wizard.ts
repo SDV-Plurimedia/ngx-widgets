@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {WizardStepComponent} from "./step";
+import {WizardStepComponent} from './step';
 
 /*
   import {WizardComponent} from '../_widgets/wizard/wizard';
@@ -16,7 +16,7 @@ import {WizardStepComponent} from "./step";
 
 @Component({
   selector: 'wizard',
-  styleUrls: ["./wizard.css"],
+  styleUrls: ['./wizard.css'],
   templateUrl: './wizard.html'
 })
 export class WizardComponent {
@@ -27,15 +27,15 @@ export class WizardComponent {
   public name_wip: string;
 
   constructor() {
-      this.steps = [];
-      this.name_wip = "built";
-      this.dependenciesAreLoaded = true;
+    this.steps = [];
+    this.name_wip = 'built';
+    this.dependenciesAreLoaded = true;
   }
 
-  public selectStep(step: WizardStepComponent, event: any){
+  public selectStep(step: WizardStepComponent, event: any) {
     event.preventDefault();
     event.stopPropagation();
-    this.steps.forEach((step_c)=>step_c.disactivate());
+    this.steps.forEach((step_c) => step_c.disactivate());
     step.activate();
     this.current_step = step.index;
     return false;

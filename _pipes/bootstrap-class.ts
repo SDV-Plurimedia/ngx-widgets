@@ -11,19 +11,16 @@ export class BootstrapClassPipe  implements PipeTransform {
    */
   transform (value: any) {
     let color = '';
-    if(value.indexOf("Création") === 0) {
-      color = "success";
+    if (value.indexOf('Création') === 0) {
+      color = 'success';
+    } else if (value.indexOf('Suppression') === 0) {
+      color = 'danger';
+    } else if (value.indexOf('Assignation') === 0) {
+      color = 'warning';
+    } else {
+      color = 'info';
     }
-    else if (value.indexOf("Suppression") === 0) {
-      color = "danger";
-    }
-    else if (value.indexOf("Assignation") === 0) {
-      color = "warning";
-    }
-    else {
-      color = "info";
-    }
-    return 'label-'+color;
+    return 'label-' + color;
   }
 
 }

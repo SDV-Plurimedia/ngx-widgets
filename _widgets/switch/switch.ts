@@ -1,24 +1,23 @@
-import {Component} from '@angular/core';
-import { StaticLoaderService } from "../../_services/static-loader";
+import {Component, Input, OnInit} from '@angular/core';
+import { StaticLoaderService } from '../../_services/static-loader';
 
 @Component({
   selector: 'switch',
   templateUrl: './switch.html',
-  styleUrls: ['./switch.css'],
-  inputs: ['switch']
+  styleUrls: ['./switch.css']
 })
 
-export class SwitchComponent {
-  public switch : Switch;
+export class SwitchComponent implements OnInit {
+  @Input() switch: Switch;
   public dependenciesAreLoaded: boolean;
   public dependenciesAreLoadedPromise: Promise<any>;
 
-  constructor(){
-    let Loader:StaticLoaderService = StaticLoaderService.getInstance();
+  constructor() {
+    let Loader: StaticLoaderService = StaticLoaderService.getInstance();
     this.dependenciesAreLoadedPromise = Loader.require_once([
-      "/assets/bootstrap-switch/dist/js/bootstrap-switch.min.js",
-      "/assets/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css"
-    ]).then(()=>{
+      '/assets/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+      '/assets/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css'
+    ]).then(() => {
       this.dependenciesAreLoaded = true;
     });
   }
@@ -27,9 +26,11 @@ export class SwitchComponent {
     let innerScope = this;
     this.dependenciesAreLoadedPromise.then(() => {
       innerScope.switch.options.onSwitchChange = (event, state) => {
-        if(state == true)
+        if (state === true) {
           innerScope.switch.callback_on.apply(innerScope.switch.scope);
-        else  innerScope.switch.callback_off.apply(innerScope.switch.scope);
+        } else  {
+          innerScope.switch.callback_off.apply(innerScope.switch.scope);
+        }
       };
 
       jQuery('#switch').bootstrapSwitch(this.switch.options);
@@ -37,12 +38,11 @@ export class SwitchComponent {
           .css('height', 'auto');
     });
   }
-
 }
 
 
 export interface Switch {
-  scope : any;
+  scope: any;
   callback_on: () => void ;
   callback_off: () => void;
   active: boolean;

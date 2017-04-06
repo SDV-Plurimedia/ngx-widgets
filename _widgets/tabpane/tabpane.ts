@@ -1,15 +1,13 @@
-
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'tabpane',
-  templateUrl: './tabpane.html',
-  inputs: ['panel_mode']
+  templateUrl: './tabpane.html'
 })
 
 export class TabpaneComponent {
-  public tabs : any[];
-  public panel_mode: boolean = false;
+  public tabs: any[];
+  @Input() panel_mode: boolean = false;
 
 
   constructor() {
@@ -17,11 +15,11 @@ export class TabpaneComponent {
   }
 
   private selectTab(tab) {
-    this.tabs.forEach((tab) => tab.active=false);
-    tab.active= true;
+    this.tabs.forEach(t => t.active = false);
+    tab.active = true;
   }
   addTab(tab: any) {
-    if(this.tabs.length === 0) {
+    if (this.tabs.length === 0) {
       tab.active = true;
     }
     this.tabs.push(tab);

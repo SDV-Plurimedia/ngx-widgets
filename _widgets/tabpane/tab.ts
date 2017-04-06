@@ -1,13 +1,9 @@
-import {Component, Host} from '@angular/core';
+import {Component, Host, Input} from '@angular/core';
 import {TabpaneComponent} from './tabpane';
 
 @Component({
     selector: 'tab',
-    inputs: [
-        'title:tabtitle',
-        'active'
-    ],
-    styleUrls: ["./tabpane.css"],
+    styleUrls: ['./tabpane.css'],
     template: `
     <div [class.hidden]="!active" class="class-pane" role="tabpanel">
       <ng-content></ng-content>
@@ -15,9 +11,9 @@ import {TabpaneComponent} from './tabpane';
   `
 })
 
-export class TabComponent{
-  public title: string;
-  public active = false;
+export class TabComponent {
+  @Input() tabtitle: string;
+  @Input() active = false;
 
   constructor( @Host() tabs: TabpaneComponent) {
     tabs.addTab(this);

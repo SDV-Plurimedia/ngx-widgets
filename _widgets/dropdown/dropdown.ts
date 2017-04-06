@@ -1,34 +1,51 @@
-import {Component, Input, Output, EventEmitter, ElementRef}     from '@angular/core';
-import {Component,Host, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, OnChanges}     from '@angular/core';
 
 @Component({
     selector: 'dropdown',
-    templateUrl: './dropdown.html',
+    templateUrl: './dropdown.html'
 })
-export class DropdownComponent {
-    @Input() data: Array<any>;
-    @Input() config: any = {
-      "champ_value": "value",
-      "champ_label": "label"
-    };
-    @Output() valueOnChange: EventEmitter<any>;
+export class DropdownComponent implements OnInit, OnChanges {
+  @Input() data: Array<any> = [];
+  @Input() config: any = {
+    champ_value: 'value',
+    champ_label: 'label'
+  };
+  @Input() icon: string;
+  @Input() value: string;
+  @Output() valueChange: EventEmitter<any>;
 
-    private innerValue: any;
-    //accés à la value
-    get value(): any {
-        return this.innerValue;
-    };
-    //modification en prevenant le parent par l'emitter
-    set value(v: any) {
-        if (v !== this.innerValue) {
-            this.innerValue = v;
-            this.valueOnChange.emit(v);
-        }
-    }
+  public selected_obj: any;
 
-    constructor(){
-      this.valueOnChange = new EventEmitter<any>();
-    }
-
-
+  constructor() {
+    this.valueChange = new EventEmitter<any>();
   }
+
+  ngOnInit() {
+    if (!this.selected_obj) {
+      this.selected_obj = this.data[0];
+    }
+  }
+
+  ngOnChanges() {
+    this.findObjByValue(this.value);
+  }
+
+  private findObjByValue(val) {
+    let objet = this.data.find((obj) => {
+      return obj[this.config.champ_value] === val;
+    });
+    if (objet) {
+      this.selected_obj = objet;
+    }
+  }
+
+  private findValueByObj(obj) {
+    this.value = obj[this.config.champ_value];
+    this.valueChange.emit(this.value);
+  }
+
+  private select(obj) {
+    this.selected_obj = obj;
+    this.findValueByObj(obj);
+  }
+}

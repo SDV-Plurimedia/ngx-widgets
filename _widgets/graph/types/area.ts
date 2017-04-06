@@ -11,7 +11,7 @@ export class AreaChart implements Graph {
 
     constructor(datas: DataGraph[], colors: SimpleColor, id: string,
         public height = 650,
-        public y_label: string, public unite = "",
+        public y_label: string, public unite = '',
         public time = false, grid = true) {
         this.datas = datas;
         this.colors = colors;
@@ -20,7 +20,7 @@ export class AreaChart implements Graph {
     }
 
     loadGraph() {
-        var color = this.colorTransform(this.colors.color);
+        let color = this.colorTransform(this.colors.color);
         Morris.Area({
             element: this.id,
             lineColors: [color],
@@ -35,13 +35,13 @@ export class AreaChart implements Graph {
     }
 
     colorTransform(color: Color) {
-        var r = color.r.toString(16);
-        var g = color.g.toString(16);
-        var b = color.b.toString(16);
+        let r = color.r.toString(16);
+        let g = color.g.toString(16);
+        let b = color.b.toString(16);
 
-        r = (r.length == 1) ? "0" + r : r;
-        g = (g.length == 1) ? "0" + g : g;
-        b = (b.length == 1) ? "0" + b : b;
+        r = (r.length === 1) ? '0' + r : r;
+        g = (g.length === 1) ? '0' + g : g;
+        b = (b.length === 1) ? '0' + b : b;
         return '#' + r + g + b;
     }
 }

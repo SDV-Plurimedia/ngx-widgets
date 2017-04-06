@@ -1,20 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 @Component({
   selector: 'button3d',
   template: `<button type="button" class="btn btn-{{class}} {{size}} btn3d">
   <span class="fa fa-{{icon}}"></span> <ng-content></ng-content>
   </button>`,
-  styleUrls: ['./button-3d.css'],
-  inputs: ['icon', 'class', 'size']
+  styleUrls: ['./button-3d.css']
 })
 export class Button3dComponent {
-  public icon: string;
-  public class: string;
-  public size: string;
+  @Input() icon: string;
+  @Input() class: string = 'default';
+  @Input() size: string = '';
 
-  constructor(){
-    //valeur par defaut
-    this.class = "default";
-    this.size = "";//valeur possible btn-lg, btn-sm ou vide pour normal
-  }
+  constructor() { }
 }

@@ -62,13 +62,13 @@
 
                             <ng-container *ngIf="column.pipe;">
                                 <ng-container *ngIf="column?.pipe_async">
-                                    <ng-container *ngIfv2="(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))| async); else loading; let item">
+                                    <ng-container *ngIf="(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))| async); else loading; let item">
                                         <td  class="th_{{ (column.size ? column.size : 0) }}" *ngIf="column.pipe_async_field">{{item[column.pipe_async_field]}}</td>
                                         <td class="th_{{ (column.size ? column.size : 0) }}" *ngIf="!column.pipe_async_field">{{item}}</td>
                                     </ng-container>
-                                    <template #loading>
+                                    <ng-template #loading>
                                         <td class="th_{{ (column.size ? column.size : 0) }}" >{{object[column.id]}}</td>
-                                    </template>
+                                    </ng-template>
                                 </ng-container>
                                 <ng-container  *ngIf="!column.pipe_async">
                                     <td class="th_{{ (column.size ? column.size : 0) }}"
