@@ -24,6 +24,8 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
     * **displayItem**: *Boolean* - Si true, alors on affiche les différents élements que l'on ajoute à droite du placeholder. Vaut false par défaut.
     * **displayItems**: *Array* - Tableau qui contient les différents élements à ajouter à droite du placeholder.
     * **displayItemClass**: *String* - Classe CSS pour les élements à afficher à droite du placeholder.
+    * **customSearch**: *Void* - Fonction personnalisée pour effectuer une recherche sur des données distantes. (Doit renvoyer un Observable)
+    * **scope**: A utiliser avec customSearch, permet de définir la portée de la fonction.
 * **(valid)**: *Function* - fonction appelée lorsque le champ est validé sur un resultat existant.
 * **(create)**: *Function* - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant.
 * **(delete)**: *Function* - fonction appelée lors de la suppression d'un résultat.
