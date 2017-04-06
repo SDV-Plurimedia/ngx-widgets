@@ -6,6 +6,7 @@ import {Observable, Subject} from 'rxjs';
     templateUrl: './autocomplete.html',
     styleUrls: ['./chosen.scss', './autocomplete.css'],
 })
+
 export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() data; // Tableau de données dans lequel l'autocomplete va rechercher
   @Input() config;
@@ -20,7 +21,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   private placeholder: string = '';
 
   private inputValue: string = '';
-  public  isActive: boolean = false;
+  public isActive: boolean = false;
   private inputForm;
   private removeData: any;
 
@@ -35,8 +36,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
           return [];
       });
 
-  constructor( private _eref: ElementRef ) {
-      //
+  constructor(private _eref: ElementRef) {
+    //
   }
 
   ngOnInit() {
@@ -71,7 +72,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   onInputChange(input) {
     this.inputValue = input;
     if (this.inputValue.length >= this.config.begin) {
-        this.searchStream.next(input);
+      this.searchStream.next(input);
     }
   }
 
@@ -79,23 +80,29 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   reduceResultList() {
     this.results = [];
     if (this.inputValue && this.inputValue.length >= this.config.begin) {
-      // filtre simple
-      // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
-      for (let i = 0; i < this.nb_threads; i++) {
-        let slice = this.data.slice(i * 1000, (i + 1) * 1000);
-        let sub = new Observable(observer => {
-          let res = slice.filter(item => {
-              let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
-              return this.slugify(searchable_text).includes(this.slugify(this.inputValue));
-          });
-          observer.next(res);
-          observer.complete();
-        }).subscribe((res: Array<any>) => {
-            res.forEach(item => this.results.push(item));
+          // filtre simple
+          // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
+
+      if (this.config.customSearch) {
+        this.config.customSearch.apply(this.config.scope, [this.inputValue]).subscribe(res => {
+          this.results = res;
+          this.addRemoveData();
         });
-      }
-      if (this.results.length > 0) {
-        this.results.splice(0, 0, this.removeData);
+      } else {
+        for (let i = 0; i < this.nb_threads; i++) {
+          let slice = this.data.slice(i * 1000, (i + 1) * 1000);
+          let sub = new Observable(observer => {
+            let res = slice.filter(item => {
+                let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
+              return this.slugify(searchable_text).includes(this.slugify(this.inputValue));
+            });
+            observer.next(res);
+            observer.complete();
+          }).subscribe((res: Array<any>) => {
+            res.forEach(item => this.results.push(item));
+            this.addRemoveData();
+          });
+        }
       }
 
     } else if (this.config.begin === 0) {
@@ -103,6 +110,12 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         this.data.splice(0, 0, this.removeData);
       }
       this.results = this.data;
+    }
+  }
+
+  addRemoveData() {
+    if (this.results.length > 0) {
+      this.results.splice(0, 0, this.removeData);
     }
   }
 
@@ -139,6 +152,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     this.valid.emit(this.getValue(item));
     this.toggleDropdown();
     this.inputValue = '';
+    this.reduceResultList();
     this.setCursorPosition(0);
     if (this.config.modifyPlaceholder) {
       this.placeholder = this.config.fieldInsert ? item[this.config.fieldInsert] : item[this.config.fieldDisplayed];
@@ -151,7 +165,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   }
 
   // GESTION DU CLIC EN DEHORS DU CHAMP
-  @HostListener('document:click', ['$event'])
+  @HostListener('mouse:click', ['$event'])
   onClick(event) {
     let spanElement = this._eref.nativeElement.querySelector('.spanClick');
     let inputElement = this._eref.nativeElement.querySelector('.inputField');
@@ -180,7 +194,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
 
   // recupere la position courante du curseur
   private getCurrentPosition() {
-      let pos = 0;
+    let pos = 0;
     let elem = this._eref.nativeElement.querySelector('.highlighted');
     if (elem != null) {
       pos = Number(elem.getAttribute('class').split('elem')[1].split(' ')[0]);
@@ -193,7 +207,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
 
     if (event.keyCode === 27) { // ESC
       this.toggleDropdown();
-    } else if (event.keyCode === 13) { // ENTER
+    } else if (event.keyCode === 13) {// ENTER
       if (pos > 0 && typeof this.results[pos] !== 'undefined') {
         this.removeHighlight(pos);
         this.valideItem(this.results[pos]);

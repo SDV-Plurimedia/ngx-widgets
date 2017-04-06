@@ -5,6 +5,9 @@
 * Passage à Angular4
 * Lint du projet
 
+## 0.9.3 - 06/04/2017
+* ADD: AutoComplete peut gérer des CustomSearch
+
 ## 0.9.2 - 05/04/2017
 * UPD: Ajout d'un paramètre pour initialiser le datepicker sans date
 
