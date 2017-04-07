@@ -2,11 +2,6 @@ import { Component, OnInit, EventEmitter, Input, Output, OnDestroy } from '@angu
 import {Filter} from '../filter/filter.component';
 import {Pager} from '../pager/pager';
 
-@Component({
-    selector: 'big-datatable',
-    templateUrl: './big-datatable.component.html',
-    styleUrls: ['./big-datatable.component.css']
-})
 
 /**
  * Datatable à utiliser au lieu des datatables classiques lorsque le volume des données est trop important.
@@ -76,25 +71,6 @@ import {Pager} from '../pager/pager';
                             // pour voir comment le configurer => Composant Filter.
  *
  */
-
-export class BigDatatableComponent implements OnInit, OnDestroy {
-
-    @Input() bigdata: BigDatatable;
-    @Output() message = new EventEmitter();  // Renvoie une string success ou error.
-
-    constructor() {}
-
-    ngOnInit() {
-        this.bigdata.setMessage(this.message);
-    }
-
-    ngOnDestroy() {
-        this.bigdata.subscriptions.forEach((sub) => {
-            sub.unsubscribe();
-        });
-    }
-
-}
 
 export class BigDatatable {
 
@@ -298,4 +274,29 @@ export class BigDatatable {
     public setMessage(message: EventEmitter<any>) {
         this.message = message;
     }
+}
+
+
+@Component({
+  selector: 'big-datatable',
+  templateUrl: './big-datatable.component.html',
+  styleUrls: ['./big-datatable.component.css']
+})
+export class BigDatatableComponent implements OnInit, OnDestroy {
+
+   @Input() bigdata: BigDatatable;
+   @Output() message = new EventEmitter();  // Renvoie une string success ou error.
+
+   constructor() {}
+
+   ngOnInit() {
+       this.bigdata.setMessage(this.message);
+   }
+
+   ngOnDestroy() {
+       this.bigdata.subscriptions.forEach((sub) => {
+           sub.unsubscribe();
+       });
+   }
+
 }

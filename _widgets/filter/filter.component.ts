@@ -90,6 +90,87 @@ import { Component, Input, AfterContentInit } from '@angular/core';
 
  */
 
+ export class Filter {
+
+     // Config global.
+     public config;                // La config global du composant.
+     public callback: any;          // La fonction de callback a appeller.
+     public parent_scope: any;      // Le parent de ce composant.
+     public config_column;         // Les colonnes, tableau contenant uniquement leur "taille" bootstrap (la somme doit faire 12 au max!).
+     public collapse_class: string; // Si config.advanced_mode alors collapse_class = 'in'.
+
+     constructor(parent_scope: any, config) {
+         this.config = config;
+         this.parent_scope = parent_scope;
+
+         this.callback = this.config.callback;
+         this.config_column = this.config.config_column;
+
+         if (!this.config.order_by_column) { this.config.order_by_column = 'id'; } // Order By sur la colonne id par défaut.
+         if (!this.config.order_by_type) {this.config.order_by_type = 'ASC'; }     // Order By croissant par défaut.
+         if (!this.config.advanced_mode) {this.config.advanced_mode = false; }     // Mode simplifié affiché par défaut.
+         if (this.config.advanced_mode) {this.collapse_class = ' in'; }           // Pour ouvrir le collapse de base.
+         if (!this.config.global_search) {this.config.global_search = ''; } // Champs de texte pour la recherche simplifié vide par défaut.
+         if (typeof this.config.hide_search === 'undefined') { // Si true, alors le champs de recherche sera caché en mode avancé.
+           this.config.hide_search = false;
+         }
+         this.callback.apply(this.parent_scope, []);  // On lance le filtre !
+     }
+
+     /**
+      * Inverse le type du filtre (avancé/simple).
+      */
+     public changeFilterMode() {
+         if (this.config.advanced_mode) {
+           this.config.advanced_mode = false;
+         } else {this.config.advanced_mode = true; }
+     }
+
+     /**
+      * Evenement déclenché lors du clic sur le bouton "Appliquer".
+      * On repasse la page courante à 1.
+      */
+     public btnFilter() {
+         this.parent_scope.pagination_config.page = 1;
+         this.callback.apply(this.parent_scope, []);
+     }
+
+     /**
+      * Change la colonne et/ou le type d'order by.
+      * Applique le filtre.
+      * @param attribute
+      */
+     public changeOrderBy(attribute) {
+         if (this.config.order_by_column === attribute) {
+             if (this.config.order_by_type === 'ASC') {
+               this.config.order_by_type = 'DESC';
+             } else {
+               this.config.order_by_type = 'ASC';
+             }
+         } else {
+             this.config.order_by_column = attribute;
+             this.config.order_by_type   = 'DESC';
+         }
+         this.callback.apply(this.parent_scope, []);
+     }
+
+     /**
+      * Renvoie true si on est en mode avancée, false sinon.
+      * @returns boolean
+      */
+     public get advanced_mode() {
+         return this.config.advanced_mode;
+     }
+
+     /**
+      * Renvoie le tableau des propriétés (c'est à dire, tous les champs qui sont dans notre filtre.)
+      */
+     public get property() {
+         return this.config.property;
+     }
+ }
+
+
 @Component({
   selector: 'filter',
   templateUrl: './filter.component.html',
@@ -111,84 +192,4 @@ export class FilterComponent implements AfterContentInit {
     }
   }
 
-}
-
-export class Filter {
-
-    // Config global.
-    public config;                // La config global du composant.
-    public callback: any;          // La fonction de callback a appeller.
-    public parent_scope: any;      // Le parent de ce composant.
-    public config_column;         // Les colonnes, tableau contenant uniquement leur "taille" bootstrap (la somme doit faire 12 au max!).
-    public collapse_class: string; // Si config.advanced_mode alors collapse_class = 'in'.
-
-    constructor(parent_scope: any, config) {
-        this.config = config;
-        this.parent_scope = parent_scope;
-
-        this.callback = this.config.callback;
-        this.config_column = this.config.config_column;
-
-        if (!this.config.order_by_column) { this.config.order_by_column = 'id'; } // Order By sur la colonne id par défaut.
-        if (!this.config.order_by_type) {this.config.order_by_type = 'ASC'; }     // Order By croissant par défaut.
-        if (!this.config.advanced_mode) {this.config.advanced_mode = false; }     // Mode simplifié affiché par défaut.
-        if (this.config.advanced_mode) {this.collapse_class = ' in'; }           // Pour ouvrir le collapse de base.
-        if (!this.config.global_search) {this.config.global_search = ''; } // Champs de texte pour la recherche simplifié vide par défaut.
-        if (typeof this.config.hide_search === 'undefined') { // Si true, alors le champs de recherche sera caché en mode avancé.
-          this.config.hide_search = false;
-        }
-        this.callback.apply(this.parent_scope, []);  // On lance le filtre !
-    }
-
-    /**
-     * Inverse le type du filtre (avancé/simple).
-     */
-    public changeFilterMode() {
-        if (this.config.advanced_mode) {
-          this.config.advanced_mode = false;
-        } else {this.config.advanced_mode = true; }
-    }
-
-    /**
-     * Evenement déclenché lors du clic sur le bouton "Appliquer".
-     * On repasse la page courante à 1.
-     */
-    public btnFilter() {
-        this.parent_scope.pagination_config.page = 1;
-        this.callback.apply(this.parent_scope, []);
-    }
-
-    /**
-     * Change la colonne et/ou le type d'order by.
-     * Applique le filtre.
-     * @param attribute
-     */
-    public changeOrderBy(attribute) {
-        if (this.config.order_by_column === attribute) {
-            if (this.config.order_by_type === 'ASC') {
-              this.config.order_by_type = 'DESC';
-            } else {
-              this.config.order_by_type = 'ASC';
-            }
-        } else {
-            this.config.order_by_column = attribute;
-            this.config.order_by_type   = 'DESC';
-        }
-        this.callback.apply(this.parent_scope, []);
-    }
-
-    /**
-     * Renvoie true si on est en mode avancée, false sinon.
-     * @returns boolean
-     */
-    public get advanced_mode() {
-        return this.config.advanced_mode;
-    }
-
-    /**
-     * Renvoie le tableau des propriétés (c'est à dire, tous les champs qui sont dans notre filtre.)
-     */
-    public get property() {
-        return this.config.property;
-    }
 }

@@ -1,55 +1,5 @@
 import {Component, Input, OnInit, OnChanges} from '@angular/core';
 
-@Component({
-  selector: 'pager',
-  templateUrl: './pager.html',
-  styleUrls: ['./pager.css']
-})
-
-export class PagerComponent implements OnInit, OnChanges {
-
-  @Input() pager: Pager;
-
-  public pageInterval: Array<any>;
-  public currentPage: number;
-  public nbPage: number;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.pager.elementsToShow();
-    this._setAttributes();
-  }
-  ngOnChanges(changes) {
-    if (changes.pager) {
-      this.pager = changes.pager.currentValue;
-      this.goToPage(1);
-    }
-  }
-
-  isCurrentPage(p: number) {
-    return this.pager.isCurrentPage(p);
-  }
-
-  isFirstPage() {
-    return this.pager.isFirstPage();
-  }
-
-  isLastPage() {
-    return this.pager.isLastPage();
-  }
-
-  goToPage(p: number) {
-    this.pager.goToPage(p);
-    this._setAttributes();
-  }
-
-  private _setAttributes() {
-    this.pageInterval = this.pager.getInterval();
-    this.currentPage = this.pager.getCurrent();
-    this.nbPage = this.pager.getPages();
-  }
-}
 
 /** Objet de type Pager. */
 export class Pager {
@@ -173,3 +123,55 @@ export class Pager {
       this._actionCallback.apply(this._scope, [this._from, this._to]);
     }
   }
+
+
+@Component({
+  selector: 'pager',
+  templateUrl: './pager.html',
+  styleUrls: ['./pager.css']
+})
+
+export class PagerComponent implements OnInit, OnChanges {
+
+  @Input() pager: Pager;
+
+  public pageInterval: Array<any>;
+  public currentPage: number;
+  public nbPage: number;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.pager.elementsToShow();
+    this._setAttributes();
+  }
+  ngOnChanges(changes) {
+    if (changes.pager) {
+      this.pager = changes.pager.currentValue;
+      this.goToPage(1);
+    }
+  }
+
+  isCurrentPage(p: number) {
+    return this.pager.isCurrentPage(p);
+  }
+
+  isFirstPage() {
+    return this.pager.isFirstPage();
+  }
+
+  isLastPage() {
+    return this.pager.isLastPage();
+  }
+
+  goToPage(p: number) {
+    this.pager.goToPage(p);
+    this._setAttributes();
+  }
+
+  private _setAttributes() {
+    this.pageInterval = this.pager.getInterval();
+    this.currentPage = this.pager.getCurrent();
+    this.nbPage = this.pager.getPages();
+  }
+}
