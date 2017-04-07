@@ -2,8 +2,8 @@
 
 
 ## 1.0.0 - 06/04/2017
-* Passage à Angular4
-* Lint du projet
+* BC: Passage à Angular4
+* UPD: Lint du projet
 
 ## 0.9.3 - 06/04/2017
 * ADD: AutoComplete peut gérer des CustomSearch
