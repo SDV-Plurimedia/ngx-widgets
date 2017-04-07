@@ -1,5 +1,7 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.0.1 - 10/04/2017
+* UPD: Corrections suite au passage à angular4
 
 ## 1.0.0 - 06/04/2017
 * BC: Passage à Angular4

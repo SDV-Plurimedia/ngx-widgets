@@ -165,7 +165,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   }
 
   // GESTION DU CLIC EN DEHORS DU CHAMP
-  @HostListener('mouse:click', ['$event'])
+  @HostListener('document:click', ['$event'])
   onClick(event) {
     let spanElement = this._eref.nativeElement.querySelector('.spanClick');
     let inputElement = this._eref.nativeElement.querySelector('.inputField');
