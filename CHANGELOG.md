@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.0.2 - 11/04/2017
+* FIX: Fix hierarchie-list component
+
 ## 1.0.1 - 10/04/2017
 * UPD: Corrections suite au passage à angular4
 

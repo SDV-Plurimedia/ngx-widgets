@@ -10,7 +10,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     @Input() params: HierarchieList = null;
     @Input() datas: any[];
-    public root_id: string;
+    public root_id: any;
     public name_column: string;
     public parent_scope: any;
     public buttons: HierarchieButton[];
@@ -39,7 +39,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes) {
-      if (changes.datas && changes.datas.previousValue.length > 0) {
+      if (changes.datas && changes.datas.previousValue && changes.datas.previousValue.length > 0) {
         this.datas = changes.datas.currentValue;
       }
       if (changes.params) {
@@ -132,6 +132,6 @@ export interface HierarchieList {
     name_column: string;
     primary_key: string;
     scope: any;
-    root_id: string;
+    root_id: any;
     buttons?: Array<HierarchieButton>;
 }
