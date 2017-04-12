@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.0.3 - 12/04/2017
+* FIX: erreur de compilation en mode prod
+
 ## 1.0.2 - 11/04/2017
 * FIX: Fix hierarchie-list component
 

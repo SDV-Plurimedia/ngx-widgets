@@ -15,7 +15,7 @@ export class TreeviewComponent implements OnInit, OnChanges {
     public parent_scope: any;
     public buttons: TreeviewButton[];
     public checkbox: TreeviewCheckbox;
-    protected sorted_datas: any[] = [];
+    public sorted_datas: any[] = [];
     protected states: TreeviewState[] = [];
     protected indents = {};
 

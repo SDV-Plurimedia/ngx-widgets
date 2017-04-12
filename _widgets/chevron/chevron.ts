@@ -12,7 +12,7 @@ export class ChevronComponent {
     this.hiddenChange = new EventEmitter<boolean>();
   }
 
-  change() {
+  change(event) {
     this.hidden = !this.hidden;
     this.hiddenChange.emit(this.hidden);
   }

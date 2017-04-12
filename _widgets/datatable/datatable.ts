@@ -12,14 +12,14 @@ export class DatatableComponent implements DoCheck, OnDestroy {
 
   @Input() data: Array<any>;
   @Input() structure: Array<any>;
-  @Input() private buttons: Array<any> = null;
-  @Input() private columnDefs: Array<any> = [];
-  @Input() private footer: boolean = false;
-  @Input() private header: boolean = true;
-  @Input() private info: boolean = true;
-  @Input() private ordering: boolean = true;
-  @Input() private paging: boolean = true;
-  @Input() private parent_scope: any;
+  @Input() buttons: Array<any> = null;
+  @Input() columnDefs: Array<any> = [];
+  @Input() footer: boolean = false;
+  @Input() header: boolean = true;
+  @Input() info: boolean = true;
+  @Input() ordering: boolean = true;
+  @Input() paging: boolean = true;
+  @Input() parent_scope: any;
 
   private table_elem: JQuery;
   private table: DataTables.DataTable;

@@ -17,10 +17,10 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Output() create = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un texte inexistant
   @Output() delete = new EventEmitter(); // Evenement émit lors de la suppression.
 
-  private results: Array<string> = [];
-  private placeholder: string = '';
+  public results: Array<string> = [];
+  public placeholder: string = '';
 
-  private inputValue: string = '';
+  public inputValue: string = '';
   public isActive: boolean = false;
   private inputForm;
   private removeData: any;
