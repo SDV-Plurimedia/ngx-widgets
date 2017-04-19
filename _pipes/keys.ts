@@ -8,7 +8,7 @@ export class KeysPipe implements PipeTransform {
       if (value.hasOwnProperty(key)) {
         let tmp = { 'key' : key};
         for (let key2 in value[key]) {
-          if (value[key].hasOwnProperty(key)) {
+          if (value[key].hasOwnProperty(key2)) {
             tmp[key2] = value[key][key2];
           }
         }
