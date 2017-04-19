@@ -5,15 +5,15 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./chevron.css']
 })
 export class ChevronComponent {
-  @Input() hiddenChange: EventEmitter<boolean>;
-  @Output() hidden = false;
+  @Input() is_hidden: boolean = false;
+  @Output() emitHidden:EventEmitter<boolean>;
 
   constructor() {
-    this.hiddenChange = new EventEmitter<boolean>();
+    this.emitHidden = new EventEmitter<boolean>();
   }
 
   change(event) {
-    this.hidden = !this.hidden;
-    this.hiddenChange.emit(this.hidden);
+    this.is_hidden = !this.is_hidden;
+    this.emitHidden.emit(this.is_hidden);
   }
 }
