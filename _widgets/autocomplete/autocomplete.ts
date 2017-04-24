@@ -79,7 +79,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   // reduit le nombre de resultat, en fonction de la valeur tapé
   reduceResultList() {
     this.results = [];
-    this.inputValue = this.inputValue.trim();
+    if(this.inputValue) this.inputValue = this.inputValue.trim();
     if (this.inputValue && this.inputValue.length >= this.config.begin) {
           // filtre simple
           // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
