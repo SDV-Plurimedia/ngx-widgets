@@ -1,5 +1,12 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.1.0 - 27/04/2017
+* ADD: Ajout d'un widget permettant d'afficher des tags dans un input
+* FIX: fix keys pipe
+* FIX: fix bug chevron
+* ADD: Autocomplete: Ajout trim sur la valeur de l'input et fix valeur par défaut.  
+* FIX: fix bug autocomplete 
+
 ## 1.0.3 - 12/04/2017
 * FIX: erreur de compilation en mode prod
 
