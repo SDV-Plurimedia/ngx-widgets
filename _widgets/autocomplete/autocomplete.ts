@@ -79,6 +79,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   // reduit le nombre de resultat, en fonction de la valeur tapé
   reduceResultList() {
     this.results = [];
+    if(this.inputValue) this.inputValue = this.inputValue.trim();
     if (this.inputValue && this.inputValue.length >= this.config.begin) {
           // filtre simple
           // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
@@ -115,7 +116,10 @@ export class AutocompleteComponent implements OnInit, OnChanges {
 
   addRemoveData() {
     if (this.results.length > 0) {
-      this.results.splice(0, 0, this.removeData);
+      if(this.results[0][this.config.fieldSearch] !== (this.config.fieldDefault ? this.config.fieldDefault : 'Aucun')
+          && this.results[0][this.config.fieldDisplayed] !== (this.config.fieldDefault ? this.config.fieldDefault : 'Aucun')) {
+        this.results.splice(0, 0, this.removeData);
+      }
     }
   }
 
