@@ -558,6 +558,18 @@ Le composant doit figurer dans le template  de la façon suivante :
     * **[tabtitle]** est le titre que portera l'onglet
     * Chaque balise tab peut contenir du html ou des composants Angular
 
+# Tag
+
+![Input tag](./img/input-tag.png)
+
+Un input permettant d'afficher des tags
+
+    <input-tag [tags]="[{name: 'test'}, {name: 'voiture'}]" (hasChanged)="test($event)"></input-tag>
+
+* **tags** *Array* contenant les tags affichés dans l'input (le champ name doit être présent) *(optionnel)*
+* **placeholder** *string* Placeholder de l'input. Vaut "Ajouter un tag" par defaut *(optionnel)*
+* **hasChanged** *function* fonction appelée quand un tag est ajouté ou supprimé *(optionnel)*
+
 # Touch Button
 
 Permet de créer un bouton flottant de style "polymere", contenant plusieurs autres boutons

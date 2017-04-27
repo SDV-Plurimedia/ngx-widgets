@@ -32,6 +32,7 @@ import { StatusBarComponent } from './_widgets/status-bar/status-bar';
 import { SwitchComponent } from './_widgets/switch/switch';
 import { TabpaneComponent } from './_widgets/tabpane/tabpane';
 import { TabComponent } from './_widgets/tabpane/tab';
+import { TagComponent } from './_widgets/tag/tag';
 import { TouchButtonComponent } from './_widgets/touch-button/touch-button';
 import { TouchButtonLinkComponent } from './_widgets/touch-button/link';
 import { TreeviewComponent } from './_widgets/treeview/treeview';
@@ -60,6 +61,7 @@ let widgets =  [
   SwitchComponent,
   TabpaneComponent,
   TabComponent,
+  TagComponent,
   TouchButtonComponent,
   TouchButtonLinkComponent,
   TreeviewComponent,
