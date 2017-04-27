@@ -1,0 +1,9 @@
+<div class="tagsinput" (click)="focusOnInput()">
+  <span class="tag" *ngFor="let tag of tags">
+    <span>{{tag.name}}&nbsp;&nbsp;</span><a class="tag_pointer" (click)="removeTag(tag)">x</a>
+  </span>
+  <div>
+    <input #input value="" placeholder="{{placeholder}}" (keyup.enter)=addTag($event)>
+  </div>
+  <div class="tags_clear"></div>
+</div>
