@@ -12,6 +12,8 @@ Pack de widgets pour Angular2 / bootstrap
 
 https://sdv-plurimedia.github.io/sdv-ng2-widgets/
 
+( En cas de modification, utilisez ./bin/deploy-pages.sh pour republier la doc)
+
 ## Utilisation
 
 ` npm install sdv-ng2-widgets`
