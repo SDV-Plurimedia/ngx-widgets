@@ -22,6 +22,8 @@ import { Component, Input, AfterContentInit } from '@angular/core';
                 ],
                 default: 20, // La valeur par défaut qui sera choisie.
                 post_filter:true, // Post le filtre lors du changement du nb d'élement.
+                cookie_name:'le_nom_que_je_veux', // faculatif Le nom du cookie.
+                save_in_cookie:true // facultatif si on veut sauvegarder dans un cookie.
             },
             // Les différents type de champs possible.
             property: {
@@ -175,6 +177,14 @@ import { Component, Input, AfterContentInit } from '@angular/core';
      public selectItemPerPageChange() {
          if(this.config.select_item_per_page.post_filter)
              this.callback.apply(this.parent_scope, []);
+
+         if(this.config.select_item_per_page.save_in_cookie) {
+             if(this.config.select_item_per_page.cookie_name) {
+                 localStorage.setItem(this.config.select_item_per_page.cookie_name, this.config.select_item_per_page.value);
+             } else {
+                 localStorage.setItem('cookie_nb_item_per_page', this.config.select_item_per_page.value);
+             }
+         }
      }
 }
 
