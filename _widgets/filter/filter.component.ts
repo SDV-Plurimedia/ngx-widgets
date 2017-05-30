@@ -7,10 +7,22 @@ import { Component, Input, AfterContentInit } from '@angular/core';
                                             //  (la somme maximum doit faire 12).
             callback: this.method,          // La méthode a appeller lorsque l'on veut appliquer le filtre.
             parent_scope: this,             // Le parent de ce composant. (celui qui contient la méthode callback.
-            order_by_column: 'updated_at',  // FACULTATIF, DEFAULT = id : La colonne qui sera utilisée de base pour l'order by.
-            order_by_type: 'DESC',          // FACULTATIF, DEFAULT = ASC : Si l'order by est croissant ou décroissant.
             advanced_mode: false,           // FACULTATIF, DEFAULT = false : Pour activer ou désactiver le mode avancé.
+            hide_search: true,              // Facultatif => cache le champs de texte pour la recherche en mode avancé.
 
+            select_item_per_page: { // Facultatif => affiche une liste déroulante pour choisir le nb d'item par page.
+                values: [ // Obligatoire => les différentes valeurs qu'il y aura dans cette liste.
+                    5,
+                    10,
+                    15,
+                    20,
+                    25,
+                    50,
+                    100
+                ],
+                default: 20, // La valeur par défaut qui sera choisie.
+                post_filter:true, // Post le filtre lors du changement du nb d'élement.
+            },
             // Les différents type de champs possible.
             property: {
              // INPUT TEXT
@@ -106,14 +118,21 @@ import { Component, Input, AfterContentInit } from '@angular/core';
          this.callback = this.config.callback;
          this.config_column = this.config.config_column;
 
-         if (!this.config.order_by_column) { this.config.order_by_column = 'id'; } // Order By sur la colonne id par défaut.
-         if (!this.config.order_by_type) {this.config.order_by_type = 'ASC'; }     // Order By croissant par défaut.
          if (!this.config.advanced_mode) {this.config.advanced_mode = false; }     // Mode simplifié affiché par défaut.
          if (this.config.advanced_mode) {this.collapse_class = ' in'; }           // Pour ouvrir le collapse de base.
          if (!this.config.global_search) {this.config.global_search = ''; } // Champs de texte pour la recherche simplifié vide par défaut.
          if (typeof this.config.hide_search === 'undefined') { // Si true, alors le champs de recherche sera caché en mode avancé.
            this.config.hide_search = false;
          }
+
+         // Pour le select de la pagination.
+         // On ne l'active que si on a this.config.select_item_per_page.
+         if(this.config.select_item_per_page) {
+             if(this.config.select_item_per_page.default) {
+                 this.config.select_item_per_page.value = this.config.select_item_per_page.default;
+             }
+         }
+
          this.callback.apply(this.parent_scope, []);  // On lance le filtre !
      }
 
@@ -136,25 +155,6 @@ import { Component, Input, AfterContentInit } from '@angular/core';
      }
 
      /**
-      * Change la colonne et/ou le type d'order by.
-      * Applique le filtre.
-      * @param attribute
-      */
-     public changeOrderBy(attribute) {
-         if (this.config.order_by_column === attribute) {
-             if (this.config.order_by_type === 'ASC') {
-               this.config.order_by_type = 'DESC';
-             } else {
-               this.config.order_by_type = 'ASC';
-             }
-         } else {
-             this.config.order_by_column = attribute;
-             this.config.order_by_type   = 'DESC';
-         }
-         this.callback.apply(this.parent_scope, []);
-     }
-
-     /**
       * Renvoie true si on est en mode avancée, false sinon.
       * @returns boolean
       */
@@ -168,8 +168,15 @@ import { Component, Input, AfterContentInit } from '@angular/core';
      public get property() {
          return this.config.property;
      }
- }
 
+     /**
+      * Lance le filtre si on change le nb d'élement par page (se lance juste si this.config.post_filter = true).
+      */
+     public selectItemPerPageChange() {
+         if(this.config.select_item_per_page.post_filter)
+             this.callback.apply(this.parent_scope, []);
+     }
+}
 
 @Component({
   selector: 'filter',

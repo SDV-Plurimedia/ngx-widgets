@@ -66,6 +66,12 @@ import {Pager} from '../pager/pager';
                     class:'tag_list hover', function: this.addFilterTag, state:3},
         ],
 
+        can_sort:true, // Si on peut trier. (Facultatif, default = false)
+        sort: { // objet contenant le nom du champs sur lequel appliquer le filtre.
+            field: 'updated_at', // facultatif.
+            asc: false  // facultatif (si true alors tri croissant).
+        },
+
 
         filter_config: {}   // FACULTATIF (Seulement si on a définit is_filter à false).
                             // pour voir comment le configurer => Composant Filter.
@@ -150,8 +156,8 @@ export class BigDatatable {
             if (this.config.sort) {
                 this.sort = {
                     field: this.config.sort.field || null,
-                    asc: this.config.sort.asc || true
-                };
+                    asc: (typeof(this.config.sort.asc) === 'boolean' ? this.config.sort.asc : true)
+            };
             } else {
                 this.sort = {
                     field: null,
@@ -216,6 +222,22 @@ export class BigDatatable {
                 this.pagination_config.item_per_page = this.filter_config.property[this.config.display_items_name].value;
             }
         }
+
+        // On ajoute dans la config le nb d'élement par page (celui du select si il est défini).
+        if(this.filter_config.select_item_per_page) {
+            if(!this.filter_config.select_item_per_page.value) {
+                if(this.filter_config.select_item_per_page.default) {
+                    this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.default;
+                }else {
+                    this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.values[0];
+                }
+            }
+            this.filter_config.property.select_display_items = {
+                value: this.filter_config.select_item_per_page.value
+            };
+            this.pagination_config.item_per_page = this.filter_config.select_item_per_page.value;
+        }
+
         this.loading_datas = true;
         let sub = this._service_method.apply(this._service, [this.filter_config, this.sort, this.pagination_config.current_page]).subscribe(
             result => {
