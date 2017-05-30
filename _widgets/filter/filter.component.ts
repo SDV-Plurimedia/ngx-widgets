@@ -22,6 +22,8 @@ import { Component, Input, AfterContentInit } from '@angular/core';
                 ],
                 default: 20, // La valeur par défaut qui sera choisie.
                 post_filter:true, // Post le filtre lors du changement du nb d'élement.
+                localStorage_name:'le_nom_que_je_veux', // faculatif Le nom du localStorage.
+                save_in_localStorage:true // facultatif si on veut sauvegarder dans un localStorage.
             },
             // Les différents type de champs possible.
             property: {
@@ -175,6 +177,14 @@ import { Component, Input, AfterContentInit } from '@angular/core';
      public selectItemPerPageChange() {
          if(this.config.select_item_per_page.post_filter)
              this.callback.apply(this.parent_scope, []);
+
+         if(this.config.select_item_per_page.save_in_localStorage) {
+             if(this.config.select_item_per_page.localStorage_name) {
+                 localStorage.setItem(this.config.select_item_per_page.localStorage_name, this.config.select_item_per_page.value);
+             } else {
+                 localStorage.setItem('localStorage_nb_item_per_page', this.config.select_item_per_page.value);
+             }
+         }
      }
 }
 

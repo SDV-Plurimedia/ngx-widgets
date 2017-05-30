@@ -325,6 +325,18 @@ La configuration est la suivante :
         * **values** - **Array** - **OBLIGATOIRE** : Contient les différentes valeurs que l'on peut chosir dans la liste déroulante.
         * **default** - **number** - **FACULTATIF** : Contient la valeur qui sera choisie par défaut dans la liste déroulante.
         * **post_filter** - **boolean** - **FACULTATIF** : Si true, alors **callback** sera appellée lors du changement dans la liste déroulante.
+        * **save_in_localStorage** - **boolean** - **FACULTATIF** : Si true, alors on sauvegarde le nombre d'item par page choisit dans le localStorage.
+        * **localStorage_name** - **string** - **FACULTATIF** Si **save_in_localStorage** est true, alors le localStorage aura **localStorage_name**. Si pas de nom renseigné, le nom sera : "localStorage_nb_item_per_page".
+          ** Pour utiliser le localStorage (à ajouter avant l'instanciation de la bigdatatable) :
+          
+          
+                if(this.config.filter_config.select_item_per_page.save_in_localStorage) {
+                  let nb_item_per_page = localStorage.getItem(this.config.filter_config.select_item_per_page.localStorage_name); // ou "localStorage_nb_item_per_page" si on a pas défini de nom.
+                  if(nb_item_per_page) this.config.filter_config.select_item_per_page.default = +nb_item_per_page;
+                }
+            
+                this.bigdata = new BigDatatable(this.config, this.config.structure, this.scope);
+
 
 **property** est un tableau associatif, qui est formé de la manière suivante :
     * **key** : **data (Array)** : **key** est le nom du champ tel qu'il l'est en BDD.
