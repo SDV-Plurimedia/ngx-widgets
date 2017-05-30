@@ -47,6 +47,11 @@ La configuration est la suivante :
     * **display_items_name** - **string** - **default = display_items** : Nom du champs qui contient le nombre d'élement par page dans le filtre (sa **key**).
     * **is_filter** - **boolean** - **default = true** : Si false, alors on a pas de filtre.
 
+    * **can_sort** - **boolean ** - **default = false** : Si true, alors on peut trier les colonnes.
+    * **sort** - **object** - **FACULTATIF** :
+        * **field** - **string** - **default = ''** : Le nom du champs sur lequel appliquer le tri lors du chargement.
+        * **asc** - **boolean** - **default = true** : Si false alors le tri est décroissant.
+        
     * **filter_config** - **Array** : Correspond à **config** de **Filtre**. Voir sa configuration.
     * **tr** -Object** : Contient soit une propriété :
         * **class** : La classe à appliquer sur les tr
@@ -304,20 +309,22 @@ A documenter
 Ce composant permet de générer un filtre. Ce filtre possède deux états :
  * un état simple, où seulement un champs de recherche est présent.
  * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.
-
+ 
 La configuration est la suivante :
 * **config**
     * **advanced_mode** - **boolean** - **default = false** : Si true, alors le filtre sera dans l'état "Filtre avancé".
     * **global_search** - **string** - **default = ''** : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
     * **callback**      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur **parent_scope**
     * **parent_scope**  : Le composant parent qui contient la méthode **callback**.
-    * **order_by_column** - **string** - **default = id** : Le champs en base sur lequel l'order by sera appliqué.
-    * **order_by_type**   - **string** - **default = ASC** : Si l'order by est croissant ou décroissant.
     * **config_column** - **Array<number>** : Tableau contenant la taille bootstrap des différentes colonnes.
                                               Par exemple [4,8] => On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
                                               **Attention le maxium des sommes des colonnes doit faire 12 !!!**
     * **hide_search** - **boolean** - **default = false** : Si true, alors le filtre de recherche globale sera caché lorsqu'on est en recherche avancé.
     * **property** - **Array** : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
+    * **select_item_per_page** - **object** - **FACULTATIF** : Permet d'avoir une liste déroulante à côté du champs de recherche. Attention, ceci remplace **filter_has_display_items** de la **Bigdatatable** s'il est activé.
+        * **values** - **Array** - **OBLIGATOIRE** : Contient les différentes valeurs que l'on peut chosir dans la liste déroulante.
+        * **default** - **number** - **FACULTATIF** : Contient la valeur qui sera choisie par défaut dans la liste déroulante.
+        * **post_filter** - **boolean** - **FACULTATIF** : Si true, alors **callback** sera appellée lors du changement dans la liste déroulante.
 
 **property** est un tableau associatif, qui est formé de la manière suivante :
     * **key** : **data (Array)** : **key** est le nom du champ tel qu'il l'est en BDD.
