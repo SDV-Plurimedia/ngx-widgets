@@ -66,6 +66,12 @@ import {Pager} from '../pager/pager';
                     class:'tag_list hover', function: this.addFilterTag, state:3},
         ],
 
+        can_sort:true, // Si on peut trier. (Facultatif, default = false)
+        sort: { // objet contenant le nom du champs sur lequel appliquer le filtre.
+            field: 'updated_at', // facultatif.
+            asc: false  // facultatif (si true alors tri croissant).
+        },
+
 
         filter_config: {}   // FACULTATIF (Seulement si on a définit is_filter à false).
                             // pour voir comment le configurer => Composant Filter.

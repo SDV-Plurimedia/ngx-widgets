@@ -8,7 +8,21 @@ import { Component, Input, AfterContentInit } from '@angular/core';
             callback: this.method,          // La méthode a appeller lorsque l'on veut appliquer le filtre.
             parent_scope: this,             // Le parent de ce composant. (celui qui contient la méthode callback.
             advanced_mode: false,           // FACULTATIF, DEFAULT = false : Pour activer ou désactiver le mode avancé.
+            hide_search: true,              // Facultatif => cache le champs de texte pour la recherche en mode avancé.
 
+            select_item_per_page: { // Facultatif => affiche une liste déroulante pour choisir le nb d'item par page.
+                values: [ // Obligatoire => les différentes valeurs qu'il y aura dans cette liste.
+                    5,
+                    10,
+                    15,
+                    20,
+                    25,
+                    50,
+                    100
+                ],
+                default: 20, // La valeur par défaut qui sera choisie.
+                post_filter:true, // Post le filtre lors du changement du nb d'élement.
+            },
             // Les différents type de champs possible.
             property: {
              // INPUT TEXT
