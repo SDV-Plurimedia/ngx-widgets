@@ -25,6 +25,7 @@ export class GraphComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
     if(changes.graph.previousValue) {
+      document.getElementById(this.graph.id).innerHTML = '';
       this.graph.loadGraph();
     }
   }
