@@ -1,4 +1,4 @@
-import {Component, ElementRef, Renderer, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Renderer, Input, OnInit, OnChanges} from '@angular/core';
 import {Graph} from './types/commun';
 
 @Component({
@@ -7,7 +7,7 @@ import {Graph} from './types/commun';
   styleUrls: ['./graph.css']
 })
 
-export class GraphComponent implements OnInit {
+export class GraphComponent implements OnInit, OnChanges {
   @Input() graph: Graph;
   public graph_width;
   public graph_height;
@@ -21,6 +21,12 @@ export class GraphComponent implements OnInit {
     this.graph_width = this.graph.width + 'px';
     // on construit dans un timeout, pour ne pas appeler Morrisou D" avabt que la div existe vraiment
     setTimeout(scope => { scope.loadGraph(); }, 1, this.graph);
+  }
+
+  ngOnChanges(changes) {
+    if(changes.graph.previousValue) {
+      this.graph.loadGraph();
+    }
   }
 
 }
