@@ -47,7 +47,11 @@ Example:
 
 ## Utilisation de l'app d'exemple
 
-` git clone git@github.com:SDV-Plurimedia/sdv-ng2-widgets.git
+``` 
+git clone git@github.com:SDV-Plurimedia/sdv-ng2-widgets.git
 cd sdv-ng2-widgets/example
 npm install
-npm start `
+npm start 
+```
+
+Example:
