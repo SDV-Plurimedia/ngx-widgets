@@ -8,13 +8,21 @@
   },
   "scripts": {
     "start": "tsc",
-    "lint": "tslint \"_*/**/*.ts\"",
+    "lint": "tslint _*/**/*.ts",
     "copy2test": "cp -r _* example/node_modules/sdv-ng2-widgets/",
     "build": "tsc",
     "dts": "tsc --declaration index.ts "
   },
   "license": "MIT",
   "dependencies": {
+    "@angular/animations": "~4.0.1",
+    "@angular/common": "~4.0.1",
+    "@angular/compiler": "~4.0.1",
+    "@angular/core": "~4.0.1",
+    "@angular/forms": "~4.0.1",
+    "@angular/http": "~4.0.1",
+    "@angular/platform-browser": "~4.0.1",
+    "@angular/platform-browser-dynamic": "~4.0.1",
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
@@ -28,16 +36,6 @@
     "moment": "^2.15.1",
     "rxjs": "^5.0.0",
     "zone.js": "^0.8.0"
-  },
-  "peerDependencies": {
-    "@angular/animations": "~4.0.1",
-    "@angular/common": "~4.0.1",
-    "@angular/compiler": "~4.0.1",
-    "@angular/core": "~4.0.1",
-    "@angular/forms": "~4.0.1",
-    "@angular/http": "~4.0.1",
-    "@angular/platform-browser": "~4.0.1",
-    "@angular/platform-browser-dynamic": "~4.0.1"
   },
   "devDependencies": {
     "codelyzer": "~2.1.1",

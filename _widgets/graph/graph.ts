@@ -12,9 +12,7 @@ export class GraphComponent implements OnInit, OnChanges {
   public graph_width;
   public graph_height;
 
-  constructor(private element: ElementRef, private renderer: Renderer) {
-
-  }
+  constructor(private element: ElementRef, private renderer: Renderer) { }
 
   ngOnInit() {
     this.graph_height = this.graph.height + 'px';
@@ -24,7 +22,7 @@ export class GraphComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if(changes.graph.previousValue) {
+    if (changes.graph.previousValue) {
       document.getElementById(this.graph.id).innerHTML = '';
       this.graph.loadGraph();
     }
