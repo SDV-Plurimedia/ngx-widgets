@@ -3,6 +3,7 @@
 [![npm download](https://img.shields.io/npm/dt/sdv-ng2-widgets.svg)]()
 [![npm version](https://img.shields.io/npm/v/sdv-ng2-widgets.svg)]()
 [![npm license](https://img.shields.io/npm/l/sdv-ng2-widgets.svg)]()
+[![Build Status](https://travis-ci.org/SDV-Plurimedia/sdv-ng2-widgets.svg?branch=develop)](https://travis-ci.org/SDV-Plurimedia/sdv-ng2-widgets)
 
 Pack de widgets pour Angular2 / bootstrap
 
@@ -47,11 +48,11 @@ Example:
 
 ## Utilisation de l'app d'exemple
 
-``` 
+```
 git clone git@github.com:SDV-Plurimedia/sdv-ng2-widgets.git
 cd sdv-ng2-widgets/example
 npm install
-npm start 
+npm start
 ```
 
 Example:
