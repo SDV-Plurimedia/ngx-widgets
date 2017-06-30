@@ -224,9 +224,9 @@ export class BigDatatable {
         }
 
         // On ajoute dans la config le nb d'élement par page (celui du select si il est défini).
-        if(this.filter_config.select_item_per_page) {
-            if(!this.filter_config.select_item_per_page.value) {
-                if(this.filter_config.select_item_per_page.default) {
+        if (this.filter_config.select_item_per_page) {
+            if (!this.filter_config.select_item_per_page.value) {
+                if (this.filter_config.select_item_per_page.default) {
                     this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.default;
                 }else {
                     this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.values[0];

@@ -11,7 +11,7 @@ export class CkeditorComponent  implements OnChanges {
   @Input() id: string = 'editor';
   @Input() rows: number = 10;
   @Input() disabled: boolean = false;
-  @Input() config = false;
+  @Input() config: any = null;
 
   @Output() contentChange = new EventEmitter();
   @Output() drop = new EventEmitter();

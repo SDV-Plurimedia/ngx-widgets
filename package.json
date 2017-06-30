@@ -8,13 +8,29 @@
   },
   "scripts": {
     "start": "tsc",
-    "lint": "tslint \"_*/**/*.ts\"",
+    "lint": "tslint _*/**/*.ts",
     "copy2test": "cp -r _* example/node_modules/sdv-ng2-widgets/",
     "build": "tsc",
     "dts": "tsc --declaration index.ts "
   },
   "license": "MIT",
   "dependencies": {
+    "@angular/animations": "4.0.1",
+    "@angular/common": "4.0.1",
+    "@angular/compiler": "4.0.1",
+    "@angular/core": "4.0.1",
+    "@angular/forms": "4.0.1",
+    "@angular/http": "4.0.1",
+    "@angular/platform-browser": "4.0.1",
+    "@angular/platform-browser-dynamic": "4.0.1",
+    "moment": "^2.15.1",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "codelyzer": "~2.1.1",
+    "tslint": "^4.5.0",
+    "typescript": "~2.3.0",
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
@@ -24,25 +40,7 @@
     "@types/jquery-knob": "^1.2.28",
     "@types/jquery.datatables": "^1.10.36",
     "@types/morris.js": "^0.5.5",
-    "@types/raphael": "^2.1.30",
-    "moment": "^2.15.1",
-    "rxjs": "^5.0.0",
-    "zone.js": "^0.8.0"
-  },
-  "peerDependencies": {
-    "@angular/animations": "~4.0.1",
-    "@angular/common": "~4.0.1",
-    "@angular/compiler": "~4.0.1",
-    "@angular/core": "~4.0.1",
-    "@angular/forms": "~4.0.1",
-    "@angular/http": "~4.0.1",
-    "@angular/platform-browser": "~4.0.1",
-    "@angular/platform-browser-dynamic": "~4.0.1"
-  },
-  "devDependencies": {
-    "codelyzer": "~2.1.1",
-    "tslint": "^4.0.0",
-    "typescript": "^2.2.0"
+    "@types/raphael": "^2.1.30"
   },
   "bugs": {
     "url": "https://github.com/SDV-Plurimedia/sdv-ng2-widgets/issues"

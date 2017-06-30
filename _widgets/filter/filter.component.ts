@@ -129,8 +129,8 @@ import { Component, Input, AfterContentInit } from '@angular/core';
 
          // Pour le select de la pagination.
          // On ne l'active que si on a this.config.select_item_per_page.
-         if(this.config.select_item_per_page) {
-             if(this.config.select_item_per_page.default) {
+         if (this.config.select_item_per_page) {
+             if (this.config.select_item_per_page.default) {
                  this.config.select_item_per_page.value = this.config.select_item_per_page.default;
              }
          }
@@ -175,11 +175,12 @@ import { Component, Input, AfterContentInit } from '@angular/core';
       * Lance le filtre si on change le nb d'élement par page (se lance juste si this.config.post_filter = true).
       */
      public selectItemPerPageChange() {
-         if(this.config.select_item_per_page.post_filter)
+         if (this.config.select_item_per_page.post_filter) {
              this.callback.apply(this.parent_scope, []);
+         }
 
-         if(this.config.select_item_per_page.save_in_localStorage) {
-             if(this.config.select_item_per_page.localStorage_name) {
+         if (this.config.select_item_per_page.save_in_localStorage) {
+             if (this.config.select_item_per_page.localStorage_name) {
                  localStorage.setItem(this.config.select_item_per_page.localStorage_name, this.config.select_item_per_page.value);
              } else {
                  localStorage.setItem('localStorage_nb_item_per_page', this.config.select_item_per_page.value);
