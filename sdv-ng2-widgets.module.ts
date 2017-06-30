@@ -6,7 +6,6 @@ Le module shared contient les widgets,directives et pipes qui peuvent etre utili
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule }   from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -108,7 +107,6 @@ let services = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,

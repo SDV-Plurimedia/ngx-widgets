@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, ElementRef, HostListener, OnInit, OnChanges}     from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Component, Input, Output, EventEmitter, ElementRef, HostListener, OnInit, OnChanges} from '@angular/core';
+import {Subject, Observable} from 'rxjs/Rx';
 
 @Component({
     selector: 'autocomplete',
@@ -36,9 +36,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
           return [];
       });
 
-  constructor(private _eref: ElementRef) {
-    //
-  }
+  constructor(private _eref: ElementRef) { }
 
   ngOnInit() {
     this.removeData = {};
