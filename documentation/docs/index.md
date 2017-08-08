@@ -51,7 +51,7 @@ La configuration est la suivante :
     * **sort** - **object** - **FACULTATIF** :
         * **field** - **string** - **default = ''** : Le nom du champs sur lequel appliquer le tri lors du chargement.
         * **asc** - **boolean** - **default = true** : Si false alors le tri est décroissant.
-        
+
     * **filter_config** - **Array** : Correspond à **config** de **Filtre**. Voir sa configuration.
     * **tr** -Object** : Contient soit une propriété :
         * **class** : La classe à appliquer sur les tr
@@ -309,7 +309,7 @@ A documenter
 Ce composant permet de générer un filtre. Ce filtre possède deux états :
  * un état simple, où seulement un champs de recherche est présent.
  * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.
- 
+
 La configuration est la suivante :
 * **config**
     * **advanced_mode** - **boolean** - **default = false** : Si true, alors le filtre sera dans l'état "Filtre avancé".
@@ -328,13 +328,13 @@ La configuration est la suivante :
         * **save_in_localStorage** - **boolean** - **FACULTATIF** : Si true, alors on sauvegarde le nombre d'item par page choisit dans le localStorage.
         * **localStorage_name** - **string** - **FACULTATIF** Si **save_in_localStorage** est true, alors le localStorage aura **localStorage_name**. Si pas de nom renseigné, le nom sera : "localStorage_nb_item_per_page".
           ** Pour utiliser le localStorage (à ajouter avant l'instanciation de la bigdatatable) :
-          
-          
+
+
                 if(this.config.filter_config.select_item_per_page.save_in_localStorage) {
                   let nb_item_per_page = localStorage.getItem(this.config.filter_config.select_item_per_page.localStorage_name); // ou "localStorage_nb_item_per_page" si on a pas défini de nom.
                   if(nb_item_per_page) this.config.filter_config.select_item_per_page.default = +nb_item_per_page;
                 }
-            
+
                 this.bigdata = new BigDatatable(this.config, this.config.structure, this.scope);
 
 
@@ -387,7 +387,56 @@ Actuellement les différents champs possible sont :
 
 # Graph
 
-A documenter
+BarGraph
+
+![Exemple de graphique en barre](./img/bargraph.png)
+
+Utilisation
+
+```html
+<graph [graph]="views"></graph>
+```
+
+```ts
+import { BarChart } from 'sdv-ng2-widgets/_widgets/graph/types/bar';
+
+...
+
+this.views = new BarChart(data, color, id, height, label);
+```
+
+* ** data ** - *Array<any>* : tableau contenant les données du graphique, l'objet nécessite les champs label et value
+    * exemple :
+
+```
+[
+  { label: '01-08-2017', value: 10 },
+  { label: '02-08-2017', value: 20 },
+  { label: '03-08-2017', value: 30 },
+];
+```
+
+* color ** - *any* : les couleurs du graphique
+    * exemple :
+```
+{
+  color: { r: 55, g: 180, b: 148 },
+  hover_color: { r: 3, g: 156, b: 187 }
+}
+```
+
+* **id** - *string* : l'id html de l'élément contenant le graphique
+* **height** - *number* : la hauteur en pixel du graphique
+* **label** - *string* : le label de l'axe y
+
+Exemple
+
+
+```ts
+let views_data = [ { label: '01-08-2017', value: 10 }, { label: '02-08-2017', value: 20 }, { label: '03-08-2017', value: 30 } ];
+let simple_color = { color: { r: 55, g: 180, b: 148 }, hover_color: { r: 3, g: 156, b: 187 }}
+this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniques');
+```
 
 # Hierarchie List
 

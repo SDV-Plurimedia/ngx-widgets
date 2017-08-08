@@ -3,32 +3,29 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SDV NG2 Widgets est un pack de widgets pour angular2 avec bootstrap">
   
-  <title>SDV NG2 Widgets</title>
-  
-
   <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
+  <title>Accueil - SDV NG2 Widgets</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="./css/highlight.css">
   <link href="./css/extra.css" rel="stylesheet">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "None";
+    var mkdocs_page_name = "Accueil";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/index.html";
   </script>
   
   <script src="./js/jquery-2.1.1.min.js"></script>
   <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
 </head>
 
@@ -48,7 +45,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
           
             <li>
     <li class="toctree-l1 current">
@@ -124,6 +121,9 @@
                 
             
                 <li class="toctree-l3"><a href="#tabpane-onglets">TabPane ( Onglets )</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#tag">Tag</a></li>
                 
             
                 <li class="toctree-l3"><a href="#touch-button">Touch Button</a></li>
@@ -219,6 +219,16 @@ Pour un bon fonctionnement de ce composant, il est néanmois conseillé de dispo
 <li><strong>display_items_name</strong> - <strong>string</strong> - <strong>default = display_items</strong> : Nom du champs qui contient le nombre d'élement par page dans le filtre (sa <strong>key</strong>).</li>
 <li>
 <p><strong>is_filter</strong> - <strong>boolean</strong> - <strong>default = true</strong> : Si false, alors on a pas de filtre.</p>
+</li>
+<li>
+<p><strong>can_sort</strong> - <strong>boolean </strong> - <strong>default = false</strong> : Si true, alors on peut trier les colonnes.</p>
+</li>
+<li>
+<p><strong>sort</strong> - <strong>object</strong> - <strong>FACULTATIF</strong> :</p>
+<ul>
+<li><strong>field</strong> - <strong>string</strong> - <strong>default = ''</strong> : Le nom du champs sur lequel appliquer le tri lors du chargement.</li>
+<li><strong>asc</strong> - <strong>boolean</strong> - <strong>default = true</strong> : Si false alors le tri est décroissant.</li>
+</ul>
 </li>
 <li>
 <p><strong>filter_config</strong> - <strong>Array</strong> : Correspond à <strong>config</strong> de <strong>Filtre</strong>. Voir sa configuration.</p>
@@ -466,18 +476,30 @@ public get liste_lapins() {
  * un état simple, où seulement un champs de recherche est présent.
  * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.</p>
 <p>La configuration est la suivante :
-* <strong>config</strong>
+<em> <strong>config</strong>
     * <strong>advanced_mode</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors le filtre sera dans l'état "Filtre avancé".
     * <strong>global_search</strong> - <strong>string</strong> - <strong>default = ''</strong> : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
     * <strong>callback</strong>      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur <strong>parent_scope</strong>
     * <strong>parent_scope</strong>  : Le composant parent qui contient la méthode <strong>callback</strong>.
-    * <strong>order_by_column</strong> - <strong>string</strong> - <strong>default = id</strong> : Le champs en base sur lequel l'order by sera appliqué.
-    * <strong>order_by_type</strong>   - <strong>string</strong> - <strong>default = ASC</strong> : Si l'order by est croissant ou décroissant.
     * <strong>config_column</strong> - <strong>Array<number></strong> : Tableau contenant la taille bootstrap des différentes colonnes.
                                               Par exemple [4,8] =&gt; On aura une colonne avec ce style "col-lg-4" et la deuxième aura "col-lg-8".
                                               <strong>Attention le maxium des sommes des colonnes doit faire 12 !!!</strong>
     * <strong>hide_search</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors le filtre de recherche globale sera caché lorsqu'on est en recherche avancé.
-    * <strong>property</strong> - <strong>Array</strong> : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.</p>
+    * <strong>property</strong> - <strong>Array</strong> : Tableau contenant les différentes propriétés sur lesquelles on peut filtrer.
+    * <strong>select_item_per_page</strong> - <strong>object</strong> - <strong>FACULTATIF</strong> : Permet d'avoir une liste déroulante à côté du champs de recherche. Attention, ceci remplace <strong>filter_has_display_items</strong> de la <strong>Bigdatatable</strong> s'il est activé.
+        * <strong>values</strong> - <strong>Array</strong> - <strong>OBLIGATOIRE</strong> : Contient les différentes valeurs que l'on peut chosir dans la liste déroulante.
+        * <strong>default</strong> - <strong>number</strong> - <strong>FACULTATIF</strong> : Contient la valeur qui sera choisie par défaut dans la liste déroulante.
+        * <strong>post_filter</strong> - <strong>boolean</strong> - <strong>FACULTATIF</strong> : Si true, alors <strong>callback</strong> sera appellée lors du changement dans la liste déroulante.
+        * <strong>save_in_localStorage</strong> - <strong>boolean</strong> - <strong>FACULTATIF</strong> : Si true, alors on sauvegarde le nombre d'item par page choisit dans le localStorage.
+        * <strong>localStorage_name</strong> - <strong>string</strong> - <strong>FACULTATIF</strong> Si <strong>save_in_localStorage</strong> est true, alors le localStorage aura <strong>localStorage_name</strong>. Si pas de nom renseigné, le nom sera : "localStorage_nb_item_per_page".
+          </em>* Pour utiliser le localStorage (à ajouter avant l'instanciation de la bigdatatable) :</p>
+<pre><code>            if(this.config.filter_config.select_item_per_page.save_in_localStorage) {
+              let nb_item_per_page = localStorage.getItem(this.config.filter_config.select_item_per_page.localStorage_name); // ou "localStorage_nb_item_per_page" si on a pas défini de nom.
+              if(nb_item_per_page) this.config.filter_config.select_item_per_page.default = +nb_item_per_page;
+            }
+
+            this.bigdata = new BigDatatable(this.config, this.config.structure, this.scope);
+</code></pre>
 <p><strong>property</strong> est un tableau associatif, qui est formé de la manière suivante :
     * <strong>key</strong> : <strong>data (Array)</strong> : <strong>key</strong> est le nom du champ tel qu'il l'est en BDD.</p>
 <p><strong>data</strong> est un tableau contenant les différentes configurations pour le champs <strong>key</strong>. La configuration diffèrent selon le type de champ.
@@ -536,7 +558,55 @@ Actuellement les différents champs possible sont :
 </ul>
 <p><img alt="Filtre__" src="./img/filtre.png" /></p>
 <h1 id="graph">Graph</h1>
-<p>A documenter</p>
+<p>BarGraph</p>
+<p><img alt="Exemple de graphique en barre" src="./img/bargraph.png" /></p>
+<p>Utilisation</p>
+<pre><code class="html">&lt;graph [graph]=&quot;views&quot;&gt;&lt;/graph&gt;
+</code></pre>
+
+<pre><code class="ts">import { BarChart } from 'sdv-ng2-widgets/_widgets/graph/types/bar';
+
+...
+
+this.views = new BarChart(data, color, id, height, label);
+</code></pre>
+
+<ul>
+<li><strong> data </strong> - <em>Array<any></em> : tableau contenant les données du graphique, l'objet nécessite les champs label et value<ul>
+<li>exemple :</li>
+</ul>
+</li>
+</ul>
+<pre><code>[
+  { label: '01-08-2017', value: 10 },
+  { label: '02-08-2017', value: 20 },
+  { label: '03-08-2017', value: 30 },
+];
+</code></pre>
+
+<ul>
+<li>color <em><em> - </em>any</em> : les couleurs du graphique<ul>
+<li>exemple :</li>
+</ul>
+</li>
+</ul>
+<pre><code>{
+  color: { r: 55, g: 180, b: 148 },
+  hover_color: { r: 3, g: 156, b: 187 }
+}
+</code></pre>
+
+<ul>
+<li><strong>id</strong> - <em>string</em> : l'id html de l'élément contenant le graphique</li>
+<li><strong>height</strong> - <em>number</em> : la hauteur en pixel du graphique</li>
+<li><strong>label</strong> - <em>string</em> : le label de l'axe y</li>
+</ul>
+<p>Exemple</p>
+<pre><code class="ts">let views_data = [ { label: '01-08-2017', value: 10 }, { label: '02-08-2017', value: 20 }, { label: '03-08-2017', value: 30 } ];
+let simple_color = { color: { r: 55, g: 180, b: 148 }, hover_color: { r: 3, g: 156, b: 187 }}
+this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniques');
+</code></pre>
+
 <h1 id="hierarchie-list">Hierarchie List</h1>
 <p>Ce widget permet de faire une hierarchisation d'éléments en plusieurs volets qui s'ouvrent l'un à côté de l'autre.</p>
 <p>Utilisation:</p>
@@ -708,6 +778,16 @@ Actuellement les différents champs possible sont :
 </ul>
 </li>
 </ul>
+<h1 id="tag">Tag</h1>
+<p><img alt="Input tag" src="./img/input-tag.png" /></p>
+<p>Un input permettant d'afficher des tags</p>
+<pre><code>&lt;input-tag [tags]="[{name: 'test'}, {name: 'voiture'}]" (hasChanged)="test($event)"&gt;&lt;/input-tag&gt;
+</code></pre>
+<ul>
+<li><strong>tags</strong> <em>Array</em> contenant les tags affichés dans l'input (le champ name doit être présent) <em>(optionnel)</em></li>
+<li><strong>placeholder</strong> <em>string</em> Placeholder de l'input. Vaut "Ajouter un tag" par defaut <em>(optionnel)</em></li>
+<li><strong>hasChanged</strong> <em>function</em> fonction appelée quand un tag est ajouté ou supprimé <em>(optionnel)</em></li>
+</ul>
 <h1 id="touch-button">Touch Button</h1>
 <p>Permet de créer un bouton flottant de style "polymere", contenant plusieurs autres boutons</p>
 <p><img alt="TouchButton__" src="./img/touch-button.png" /></p>
@@ -763,21 +843,22 @@ Actuellement les différents champs possible sont :
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
       
     </span>
 </div>
+    <script src="./js/theme.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.14.0
-Build Date UTC : 2017-04-06 13:29:30.765517
+MkDocs version : 0.16.1
+Build Date UTC : 2017-08-08 13:37:48
 -->
