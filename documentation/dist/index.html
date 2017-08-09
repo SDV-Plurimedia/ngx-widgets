@@ -558,7 +558,7 @@ Actuellement les différents champs possible sont :
 </ul>
 <p><img alt="Filtre__" src="./img/filtre.png" /></p>
 <h1 id="graph">Graph</h1>
-<p>BarGraph</p>
+<p><strong>BarChart</strong></p>
 <p><img alt="Exemple de graphique en barre" src="./img/bargraph.png" /></p>
 <p>Utilisation</p>
 <pre><code class="html">&lt;graph [graph]=&quot;views&quot;&gt;&lt;/graph&gt;
@@ -605,6 +605,82 @@ this.views = new BarChart(data, color, id, height, label);
 <pre><code class="ts">let views_data = [ { label: '01-08-2017', value: 10 }, { label: '02-08-2017', value: 20 }, { label: '03-08-2017', value: 30 } ];
 let simple_color = { color: { r: 55, g: 180, b: 148 }, hover_color: { r: 3, g: 156, b: 187 }}
 this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniques');
+</code></pre>
+
+<p><strong>LineChart</strong></p>
+<p><img alt="Exemple de graphique en ligne" src="./img/linegraph.png" /></p>
+<p>Utilisation</p>
+<pre><code class="html">&lt;graph [graph]=&quot;views&quot;&gt;&lt;/graph&gt;
+</code></pre>
+
+<pre><code class="ts">import { LineChart, Periodicite } from 'sdv-ng2-widgets/_widgets/graph/types/line';
+
+...
+
+this.views = new LineChart(datas, colors, id, height, y_label, unite, time, grid, periodicite);
+</code></pre>
+
+<ul>
+<li><strong>datas</strong> - <em>Array<any></em> : tableau contenant les données du graphique, l'objet nécessite les champs label et value<ul>
+<li>exemple :</li>
+</ul>
+</li>
+</ul>
+<pre><code>[
+  { label: '2017-01-08', value: 10 },
+  { label: '2017-02-08', value: 20 },
+  { label: '2017-03-08', value: 30 },
+];
+</code></pre>
+
+<p>NB : Si le label est sous forme de date, il doit être passé au format US (voir la <a href="http://morrisjs.github.io/morris.js/lines.html" target="_blank">documentation</a> de Morris (xkey) pour les formats aceptés), la date sera
+convertie au format français à l'affichage par le widget</p>
+<ul>
+<li><strong>colors</strong> - <em>any</em> : les couleurs du graphique<ul>
+<li>exemple :</li>
+</ul>
+</li>
+</ul>
+<pre><code>{
+  color: { r: 140, g: 180, b: 188 },
+  hover_color: { r: 83, g: 135, b: 146 }
+}
+</code></pre>
+
+<ul>
+<li><strong>id</strong> - <em>string</em> : l'id html de l'élément contenant le graphique</li>
+<li><strong>height</strong> - <em>number</em> : la hauteur en pixel du graphique</li>
+<li><strong>label</strong> - <em>string</em> : le label de l'axe Y</li>
+<li><strong>unite</strong> - <em>string</em> [valeur par defaut = ''] : Un suffixe qui sera ajoutée aux elements sur l'axe Y<ul>
+<li>exemple : 'Vues', 'Nombre de clics', 'Articles', etc ...</li>
+</ul>
+</li>
+<li><strong>time</strong> - <em>boolean</em> [valeur par defaut = false] : Quand vaut faux, ne parse pas les dates pour l'axe X et considère qu'il y a la même
+durée entre chaque date</li>
+<li><strong>grid</strong> - <em>boolean</em> [valeur par defaut = false]: Quand vaut true, affiche les lignes horizontales</li>
+<li><strong>periodicite</strong> - <em>enum</em> : [valeur possible : Periodicite.Day, Periodicite.Month, Periodicite.Week, Periodicite.Year] : format du label passé
+dans les datas</li>
+</ul>
+<p>Exemple</p>
+<pre><code>this.views = new LineChart(
+  [
+    {label: &quot;2017-08-03&quot;, value: 0},
+    {label: &quot;2017-08-04&quot;, value: 0},
+    {label: &quot;2017-08-05&quot;, value: 0},
+    {label: &quot;2017-08-06&quot;, value: 0},
+    {label: &quot;2017-08-07&quot;, value: 2},
+    {label: &quot;2017-08-08&quot;, value: 0},
+    {label: &quot;2017-08-09&quot;, value: 0},
+  ],
+  { color: { r: 140, g: 180, b: 188 }, hover_color: { r: 83, g: 135, b: 146 } },
+  'articles_chart',
+  150,
+  'Nombre d\'articles',
+  '',
+  true,
+  false,
+  Periodicite.Day
+ );
 </code></pre>
 
 <h1 id="hierarchie-list">Hierarchie List</h1>
@@ -860,5 +936,5 @@ this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniq
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2017-08-08 13:37:48
+Build Date UTC : 2017-08-09 09:01:47
 -->

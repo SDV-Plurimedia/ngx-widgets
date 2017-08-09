@@ -387,7 +387,7 @@ Actuellement les différents champs possible sont :
 
 # Graph
 
-BarGraph
+**BarChart**
 
 ![Exemple de graphique en barre](./img/bargraph.png)
 
@@ -436,6 +436,82 @@ Exemple
 let views_data = [ { label: '01-08-2017', value: 10 }, { label: '02-08-2017', value: 20 }, { label: '03-08-2017', value: 30 } ];
 let simple_color = { color: { r: 55, g: 180, b: 148 }, hover_color: { r: 3, g: 156, b: 187 }}
 this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniques');
+```
+
+**LineChart**
+
+![Exemple de graphique en ligne](./img/linegraph.png)
+
+Utilisation
+
+```html
+<graph [graph]="views"></graph>
+```
+
+```ts
+import { LineChart, Periodicite } from 'sdv-ng2-widgets/_widgets/graph/types/line';
+
+...
+
+this.views = new LineChart(datas, colors, id, height, y_label, unite, time, grid, periodicite);
+```
+* **datas** - *Array<any>* : tableau contenant les données du graphique, l'objet nécessite les champs label et value
+    * exemple :
+
+```
+[
+  { label: '2017-01-08', value: 10 },
+  { label: '2017-02-08', value: 20 },
+  { label: '2017-03-08', value: 30 },
+];
+```
+
+NB : Si le label est sous forme de date, il doit être passé au format US (voir la <a href="http://morrisjs.github.io/morris.js/lines.html" target="_blank">documentation</a> de Morris (xkey) pour les formats aceptés), la date sera
+convertie au format français à l'affichage par le widget
+
+* **colors** - *any* : les couleurs du graphique
+    * exemple :
+```
+{
+  color: { r: 140, g: 180, b: 188 },
+  hover_color: { r: 83, g: 135, b: 146 }
+}
+```
+
+* **id** - *string* : l'id html de l'élément contenant le graphique
+* **height** - *number* : la hauteur en pixel du graphique
+* **label** - *string* : le label de l'axe Y
+* **unite** - *string* [valeur par defaut = ''] : Un suffixe qui sera ajoutée aux elements sur l'axe Y
+    * exemple : 'Vues', 'Nombre de clics', 'Articles', etc ...
+* **time** - *boolean* [valeur par defaut = false] : Quand vaut faux, ne parse pas les dates pour l'axe X et considère qu'il y a la même
+durée entre chaque date
+* **grid** - *boolean* [valeur par defaut = false]: Quand vaut true, affiche les lignes horizontales
+* **periodicite** - *enum* : [valeur possible : Periodicite.Day, Periodicite.Month, Periodicite.Week, Periodicite.Year] : format du label passé
+dans les datas
+
+
+Exemple
+
+```
+this.views = new LineChart(
+  [
+    {label: "2017-08-03", value: 0},
+    {label: "2017-08-04", value: 0},
+    {label: "2017-08-05", value: 0},
+    {label: "2017-08-06", value: 0},
+    {label: "2017-08-07", value: 2},
+    {label: "2017-08-08", value: 0},
+    {label: "2017-08-09", value: 0},
+  ],
+  { color: { r: 140, g: 180, b: 188 }, hover_color: { r: 83, g: 135, b: 146 } },
+  'articles_chart',
+  150,
+  'Nombre d\'articles',
+  '',
+  true,
+  false,
+  Periodicite.Day
+ );
 ```
 
 # Hierarchie List
