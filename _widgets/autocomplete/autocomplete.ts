@@ -63,6 +63,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   ngOnChanges(changes) {
     if (changes.data) {
       this.nb_threads = Math.floor(this.data.length / 1000) + 1;
+      this.results = [];
+      this.inputValue = '';
       // console.log('nb de threads ', this.nb_threads);
     }
   }
