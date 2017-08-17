@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.1.1 - 17/08/2017
+* FIX: Vidage de l'input de l'autocomplete au changement des  données
+* FIX: Mise à jour des graphique au changement des données
+
 ## 1.1.0 - 27/04/2017
 * ADD: Ajout d'un widget permettant d'afficher des tags dans un input
 * FIX: fix keys pipe
