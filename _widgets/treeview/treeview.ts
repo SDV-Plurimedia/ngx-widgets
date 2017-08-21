@@ -42,7 +42,7 @@ export class TreeviewComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes) {
-      if (changes.datas && changes.datas.previousValue.length > 0) {
+      if (changes.datas && changes.datas.previousValue && changes.datas.previousValue.length > 0) {
         this.datas = changes.datas.currentValue;
       }
       if (changes.params) {

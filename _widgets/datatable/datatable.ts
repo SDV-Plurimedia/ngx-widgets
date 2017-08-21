@@ -1,7 +1,5 @@
 import {Component, ElementRef, IterableDiffers, Input, DoCheck, OnDestroy} from '@angular/core';
-import { StaticLoaderService } from '../../_services/static-loader';
 import { LoaderService } from '../../_services/loader';
-
 
 @Component({
   selector: 'datatable',
@@ -46,8 +44,6 @@ export class DatatableComponent implements DoCheck, OnDestroy {
     }
   };
 
-  public dependenciesAreLoaded: boolean;
-  public dependenciesAreLoadedPromise: Promise<any>;
   private differ: any;
 
   constructor(
@@ -55,18 +51,6 @@ export class DatatableComponent implements DoCheck, OnDestroy {
     private differs: IterableDiffers
   ) {
     this.differ = differs.find([]).create(null);
-    LoaderService.getInstance().start();
-    this.dependenciesAreLoaded = false;
-
-    // chargement des scripts necessaires
-    this.dependenciesAreLoadedPromise = StaticLoaderService.getInstance().require_once_ordered([
-      '/assets/datatables.net/js/jquery.dataTables.js',
-      '/assets/datatables.net-bs/js/dataTables.bootstrap.js',
-      '/assets/datatables.net-bs/css/dataTables.bootstrap.css'
-    ]).then(() => {
-      this.dependenciesAreLoaded = true;
-      LoaderService.getInstance().stop();
-    });
   }
 
   /*
@@ -75,14 +59,11 @@ export class DatatableComponent implements DoCheck, OnDestroy {
    */
   destroyTable(JQdestroy: boolean = false) {
     if (typeof this.table !== 'undefined') {
-      console.log('suppression propre de la table');
       this.table.destroy(JQdestroy);
     }
   }
 
   buildTable() {
-    console.log('construction du datatable');
-
     this.table_elem = jQuery(this._element.nativeElement).find('table');
     this.table = this.table_elem.DataTable({
         language: this.language,
@@ -134,14 +115,10 @@ export class DatatableComponent implements DoCheck, OnDestroy {
         }, 1);
       };
       // on attend le chargement des plugins pour faire cette construction
-      if (this.dependenciesAreLoaded) {
-        init();
-      } else {
-        this.dependenciesAreLoadedPromise.then(init);
-      }
+      init();
     }
-
   }
+
   getValue(ligne, id: string) {
     try {
       if (id.indexOf('.') === -1) {
