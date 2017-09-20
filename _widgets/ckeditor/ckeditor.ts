@@ -26,11 +26,11 @@ export class CkeditorComponent  implements OnChanges {
     if (this.disabled === false && changes.disabled !== undefined) {
       // on charge CKEDITOR, mais dans un setTimeout, pour que la reconstruction des template ai eu le temp d'afficher les ngIf
       StaticLoaderService.getInstance().require_once([
-          '/utils/static/ckeditor/ckeditor.js'
-        ]).then(() => {
-          CKEDITOR.basePath = '/utils/static/ckeditor/';
-          this.initCKeditor();
-        });
+        '/utils/static/ckeditor/ckeditor.js'
+      ]).then(() => {
+        CKEDITOR.basePath = '/utils/static/ckeditor/';
+        this.initCKeditor();
+      });
     } else if (changes.disabled && changes.disabled.currentValue === true && changes.disabled.previousValue === false) {
       this.instance.destroy();
     }
@@ -46,16 +46,26 @@ export class CkeditorComponent  implements OnChanges {
     this.instance = CKEDITOR.instances[this.id];
     this.instance.on('change', this.textChanged, this);
     this.instance.on('drop', (evt) => {
-        evt.stop();
-        evt.component = this;
-        this.drop.emit(evt);
-        return false;
+      evt.stop();
+      evt.component = this;
+      this.drop.emit(evt);
+      return false;
     }, this);
+    this.instance.on('afterCommandExec', this.handleAfterCommandExec, this);
     this.isLoaded = true;
   }
 
-  public textChanged() {
+  public textChanged(event = null) {
     this.content = this.instance.getData();
     this.contentChange.emit(this.content);
+  }
+
+  private handleAfterCommandExec(event) {
+    let commandName = event.data.name;
+    if (commandName === 'source') {
+      jQuery('#cke_' + this.id + ' textarea').on('keyup', $.proxy(function() {
+        this.textChanged();
+      }, this));
+    }
   }
 }
