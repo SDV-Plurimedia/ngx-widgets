@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.1.23 - 22/09/2017
+* FIX: Erreur d'accès à un item inexistant sur le component hierarchie-list
+* FIX: Sauvegarde CKEditor en mode source
+
 ## 1.1.1 - 17/08/2017
 * FIX: Vidage de l'input de l'autocomplete au changement des  données
 * FIX: Mise à jour des graphique au changement des données
