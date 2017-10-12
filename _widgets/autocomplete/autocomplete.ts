@@ -242,10 +242,9 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         .replace(/[\u00D2-\u00D6]/ig, 'o') // remplace les 'o' accentués
         .replace(/[\u00D9-\u00DC]/ig, 'u') // remplace les 'u' accentués
         .replace(/[\u00D1]/ig, 'n') // remplace les '~n' accentués
-        .replace(/[^a-z0-9 ]+/gi, '')
+        .replace(/[^a-z0-9\- ]+/gi, '')
         .trim().replace(/ /g, '-')
-        .replace(/[\-]{2}/g, '')
-        .replace(/[^a-z\- ]*/gi, '');
-
+        .replace(/[\-]{2}/g, '-');
+        // .replace(/[^a-z\- ]*/gi, '');
   }
 }

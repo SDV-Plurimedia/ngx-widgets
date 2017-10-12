@@ -1,6 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
-## 1.2.0
+## 1.2.1
+* FIX: Autocomplete ne retire plus les chiffres de la recherche
+
+## 1.2.0 - 12/10/2017
 * ADD: Gestion des texte HTML sur les boutons
 
 ## 1.1.23 - 22/09/2017
