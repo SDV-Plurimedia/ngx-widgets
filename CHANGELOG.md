@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.2.0
+* ADD: Gestion des texte HTML sur les boutons
+
 ## 1.1.23 - 22/09/2017
 * FIX: Erreur d'accès à un item inexistant sur le component hierarchie-list
 * FIX: Sauvegarde CKEditor en mode source
