@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.2.2 - 16/10/2017
+* FIX : chevron en trop dans le HTML du datatable
+
 ## 1.2.1 - 12/10/2017
 * FIX: Autocomplete ne retire plus les chiffres de la recherche
 
