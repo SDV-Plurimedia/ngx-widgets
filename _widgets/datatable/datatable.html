@@ -25,7 +25,7 @@
                 <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
             </ng-container>
             <td *ngIf="buttons">
-                <ng-container *ngFor="let button of buttons">>
+                <ng-container *ngFor="let button of buttons">
                     <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
                 </ng-container>
             </td>
