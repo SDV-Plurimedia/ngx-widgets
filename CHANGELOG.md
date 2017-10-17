@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.2.3 - 17/10/2017
+* ADD: Ajout du paramètre access pour les boutons de HierarchieListComponent
+
 ## 1.2.2 - 16/10/2017
 * FIX : chevron en trop dans le HTML du datatable
 
@@ -22,7 +25,7 @@
 * FIX: fix keys pipe
 * FIX: fix bug chevron
 * ADD: Autocomplete: Ajout trim sur la valeur de l'input et fix valeur par défaut.  
-* FIX: fix bug autocomplete 
+* FIX: fix bug autocomplete
 
 ## 1.0.3 - 12/04/2017
 * FIX: erreur de compilation en mode prod
