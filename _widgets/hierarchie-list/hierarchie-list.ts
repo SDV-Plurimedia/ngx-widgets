@@ -120,12 +120,26 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       return this.datas.filter(data => data.parent === id).length > 0 ? true : false;
     }
 
+    /**
+     * Vérifie si le bouton doit être affiché
+     * @param {HierarchieButton} button Le bouton à afficher
+     * @param {any} data Les données pour tester
+     * @return {boolean}
+     */
+    displayButton(button, data) {
+      if (button.access) {
+        return button.access.apply(this.parent_scope, [data]);
+      }
+      return true;
+    }
+
 }
 
 export interface HierarchieButton {
     text: string;
     class?: string;
     action: (any) => void;
+    access?: (any) => boolean;
 }
 
 export interface HierarchieList {
