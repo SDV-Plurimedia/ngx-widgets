@@ -1,0 +1,20 @@
+<ng-container provide-parent-form>
+  <ng-container *ngFor="let checkbox of field.options; let i = index">
+    <label class="label-checkbox" [class.inline]="field.inline" [attr.for]="field.id+'_'+i">
+      <input type="checkbox"
+             [required]="field.required"
+             (change)="checkValidity($event, checkbox.value)"
+             [id]="field.id+'_'+i"
+             [name]="field.id"
+             [checked]="model[field.id].indexOf(checkbox.value) > -1"
+             [disabled]="field.isDisabled()"
+      >
+      <span class="custom-checkbox"
+            [class.required]="field.required"
+            [class.checked]="model[field.id].indexOf(checkbox.value) > -1"
+            [class.ng-invalid]="field.invalid && field.required"
+            [class.ng-valid]="!field.invalid && field.required"></span>
+      {{checkbox.label}}
+    </label>
+  </ng-container>
+</ng-container>

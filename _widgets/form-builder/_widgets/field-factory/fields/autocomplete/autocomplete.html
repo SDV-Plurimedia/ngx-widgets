@@ -1,0 +1,10 @@
+<autocomplete [config]="field.config"
+              [data]="field.data"
+              [displayItems]="model[field.id]"
+              (delete)="checkValidity($event, false)"
+              (valid)="checkValidity($event)"
+              [class.ng-invalid]="field.invalid && field.required"
+              [class.ng-valid]="!field.invalid && field.required"
+              [id]="field.id"
+>
+</autocomplete>

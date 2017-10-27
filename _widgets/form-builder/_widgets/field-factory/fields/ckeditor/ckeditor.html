@@ -1,0 +1,11 @@
+<ckeditor [(content)]="model[field.id]"
+          [id]="field.id"
+          [disabled]="field.isDisabled()"
+          [rows]="field.rows"
+          [config]="field.config"
+          (contentChange)="checkValidity($event)"
+          [class.ng-invalid]="field.invalid && field.required"
+          [class.ng-valid]="!field.invalid && field.required"
+          (drop)="field.drop.apply(field.scope, [$event])"
+>
+</ckeditor>

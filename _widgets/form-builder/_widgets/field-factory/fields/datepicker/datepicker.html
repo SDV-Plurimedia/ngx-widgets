@@ -1,0 +1,13 @@
+<datepicker [id]="field.id"
+            [name]="field.id"
+            [(ngModel)]="model[field.id]"
+            [view-format]="field.view_format"
+            [model-format]="field.model_format"
+            [first-week-day-sunday]="field.first_week_day_sunday"
+            [init-empty]="field.init_empty"
+            [init-date]="model[field.id]"
+            [class.ng-invalid]="field.invalid && field.required"
+            [class.ng-valid]="!field.invalid && field.required"
+            (changed)="checkValidity($event)"
+            [disabled]="field.isDisabled()"
+></datepicker>

@@ -1,0 +1,11 @@
+<select [id]="field.id"
+        [name]="field.id"
+        [(ngModel)]="model[field.id]"
+        [required]="field.required"
+        [class]="field.input_class"
+        (change)="checkValidity($event)"
+        [disabled]="field.isDisabled()"
+        provide-parent-form
+>
+  <option *ngFor="let option of field.options" value="{{option.value}}">{{option.label}}</option>
+</select>

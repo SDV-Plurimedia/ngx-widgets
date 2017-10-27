@@ -1,0 +1,21 @@
+<ng-container provide-parent-form>
+  <ng-container *ngFor="let radiobutton of field.options; let i = index">
+    <label class="label-radio" [class.inline]="field.inline" [attr.for]="field.id+'_'+i">
+      <input type="radio"
+             [(ngModel)]="model[field.id]"
+             [required]="field.required"
+             [id]="field.id+'_'+i"
+             [name]="field.id"
+             [disabled]="field.isDisabled()"
+             [value]="radiobutton.value"
+             (change)="checkValidity($event)"
+      >
+      <span class="custom-radio"
+            [class.required]="field.required"
+            [class.checked]="model[field.id] == radiobutton.value"
+            [class.ng-invalid]="field.invalid && field.required"
+            [class.ng-valid]="!field.invalid && field.required"></span>
+      {{radiobutton.label}}
+    </label>
+  </ng-container>
+</ng-container>

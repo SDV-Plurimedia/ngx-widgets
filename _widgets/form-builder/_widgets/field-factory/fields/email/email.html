@@ -1,0 +1,15 @@
+<input provide-parent-form
+       type="email"
+       [email]="model[field.id] !== ''"
+       [name]="field.id"
+       [id]="field.id"
+       [(ngModel)]="model[field.id]"
+       [required]="field.required"
+       [class]="field.input_class"
+       (keyup)="checkValidity($event)"
+       [minlength]="field.min_length"
+       [maxlength]="field.max_length"
+       [placeholder]="field.placeholder"
+       [disabled]="field.isDisabled()"
+       [readonly]="field.readonly"
+/>

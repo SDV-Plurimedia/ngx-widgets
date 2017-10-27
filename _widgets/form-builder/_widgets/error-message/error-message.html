@@ -1,0 +1,10 @@
+<ng-container *ngIf="field">
+    <div class="alert alert-danger" [hidden]="field.error_message.hidden">
+        <ng-container *ngIf="field.error_message.message; else default_message">
+            {{field.error_message.message}}
+        </ng-container>
+        <ng-template #default_message>
+            <div [innerHTML]="defaultErrorMessage()"></div>
+        </ng-template>
+    </div>
+</ng-container>
