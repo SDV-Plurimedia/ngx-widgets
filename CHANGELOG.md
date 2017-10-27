@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.3.0 - 27/10/2017
+* ADD : Ajout du widget FormBuilder
+* UPD : Retrait code inutile dans le widget autocomplete
+
 ## 1.2.3 - 17/10/2017
 * ADD: Ajout du paramètre access pour les boutons de HierarchieListComponent
 
