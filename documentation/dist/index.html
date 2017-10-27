@@ -79,10 +79,6 @@
             
                 <li class="toctree-l3"><a href="#datatable">Datatable</a></li>
                 
-                    <li><a class="toctree-l4" href="#dans-mon-model">dans mon model</a></li>
-                
-                    <li><a class="toctree-l4" href="#dans-le-constructeur-du-mode">Dans le constructeur du mode</a></li>
-                
             
                 <li class="toctree-l3"><a href="#datepicker">DatePicker</a></li>
                 
@@ -91,6 +87,11 @@
                 
             
                 <li class="toctree-l3"><a href="#filtre">Filtre</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#formbuilder">FormBuilder</a></li>
+                
+                    <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
                 
             
                 <li class="toctree-l3"><a href="#graph">Graph</a></li>
@@ -432,17 +433,17 @@ public data_tab = [{id: 1, name: "Antoine"}];
 </li>
 <li>
 <p>Ensuite, dans mon model :</p>
-<ul>
+<ol>
 <li>Ajouter la propriété "liste_lapin".</li>
 <li>Générer le HTML qui corresponds.</li>
 <li>L'affecter à cette propriété.</li>
-</ul>
+</ol>
 </li>
 </ul>
-<h3 id="dans-mon-model">dans mon model</h3>
+<p>Dans mon model</p>
 <pre><code>public lapins: Lapin[]; // Les différents objets Lapin
 </code></pre>
-<h3 id="dans-le-constructeur-du-mode">Dans le constructeur du mode</h3>
+<p>Dans le constructeur du mode</p>
 <pre><code>this.lapins      = obj &amp;&amp; obj.lapins     || null;
 
 public get liste_lapins() {
@@ -557,6 +558,205 @@ Actuellement les différents champs possible sont :
 </li>
 </ul>
 <p><img alt="Filtre__" src="./img/filtre.png" /></p>
+<h1 id="formbuilder">FormBuilder</h1>
+<p>Ce widget permet à l'aide d'un tableau d'objet de créer un formulaire sur une page avec ou sans onglet.</p>
+<p>Les types de champs pris en compte sont les suivants :
+ * <strong><a href="#autocomplete">autocomplete</a></strong> 
+ * <strong><a href="#checkboxes">checkbox</a></strong>
+ * <strong><a href="#checkboxes">checkboxes</a></strong>
+ * <strong><a href="#ckeditor">ckeditor</a></strong>
+ * <strong><a href="#datepicker">datepicker</a></strong>
+ * <strong><a href="#email">email</a></strong>
+ * <strong><a href="#number">number</a></strong>
+ * <strong><a href="#radios">radios</a></strong>
+ * <strong><a href="#select">select</a></strong>
+ * <strong><a href="#text">text</a></strong>
+ * <strong><a href="#textarea">textarea</a></strong>
+ * <strong><a href="#url">url</a></strong></p>
+<p>De base, chacun de ces champs bénéficie d'une méthode de validité par défaut qui vérifie si le champ est valide ainsi que
+d'un message d'erreur correspondant. Il est néanmoins possible de surcharger ces méthodes de vérifications et messages d'erreurs.
+Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moins un champ est encore invalid.</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="a-formulaire">A) Formulaire</h3>
+<pre><code>&lt;form-builder [(fields)]="fields"
+              [scope]="scope"
+              [(model)]="agence"
+              [type]="'tabs'"
+              (cancel)="cancel()"
+              [saveLabel]="'Sauvegarder'"
+              [cancelLabel]="'Retour'"
+              (save)="save()"
+&gt;
+&lt;/form-builder&gt;
+</code></pre>
+<ul>
+<li><strong>scope</strong> est le composant dans lequel est contenu le form-builder</li>
+<li><strong>type</strong> est le type de formulaire soit <strong>classic (par défaut)</strong> soit <strong>tabs</strong> (sous forme d'onglet)</li>
+<li><strong>cancel</strong> est la méthode de callback à appeller lors du clic sur le bouton "Annuler"</li>
+<li><strong>save</strong> est la méthode de callback à appeller lors du clic sur le bouton "Enregistrer"</li>
+<li><strong>model</strong> est l'objet qui va être édité/crée</li>
+<li><strong>saveLabel</strong> est le label du bouton pour la sauvegarde (par défaut vaut "Enregistrer"</li>
+<li><strong>cancelLabel</strong> est le label du bouton pour annuler (par défaut vaut "Annuler")</li>
+<li><strong>fields</strong> est soit un objet (cas du formulaire <strong>classic</strong>) soit un tableau d'objet (cas du formulaire <strong>tabs</strong>, voir I)B)1 et I)B)2)</li>
+</ul>
+<h3 id="b-fields">B) Fields</h3>
+<p>Dans les deux cas ci-dessous, <strong>id_field</strong> correspond à l'identifiant du champ ainsi que le nom de la propriété du model.
+Si <strong>id_field</strong> n'existe pas un log d'erreur sera présent dans la console.</p>
+<h4 id="1-cas-du-formulaire-classic">1) Cas du formulaire "classic"</h4>
+<pre><code>  public fields = {
+    id_field: {configuration_field},
+    id_field2: {configuration_field2}
+  };
+</code></pre>
+<h4 id="2-cas-du-formulaire-tabs">2) Cas du formulaire "tabs"</h4>
+<pre><code>  public fields = [
+    {
+      title: 'Le titre de mon onglet 1'
+      fields: {
+        id_field: {configuration_field},
+        id_field2: {configuration_field2}
+      }
+    },
+    {
+      title: 'Le titre de mon onglet 2'
+      fields: {
+        id_field3: {configuration_field3},
+        id_field4: {configuration_field4}
+      }
+    }
+  ];
+</code></pre>
+<h4 id="3-field">3) Field</h4>
+<h5 id="a-configuration-generale">a) Configuration générale</h5>
+<ul>
+<li><strong>label</strong> - <strong>string</strong> - le label du champ</li>
+<li><strong>required</strong> - <strong>boolean</strong> - <strong>default = false</strong> / si le champ est requis</li>
+<li><strong>type</strong> - <strong>string</strong> - <strong>default = 'text'</strong> / le type du champ</li>
+<li><strong>pattern</strong> - <strong>string</strong> - une regex à appliquer sur le champ (par exemple [0-9][0-9][0-9][0-9])</li>
+<li><strong>error_message</strong> - <strong>string</strong> - un message d'erreur à afficher</li>
+<li><strong>placeholder</strong> - <strong>string</strong> - le placeholder du champ</li>
+<li><strong>readonly</strong> - <strong>boolean</strong> - <strong>default = false</strong> - si le champ est en readonly</li>
+<li><strong>verifyFunction</strong> - <strong>any</strong> - Une fonction de callback servant à vérifier soi même le champ (doit renvoyer <strong>true</strong> si le champ est correct et <strong>false</strong> si il est incorrect)</li>
+<li><strong>hiddenFunction</strong> - <strong>any</strong> - Une fonction de callback servant à afficher/cacher un champ (doit renvoyer <strong>true</strong> pour le cacher et <strong>false</strong> pour l'afficher)</li>
+<li><strong>disabledFunction</strong> - <strong>any</strong> - Une fonction de callback servant à passer un champ en disabled (doit renvoyer <strong>true</strong> pour le passer en disabled et <strong>false</strong> pour le remettre en état "normal")</li>
+<li><strong>input_container_class</strong> - <strong>string</strong> - <strong>default = 'col-md-8'</strong> - La classe CSS du conteneur du champ</li>
+<li><strong>input_class</strong> - <strong>string</strong> - <strong>default = 'form-control'</strong> - La classe CSS appliquer sur le champ</li>
+<li><strong>label_class</strong> - <strong>string</strong> - <strong>default = 'col-md-2 control-label'</strong> - La classe CSS à appliquer sur le label du champ</li>
+</ul>
+<p>Les méthodes de callback peuvent prendre en paramètre un objet Field (contenant toutes les informations du champ). Il est possible de modifier ce dernier et donc
+par exemple de changer son message d'erreur à la volée.</p>
+<h5 id="b-configuration-specifique">b) Configuration spécifique</h5>
+<p>Selon le type de champ spécifié, différents paramètres peuvent être ajouté aux paramètres généraux.</p>
+<h6 id="autocomplete_1">Autocomplete<a id="autocomplete"></a></h6>
+<p>Un widget Autocomplete.</p>
+<p><strong>ATTENTION : Pour les autocompletes, <em>verifyFunction</em> n'est pas utilisé. La gestion de la validité doit se faire dans <em>add</em> et <em>delete</em>.
+Si rien n'est renvoyée par ces fonctions alors le champ sera considéré comme valide.</strong></p>
+<ul>
+<li><strong>data</strong> - <strong>[]</strong> - les données contenues dans l'autocomplete</li>
+<li><strong>add</strong> - <strong>any</strong> - <strong>default = () =&gt; { return true; };</strong> -La fonction de callback appellée lors du clic sur un élement de l'autocomplete</li>
+<li><strong>delete</strong> - <strong>any</strong> - <strong>default = () =&gt; { return true} };</strong> -La fonction de callback suite à la suppression d'un élement de l'autocomplete</li>
+<li><strong>config</strong> - <strong>any</strong> -La configuration de l'autocomplete (voir partie Autocomplete)</li>
+</ul>
+<h6 id="checkboxes">Checkboxes<a id="checkboxes"></a></h6>
+<p>Plusieurs cases à cocher.
+ * <strong>inline</strong> - <strong>boolean</strong> - <strong>default = false</strong> - Si inline vaut true, alors les checkboxes seront sur la même ligne sinon elles seront à la ligne à chaque fois
+ * <strong>options</strong> - <strong>[]</strong> -Un tableau d'objet contenant les différentes checkboxes à afficher</p>
+<pre><code>      options = [{value: 'value', label: 'label}]
+</code></pre>
+<p>Les checkboxes peuvent être en required et être utilisées avec une méthode de vérification (par exemple il faut au moins que deux soient cochées).</p>
+<p>###### CKEditor<a id="ckeditor"></a>
+  Un widget CKEditor.
+  * <strong>drop</strong> - <strong>any</strong> -L'évenement déclenché lors du drop sur le CKEditor
+  * <strong>config</strong> - <strong>any</strong> -La configuration du CKEditor (voir partie CKEditor)</p>
+<p>###### Datepicker<a id="datepicker"></a>
+  Un widget Datepicker.
+  * <strong>view_format</strong> - <strong>string</strong> - <strong>default = 'DD/MM/YYYY'</strong> -Le format de la date à l'affichage
+  * <strong>model_format</strong> - <strong>string</strong> - <strong>default = 'YYYY-MM-DD'</strong> -Le format de la date dans le model
+  * <strong>first_week_day_sunday</strong> - <strong>boolean</strong> - <strong>default = false</strong> -Si le premier jour de la semaine dans le calendrier est Dimanche
+  * <strong>init_empty</strong> - <strong>boolean</strong> - <strong>default = false</strong> -Si la date doit être vide si elle n'est pas renseigné, sinon la date du jour apparaitra</p>
+<p>###### Email<a id="email"></a>
+  Un input email. La validité de l'email est gérée par une directive Angular.
+  * <strong>min_length</strong> - <strong>number</strong> - <strong>default = 1</strong> -La longueur minimale du champ
+  * <strong>max_length</strong> - <strong>number</strong> -La longueur maximale du champ</p>
+<p>###### Number<a id="number"></a>
+  Un input number
+  * <strong>min</strong> - <strong>number</strong> -La valeur minimale de l'input
+  * <strong>max</strong> - <strong>number</strong> -La valeur maximale de l'input
+  * <strong>step</strong> - <strong>number</strong> -Pour avancer de step en step dans la valeur de l'input</p>
+<p>###### Radios<a id="radios"></a>
+  Des radiosbuttons.
+  * <strong>inline</strong> - <strong>boolean</strong> - <strong>default = false</strong> - Si inline vaut true, alors les radiobuttons seront sur la même ligne sinon ils seront à la ligne à chaque fois
+  * <strong>options</strong> - <strong>[]</strong> -Un tableau d'objet contenant les différents radiobuttons à afficher</p>
+<pre><code>    options = [{value: 'value', label: 'label}]
+</code></pre>
+<p>###### Select<a id="select"></a>
+  Un select.
+  * <strong>options</strong> - <strong>[]</strong> -Un tableau d'objet contenant les différentes options à afficher</p>
+<pre><code>    options = [{value: 'value', label: 'label}]
+</code></pre>
+<p>###### Text<a id="text"></a>
+  Un input text.
+  * <strong>min_length</strong> - <strong>number</strong> - <strong>default = 1</strong> -La longueur minimale du champ
+  * <strong>max_length</strong> - <strong>number</strong> -La longueur maximale du champ</p>
+<p>###### <a id="textarea"></a>
+  Un textarea.
+  * <strong>rows</strong> - <strong>number</strong> -Le nombre de ligne du textarea</p>
+<p>###### Url<a id="url"></a>
+  Un input url. La validité de l'URL est gérée par une RegExp.
+  * <strong>min_length</strong> - <strong>number</strong> - <strong>default = 1</strong> -La longueur minimale du champ
+  * <strong>max_length</strong> - <strong>number</strong> -La longueur maximale du champ</p>
+<p>## Exemple d'utilisation pour un formulaire avec plusieurs onglets
+  Dans mon fichier typescript :</p>
+<pre><code>// Les différents onglets et la conf pour le FormBuilder.
+private infos1 = {
+  title: 'Informations 1',
+  fields: {
+    identifiant: {label: 'identifiant', type: 'text', required: true},
+    année: {label: 'Année de création', type: 'text', pattern: '[0-9][0-9][0-9][0-9]'},
+    nom: {label: 'Nom', type: 'text'},
+    description: {label: 'Description', type: 'textarea'},
+    langues: {label: 'Langue(s)', type: 'autocomplete', required: true, config: this.configLangues, add: this.addLangue, delete: this.deleteLangue, data: this.all_langues},
+   }
+};
+private infos2 = {
+  title: 'Informations 2',
+  fields: {
+    continent: {
+      label: 'Continent', type: 'select',
+      options: [
+        {value: 'Afrique', label: 'Afrique'},
+        {value: 'Amérique du Nord', label: 'Amérique du Nord'},
+        {value: 'Amérique du Sud', label: 'Amérique du Sud'},
+        {value: 'Antarctique', label: 'Antarctique'},
+        {value: 'Asie', label: 'Asie'},
+        {value: 'Europe', label: 'Europe'},
+        {value: 'Océanie', label: 'Océanie'},
+      ]
+    },
+    telephone: {label: 'Téléphone', type: 'text', error_message: 'Merci de saisir un numéro correct.'},
+    mail: {label: 'Email', type: 'email'},
+    web: {label: 'web1', type: 'url'},
+  }
+};
+public fields = [
+  this.infos1,
+  this.infos2
+];
+
+public agence: Model = new Model();
+public scope = this;
+</code></pre>
+<p>Dans mon template :</p>
+<pre><code>&lt;form-builder [(fields)]="fields"
+              [scope]="scope"
+              [(model)]="model"
+              [type]="'tabs'"
+              (cancel)="cancel()"
+              (save)="save()"
+&gt;
+&lt;/form-builder&gt;
+</code></pre>
+<p><img alt="Exemple de formulaire avec onglets" src="./img/form-builder.png" /></p>
 <h1 id="graph">Graph</h1>
 <p><strong>BarChart</strong></p>
 <p><img alt="Exemple de graphique en barre" src="./img/bargraph.png" /></p>
@@ -936,5 +1136,5 @@ dans les datas</li>
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2017-08-09 09:01:47
+Build Date UTC : 2017-10-27 14:36:18
 -->
