@@ -1,0 +1,13 @@
+<textarea [required]="field.required"
+          [name]="field.id"
+          [id]="field.id"
+          [placeholder]="field.placeholder"
+          [class]="field.input_class"
+          (keyup)="checkValidity($event)"
+          [(ngModel)]="model[field.id]"
+          [minlength]="field.min_length"
+          [maxlength]="field.max_length"
+          [disabled]="field.isDisabled()"
+          [readonly]="field.readonly"
+          provide-parent-form
+>{{field.value}}</textarea>

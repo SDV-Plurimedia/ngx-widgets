@@ -1,0 +1,25 @@
+/deep/ input.ng-valid[required],
+/deep/select.ng-valid[required],
+/deep/textarea.ng-valid[required],
+/deep/ datepicker.ng-valid input,
+/deep/ autocomplete.ng-valid a,
+/deep/ ckeditor.ng-valid div.cke{
+         border-left: 5px solid #42A948;
+}
+
+/deep/input.ng-invalid,
+/deep/select.ng-invalid,
+/deep/textarea.ng-invalid,
+/deep/ datepicker.ng-invalid input,
+/deep/ autocomplete.ng-invalid a,
+/deep/ ckeditor.ng-invalid div.cke{
+         border-left: 5px solid #a94442;
+}
+
+/deep/ span.custom-radio.ng-invalid, /deep/ span.custom-checkbox.ng-invalid  {
+  border: 2px solid #a94442;
+}
+
+/deep/ span.custom-radio.ng-valid.checked.required, /deep/ span.custom-checkbox.ng-valid.required.checked {
+  border: 1px solid #42A948;
+}

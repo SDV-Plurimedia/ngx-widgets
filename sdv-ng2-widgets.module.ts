@@ -38,7 +38,26 @@ import { TreeviewComponent } from './_widgets/treeview/treeview';
 import { WizardComponent } from './_widgets/wizard/wizard';
 import { WizardStepComponent } from './_widgets/wizard/step';
 
+// FormBuilder
+import { FieldFactoryComponent} from './_widgets/form-builder/_widgets/field-factory/field-factory';
+import { FieldComponent} from './_widgets/form-builder/_widgets/field-factory/fields/field';
+import { FieldAutocompleteComponent} from './_widgets/form-builder/_widgets/field-factory/fields/autocomplete/autocomplete';
+import { FieldCheckboxComponent} from './_widgets/form-builder/_widgets/field-factory/fields/checkbox/checkbox';
+import { FieldCheckboxesComponent} from './_widgets/form-builder/_widgets/field-factory/fields/checkboxes/checkboxes';
+import { FieldCKEditorComponent} from './_widgets/form-builder/_widgets/field-factory/fields/ckeditor/ckeditor';
+import { FieldDatepickerComponent} from './_widgets/form-builder/_widgets/field-factory/fields/datepicker/datepicker';
+import { FieldEmailComponent} from './_widgets/form-builder/_widgets/field-factory/fields/email/email';
+import { FieldNumberComponent} from './_widgets/form-builder/_widgets/field-factory/fields/number/number';
+import { FieldRadiosComponent} from './_widgets/form-builder/_widgets/field-factory/fields/radios/radios';
+import { FieldSelectComponent} from './_widgets/form-builder/_widgets/field-factory/fields/select/select';
+import { FieldTextComponent} from './_widgets/form-builder/_widgets/field-factory/fields/text/text';
+import { FieldTextareaComponent} from './_widgets/form-builder/_widgets/field-factory/fields/textarea/textarea';
+import { FieldUrlComponent} from './_widgets/form-builder/_widgets/field-factory/fields/url/url';
+import { FormBuilderComponent} from './_widgets/form-builder/form-builder';
+import { ErrorMessageComponent} from './_widgets/form-builder/_widgets/error-message/error-message';
+
 let widgets =  [
+
   AutocompleteComponent,
   BigDatatableComponent,
   BlocCardComponent,
@@ -65,16 +84,36 @@ let widgets =  [
   TouchButtonLinkComponent,
   TreeviewComponent,
   WizardComponent,
-  WizardStepComponent
+  WizardStepComponent,
+
+  // FormBuilder
+  FieldFactoryComponent,
+  FieldComponent,
+  FieldAutocompleteComponent,
+  FieldCheckboxComponent,
+  FieldCheckboxesComponent,
+  FieldCKEditorComponent,
+  FieldDatepickerComponent,
+  FieldEmailComponent,
+  FieldNumberComponent,
+  FieldRadiosComponent,
+  FieldSelectComponent,
+  FieldTextComponent,
+  FieldTextareaComponent,
+  FieldUrlComponent,
+  FormBuilderComponent,
+  ErrorMessageComponent
 ];
 
 // les directives
 import { DNDDirective } from './_directives/dnd';
 import { LazyloadDirective } from './_directives/lazyload';
+import { ProvideParentFormDirective } from './_directives/provide-parent-form'
 
 let directives = [
   DNDDirective,
-  LazyloadDirective
+  LazyloadDirective,
+  ProvideParentFormDirective
 ];
 
 // les pipes

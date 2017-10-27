@@ -1,0 +1,63 @@
+<ng-container *ngFor="let field of fields">
+  <div [ngSwitch]="field.type" provide-parent-form>
+    <div class="form-group" [hidden]="field.isHidden()">
+
+      <label [attr.for]="field.id" [class]="field.label_class">{{field.label}}</label>
+
+      <div [class]="field.input_container_class">
+
+        <ng-container *ngSwitchCase="'url'">
+          <field-url [field]="field" [model]="model" [form]="form"></field-url>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'textarea'">
+          <field-textarea [field]="field" [model]="model" [form]="form"></field-textarea>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'email'">
+          <field-email [field]="field" [model]="model" [form]="form"></field-email>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'number'">
+          <field-number [field]="field" [model]="model" [form]="form"></field-number>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'select'">
+          <field-select [field]="field" [model]="model" [form]="form"></field-select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'radios'">
+          <field-radios [field]="field" [model]="model" [form]="form"></field-radios>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'checkbox'">
+          <field-checkbox [field]="field" [model]="model" [form]="form"></field-checkbox>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'checkboxes'">
+          <field-checkboxes [field]="field" [model]="model" [form]="form"></field-checkboxes>
+        </ng-container>
+
+        <!-- SDV Widgets -->
+        <ng-container *ngSwitchCase="'autocomplete'">
+          <field-autocomplete [field]="field" [model]="model" [form]="form"></field-autocomplete>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'datepicker'">
+          <field-datepicker [field]="field" [model]="model" [form]="form"></field-datepicker>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'ckeditor'">
+          <field-ckeditor [field]="field" [model]="model" [form]="form"></field-ckeditor>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <field-text [field]="field" [model]="model" [form]="form" provide-parent-form></field-text>
+        </ng-container>
+
+        <error-message [field]="field" [model]="model"></error-message>
+      </div>
+
+    </div>
+  </div>
+</ng-container>

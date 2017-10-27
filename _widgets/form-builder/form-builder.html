@@ -1,0 +1,22 @@
+<form #form="ngForm" class="form-horizontal">
+
+    <ng-container *ngIf="formBuilder.type === 'classic'">
+        <field-factory [fields]="formBuilder.fields" [model]="formBuilder.model" [form]="formBuilder"></field-factory>
+    </ng-container>
+
+    <ng-container *ngIf="formBuilder.type === 'tabs'">
+      <tabpane>
+        <tab *ngFor="let tab of formBuilder.tabs" [tabtitle]="tab.title">
+          <field-factory [fields]="tab.fields" [model]="formBuilder.model" [form]="formBuilder"></field-factory>
+        </tab>
+      </tabpane>
+    </ng-container>
+
+    <div class="col-lg-8 col-offset-10">
+      <div class="form-group pull-right">
+        <button [disabled]="!formBuilder.isValid()" class="btn btn-success" (click)="emitSave()">{{saveLabel}}</button>
+        <button class="btn btn-danger" (click)="emitCancel()">{{cancelLabel}}</button>
+      </div>
+    </div>
+
+</form>

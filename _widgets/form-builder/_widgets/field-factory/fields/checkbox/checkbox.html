@@ -1,0 +1,10 @@
+<input type="checkbox" provide-parent-form
+       [required]="field.required"
+       (change)="checkValidity($event)"
+       [(ngModel)]="model[field.id]"
+       [id]="field.id"
+       [name]="field.id"
+       [checked]="model[field.id]"
+       [disabled]="field.isDisabled()"
+>
+<span class="custom-checkbox"></span>

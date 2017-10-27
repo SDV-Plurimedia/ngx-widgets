@@ -53,11 +53,6 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     if (typeof this.config.modifyPlaceholder === 'undefined') {
       this.config.modifyPlaceholder = true;
     }
-
-    // Pour afficher les items séléctionnés à droite du placeholder.
-    if (typeof this.config.displayAddedItem === 'undefined') {
-      this.config.displayAddedItem = false;
-    }
   }
 
   ngOnChanges(changes) {
