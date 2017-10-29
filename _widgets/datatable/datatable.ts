@@ -65,16 +65,24 @@ export class DatatableComponent implements DoCheck, OnDestroy {
 
   buildTable() {
     this.table_elem = jQuery(this._element.nativeElement).find('table');
-    this.table = this.table_elem.DataTable({
-        language: this.language,
-        paging: this.paging,
-        ordering: this.ordering,
-        info: this.info,
-        initComplete: (settings, json) => {
-          jQuery(this._element.nativeElement).find('.dataTables_paginate li').addClass('page-item');
-          jQuery(this._element.nativeElement).find('.dataTables_paginate li a').addClass('page-link');
-        }
-    });
+    let datatableConfig = {
+      language: this.language,
+      paging: this.paging,
+      ordering: this.ordering,
+      info: this.info,
+      initComplete: (settings, json) => {
+        jQuery(this._element.nativeElement).find('.dataTables_paginate li').addClass('page-item');
+        jQuery(this._element.nativeElement).find('.dataTables_paginate li a').addClass('page-link');
+      }
+    };
+
+    if (this.buttons) {
+      datatableConfig['columnDefs'] = [
+        {orderable: false, targets: this.structure.length}
+      ];
+    }
+
+    this.table = this.table_elem.DataTable(datatableConfig);
 
     /** On surveille le dom pour ne pas perdre les classes bootstrap4*/
     if (document.querySelector('.dataTables_paginate') != null) {
