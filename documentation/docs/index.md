@@ -398,6 +398,7 @@ Les types de champs pris en compte sont les suivants :
  * **[datepicker](#datepicker)**
  * **[email](#email)**
  * **[number](#number)**
+ * **[password](#text)**
  * **[radios](#radios)**
  * **[select](#select)**
  * **[text](#text)**

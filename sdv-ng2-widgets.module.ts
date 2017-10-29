@@ -48,6 +48,7 @@ import { FieldCKEditorComponent} from './_widgets/form-builder/_widgets/field-fa
 import { FieldDatepickerComponent} from './_widgets/form-builder/_widgets/field-factory/fields/datepicker/datepicker';
 import { FieldEmailComponent} from './_widgets/form-builder/_widgets/field-factory/fields/email/email';
 import { FieldNumberComponent} from './_widgets/form-builder/_widgets/field-factory/fields/number/number';
+import { FieldPasswordComponent} from './_widgets/form-builder/_widgets/field-factory/fields/password/password';
 import { FieldRadiosComponent} from './_widgets/form-builder/_widgets/field-factory/fields/radios/radios';
 import { FieldSelectComponent} from './_widgets/form-builder/_widgets/field-factory/fields/select/select';
 import { FieldTextComponent} from './_widgets/form-builder/_widgets/field-factory/fields/text/text';
@@ -96,6 +97,7 @@ let widgets =  [
   FieldDatepickerComponent,
   FieldEmailComponent,
   FieldNumberComponent,
+  FieldPasswordComponent,
   FieldRadiosComponent,
   FieldSelectComponent,
   FieldTextComponent,
