@@ -510,70 +510,70 @@ Plusieurs cases à cocher.
   Les checkboxes peuvent être en required et être utilisées avec une méthode de vérification (par exemple il faut au moins que deux soient cochées).
   
   
-  ###### CKEditor<a id="ckeditor"></a>
-  Un widget CKEditor.
-  * **drop** - **any** -L'évenement déclenché lors du drop sur le CKEditor
-  * **config** - **any** -La configuration du CKEditor (voir partie CKEditor)
+###### CKEditor<a id="ckeditor"></a>
+Un widget CKEditor.
+* **drop** - **any** -L'évenement déclenché lors du drop sur le CKEditor
+* **config** - **any** -La configuration du CKEditor (voir partie CKEditor)
+
+  
+###### Datepicker<a id="datepicker"></a>
+Un widget Datepicker.
+* **view_format** - **string** - **default = 'DD/MM/YYYY'** -Le format de la date à l'affichage
+* **model_format** - **string** - **default = 'YYYY-MM-DD'** -Le format de la date dans le model
+* **first_week_day_sunday** - **boolean** - **default = false** -Si le premier jour de la semaine dans le calendrier est Dimanche
+* **init_empty** - **boolean** - **default = false** -Si la date doit être vide si elle n'est pas renseigné, sinon la date du jour apparaitra
   
   
-  ###### Datepicker<a id="datepicker"></a>
-  Un widget Datepicker.
-  * **view_format** - **string** - **default = 'DD/MM/YYYY'** -Le format de la date à l'affichage
-  * **model_format** - **string** - **default = 'YYYY-MM-DD'** -Le format de la date dans le model
-  * **first_week_day_sunday** - **boolean** - **default = false** -Si le premier jour de la semaine dans le calendrier est Dimanche
-  * **init_empty** - **boolean** - **default = false** -Si la date doit être vide si elle n'est pas renseigné, sinon la date du jour apparaitra
-  
-  
-  ###### Email<a id="email"></a>
-  Un input email. La validité de l'email est gérée par une directive Angular.
-  * **min_length** - **number** - **default = 1** -La longueur minimale du champ
-  * **max_length** - **number** -La longueur maximale du champ
-  
-  
-  ###### Number<a id="number"></a>
-  Un input number
-  * **min** - **number** -La valeur minimale de l'input
-  * **max** - **number** -La valeur maximale de l'input
-  * **step** - **number** -Pour avancer de step en step dans la valeur de l'input
-  
-  
-  ###### Radios<a id="radios"></a>
-  Des radiosbuttons.
-  * **inline** - **boolean** - **default = false** - Si inline vaut true, alors les radiobuttons seront sur la même ligne sinon ils seront à la ligne à chaque fois
-  * **options** - **[]** -Un tableau d'objet contenant les différents radiobuttons à afficher
-      
-      
-        options = [{value: 'value', label: 'label}]
+###### Email<a id="email"></a>
+Un input email. La validité de l'email est gérée par une directive Angular.
+* **min_length** - **number** - **default = 1** -La longueur minimale du champ
+* **max_length** - **number** -La longueur maximale du champ
 
 
-  ###### Select<a id="select"></a>
-  Un select.
-  * **options** - **[]** -Un tableau d'objet contenant les différentes options à afficher
-      
-      
-        options = [{value: 'value', label: 'label}]
-   
-   
-  ###### Text<a id="text"></a>
-  Un input text.
-  * **min_length** - **number** - **default = 1** -La longueur minimale du champ
-  * **max_length** - **number** -La longueur maximale du champ
-     
-  ###### <a id="textarea"></a>
-  Un textarea.
-  * **rows** - **number** -Le nombre de ligne du textarea
+###### Number<a id="number"></a>
+Un input number
+* **min** - **number** -La valeur minimale de l'input
+* **max** - **number** -La valeur maximale de l'input
+* **step** - **number** -Pour avancer de step en step dans la valeur de l'input
+
+
+###### Radios<a id="radios"></a>
+Des radiosbuttons.
+* **inline** - **boolean** - **default = false** - Si inline vaut true, alors les radiobuttons seront sur la même ligne sinon ils seront à la ligne à chaque fois
+* **options** - **[]** -Un tableau d'objet contenant les différents radiobuttons à afficher
   
   
-  ###### Url<a id="url"></a>
-  Un input url. La validité de l'URL est gérée par une RegExp.
-  * **min_length** - **number** - **default = 1** -La longueur minimale du champ
-  * **max_length** - **number** -La longueur maximale du champ
+    options = [{value: 'value', label: 'label}]
+
+
+###### Select<a id="select"></a>
+Un select.
+* **options** - **[]** -Un tableau d'objet contenant les différentes options à afficher
+      
+      
+    options = [{value: 'value', label: 'label}]
+
+
+###### Text/password<a id="text"></a>
+Un input text ou password.
+* **min_length** - **number** - **default = 1** -La longueur minimale du champ
+* **max_length** - **number** -La longueur maximale du champ
+ 
+###### Textarea<a id="textarea"></a>
+Un textarea.
+* **rows** - **number** -Le nombre de ligne du textarea
+
+
+###### Url<a id="url"></a>
+Un input url. La validité de l'URL est gérée par une RegExp.
+* **min_length** - **number** - **default = 1** -La longueur minimale du champ
+* **max_length** - **number** -La longueur maximale du champ
     
     
 
-  ## Exemple d'utilisation pour un formulaire avec plusieurs onglets
-  Dans mon fichier typescript :
-  
+## Exemple d'utilisation pour un formulaire avec plusieurs onglets
+Dans mon fichier typescript :
+
     // Les différents onglets et la conf pour le FormBuilder.
     private infos1 = {
       title: 'Informations 1',
@@ -612,9 +612,9 @@ Plusieurs cases à cocher.
     
     public agence: Model = new Model();
     public scope = this;
-    
-    
-  Dans mon template :
+
+
+Dans mon template :
 
     <form-builder [(fields)]="fields"
                   [scope]="scope"
