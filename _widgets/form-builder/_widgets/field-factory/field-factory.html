@@ -30,6 +30,10 @@
           <field-radios [field]="field" [model]="model" [form]="form"></field-radios>
         </ng-container>
 
+        <ng-container *ngSwitchCase="'password'">
+          <field-password [field]="field" [model]="model" [form]="form"></field-password>
+        </ng-container>
+
         <ng-container *ngSwitchCase="'checkbox'">
           <field-checkbox [field]="field" [model]="model" [form]="form"></field-checkbox>
         </ng-container>
