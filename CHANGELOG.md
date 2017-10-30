@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.3.1 - 30/10/2017
+* FIX : Textearea field value
+* ADD: Input password support
+
 ## 1.3.0 - 27/10/2017
 * ADD : Ajout du widget FormBuilder
 * UPD : Retrait code inutile dans le widget autocomplete
@@ -28,7 +32,7 @@
 * ADD: Ajout d'un widget permettant d'afficher des tags dans un input
 * FIX: fix keys pipe
 * FIX: fix bug chevron
-* ADD: Autocomplete: Ajout trim sur la valeur de l'input et fix valeur par défaut.  
+* ADD: Autocomplete: Ajout trim sur la valeur de l'input et fix valeur par défaut.
 * FIX: fix bug autocomplete
 
 ## 1.0.3 - 12/04/2017
