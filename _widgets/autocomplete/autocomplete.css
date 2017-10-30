@@ -24,6 +24,6 @@ a {
   line-height: 1.5;
 }
 
-autocomplete > div:focus{
+div:focus {
   outline: none;
 }
