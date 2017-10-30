@@ -7,7 +7,9 @@
                         id="item_{{data[params.primary_key]}}" (click)="getNextLevel(next, data[params.primary_key])">
                 <div class="col-md-4" *ngIf="buttons && buttons.length > 0">
                   <ng-template ngFor let-button [ngForOf]="buttons">
-                    <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>
+                    <ng-container *ngIf="displayButton(button, data)">
+                      <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>
+                    </ng-container>
                   </ng-template>
                 </div>
                 <div class="col-md-6">

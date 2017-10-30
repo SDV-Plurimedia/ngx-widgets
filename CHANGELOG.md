@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.3.2 - 30/10/2017
+* FIX : Prise en compte de l'affichage des boutons dans le template
+* FIX : Css autocomplete
+
 ## 1.3.1 - 30/10/2017
 * FIX : Textearea field value
 * ADD: Input password support
