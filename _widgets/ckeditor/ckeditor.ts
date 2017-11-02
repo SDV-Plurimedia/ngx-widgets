@@ -53,6 +53,10 @@ export class CkeditorComponent  implements OnChanges {
     }, this);
     this.instance.on('afterCommandExec', this.handleAfterCommandExec, this);
     this.isLoaded = true;
+
+    if(this.config.dtd.$removeEmpty) {
+      this.changeRemoveEmpty(this.config.dtd.$removeEmpty)
+    }
   }
 
   public textChanged(event = null) {
@@ -67,5 +71,16 @@ export class CkeditorComponent  implements OnChanges {
         this.textChanged();
       }, this));
     }
+  }
+
+  /**
+   * Override the default $removeEmpty
+   * @type {[type]}
+   */
+  private changeRemoveEmpty($removeEmpty) {
+    let keys = Object.keys($removeEmpty);
+    keys.forEach(key => {
+      CKEDITOR.dtd['$removeEmpty'][key] = $removeEmpty[key];
+    });
   }
 }
