@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.0 - 07/11/2017
+* ADD: Support de la possibilité de surcharger $removeEmpty de CKEditor
+* ADD: Ajout du widget form-builder
+
 ## 1.3.2 - 30/10/2017
 * FIX : Prise en compte de l'affichage des boutons dans le template
 * FIX : Css autocomplete
