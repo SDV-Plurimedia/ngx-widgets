@@ -54,7 +54,7 @@ export class CkeditorComponent  implements OnChanges {
     this.instance.on('afterCommandExec', this.handleAfterCommandExec, this);
     this.isLoaded = true;
 
-    if (this.config.dtd.$removeEmpty) {
+    if (this.config && this.config.dtd && this.config.dtd.$removeEmpty) {
       this.changeRemoveEmpty(this.config.dtd.$removeEmpty);
     }
   }
