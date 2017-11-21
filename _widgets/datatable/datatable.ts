@@ -1,5 +1,5 @@
 import {Component, ElementRef, IterableDiffers, Input, DoCheck, OnDestroy} from '@angular/core';
-import { LoaderService } from '../../_services/loader';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
   selector: 'datatable',
@@ -33,22 +33,23 @@ export class DatatableComponent implements DoCheck, OnDestroy {
     'sZeroRecords':    'Aucun &eacute;l&eacute;ment &agrave; afficher',
     'sEmptyTable':     'Aucune donn&eacute;e disponible dans le tableau',
     'oPaginate': {
-        'sFirst':      'Premier',
-        'sPrevious':   'Pr&eacute;c&eacute;dent',
-        'sNext':       'Suivant',
-        'sLast':       'Dernier'
+      'sFirst':      'Premier',
+      'sPrevious':   'Pr&eacute;c&eacute;dent',
+      'sNext':       'Suivant',
+      'sLast':       'Dernier'
     },
     'oAria': {
-        'sSortAscending':  ': activer pour trier la colonne par ordre croissant',
-        'sSortDescending': ': activer pour trier la colonne par ordre d&eacute;croissant'
+      'sSortAscending':  ': activer pour trier la colonne par ordre croissant',
+      'sSortDescending': ': activer pour trier la colonne par ordre d&eacute;croissant'
     }
   };
 
   private differ: any;
 
   constructor(
-    private _element: ElementRef,
-    private differs: IterableDiffers
+      private _element: ElementRef,
+      private differs: IterableDiffers,
+      private _sanitizer: DomSanitizer
   ) {
     this.differ = differs.find([]).create(null);
   }
@@ -127,19 +128,35 @@ export class DatatableComponent implements DoCheck, OnDestroy {
     }
   }
 
-  getValue(ligne, id: string) {
+  getValue(ligne, id: string, html: boolean = false) {
     try {
+      let res = '';
       if (id.indexOf('.') === -1) {
-        return ligne[id];
+        res = ligne[id];
       } else {
-        let res = ligne;
+        res = ligne;
         id.split('.').forEach((value) => {
           res = res[value];
         });
+      }
+
+      if (html) {
+        return this.sanitizeHtml(res);
+      } else {
         return res;
       }
+
     } catch (e) {
       return '-- valeur introuvable --';
     }
+  }
+
+  /**
+   * On rends le html safe pour l'affichage sinon certaines balises (button par ex) ne passent pas.
+   * @param html
+   * @returns {SafeHtml}
+   */
+  private sanitizeHtml(html): SafeHtml {
+    return this._sanitizer.bypassSecurityTrustHtml(html);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
 import {Filter} from '../filter/filter.component';
 import {Pager} from '../pager/pager';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 
 /**
@@ -309,7 +310,7 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
    @Input() bigdata: BigDatatable;
    @Output() message = new EventEmitter();  // Renvoie une string success ou error.
 
-   constructor() {}
+   constructor(private _sanitizer: DomSanitizer) {}
 
    ngOnInit() {
        this.bigdata.setMessage(this.message);
@@ -320,5 +321,14 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
            sub.unsubscribe();
        });
    }
+
+    /**
+     * On rends le html safe pour l'affichage sinon certaines balises (button par ex) ne passent pas.
+     * @param html
+     * @returns {SafeHtml}
+     */
+    public sanitizeHtml(html): SafeHtml {
+        return this._sanitizer.bypassSecurityTrustHtml(html);
+    }
 
 }
