@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.2 - 21/11/2017
+* FIX: SanitizeHTML in datatable 
+
 ## 1.4.1 - 07/11/2017
 * FIX: Test sur la presence de l'objet config.dtd 
 
