@@ -57,7 +57,7 @@
                         <!-- HTML -->
                         <ng-container *ngIf="column.state == 2">
                             <ng-container *ngIf="!column.pipe">
-                                <td class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="object[column.id]"></td>
+                                <td class="th_{{ (column.size ? column.size : 0) }}" [innerHTML]="sanitizeHtml(object[column.id])"></td>
                             </ng-container>
 
                             <ng-container *ngIf="column.pipe;">
@@ -72,7 +72,7 @@
                                 </ng-container>
                                 <ng-container  *ngIf="!column.pipe_async">
                                     <td class="th_{{ (column.size ? column.size : 0) }}"
-                                        [innerHTML]="column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null))"></td>
+                                        [innerHTML]="sanitizeHtml(column.pipe.transform((object[column.id] ? object[column.id] : ''), (column.params ? column.params : null)))"></td>
                                 </ng-container>
                             </ng-container>
                         </ng-container>
@@ -99,7 +99,7 @@
                             <ng-container *ngIf="column.function_type == 'content'">
                                 <td class="th_{{ (column.size ? column.size : 0) }}">
                                     <ng-container *ngIf="object[column.id] != 'undefined'">
-                                        <span [ngClass]="column.class ? column.class : ''" [innerHTML]="column.function.apply(bigdata.parent_scope, [object])" ></span>
+                                        <span [ngClass]="column.class ? column.class : ''" [innerHTML]="sanitizeHtml(column.function.apply(bigdata.parent_scope, [object]))" ></span>
                                     </ng-container>
                                 </td>
                             </ng-container>

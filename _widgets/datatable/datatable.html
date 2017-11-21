@@ -21,7 +21,7 @@
         <tr class="dt-body-row" >
             <ng-container *ngFor="let champ of structure">
                 <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
-                <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id)"></td>
+                <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
                 <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
             </ng-container>
             <td *ngIf="buttons">
