@@ -156,7 +156,7 @@ export class DatatableComponent implements DoCheck, OnDestroy {
    * @param html
    * @returns {SafeHtml}
    */
-  private sanitizeHtml(html) : SafeHtml {
+  private sanitizeHtml(html): SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(html);
   }
 }

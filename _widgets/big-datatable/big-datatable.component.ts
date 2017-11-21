@@ -327,7 +327,7 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
      * @param html
      * @returns {SafeHtml}
      */
-    public sanitizeHtml(html) : SafeHtml {
+    public sanitizeHtml(html): SafeHtml {
         return this._sanitizer.bypassSecurityTrustHtml(html);
     }
 
