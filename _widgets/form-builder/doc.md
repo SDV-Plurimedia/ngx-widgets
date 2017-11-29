@@ -7,6 +7,7 @@ Les types de champs pris en compte sont les suivants :
  * **[checkboxes](#checkboxes)**
  * **[ckeditor](#ckeditor)**
  * **[datepicker](#datepicker)**
+ * **[dynamic](#dynamic)**
  * **[email](#email)**
  * **[number](#number)**
  * **[password](#text)**
@@ -16,7 +17,7 @@ Les types de champs pris en compte sont les suivants :
  * **[textarea](#textarea)**
  * **[url](#url)**
  
-De base, chacun de ces champs bénéficie d'une méthode de validité par défaut qui vérifie si le champ est valide ainsi que
+De base, chacun de ces champs bénéficie d'une méthode de validité (**SAUF le dynamic**) par défaut qui vérifie si le champ est valide ainsi que
 d'un message d'erreur correspondant. Il est néanmoins possible de surcharger ces méthodes de vérifications et messages d'erreurs.
 Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moins un champ est encore invalid.
  
@@ -91,7 +92,7 @@ Si **id_field** n'existe pas un log d'erreur sera présent dans la console.
  * **input_container_class** - **string** - **default = 'col-md-8'** - La classe CSS du conteneur du champ
  * **input_class** - **string** - **default = 'form-control'** - La classe CSS appliquer sur le champ
  * **label_class** - **string** - **default = 'col-md-2 control-label'** - La classe CSS à appliquer sur le label du champ
-  
+ * **display_label** - **boolean** - **default = true** - Si, false alors on affiche pas le label mais un span avec sa classe sera à l'écran (pour que le contenu soit toujours aligné).
 Les méthodes de callback peuvent prendre en paramètre un objet Field (contenant toutes les informations du champ). Il est possible de modifier ce dernier et donc
 par exemple de changer son message d'erreur à la volée.
   
@@ -134,6 +135,15 @@ Un widget Datepicker.
 * **first_week_day_sunday** - **boolean** - **default = false** -Si le premier jour de la semaine dans le calendrier est Dimanche
 * **init_empty** - **boolean** - **default = false** -Si la date doit être vide si elle n'est pas renseigné, sinon la date du jour apparaitra
   
+###### Dynamic<a id="dynamic"></a>
+Un widget custom.
+* **class_component** - **any** -La classe de ce composant
+* **widgetsInputs** - **Array** -Les différents champs que l'on souhaite ajouter en plus dans notre composant.
+Par défaut, les composants dynamiques recoivent en input **model**, **field** et **form**. Pour prendre en compte les modifications
+sur un des champs du **model**, il faut soit :
+
+  * Le faire dans le composant (**this.model[this.field.id]="bidule")
+  * Avoir un Output() updateModel qui va s'occuper d'émettre la nouvelle valeur
   
 ###### Email<a id="email"></a>
 Un input email. La validité de l'email est gérée par une directive Angular.
@@ -189,6 +199,7 @@ Dans mon fichier typescript :
     private infos1 = {
       title: 'Informations 1',
       fields: {
+        widget: {label: 'widget', type: 'dynamic', component_class=WidgetComponent, display_label: false},
         identifiant: {label: 'identifiant', type: 'text', required: true},
         année: {label: 'Année de création', type: 'text', pattern: '[0-9][0-9][0-9][0-9]'},
         nom: {label: 'Nom', type: 'text'},
