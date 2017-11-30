@@ -21,6 +21,7 @@ export class Field {
   public input_container_class = 'col-md-8';
   public input_class: string = 'form-control';
   public label_class: string = 'col-md-2 control-label';
+  public display_label: boolean = true;
 
   // Text
   public min_length: number = 1;
@@ -55,6 +56,10 @@ export class Field {
   // Checkboxes
   public inline: boolean = false;
   public checked: boolean = false;
+
+  // Dynamic field
+  public class_component: any = null;
+  public widgetInputs: any = {};
 
   constructor(id, obj: any, scope: any) {
     this.id = id;

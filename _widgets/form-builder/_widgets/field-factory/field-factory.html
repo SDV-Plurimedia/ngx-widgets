@@ -2,7 +2,10 @@
   <div [ngSwitch]="field.type" provide-parent-form>
     <div class="form-group" [hidden]="field.isHidden()">
 
-      <label [attr.for]="field.id" [class]="field.label_class">{{field.label}}</label>
+      <label [attr.for]="field.id" [class]="field.label_class" *ngIf="field.display_label; else invisible_label">{{field.label}}</label>
+      <ng-template #invisible_label>
+        <span [class]="field.label_class"></span>
+      </ng-template>
 
       <div [class]="field.input_container_class">
 
@@ -53,6 +56,10 @@
 
         <ng-container *ngSwitchCase="'ckeditor'">
           <field-ckeditor [field]="field" [model]="model" [form]="form"></field-ckeditor>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'dynamic'">
+          <field-dynamic #widgets [model]="model" [form]="form" [field]="field"></field-dynamic>
         </ng-container>
 
         <ng-container *ngSwitchDefault>

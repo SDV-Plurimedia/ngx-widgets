@@ -54,6 +54,7 @@ import { FieldSelectComponent} from './_widgets/form-builder/_widgets/field-fact
 import { FieldTextComponent} from './_widgets/form-builder/_widgets/field-factory/fields/text/text';
 import { FieldTextareaComponent} from './_widgets/form-builder/_widgets/field-factory/fields/textarea/textarea';
 import { FieldUrlComponent} from './_widgets/form-builder/_widgets/field-factory/fields/url/url';
+import { FieldDynamicComponent} from './_widgets/form-builder/_widgets/field-factory/fields/dynamic/dynamic';
 import { FormBuilderComponent} from './_widgets/form-builder/form-builder';
 import { ErrorMessageComponent} from './_widgets/form-builder/_widgets/error-message/error-message';
 
@@ -103,6 +104,7 @@ let widgets =  [
   FieldTextComponent,
   FieldTextareaComponent,
   FieldUrlComponent,
+  FieldDynamicComponent,
   FormBuilderComponent,
   ErrorMessageComponent
 ];
