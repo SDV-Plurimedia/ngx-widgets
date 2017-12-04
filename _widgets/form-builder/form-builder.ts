@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder} from './_models/form_builder';
 
 @Component({
   selector: 'form-builder',
   templateUrl: 'form-builder.html'
 })
-export class FormBuilderComponent implements OnInit {
+export class FormBuilderComponent implements OnInit, OnChanges {
 
   @Input() public type: string = 'classic';
   @Input() public fields: any = {};
@@ -23,6 +23,21 @@ export class FormBuilderComponent implements OnInit {
 
   ngOnInit() {
     this.formBuilder = new FormBuilder(this.type, this.fields, this.model, this.scope, this.form);
+  }
+
+  /**
+   * Si le model change, il faut également reporter la modif dans le FormBuilder sinon aucune modification
+   * après le premier enregistrement ne sera réalisée...
+   * @param changes
+   */
+  ngOnChanges(changes) {
+    if (this.formBuilder) {
+      if (changes.model) {
+        if (changes.model.currentValue) {
+          this.formBuilder.model = changes.model.currentValue;
+        }
+      }
+    }
   }
 
   /**
