@@ -43,7 +43,7 @@ export class FieldDynamicComponent implements OnInit, OnDestroy {
       this.subscriptions.push(sub);
     }
 
-    this.sendDataToDynamicField({});
+    this.sendDataToDynamicField();
   }
 
   /**
@@ -60,9 +60,8 @@ export class FieldDynamicComponent implements OnInit, OnDestroy {
 
   /**
    * Envoie des données à l'enfant.
-   * @param changes
    */
-  private sendDataToDynamicField(changes = null) {
+  private sendDataToDynamicField() {
     if (this.dynamicField) {
       // On envoit le model, le form et le field si jamais on veut l'utiliser dans notre composant dynamique.
       this.dynamicField.instance.model = this.model;
@@ -75,7 +74,6 @@ export class FieldDynamicComponent implements OnInit, OnDestroy {
           this.dynamicField.instance[property] = this.field.widgetInputs[property];
         });
       }
-      this.dynamicField.instance.ngOnChanges(changes);
     }
   }
 }

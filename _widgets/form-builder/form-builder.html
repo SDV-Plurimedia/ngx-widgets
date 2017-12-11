@@ -1,4 +1,4 @@
-<form #form="ngForm" class="form-horizontal">
+<form #form="ngForm" [class]=formClass>
 
     <ng-container *ngIf="formBuilder.type === 'classic'">
         <field-factory [fields]="formBuilder.fields" [model]="formBuilder.model" [form]="formBuilder"></field-factory>
@@ -12,7 +12,7 @@
       </tabpane>
     </ng-container>
 
-    <div class="col-lg-8 col-offset-10">
+    <div [class]="buttonsContainerClass" *ngIf="displayButtons">
       <div class="form-group pull-right">
         <button [disabled]="!formBuilder.isValid()" class="btn btn-success" (click)="emitSave()">{{saveLabel}}</button>
         <button class="btn btn-danger" (click)="emitCancel()">{{cancelLabel}}</button>
