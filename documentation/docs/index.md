@@ -419,26 +419,32 @@ Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moin
                   [(model)]="agence"
                   [type]="'tabs'"
                   (cancel)="cancel()"
-                  [saveLabel]="'Sauvegarder'"
-                  [cancelLabel]="'Retour'"
                   (save)="save()"
+                  [config]="config"
     >
     </form-builder>
     
- * **scope** est le composant dans lequel est contenu le form-builder
- * **type** est le type de formulaire soit **classic (par défaut)** soit **tabs** (sous forme d'onglet)
+ * **scope** - **any** - est le composant dans lequel est contenu le form-builder
+ * **type** - **string** - est le type de formulaire soit **classic (par défaut)** soit **tabs** (sous forme d'onglet)
  * **cancel** est la méthode de callback à appeller lors du clic sur le bouton "Annuler"
  * **save** est la méthode de callback à appeller lors du clic sur le bouton "Enregistrer"
- * **model** est l'objet qui va être édité/crée
- * **saveLabel** est le label du bouton pour la sauvegarde (par défaut vaut "Enregistrer"
- * **cancelLabel** est le label du bouton pour annuler (par défaut vaut "Annuler")
- * **fields** est soit un objet (cas du formulaire **classic**) soit un tableau d'objet (cas du formulaire **tabs**, voir I)B)1 et I)B)2)
+ * **model** - **any** - est l'objet qui va être édité/crée
+ * **fields** - **any** - est soit un objet (cas du formulaire **classic**) soit un tableau d'objet (cas du formulaire **tabs**, voir I)B)1 et I)B)2)
+ * **config** - **any** - est un objet contenant les différents champ possible à configurer :
+ 
+    * **saveLabel** - **string** - est le label du bouton pour la sauvegarde (par défaut vaut "Enregistrer")
+    * **cancelLabel** - **string** - est le label du bouton pour annuler (par défaut vaut "Annuler")
+    * **displayButtons** - **boolean** - true par défaut, si false alors les boutons du form-builder seront cachés
+    * **buttonsContainerClass** - **string** - est la classe CSS du conteneur des boutons du form-builder, vaut **col-md-10** par défaut
+    * **formClass** - **string** - est la classe CSS du form, par défaut vaut **form-horizontal**.
 
 ### B) Fields
   
 Dans les deux cas ci-dessous, **id_field** correspond à l'identifiant du champ ainsi que le nom de la propriété du model.
 Si **id_field** n'existe pas un log d'erreur sera présent dans la console.
-  
+Dans le cas du formulaire **tabs**, il est également possible de fournir pour chaque onglet une classe CSS à appliquer sur tous les différents champ
+que cet onglet contient, pour cela, il faut ajouter **tab_class: 'ma-class-css'**.
+
 #### 1) Cas du formulaire "classic"
   
       public fields = {
@@ -454,7 +460,8 @@ Si **id_field** n'existe pas un log d'erreur sera présent dans la console.
           fields: {
             id_field: {configuration_field},
             id_field2: {configuration_field2}
-          }
+          },
+          tab_class: 'ma-class-css'
         },
         {
           title: 'Le titre de mon onglet 2'
@@ -478,6 +485,7 @@ Si **id_field** n'existe pas un log d'erreur sera présent dans la console.
  * **verifyFunction** - **any** - Une fonction de callback servant à vérifier soi même le champ (doit renvoyer **true** si le champ est correct et **false** si il est incorrect)
  * **hiddenFunction** - **any** - Une fonction de callback servant à afficher/cacher un champ (doit renvoyer **true** pour le cacher et **false** pour l'afficher)
  * **disabledFunction** - **any** - Une fonction de callback servant à passer un champ en disabled (doit renvoyer **true** pour le passer en disabled et **false** pour le remettre en état "normal")
+ * **field_class** - **string** - **default = ''** - La classe CSS du champ (par exemple, pour passer le formulaire sur deux colonnes mettre **col-md-6** partout).
  * **input_container_class** - **string** - **default = 'col-md-8'** - La classe CSS du conteneur du champ
  * **input_class** - **string** - **default = 'form-control'** - La classe CSS appliquer sur le champ
  * **label_class** - **string** - **default = 'col-md-2 control-label'** - La classe CSS à appliquer sur le label du champ

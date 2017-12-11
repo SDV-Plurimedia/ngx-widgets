@@ -1,5 +1,5 @@
 <ng-container *ngFor="let field of fields">
-  <div [ngSwitch]="field.type" provide-parent-form>
+  <div [ngSwitch]="field.type" provide-parent-form [class]="field.field_class">
     <div class="form-group" [hidden]="field.isHidden()">
 
       <label [attr.for]="field.id" [class]="field.label_class" *ngIf="field.display_label; else invisible_label">{{field.label}}</label>
