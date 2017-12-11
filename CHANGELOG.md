@@ -1,5 +1,14 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.4 - 11/12/2017
+* FIX: AutoComplete: reduceResultList ne trim plus le contenu du champs HTML
+* FIX: FormBuilder: réagit au modification de l'objet (NgOnChanges)
+* ADD: FormBuilder: possibilité de gérer la classe css des champs
+
+## 1.4.3 - 01/12/2017
+* ADD: FormBuilder: point d'entrée pour widget custom
+ 
+
 ## 1.4.2 - 21/11/2017
 * FIX: SanitizeHTML in datatable 
 
