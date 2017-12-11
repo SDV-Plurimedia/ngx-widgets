@@ -74,15 +74,17 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   // reduit le nombre de resultat, en fonction de la valeur tapé
   reduceResultList() {
     this.results = [];
+    // Variable intermédiaire de recherche pour éviter de trimer la valeur dans le champ
+    let searchValue = '';
     if (this.inputValue) {
-      this.inputValue = this.inputValue.trim();
+      searchValue = this.inputValue.trim();
     }
-    if (this.inputValue && this.inputValue.length >= this.config.begin) {
+    if (searchValue && searchValue.length >= this.config.begin) {
           // filtre simple
           // this.results = this.data.filter(item => item.complete_label.toLowerCase().includes(this.inputValue.toLowerCase()));
 
       if (this.config.customSearch) {
-        this.config.customSearch.apply(this.config.scope, [this.inputValue]).subscribe(res => {
+        this.config.customSearch.apply(this.config.scope, [searchValue]).subscribe(res => {
           this.results = res;
           this.addRemoveData();
         });
@@ -92,7 +94,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
           let sub = new Observable(observer => {
             let res = slice.filter(item => {
                 let searchable_text = this.config.fieldSearch ? item[this.config.fieldSearch] : item[this.config.fieldDisplayed];
-              return this.slugify(searchable_text).includes(this.slugify(this.inputValue));
+              return this.slugify(searchable_text).includes(this.slugify(searchValue));
             });
             observer.next(res);
             observer.complete();
