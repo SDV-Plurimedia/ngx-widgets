@@ -13,16 +13,16 @@ export class PieChart implements Graph {
   protected href = window.location.href;
 
   constructor(datas: DataGraph[], color: ColorsForScale, id: string,
-              public width = 960, public height = 500 ) {
+              public width = 960, public height = 500) {
 
-      this.datas = datas;
-      this.colors = color;
-      this.id = id;
-      if (color.end_color !== undefined) {
-        this.setColorScale();
-      } else {
-        this.color_scale = ['rgb(' + color.start_color.r + ',' + color.start_color.g + ',' + color.start_color.b + ')'];
-      }
+    this.datas = datas;
+    this.colors = color;
+    this.id = id;
+    if (color.end_color !== undefined) {
+      this.setColorScale();
+    } else {
+      this.color_scale = ['rgb(' + color.start_color.r + ',' + color.start_color.g + ',' + color.start_color.b + ')'];
+    }
   }
 
 
@@ -39,7 +39,7 @@ export class PieChart implements Graph {
     };
     let c = {r: 0, g: 0, b: 0};
 
-    for (let i = 0; i < nb; i++ ) {
+    for (let i = 0; i < nb; i++) {
       c.r = Math.round(c1.r + i * diff.r);
       c.g = Math.round(c1.g + i * diff.g);
       c.b = Math.round(c1.b + i * diff.b);
@@ -48,80 +48,82 @@ export class PieChart implements Graph {
   }
 
   public loadGraph() {
-    let radius = Math.min(this.width, this.height) / 2 - 70;
+    if (document.getElementById(this.id)) {
+      let radius = Math.min(this.width, this.height) / 2 - 70;
 
-    let colors = d3
-    .scale
-    .ordinal()// <string>
-    .range(this.color_scale);
+      let colors = d3
+        .scale
+        .ordinal()// <string>
+        .range(this.color_scale);
 
-    let arc = d3
-    .svg
-    .arc()// <d3.layout.pie.Arc<DataGraph>>
-    .innerRadius(0)
-    .outerRadius(radius);
+      let arc = d3
+        .svg
+        .arc()// <d3.layout.pie.Arc<DataGraph>>
+        .innerRadius(0)
+        .outerRadius(radius);
 
-    let pie = d3
-      .layout
-      .pie() // <DataGraph>
-      .sort((a, b) => (a.label < b.label) ? -1 : 1)
-      .value(d => d.value);
+      let pie = d3
+        .layout
+        .pie() // <DataGraph>
+        .sort((a, b) => (a.label < b.label) ? -1 : 1)
+        .value(d => d.value);
 
-    let svg = d3.select('#' + this.id).append('svg')
-                  .attr('width', this.width).attr('height', this.height).attr('xmlns', 'http://www.w3.org/2000/svg')
-                  .append('g').attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
+      let svg = d3.select('#' + this.id).append('svg')
+        .attr('width', this.width).attr('height', this.height).attr('xmlns', 'http://www.w3.org/2000/svg')
+        .append('g').attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
 
-    let gradient = svg.append('defs').selectAll('.gradient')
-                .data(this.color_scale).enter().append('radialGradient')
-                .attr('id', (d, i) => 'gradient' + i)
-                .attr('gradientUnits', 'userSpaceOnUse')
-                .attr('cx', '0').attr('cy', '0').attr('r', radius * 2.5).attr('spreadMethod', 'pad');
+      let gradient = svg.append('defs').selectAll('.gradient')
+        .data(this.color_scale).enter().append('radialGradient')
+        .attr('id', (d, i) => 'gradient' + i)
+        .attr('gradientUnits', 'userSpaceOnUse')
+        .attr('cx', '0').attr('cy', '0').attr('r', radius * 2.5).attr('spreadMethod', 'pad');
 
-    gradient.append('stop').attr('offset', '0%').attr('stop-color', d => d);
-    gradient.append('stop').attr('offset', '30%')
-            .attr('stop-color', d => d)
-            .attr('stop-opacity', 1);
+      gradient.append('stop').attr('offset', '0%').attr('stop-color', d => d);
+      gradient.append('stop').attr('offset', '30%')
+        .attr('stop-color', d => d)
+        .attr('stop-opacity', 1);
 
-    gradient.append('stop').attr('offset', '70%')
-            .attr('stop-color', d => 'black')
-            .attr('stop-opacity', 1);
+      gradient.append('stop').attr('offset', '70%')
+        .attr('stop-color', d => 'black')
+        .attr('stop-opacity', 1);
 
-    let g = svg.selectAll('.arc')
-                .data(pie(this.datas))
-                .enter()
-                .append('g')
-                .attr('class', 'arc');
+      let g = svg.selectAll('.arc')
+        .data(pie(this.datas))
+        .enter()
+        .append('g')
+        .attr('class', 'arc');
 
-    g.append('path')
+      g.append('path')
         .attr('fill', (d, i) => 'url(' + this.href + '#gradient' + i + ')')
         .attr('stroke', 'black')
         .attr('d', arc);
-    g.append('text')
-        .attr('transform', function(d) {
-            return 'translate(' + Math.cos(((d.startAngle + d.endAngle - Math.PI) / 2)) * (radius) + ','
-                      + Math.sin((d.startAngle + d.endAngle - Math.PI) / 2) * (radius) + ')';
+      g.append('text')
+        .attr('transform', function (d) {
+          return 'translate(' + Math.cos(((d.startAngle + d.endAngle - Math.PI) / 2)) * (radius) + ','
+            + Math.sin((d.startAngle + d.endAngle - Math.PI) / 2) * (radius) + ')';
         })
-        .attr('dy', function(d) {
-            let return_value;
-            if ((d.startAngle + d.endAngle) / 2 > Math.PI / 2 && (d.startAngle + d.endAngle) / 2 < Math.PI * 1.5) {
-                return_value = 5;
-            } else {
-                return_value = -7;
-            }
-            return return_value;
+        .attr('dy', function (d) {
+          let return_value;
+          if ((d.startAngle + d.endAngle) / 2 > Math.PI / 2 && (d.startAngle + d.endAngle) / 2 < Math.PI * 1.5) {
+            return_value = 5;
+          } else {
+            return_value = -7;
+          }
+          return return_value;
         })
-        .attr('text-anchor', function(d) {
-            let return_value;
-            if ((d.startAngle + d.endAngle) / 2 < Math.PI) {
-                return_value = 'beginning';
-            } else {
-                return_value = 'end';
-            }
-            return return_value;
+        .attr('text-anchor', function (d) {
+          let return_value;
+          if ((d.startAngle + d.endAngle) / 2 < Math.PI) {
+            return_value = 'beginning';
+          } else {
+            return_value = 'end';
+          }
+          return return_value;
         })
-        .text(function(d) {
-            let percentage = (d.data.value / 100 ) * 100;
-            return d.data.label  + ' (' + percentage.toFixed(1) + '%)';
+        .text(function (d) {
+          let percentage = (d.data.value / 100 ) * 100;
+          return d.data.label + ' (' + percentage.toFixed(1) + '%)';
         });
+    }
   }
 }

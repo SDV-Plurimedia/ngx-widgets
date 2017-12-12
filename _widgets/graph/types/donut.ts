@@ -13,7 +13,7 @@ export class DonutChart implements Graph {
   protected href = window.location.href;
 
   constructor(datas: DataGraph[], color: ColorsForScale, id: string,
-    public width = 960, public height = 500, public unite = '') {
+              public width = 960, public height = 500, public unite = '') {
 
     this.datas = datas;
     this.colors = color;
@@ -38,7 +38,7 @@ export class DonutChart implements Graph {
       g: (c2.g - c1.g) / (nb - 1),
       b: (c2.b - c1.b) / (nb - 1)
     };
-    let c = { r: 0, g: 0, b: 0 };
+    let c = {r: 0, g: 0, b: 0};
 
     for (let i = 0; i < nb; i++) {
       c.r = Math.round(c1.r + i * diff.r);
@@ -48,12 +48,16 @@ export class DonutChart implements Graph {
     }
   }
 
-    loadGraph() {
-        Morris.Donut({
-            element: this.id,
-            data: this.datas,
-            colors: this.color_scale,
-            formatter: (y, data) => { return y + this.unite; }
-        });
+  loadGraph() {
+    if (document.getElementById(this.id)) {
+      Morris.Donut({
+        element: this.id,
+        data: this.datas,
+        colors: this.color_scale,
+        formatter: (y, data) => {
+          return y + this.unite;
+        }
+      });
     }
+  }
 }
