@@ -6,39 +6,39 @@ import {Graph, DataGraph, SimpleColor, Color} from './commun';
 export enum Periodicite { Day, Week, Month, Year }
 
 export class LineChart implements Graph {
-    public datas: DataGraph[];
-    public colors: SimpleColor;
-    public id: string;
-    public grid: boolean;
-    public required_files = [];
-    protected margin = { top: 20, right: 30, bottom: 80, left: 40 };
-    protected time_functions: {
-        periodicite: string,
-        dateFormat: (number) => string,
-        xLabelFormat: (string) => string
-    };
+  public datas: DataGraph[];
+  public colors: SimpleColor;
+  public id: string;
+  public grid: boolean;
+  public required_files = [];
+  protected margin = {top: 20, right: 30, bottom: 80, left: 40};
+  protected time_functions: {
+    periodicite: string,
+    dateFormat: (number) => string,
+    xLabelFormat: (string) => string
+  };
 
-    constructor(
-        datas: DataGraph[],
-        colors: SimpleColor,
-        id: string,
-        public height = 650,
-        public y_label: string,
-        public unite = '',
-        public time = false,
-        grid = true,
-        periodicite: Periodicite = null) {
-        this.datas = datas;
-        this.colors = colors;
-        this.id = id;
-        this.grid = grid;
-        // this.width = width - this.margin.left - this.margin.right;
-        // this.height = height - this.margin.top - this.margin.bottom;
-        this.prepareDateFormat(periodicite);
-    }
+  constructor(datas: DataGraph[],
+              colors: SimpleColor,
+              id: string,
+              public height = 650,
+              public y_label: string,
+              public unite = '',
+              public time = false,
+              grid = true,
+              periodicite: Periodicite = null) {
+    this.datas = datas;
+    this.colors = colors;
+    this.id = id;
+    this.grid = grid;
+    // this.width = width - this.margin.left - this.margin.right;
+    // this.height = height - this.margin.top - this.margin.bottom;
+    this.prepareDateFormat(periodicite);
+  }
 
-    loadGraph() {
-      let color = this.colorTransform(this.colors.color);
+  loadGraph() {
+    let color = this.colorTransform(this.colors.color);
+    if (document.getElementById(this.id)) {
       Morris.Line({
         element: this.id,
         data: this.datas,
@@ -57,17 +57,18 @@ export class LineChart implements Graph {
         xLabelAngle: 30
       });
     }
+  }
 
-    colorTransform(color: Color) {
-      let r = color.r.toString(16);
-      let g = color.g.toString(16);
-      let b = color.b.toString(16);
+  colorTransform(color: Color) {
+    let r = color.r.toString(16);
+    let g = color.g.toString(16);
+    let b = color.b.toString(16);
 
-      r = (r.length === 1) ? '0' + r : r;
-      g = (g.length === 1) ? '0' + g : g;
-      b = (b.length === 1) ? '0' + b : b;
-      return '#' + r + g + b;
-    }
+    r = (r.length === 1) ? '0' + r : r;
+    g = (g.length === 1) ? '0' + g : g;
+    b = (b.length === 1) ? '0' + b : b;
+    return '#' + r + g + b;
+  }
 
   prepareDateFormat(periodicite: Periodicite) {
     switch (periodicite) {
@@ -96,12 +97,12 @@ export class LineChart implements Graph {
         this.time_functions = {
           periodicite: 'week',
           dateFormat: (x) => {
-            return new Date(x).toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric' });
+            return new Date(x).toLocaleDateString('fr-FR', {year: 'numeric', month: 'numeric'});
           },
           xLabelFormat: (x) => {
             let date = new Date(x);
             // if(date.getMonth()%2 == 1)
-            return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric' });
+            return date.toLocaleDateString('fr-FR', {year: 'numeric', month: 'numeric'});
           }
         };
         break;
@@ -109,29 +110,29 @@ export class LineChart implements Graph {
         this.time_functions = {
           periodicite: 'month',
           dateFormat: (x) => {
-            return new Date(x).toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric' });
+            return new Date(x).toLocaleDateString('fr-FR', {year: 'numeric', month: 'numeric'});
           },
           xLabelFormat: (x) => {
             let date = new Date(x);
             // if(date.getMonth()%2 == 1)
-            return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric' });
+            return date.toLocaleDateString('fr-FR', {year: 'numeric', month: 'numeric'});
           }
         };
         break;
       case Periodicite.Year:
         this.time_functions = {
-            periodicite: 'year',
-            dateFormat: (x) => {
-              return new Date(x).toLocaleDateString('fr-FR', { year: 'numeric' });
-            },
-            xLabelFormat: (x) => {
-              let date = new Date(x);
-              if (date.getFullYear() % 2 === 1) {
-                return date.toLocaleDateString('fr-FR', { year: 'numeric' });
-              } else {
-                return null;
-              }
+          periodicite: 'year',
+          dateFormat: (x) => {
+            return new Date(x).toLocaleDateString('fr-FR', {year: 'numeric'});
+          },
+          xLabelFormat: (x) => {
+            let date = new Date(x);
+            if (date.getFullYear() % 2 === 1) {
+              return date.toLocaleDateString('fr-FR', {year: 'numeric'});
+            } else {
+              return null;
             }
+          }
         };
         break;
     }

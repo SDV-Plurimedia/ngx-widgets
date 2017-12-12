@@ -28,11 +28,11 @@ export interface SimpleColor {
 }
 
 export interface Graph {
-    datas: DataGraph[] | SingleData;
-    colors ?: ColorsForScale | SimpleColor;
-    width ?: number;
-    height ?: number;
-    id: string;
-    required_files: string[];
-    loadGraph(): void;
+  datas: DataGraph[] | SingleData;
+  colors ?: ColorsForScale | SimpleColor;
+  width ?: number;
+  height ?: number;
+  id: string;
+  required_files: string[];
+  loadGraph(): void;
 }
