@@ -8,6 +8,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+
+let modules = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpModule,
+  JsonpModule,
+  DragulaModule
+];
 
 // les widgets
 import { AutocompleteComponent } from './_widgets/autocomplete/autocomplete';
@@ -59,7 +69,6 @@ import { FormBuilderComponent} from './_widgets/form-builder/form-builder';
 import { ErrorMessageComponent} from './_widgets/form-builder/_widgets/error-message/error-message';
 
 let widgets =  [
-
   AutocompleteComponent,
   BigDatatableComponent,
   BlocCardComponent,
@@ -112,7 +121,7 @@ let widgets =  [
 // les directives
 import { DNDDirective } from './_directives/dnd';
 import { LazyloadDirective } from './_directives/lazyload';
-import { ProvideParentFormDirective } from './_directives/provide-parent-form'
+import { ProvideParentFormDirective } from './_directives/provide-parent-form';
 
 let directives = [
   DNDDirective,
@@ -149,11 +158,7 @@ let services = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    JsonpModule
+    ...modules
   ],
   declarations: [
     ...widgets,

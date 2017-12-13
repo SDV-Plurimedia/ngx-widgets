@@ -1,12 +1,13 @@
-import {Component, ElementRef, IterableDiffers, Input, DoCheck, OnDestroy} from '@angular/core';
+import {Component, ElementRef, IterableDiffers, Input, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   selector: 'datatable',
   templateUrl: './datatable.html',
   styleUrls: ['./datatable.css']
 })
-export class DatatableComponent implements DoCheck, OnDestroy {
+export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
 
   @Input() data: Array<any>;
   @Input() structure: Array<any>;
@@ -18,6 +19,12 @@ export class DatatableComponent implements DoCheck, OnDestroy {
   @Input() ordering: boolean = true;
   @Input() paging: boolean = true;
   @Input() parent_scope: any;
+  /**
+   * [dragulaFunctions permet de s'enregistrer sur les fonctions dragula]
+   * Exemple: { dropModel: (val) => {}, over: (val) => {}, out: (val) => {}, }
+   * @return {[type]} [description]
+   */
+  @Input() dragulaFunctions: any = null;
 
   private table_elem: JQuery;
   private table: DataTables.DataTable;
@@ -45,26 +52,49 @@ export class DatatableComponent implements DoCheck, OnDestroy {
   };
 
   private differ: any;
+  private subscriptions: Array<any> = [];
+  private dragulaBag: string = "bag-datatable";
 
   constructor(
       private _element: ElementRef,
       private differs: IterableDiffers,
-      private _sanitizer: DomSanitizer
+      private _sanitizer: DomSanitizer,
+      private _dragulaService: DragulaService
   ) {
     this.differ = differs.find([]).create(null);
+  }
+
+  public ngOnInit(){
+
+    if (
+      // si le bag n'existe pas encore (donc uniquement la premiere fois)
+      !this._dragulaService.find(this.dragulaBag)
+      // si des fonctions de dragNDrop sont envoyé
+      && this.dragulaFunctions ) {
+        console.log("Enregistrement des fonctions de drag", this.dragulaFunctions);
+        let sub = null;
+        // Pour chaque fonction dragula donné en input, on s'enregistre
+        Object.keys(this.dragulaFunctions).forEach( (functionName) => {
+          sub = this._dragulaService[functionName].subscribe((value) => {
+              this.dragulaFunctions[functionName].apply(this.parent_scope,[value]);
+          });
+          this.subscriptions.push(sub);
+        });
+   }
+
   }
 
   /*
    * JQDestroy: paramètre pour utiliser la destuction Jquery en plus de la destruction de la table
    * (à mettre à true uniquemenb pour le NgOnDestroy )
    */
-  destroyTable(JQdestroy: boolean = false) {
+  public destroyTable(JQdestroy: boolean = false) {
     if (typeof this.table !== 'undefined') {
       this.table.destroy(JQdestroy);
     }
   }
 
-  buildTable() {
+  public buildTable() {
     this.table_elem = jQuery(this._element.nativeElement).find('table');
     let datatableConfig = {
       language: this.language,
@@ -100,13 +130,18 @@ export class DatatableComponent implements DoCheck, OnDestroy {
 
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     // Speak now or forever hold your peace
     this.destroyTable(true);
+
+    if (this._dragulaService.find(this.dragulaBag)) {
+        this._dragulaService.destroy(this.dragulaBag);
+    }
+
   }
 
   // Custom change detection
-  ngDoCheck() {
+  public ngDoCheck() {
     // (la vraie donnée à vérifier est ici, on liste donc les inputs)
     let changes = this.differ.diff(this.data);
     // si un changement est detecté
@@ -128,7 +163,7 @@ export class DatatableComponent implements DoCheck, OnDestroy {
     }
   }
 
-  getValue(ligne, id: string, html: boolean = false) {
+  public getValue(ligne, id: string, html: boolean = false) {
     try {
       let res = '';
       if (id.indexOf('.') === -1) {

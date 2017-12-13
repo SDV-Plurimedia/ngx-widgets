@@ -16,20 +16,35 @@
     </tr>
 
     </tfoot>
-    <tbody>
-    <ng-container *ngFor="let ligne of data" >
-        <tr class="dt-body-row" >
-            <ng-container *ngFor="let champ of structure">
-                <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
-                <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
-                <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
-            </ng-container>
-            <td *ngIf="buttons">
-                <ng-container *ngFor="let button of buttons">
-                    <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
-                </ng-container>
-            </td>
-        </tr>
-    </ng-container>
+
+    <!-- header du tableau avec dragndrop -->
+    <tbody *ngIf="dragulaFunctions; else nodrag" [dragula]="dragulabag" [dragulaModel]="data">
+      <ng-container *ngTemplateOutlet="contenu"></ng-container>
     </tbody>
+
+    <!-- Sans dragndrop -->
+    <ng-template #nodrag>
+      <tbody>
+        <ng-container *ngTemplateOutlet="contenu"></ng-container>
+      </tbody>
+    </ng-template>
+
+    <!-- contenu du tableau -->
+    <ng-template #contenu>
+      <ng-container *ngFor="let ligne of data" >
+          <tr class="dt-body-row" fsgfsgs>
+              <ng-container *ngFor="let champ of structure">
+                  <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
+                  <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
+                  <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
+              </ng-container>
+              <td *ngIf="buttons">
+                  <ng-container *ngFor="let button of buttons">
+                      <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
+                  </ng-container>
+              </td>
+          </tr>
+      </ng-container>
+    </ng-template>
+
 </table>
