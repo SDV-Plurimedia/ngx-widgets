@@ -53,7 +53,7 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
 
   private differ: any;
   private subscriptions: Array<any> = [];
-  private dragulaBag: string = "bag-datatable";
+  private dragulaBag: string = 'bag-datatable';
 
   constructor(
       private _element: ElementRef,
@@ -64,19 +64,19 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
     this.differ = differs.find([]).create(null);
   }
 
-  public ngOnInit(){
+  public ngOnInit() {
 
     if (
       // si le bag n'existe pas encore (donc uniquement la premiere fois)
       !this._dragulaService.find(this.dragulaBag)
       // si des fonctions de dragNDrop sont envoyé
       && this.dragulaFunctions ) {
-        console.log("Enregistrement des fonctions de drag", this.dragulaFunctions);
+        console.log('Enregistrement des fonctions de drag', this.dragulaFunctions);
         let sub = null;
         // Pour chaque fonction dragula donné en input, on s'enregistre
         Object.keys(this.dragulaFunctions).forEach( (functionName) => {
           sub = this._dragulaService[functionName].subscribe((value) => {
-              this.dragulaFunctions[functionName].apply(this.parent_scope,[value]);
+              this.dragulaFunctions[functionName].apply(this.parent_scope, [value]);
           });
           this.subscriptions.push(sub);
         });
