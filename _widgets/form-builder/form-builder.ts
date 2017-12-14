@@ -22,7 +22,7 @@ export class FormBuilderComponent implements OnInit, OnChanges {
 
   // Les champs pour la config générale
   public displayButtons: boolean = true; // Si les boutons "Enregistrer" et "Annuler" doivent être présents
-  public buttonsContainerClass: string = 'col-md-10'; // La classe de la div qui contient les deux boutons
+  public buttonsContainerClass: string = 'col-md-12'; // La classe de la div qui contient les deux boutons
   public saveLabel: string = 'Enregistrer'; // Le label du bouton "Enregistrer"
   public cancelLabel: string = 'Annuler'; // Le label du bouton "Annuler"
   public formClass: string = 'form-horizontal'; // La classe de la balise form

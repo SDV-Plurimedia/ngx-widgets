@@ -6,5 +6,6 @@
               [class.ng-invalid]="field.invalid && field.required"
               [class.ng-valid]="!field.invalid && field.required"
               [id]="field.id"
+              [disabled]="field.isDisabled()"
 >
 </autocomplete>
