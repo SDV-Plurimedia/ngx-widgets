@@ -24,11 +24,33 @@ Le composant d'autocomplete doit être appelé de la façon suivante:
     * **displayItem**: *Boolean* - Si true, alors on affiche les différents élements que l'on ajoute à droite du placeholder. Vaut false par défaut.
     * **displayItems**: *Array* - Tableau qui contient les différents élements à ajouter à droite du placeholder.
     * **displayItemClass**: *String* - Classe CSS pour les élements à afficher à droite du placeholder.
+    * **onlyShowDisplayItems**: *boolean* - Si true, on affiche pas l'autocomplete mais uniquement les items définis dans displayItems (ne pas oublier de configurer **fieldDisplayed**)
     * **customSearch**: *Void* - Fonction personnalisée pour effectuer une recherche sur des données distantes. (Doit renvoyer un Observable)
     * **scope**: A utiliser avec customSearch, permet de définir la portée de la fonction.
 * **(valid)**: *Function* - fonction appelée lorsque le champ est validé sur un resultat existant.
 * **(create)**: *Function* - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant.
 * **(delete)**: *Function* - fonction appelée lors de la suppression d'un résultat.
+* **[disabled]**: *boolean* - si true alors l'autocomplete passe dans l'état disabled.
+
+# AutocompleteDisplayItems
+Ce widget est utilisé dans le widget autocomplete, cependant, il est possible de l'utiliser sans passer par l'autocomplete. Exemple :
+
+  <autocomplete-display-items [class]="'badge'"
+                              [items]="[...]"
+                              [field]="'name'"
+                              [disabled]="false"
+                              (delete)="deleteItem($item)">
+  </autocomplete-display-items>
+  
+Voici sa configuration :
+  
+  * **[class]**: *string* - la classe CSS à appliquer aux différents items
+  * **[items]**: *Array* - les différents items qu'il faut afficher
+  * **[field]**: *string* - le champ à afficher pour nos items
+  * **[disabled]**: *boolean* - si true, alors on ne pourra pas supprimer les items
+  * **(delete)**: *Function* - fonction appelée lors du clic sur la croix pour supprimer
+  
+![AutocompleteDisplayItems__](./img/autocomplete-display-items.png)
 
 # BigDatatable
 Ce composant est une solution alternative au composant Datatable. Il permet de gérer une grande quantité de données.
