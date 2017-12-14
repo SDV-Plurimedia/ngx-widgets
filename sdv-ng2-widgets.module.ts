@@ -20,6 +20,7 @@ let modules = [
 ];
 
 // les widgets
+import { AutocompleteDisplayItemsComponent } from './_widgets/autocomplete/_widgets/autocomplete-display-items/autocomplete-display-items';
 import { AutocompleteComponent } from './_widgets/autocomplete/autocomplete';
 import { BigDatatableComponent, BigDatatable } from './_widgets/big-datatable/big-datatable.component';
 import { BlocCardComponent } from './_widgets/bloc-card/bloc-card';
@@ -69,6 +70,8 @@ import { FormBuilderComponent} from './_widgets/form-builder/form-builder';
 import { ErrorMessageComponent} from './_widgets/form-builder/_widgets/error-message/error-message';
 
 let widgets =  [
+  
+  AutocompleteDisplayItemsComponent,
   AutocompleteComponent,
   BigDatatableComponent,
   BlocCardComponent,

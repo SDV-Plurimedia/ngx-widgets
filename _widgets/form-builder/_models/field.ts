@@ -19,7 +19,7 @@ export class Field {
 
   // CSS
   public field_class: string = ''
-  public input_container_class = 'col-md-8';
+  public input_container_class = 'col-md-10';
   public input_class: string = 'form-control';
   public label_class: string = 'col-md-2 control-label';
   public display_label: boolean = true;

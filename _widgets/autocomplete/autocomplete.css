@@ -27,3 +27,7 @@ a {
 div:focus {
   outline: none;
 }
+
+.disabled {
+  cursor: not-allowed !important;
+}

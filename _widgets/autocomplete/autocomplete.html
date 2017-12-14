@@ -1,25 +1,43 @@
-<div tabindex="1" (keyup)="onKey($event)" [ngClass]="{'chosen-container-active chosen-with-drop': isActive}" class="chosen-container chosen-container-single" style="width: 1319px;" title="">
+<div *ngIf="!config.onlyShowDisplayItems; else only_display_items"
+     tabindex="1" (keyup)="onKey($event)"
+     [ngClass]="{'chosen-container-active chosen-with-drop': isActive}"
+     class="chosen-container chosen-container-single"
+     style="width: 1319px;"
+     title="">
     <div [class.input-group]="icon">
-        <a (click)="toggleDropdown()" class="form-control" tabindex="-1"><span class="spanClick">{{placeholder}}</span>
-        </a>
-        <ng-container *ngIf="this.config.displayItem">
-            <ng-container *ngFor="let item of displayItems">
-                <span class="{{ config.displayItemClass }}">{{  item[config.fieldDisplayed] }}&nbsp;&nbsp;&nbsp;<span (click)="deleteItem(item)" class="fa fa-times hover"></span></span>
-            </ng-container>
-        </ng-container>
+        <a *ngIf="!disabled; else disabled_a" (click)="toggleDropdown()" class="form-control" tabindex="-1"><span class="spanClick">{{placeholder}}</span></a>
+        <ng-template #disabled_a>
+            <a class="form-control disabled" tabindex="-1"><span class="spanClick">{{placeholder}}</span></a>
+        </ng-template>
+        <autocomplete-display-items *ngIf="config.displayItem"
+                                    [class]="config.displayItemClass"
+                                    [items]="displayItems"
+                                    [field]="config.fieldDisplayed"
+                                    [disabled]="disabled"
+                                    (delete)="deleteItem($event)"
+        >
+        </autocomplete-display-items>
 
         <div class="input-group-addon" *ngIf="icon"><span class="fa fa-{{icon}}"></span></div>
     </div>
     <div class="chosen-drop">
         <div class="chosen-search">
-            <input type="text" name="value" autocomplete="off" [ngModel]="inputValue"
+            <input [disabled]="disabled" type="text" name="value" autocomplete="off" [ngModel]="inputValue"
                    (ngModelChange)="onInputChange($event)" class="form-control inputField">
         </div>
 
-        <ul class="chosen-results">
+        <ul class="chosen-results" *ngIf="!disabled">
             <ng-template ngFor let-item [ngForOf]="results" let-i="index" let-isfirst="first">
                 <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[config.fieldDisplayed] }}</li>
             </ng-template>
         </ul>
     </div>
 </div>
+<ng-template #only_display_items>
+    <autocomplete-display-items [class]="config.displayItemClass"
+                                [items]="displayItems"
+                                [field]="config.fieldDisplayed"
+                                [disabled]="disabled"
+                                (delete)="deleteItem($event)">
+    </autocomplete-display-items>
+</ng-template>

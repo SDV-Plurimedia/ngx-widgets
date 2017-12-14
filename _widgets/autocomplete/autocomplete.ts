@@ -12,6 +12,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() config;
   @Input() icon = '';
   @Input() displayItems; // Tableau qui contient les différents élements à afficher.
+  @Input() disabled: boolean = false; // Si on est état disabled.
 
   @Output() valid = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un existant
   @Output() create = new EventEmitter(); // Evenement emit lorsque le champ d'autocomplétion est validé sur un texte inexistant
