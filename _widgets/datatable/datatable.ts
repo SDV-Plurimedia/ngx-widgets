@@ -25,6 +25,11 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
    * @return {[type]} [description]
    */
   @Input() dragulaFunctions: any = null;
+  /**
+   * [dragulaBag permet de définir le nom du bag, important si 2 datatable sont sur la même page]
+   * @return {[type]} [description]
+   */
+  @Input() dragulaBag: string = 'bag-datatable';
 
   private table_elem: JQuery;
   private table: DataTables.DataTable;
@@ -53,7 +58,7 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
 
   private differ: any;
   private subscriptions: Array<any> = [];
-  private dragulaBag: string = 'bag-datatable';
+
 
   constructor(
       private _element: ElementRef,
@@ -137,6 +142,10 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
     if (this._dragulaService.find(this.dragulaBag)) {
         this._dragulaService.destroy(this.dragulaBag);
     }
+
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
 
   }
 
