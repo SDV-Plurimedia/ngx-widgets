@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## WIP
+* ADD: DragNDrop possible sur le widget DataTable
+
 ## 1.4.4 - 11/12/2017
 * FIX: AutoComplete: reduceResultList ne trim plus le contenu du champs HTML
 * FIX: FormBuilder: réagit au modification de l'objet (NgOnChanges)
@@ -7,13 +10,13 @@
 
 ## 1.4.3 - 01/12/2017
 * ADD: FormBuilder: point d'entrée pour widget custom
- 
+
 
 ## 1.4.2 - 21/11/2017
-* FIX: SanitizeHTML in datatable 
+* FIX: SanitizeHTML in datatable
 
 ## 1.4.1 - 07/11/2017
-* FIX: Test sur la presence de l'objet config.dtd 
+* FIX: Test sur la presence de l'objet config.dtd
 
 ## 1.4.0 - 07/11/2017
 * ADD: Support de la possibilité de surcharger $removeEmpty de CKEditor
