@@ -306,6 +306,44 @@ Dans le constructeur du mode
         return ul + '</ul>';
     }
 
+    ## Ajout du DragNDrop sur la table
+
+    L'input [dragulaFunctions] permet de définir un comportement de DnD.
+    Pour cela on peut par exemple, préciser des fonction drag,drop,over,out ou dropModel (voir plus de précision)[https://github.com/valor-software/ng2-dragula]
+
+    Exemple:
+    ```
+    <datatable [data]="data_tab" [structure]="structure" [parent_scope]="scope"
+    [dragulaFunctions]="{
+      dropModel: onDrop
+      over: onOver
+      out: onOut
+      }"
+    ></datatable>
+    ```
+
+    Avec dans mon TS, les fonctions suivantes:
+    ```
+    public onDrop(value) {
+      this.save(this.data_tab);
+    }
+
+    public onOver(value) {
+      let [val] = value.slice(1);
+      HtmlHelper.addClass(val, 'ex-over');
+      HtmlHelper.addClass(val, 'gu-transit');
+    }
+
+    public onOut(value) {
+        let [val] = value.slice(1);
+        HtmlHelper.removeClass(val, 'ex-over');
+        HtmlHelper.removeClass(val, 'gu-transit');
+    }
+    ```
+
+    Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
+
+
 # DatePicker
 
 Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.
@@ -413,7 +451,7 @@ Actuellement les différents champs possible sont :
 Ce widget permet à l'aide d'un tableau d'objet de créer un formulaire sur une page avec ou sans onglet.
 
 Les types de champs pris en compte sont les suivants :
- * **[autocomplete](#autocomplete)** 
+ * **[autocomplete](#autocomplete)**
  * **[checkbox](#checkboxes)**
  * **[checkboxes](#checkboxes)**
  * **[ckeditor](#ckeditor)**
@@ -427,15 +465,15 @@ Les types de champs pris en compte sont les suivants :
  * **[text](#text)**
  * **[textarea](#textarea)**
  * **[url](#url)**
- 
+
 De base, chacun de ces champs bénéficie d'une méthode de validité (**SAUF le dynamic**) par défaut qui vérifie si le champ est valide ainsi que
 d'un message d'erreur correspondant. Il est néanmoins possible de surcharger ces méthodes de vérifications et messages d'erreurs.
 Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moins un champ est encore invalid.
- 
+
 ## Configuration
-    
+
 ### A) Formulaire
-    
+
     <form-builder [(fields)]="fields"
                   [scope]="scope"
                   [(model)]="agence"
@@ -445,7 +483,7 @@ Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moin
                   [config]="config"
     >
     </form-builder>
-    
+
  * **scope** - **any** - est le composant dans lequel est contenu le form-builder
  * **type** - **string** - est le type de formulaire soit **classic (par défaut)** soit **tabs** (sous forme d'onglet)
  * **cancel** est la méthode de callback à appeller lors du clic sur le bouton "Annuler"
@@ -453,7 +491,7 @@ Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moin
  * **model** - **any** - est l'objet qui va être édité/crée
  * **fields** - **any** - est soit un objet (cas du formulaire **classic**) soit un tableau d'objet (cas du formulaire **tabs**, voir I)B)1 et I)B)2)
  * **config** - **any** - est un objet contenant les différents champ possible à configurer :
- 
+
     * **saveLabel** - **string** - est le label du bouton pour la sauvegarde (par défaut vaut "Enregistrer")
     * **cancelLabel** - **string** - est le label du bouton pour annuler (par défaut vaut "Annuler")
     * **displayButtons** - **boolean** - true par défaut, si false alors les boutons du form-builder seront cachés
@@ -461,21 +499,21 @@ Le bouton servant à la sauvegarde du formulaire est en disabled tant qu'au moin
     * **formClass** - **string** - est la classe CSS du form, par défaut vaut **form-horizontal**.
 
 ### B) Fields
-  
+
 Dans les deux cas ci-dessous, **id_field** correspond à l'identifiant du champ ainsi que le nom de la propriété du model.
 Si **id_field** n'existe pas un log d'erreur sera présent dans la console.
 Dans le cas du formulaire **tabs**, il est également possible de fournir pour chaque onglet une classe CSS à appliquer sur tous les différents champ
 que cet onglet contient, pour cela, il faut ajouter **tab_class: 'ma-class-css'**.
 
 #### 1) Cas du formulaire "classic"
-  
+
       public fields = {
         id_field: {configuration_field},
         id_field2: {configuration_field2}
       };
-    
+
 #### 2) Cas du formulaire "tabs"
-  
+
       public fields = [
         {
           title: 'Le titre de mon onglet 1'
@@ -515,46 +553,46 @@ que cet onglet contient, pour cela, il faut ajouter **tab_class: 'ma-class-css'*
 
 Les méthodes de callback peuvent prendre en paramètre un objet Field (contenant toutes les informations du champ). Il est possible de modifier ce dernier et donc
 par exemple de changer son message d'erreur à la volée.
-  
+
 ##### b) Configuration spécifique
 Selon le type de champ spécifié, différents paramètres peuvent être ajouté aux paramètres généraux.
-  
+
 ###### Autocomplete<a id="autocomplete"></a>
 Un widget Autocomplete.
-  
+
 **ATTENTION : Pour les autocompletes, *verifyFunction* n'est pas utilisé. La gestion de la validité doit se faire dans *add* et *delete*.
 Si rien n'est renvoyée par ces fonctions alors le champ sera considéré comme valide.**
-  
+
  * **data** - **[]** - les données contenues dans l'autocomplete
  * **add** - **any** - **default = () => { return true; };** -La fonction de callback appellée lors du clic sur un élement de l'autocomplete
  * **delete** - **any** - **default = () => { return true} };** -La fonction de callback suite à la suppression d'un élement de l'autocomplete
  * **config** - **any** -La configuration de l'autocomplete (voir partie Autocomplete)
-           
-              
+
+
 ###### Checkboxes<a id="checkboxes"></a>
 Plusieurs cases à cocher.
  * **inline** - **boolean** - **default = false** - Si inline vaut true, alors les checkboxes seront sur la même ligne sinon elles seront à la ligne à chaque fois
  * **options** - **[]** -Un tableau d'objet contenant les différentes checkboxes à afficher
-        
-                
+
+
           options = [{value: 'value', label: 'label}]
-          
+
   Les checkboxes peuvent être en required et être utilisées avec une méthode de vérification (par exemple il faut au moins que deux soient cochées).
-  
-  
+
+
 ###### CKEditor<a id="ckeditor"></a>
 Un widget CKEditor.
 * **drop** - **any** -L'évenement déclenché lors du drop sur le CKEditor
 * **config** - **any** -La configuration du CKEditor (voir partie CKEditor)
 
-  
+
 ###### Datepicker<a id="datepicker"></a>
 Un widget Datepicker.
 * **view_format** - **string** - **default = 'DD/MM/YYYY'** -Le format de la date à l'affichage
 * **model_format** - **string** - **default = 'YYYY-MM-DD'** -Le format de la date dans le model
 * **first_week_day_sunday** - **boolean** - **default = false** -Si le premier jour de la semaine dans le calendrier est Dimanche
 * **init_empty** - **boolean** - **default = false** -Si la date doit être vide si elle n'est pas renseigné, sinon la date du jour apparaitra
-  
+
 ###### Dynamic<a id="dynamic"></a>
 Un widget custom.
 * **class_component** - **any** -La classe de ce composant
@@ -564,7 +602,7 @@ sur un des champs du **model**, il faut soit :
 
   * Le faire dans le composant (**this.model[this.field.id]="bidule")
   * Avoir un Output() updateModel qui va s'occuper d'émettre la nouvelle valeur
-  
+
 ###### Email<a id="email"></a>
 Un input email. La validité de l'email est gérée par une directive Angular.
 * **min_length** - **number** - **default = 1** -La longueur minimale du champ
@@ -582,16 +620,16 @@ Un input number
 Des radiosbuttons.
 * **inline** - **boolean** - **default = false** - Si inline vaut true, alors les radiobuttons seront sur la même ligne sinon ils seront à la ligne à chaque fois
 * **options** - **[]** -Un tableau d'objet contenant les différents radiobuttons à afficher
-  
-  
+
+
     options = [{value: 'value', label: 'label}]
 
 
 ###### Select<a id="select"></a>
 Un select.
 * **options** - **[]** -Un tableau d'objet contenant les différentes options à afficher
-      
-      
+
+
     options = [{value: 'value', label: 'label}]
 
 
@@ -599,7 +637,7 @@ Un select.
 Un input text ou password.
 * **min_length** - **number** - **default = 1** -La longueur minimale du champ
 * **max_length** - **number** -La longueur maximale du champ
- 
+
 ###### Textarea<a id="textarea"></a>
 Un textarea.
 * **rows** - **number** -Le nombre de ligne du textarea
@@ -609,8 +647,8 @@ Un textarea.
 Un input url. La validité de l'URL est gérée par une RegExp.
 * **min_length** - **number** - **default = 1** -La longueur minimale du champ
 * **max_length** - **number** -La longueur maximale du champ
-    
-    
+
+
 
 ## Exemple d'utilisation pour un formulaire avec plusieurs onglets
 Dans mon fichier typescript :
@@ -651,7 +689,7 @@ Dans mon fichier typescript :
       this.infos1,
       this.infos2
     ];
-    
+
     public agence: Model = new Model();
     public scope = this;
 
