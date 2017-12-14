@@ -1,7 +1,11 @@
 #Changelog SDV-NG2-Widgets
 
-## WIP
+## 1.4.5 - 14/12/2017
 * ADD: DragNDrop possible sur le widget DataTable
+* FIX: Creation Component Graph
+* ADD: Support du disabled sur Autocomplete
+* ADD: Component AutocompleteDisplayItems
+* FIX: FormBuilder CSS
 
 ## 1.4.4 - 11/12/2017
 * FIX: AutoComplete: reduceResultList ne trim plus le contenu du champs HTML
