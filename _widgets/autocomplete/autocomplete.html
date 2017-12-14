@@ -14,7 +14,7 @@
                                     [items]="displayItems"
                                     [field]="config.fieldDisplayed"
                                     [disabled]="disabled"
-                                    (delete)="deleteItem($item)"
+                                    (delete)="deleteItem($event)"
         >
         </autocomplete-display-items>
 
@@ -38,6 +38,6 @@
                                 [items]="displayItems"
                                 [field]="config.fieldDisplayed"
                                 [disabled]="disabled"
-                                (delete)="deleteItem($item)">
+                                (delete)="deleteItem($event)">
     </autocomplete-display-items>
 </ng-template>
