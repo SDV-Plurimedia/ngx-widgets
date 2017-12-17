@@ -306,12 +306,29 @@ Dans le constructeur du mode
         return ul + '</ul>';
     }
 
-    ## Ajout du DragNDrop sur la table
+## Ajout d'une colonne de checkboxes
+    
+Il est possible d'ajouter comme première colonne une colonne de checkboxes pour ce faire, passer en input **checkboxes**
+ qui vaut true et en output **checkedRows**, lors de chaque clic sur une case à cocher les différents élements cochées seront renvoyées.
+ 
+Exemple :
 
-    L'input [dragulaFunctions] permet de définir un comportement de DnD.
-    Pour cela on peut par exemple, préciser des fonction drag,drop,over,out ou dropModel (voir plus de précision)[https://github.com/valor-software/ng2-dragula]
+```
+    <datatable [structure]="structure"
+               [data]="users"
+               [parent_scope]="scope"
+               [buttons]="buttons"
+               [checkboxes]=true
+               (checkedRows)="deleteManyArray=$event"
+    ></datatable>
+```
 
-    Exemple:
+## Ajout du DragNDrop sur la table
+
+L'input [dragulaFunctions] permet de définir un comportement de DnD.
+Pour cela on peut par exemple, préciser des fonction drag,drop,over,out ou dropModel (voir plus de précision)[https://github.com/valor-software/ng2-dragula]
+
+Exemple:
     ```
     <datatable [data]="data_tab" [structure]="structure" [parent_scope]="scope"
     [dragulaFunctions]="{
@@ -322,7 +339,8 @@ Dans le constructeur du mode
     ></datatable>
     ```
 
-    Avec dans mon TS, les fonctions suivantes:
+Avec dans mon TS, les fonctions suivantes:
+
     ```
     public onDrop(value) {
       this.save(this.data_tab);
@@ -341,7 +359,7 @@ Dans le constructeur du mode
     }
     ```
 
-    Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
+Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
 
 
 # DatePicker
