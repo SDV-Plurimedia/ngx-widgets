@@ -1,3 +1,7 @@
 table.dataTable tr.even td {
     background-color: #fff;
 }
+
+table.dataTable th.th_checkbox {
+    text-align: center;
+}
