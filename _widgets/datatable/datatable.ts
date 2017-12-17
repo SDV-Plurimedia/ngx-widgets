@@ -320,6 +320,6 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
    * @returns {boolean}
    */
   public isChecked(ligne) {
-    return this.checkedData.indexOf(ligne) !== -1
+    return this.checkedData.indexOf(ligne) !== -1;
   }
 }
