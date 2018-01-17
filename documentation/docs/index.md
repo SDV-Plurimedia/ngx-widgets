@@ -78,7 +78,7 @@ La configuration est la suivante :
     * **tr** -Object** : Contient soit une propriété :
         * **class** : La classe à appliquer sur les tr
         * **function** : Une fonction qui sera appliquée sur **parent_scope** qui renvera la classe à appliquer sur le tr.
-
+        * **rowCallback** : Une fonction qui sera appliquée lors du clic sur une ligne.
     * **pagination_config** - **Array** - **FACULTATIF** : Si non renseignée, la pagination par défaut sera appliquée.
         * **pagination_top** - **boolean** - **default = false** : Si true, alors on aura une pagination en haut de page.
         * **pagination_bottom** - **boolean** - **default = true** : Si true, alors on aura une pagination en bas de page.
@@ -374,6 +374,7 @@ Ce composant permet de générer un filtre. Ce filtre possède deux états :
 
 La configuration est la suivante :
 * **config**
+    * **launch_search_on_init** -**boolean** - **default = true** : Si false, alors la recherche ne sera pas lancée lors du chargement de la page.
     * **advanced_mode** - **boolean** - **default = false** : Si true, alors le filtre sera dans l'état "Filtre avancé".
     * **global_search** - **string** - **default = ''** : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
     * **callback**      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur **parent_scope**

@@ -38,7 +38,8 @@
         <tbody>
         <ng-container *ngIf="bigdata.data">
             <ng-container *ngFor="let object of bigdata.data">
-                <tr [ngClass]="bigdata.tr.function ? bigdata.tr.function.apply(bigdata.parent_scope, [object]) : bigdata.tr.class">
+                <tr [ngClass]="bigdata.tr.function ? bigdata.tr.function.apply(bigdata.parent_scope, [object]) : bigdata.tr.class"
+                    (click)="bigdata.clickOnRow(object)">
                     <!-- Les propriétés "normales" -->
                     <ng-container *ngFor="let column of bigdata.structure;">
                         <!-- NORMAL -->
@@ -122,7 +123,7 @@
             </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="bigdata.data.length === 0">
+        <ng-container *ngIf="bigdata.data.length === 0 && bigdata.searched">
             <tr><td [attr.colspan]="bigdata.colspan" align="center">Aucun résultat trouvé.</td></tr>
         </ng-container>
         </tbody>
