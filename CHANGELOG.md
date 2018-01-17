@@ -1,5 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.6 - 17/01/2018
+* UPD: Bigdatatable: Ajout de configuration pour ne pas lancer la recherche lors de l'initialisation
+* UPD: Bigdatatable: Possibilité d'ajouter un évenement sur les lignes de la Bigdatatable
+
 ## 1.4.5 - 14/12/2017
 * ADD: DragNDrop possible sur le widget DataTable
 * FIX: Creation Component Graph
