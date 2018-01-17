@@ -125,6 +125,8 @@ export class BigDatatable {
     public pager: Pager = null;
     public loading_datas = false;
 
+    public searched: boolean = false; // Passe à true lors de la première recherche.
+
     constructor(config, structure, scope) {
         this.config = config;
         this.structure = structure;
@@ -134,9 +136,9 @@ export class BigDatatable {
         this.checkStructure();
 
         if (this.config.tr) {
-          this.tr = this.config.tr;
+            this.tr = this.config.tr;
         } else {
-          this.tr = { class: ''};
+            this.tr = { class: ''};
         }
 
         // On récupère la config de la pagination.
@@ -158,7 +160,7 @@ export class BigDatatable {
                 this.sort = {
                     field: this.config.sort.field || null,
                     asc: (typeof(this.config.sort.asc) === 'boolean' ? this.config.sort.asc : true)
-            };
+                };
             } else {
                 this.sort = {
                     field: null,
@@ -208,6 +210,7 @@ export class BigDatatable {
      * Lance la recherche depuis les filtres
      */
     public triggerSearch() {
+        this.searched = true;
         this.pagination_config.current_page = 1;
         this.postFilter(true);
     }
@@ -248,10 +251,10 @@ export class BigDatatable {
                 // On instancie le pager si ce n'est pas encore fait
                 if (this.pager === null || reset_pager) {
                     this.pager = new Pager( this,
-                                            this.pagination_config.total,
-                                            this.pagination_config.per_page,
-                                            this.config.pagination_config.delta,
-                                            this.pageChange);
+                        this.pagination_config.total,
+                        this.pagination_config.per_page,
+                        this.config.pagination_config.delta,
+                        this.pageChange);
                 }
                 for (let object of result['data']) {
                     this.data.push(object);
@@ -297,30 +300,40 @@ export class BigDatatable {
     public setMessage(message: EventEmitter<any>) {
         this.message = message;
     }
+
+    /**
+     * Déclenchée lors du clic sur une ligne.
+     * @param object
+     */
+    public clickOnRow(object) {
+        if (this.tr.rowCallback) {
+            this.tr.rowCallback.apply(this.parent_scope,[object]);
+        }
+    }
 }
 
 
 @Component({
-  selector: 'big-datatable',
-  templateUrl: './big-datatable.component.html',
-  styleUrls: ['./big-datatable.component.css']
+    selector: 'big-datatable',
+    templateUrl: './big-datatable.component.html',
+    styleUrls: ['./big-datatable.component.css']
 })
 export class BigDatatableComponent implements OnInit, OnDestroy {
 
-   @Input() bigdata: BigDatatable;
-   @Output() message = new EventEmitter();  // Renvoie une string success ou error.
+    @Input() bigdata: BigDatatable;
+    @Output() message = new EventEmitter();  // Renvoie une string success ou error.
 
-   constructor(private _sanitizer: DomSanitizer) {}
+    constructor(private _sanitizer: DomSanitizer) {}
 
-   ngOnInit() {
-       this.bigdata.setMessage(this.message);
-   }
+    ngOnInit() {
+        this.bigdata.setMessage(this.message);
+    }
 
-   ngOnDestroy() {
-       this.bigdata.subscriptions.forEach((sub) => {
-           sub.unsubscribe();
-       });
-   }
+    ngOnDestroy() {
+        this.bigdata.subscriptions.forEach((sub) => {
+            sub.unsubscribe();
+        });
+    }
 
     /**
      * On rends le html safe pour l'affichage sinon certaines balises (button par ex) ne passent pas.

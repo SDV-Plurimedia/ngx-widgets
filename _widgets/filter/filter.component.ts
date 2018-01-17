@@ -126,6 +126,9 @@ import { Component, Input, AfterContentInit } from '@angular/core';
          if (typeof this.config.hide_search === 'undefined') { // Si true, alors le champs de recherche sera caché en mode avancé.
            this.config.hide_search = false;
          }
+         if (typeof this.config.launch_search_on_init === 'undefined') { // Si false, alors on ne lance pas la recherche au chargement de la page.
+             this.config.launch_search_on_init = true;
+         }
 
          // Pour le select de la pagination.
          // On ne l'active que si on a this.config.select_item_per_page.
@@ -135,7 +138,9 @@ import { Component, Input, AfterContentInit } from '@angular/core';
              }
          }
 
-         this.callback.apply(this.parent_scope, []);  // On lance le filtre !
+         if (this.config.launch_search_on_init) {
+             this.callback.apply(this.parent_scope, []);  // On lance le filtre !
+         }
      }
 
      /**
