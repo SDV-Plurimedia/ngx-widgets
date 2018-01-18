@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { StaticLoaderService } from '../../_services/static-loader';
 
+declare var CKEDITOR: any;
+declare var jQuery: any;
 @Component({
   selector: 'ckeditor',
   templateUrl: './ckeditor.html',
@@ -38,7 +40,9 @@ export class CkeditorComponent implements OnChanges {
     if (v !== this._value) {
       this._value = v;
       if (this.instance) {
-        if (this.debounceTimeoutOut) clearTimeout(this.debounceTimeoutOut);
+        if (this.debounceTimeoutOut) {
+          clearTimeout(this.debounceTimeoutOut);
+        }
         this.debounceTimeoutOut = setTimeout(() => {
           this.zone.run(() => {
             this.instance.setData(v);
@@ -96,7 +100,9 @@ export class CkeditorComponent implements OnChanges {
   }
 
   public textChanged(event = null) {
-    if (this.debounceTimeoutIn) clearTimeout(this.debounceTimeoutIn);
+    if (this.debounceTimeoutIn) {
+      clearTimeout(this.debounceTimeoutIn);
+    }
     this.debounceTimeoutIn = setTimeout(() => {
       this.zone.run(() => {
         this._value = this.instance.getData();
@@ -111,7 +117,7 @@ export class CkeditorComponent implements OnChanges {
     if (commandName === 'source') {
       jQuery('#cke_' + this.id + ' textarea').on(
         'keyup',
-        $.proxy(function() {
+        jQuery.proxy(function() {
           this.textChanged();
         }, this)
       );

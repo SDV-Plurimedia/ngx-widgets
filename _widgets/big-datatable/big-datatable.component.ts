@@ -232,7 +232,7 @@ export class BigDatatable {
             if (!this.filter_config.select_item_per_page.value) {
                 if (this.filter_config.select_item_per_page.default) {
                     this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.default;
-                }else {
+                } else {
                     this.filter_config.select_item_per_page.value = this.filter_config.select_item_per_page.values[0];
                 }
             }
@@ -307,7 +307,7 @@ export class BigDatatable {
      */
     public clickOnRow(object) {
         if (this.tr.rowCallback) {
-            this.tr.rowCallback.apply(this.parent_scope,[object]);
+            this.tr.rowCallback.apply(this.parent_scope, [object]);
         }
     }
 }
