@@ -9,7 +9,7 @@ export class Pager {
   private _pages: number;
   private _to: number;
 
-  private _current: number = 1;
+  // private _current: number = 1;
   private _interval: Array<number> = [];
 
   /**
@@ -20,12 +20,14 @@ export class Pager {
   * @param {number} _delta - Nombre de page à afficher en accès direct.
   * @param {Function} _actionCallback - Méthode que devra implémenter le
   * composant invoquant le pager.
+  * @param {number} _current - La page courante
   */
   constructor(private _scope: any,
     private _quantity: number,
     private _perPage: number = 10,
     private _delta: number = 5,
-    private _actionCallback:  (from: number, to: number) => void) {
+    private _actionCallback:  (from: number, to: number) => void,
+    private _current: number = 1) {
       this._setPages();
       this._setInterval();
     }
@@ -148,7 +150,11 @@ export class PagerComponent implements OnInit, OnChanges {
   ngOnChanges(changes) {
     if (changes.pager) {
       this.pager = changes.pager.currentValue;
-      this.goToPage(1);
+      if (changes.pager.previousValue) {
+        this.goToPage(1);
+      } else {
+        this.goToPage(this.pager.getCurrent());
+      }
     }
   }
 
