@@ -254,7 +254,8 @@ export class BigDatatable {
                         this.pagination_config.total,
                         this.pagination_config.per_page,
                         this.config.pagination_config.delta,
-                        this.pageChange);
+                        this.pageChange,
+                        this.pagination_config.current_page);
                 }
                 for (let object of result['data']) {
                     this.data.push(object);
