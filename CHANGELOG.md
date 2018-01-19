@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.7 - 19/01/2018
+* UPD: CKEditor: Prise en compte du changement des données dans le textarea vers le CKEditor
+
 ## 1.4.6 - 17/01/2018
 * UPD: Bigdatatable: Ajout de configuration pour ne pas lancer la recherche lors de l'initialisation
 * UPD: Bigdatatable: Possibilité d'ajouter un évenement sur les lignes de la Bigdatatable
