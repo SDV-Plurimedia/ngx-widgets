@@ -28,6 +28,8 @@ import { Button3dComponent } from './_widgets/button-3d/button-3d';
 import { ChevronComponent } from './_widgets/chevron/chevron';
 import { CkeditorComponent } from './_widgets/ckeditor/ckeditor';
 import { CornerButtonComponent } from './_widgets/corner-button/corner-button';
+import { DynamicTdComponent } from './_widgets/datatable/_widgets/dynamic-td/dynamic-td';
+import { DynamicActionComponent } from './_widgets/datatable/_widgets/dynamic-action/dynamic-action';
 import { DatatableComponent } from './_widgets/datatable/datatable';
 import { DatepickerComponent } from './_widgets/datepicker/datepicker';
 import { DropdownComponent } from './_widgets/dropdown/dropdown';
@@ -78,6 +80,8 @@ let widgets =  [
   ChevronComponent,
   CkeditorComponent,
   CornerButtonComponent,
+  DynamicTdComponent,
+  DynamicActionComponent,
   DatatableComponent,
   DatepickerComponent,
   DropdownComponent,

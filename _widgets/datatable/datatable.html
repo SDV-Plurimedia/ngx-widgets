@@ -36,12 +36,18 @@
               <ng-container *ngFor="let champ of structure">
                   <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
                   <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
-                  <td *ngIf="!champ.template && !champ.inputHTML">{{ getValue(ligne, champ.id)}}</td>
+                  <td *ngIf="champ.dynamicClass"><dynamic-td [classComponent]="champ.dynamicClass" [data]="ligne" [scope]="parent_scope"></dynamic-td></td>
+                  <td *ngIf="!champ.template && !champ.inputHTML && !champ.dynamicClass">{{ getValue(ligne, champ.id)}}</td>
               </ng-container>
               <td *ngIf="buttons">
+                <ng-container *ngIf="buttons.dynamicClass; else default_buttons">
+                  <dynamic-action [data]="ligne" [scope]="parent_scope" [classComponent]="buttons.dynamicClass"></dynamic-action>
+                </ng-container>
+                <ng-template #default_buttons>
                   <ng-container *ngFor="let button of buttons">
-                      <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
+                    <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
                   </ng-container>
+                </ng-template>
               </td>
           </tr>
       </ng-container>
