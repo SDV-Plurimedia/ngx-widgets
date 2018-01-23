@@ -1,8 +1,14 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.9 - 23/01/2018
+* FIX: Autocomplete: Le placeholder du champ correspondant à "Aucun" n'apparait plus plusieurs fois
+* ADD: Datatable: Possibilité de fournir un widget pour une cellule
+* ADD: Datatable: Possibilité de fournir un widget pour les boutons
+* ADD: FormBuilder: Interface pouvant être implémentée pour les DynamicFields
+
 ## 1.4.8 - 19/01/2018
-# UPD: Pager: Possibilité d'initialiser le pager à une autre page que la page 1
-# UPD: Bigdatatable: Si dans la configuration de la pagination on fournit "current_page", le pager sera à cette page là
+* UPD: Pager: Possibilité d'initialiser le pager à une autre page que la page 1
+* UPD: Bigdatatable: Si dans la configuration de la pagination on fournit "current_page", le pager sera à cette page là
 
 ## 1.4.7 - 19/01/2018
 * UPD: CKEditor: Prise en compte du changement des données dans le textarea vers le CKEditor
