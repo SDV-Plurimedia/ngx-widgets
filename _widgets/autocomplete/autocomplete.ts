@@ -107,10 +107,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
       }
 
     } else if (this.config.begin === 0) {
-      if (this.data[0] !== this.removeData) {
-        this.data.splice(0, 0, this.removeData);
-      }
       this.results = this.data;
+      this.addRemoveData();
     }
   }
 
