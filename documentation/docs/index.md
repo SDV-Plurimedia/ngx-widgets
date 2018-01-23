@@ -254,7 +254,7 @@ Exemple de component:
 
     public structure = [
         { id: "id", label: "ID"},
-        { id: "name", label: "Nom du champ"}
+        { id: "name", label: "Nom du champ"},
     ];
 
     public buttons = [
@@ -281,7 +281,7 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
 
     ```{public structure = [
       { id: "id", label: "ID"},
-      { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
+      { id: "liste_lapins", label: "Mes Lapins", inputHTML: true},
     ];```
 
 - Ensuite, dans mon model :
@@ -289,6 +289,27 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
     2. Générer le HTML qui corresponds.
     3. L'affecter à cette propriété.
 
+Il est également possible de fournir un widget pour une cellule donnée, pour ce faire : 
+
+
+    public structure = [
+      { id: "id", label: "ID"},
+      { id: "liste_lapins", label: "Mes Lapins", inputHTML: true},
+      { id: "dynamic", label: "Dynamic", dynamicClass: MyDynamicComponent}
+    ];
+
+Ce widget peut implémenter l'interface mise à disposition (il n'est pas nécessaire de mettre les balises "td" au sein de ce widget):
+
+    import {DynamicTdInterface} from 'sdv-ng2-widgets';
+
+Pour les boutons, on peut également fournir un widget, pour ce faire, l'objet bouton fournit doit être formaté comme ceci :
+
+    
+    public buttons = {
+        dynamicClass: MyButtonComponent
+      }; 
+     
+**ATTENTION : N'oubliez pas d'ajouter ces widgets dans les entryComponents de votre ngModule.**
 
 Dans mon model
 
@@ -603,6 +624,12 @@ sur un des champs du **model**, il faut soit :
 
   * Le faire dans le composant (**this.model[this.field.id]="bidule")
   * Avoir un Output() updateModel qui va s'occuper d'émettre la nouvelle valeur
+
+Une interface a été mise à disposition pour les widgets dynamic, il suffit pour cela de l'utiliser dans votre widget :
+
+    import {DynamicFieldInterface} from 'sdv-ng2-widgets';
+    
+**ATTENTION : N'oubliez pas d'ajouter ce widget dans les entryComponents de votre ngModule.**
 
 ###### Email<a id="email"></a>
 Un input email. La validité de l'email est gérée par une directive Angular.
