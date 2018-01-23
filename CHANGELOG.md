@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.10 - 23/01/2018
+* FIX: Datatable: Retrait de la méthode destroy dans les interfaces des widgets dynamiques
+
 ## 1.4.9 - 23/01/2018
 * FIX: Autocomplete: Le placeholder du champ correspondant à "Aucun" n'apparait plus plusieurs fois
 * ADD: Datatable: Possibilité de fournir un widget pour une cellule
