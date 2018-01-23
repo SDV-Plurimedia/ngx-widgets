@@ -15,6 +15,7 @@ export class DynamicTdComponent implements OnInit, OnDestroy {
   public dynamicTd: any = null;
   @Input() public data: any = null;
   @Input() public classComponent: any = null;
+  @Input() public scope: any = null;
 
   constructor(
     private _factoryResolver: ComponentFactoryResolver,
@@ -39,6 +40,7 @@ export class DynamicTdComponent implements OnInit, OnDestroy {
   private sendDataToDynamicTd() {
     if (this.dynamicTd) {
       this.dynamicTd.instance.data = this.data;
+      this.dynamicTd.instance.scope = this.scope;
     }
   }
 }

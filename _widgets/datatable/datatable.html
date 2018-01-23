@@ -36,7 +36,7 @@
               <ng-container *ngFor="let champ of structure">
                   <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
                   <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
-                  <td *ngIf="champ.dynamicClass"><dynamic-td [classComponent]="champ.dynamicClass" [data]="ligne"></dynamic-td></td>
+                  <td *ngIf="champ.dynamicClass"><dynamic-td [classComponent]="champ.dynamicClass" [data]="ligne" [scope]="parent_scope"></dynamic-td></td>
                   <td *ngIf="!champ.template && !champ.inputHTML && !champ.dynamicClass">{{ getValue(ligne, champ.id)}}</td>
               </ng-container>
               <td *ngIf="buttons">
