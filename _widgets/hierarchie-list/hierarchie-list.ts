@@ -58,9 +58,9 @@ export class HierarchieListComponent implements OnInit, OnChanges {
         let item = this.datas.filter(item => item.id_hierarchie === id);
         if (item.length) {
           this.selectLevel((num - 1), item[0].parent);
+        }
       }
-    }
-    this.getNextLevel(num, id);
+      this.getNextLevel(num, id);
     }
 
     // recupere la liste des topics enfant
