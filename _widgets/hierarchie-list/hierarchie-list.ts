@@ -55,10 +55,12 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     public selectLevel(num, id) {
       if (num > 0) {
-        this.selectLevel((num - 1) , this.datas.filter(item => item.id_hierarchie === id)[0].parent);
+        let item = this.datas.filter(item => item.id_hierarchie === id);
+        if (item.length) {
+          this.selectLevel((num - 1), item[0].parent);
       }
-      console.log('TODO -> selection du level ', num, id);
-      this.getNextLevel(num, id);
+    }
+    this.getNextLevel(num, id);
     }
 
     // recupere la liste des topics enfant
