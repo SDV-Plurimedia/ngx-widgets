@@ -55,7 +55,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     public selectLevel(num, id) {
       if (num > 0) {
-        let item = this.datas.filter(item => item.id_hierarchie === id);
+        let item = this.datas.filter(item2 => item2.id_hierarchie === id);
         if (item.length) {
           this.selectLevel((num - 1), item[0].parent);
         }
