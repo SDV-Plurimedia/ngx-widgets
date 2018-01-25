@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.11 - 25/01/2018
+* FIX: HierarchieList: Le choix du niveau ne plante plus si le niveau n'existe pas
+
 ## 1.4.10 - 23/01/2018
 * FIX: Datatable: Retrait de la méthode destroy dans les interfaces des widgets dynamiques
 
