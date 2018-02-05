@@ -153,7 +153,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       this.level.forEach((level, index) => {
         this.buttons_path[level] = [];
         if (level && this.level_displayed && this.level_displayed.indexOf(level) >= 0) {
-          this.datas_level[index].forEach((data)=> {
+          this.datas_level[index].forEach((data) => {
             this.buttons.forEach((button: HierarchieButton) => {
               if (button.navigation) {
                 this.buttons_path[level].push(button.action.apply(this.parent_scope, [data]));
