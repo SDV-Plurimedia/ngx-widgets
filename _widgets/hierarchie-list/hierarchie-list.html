@@ -1,28 +1,57 @@
 <div class="m-right-md m-left-md" *ngIf="params">
-  <ng-template  ngFor let-lvl [ngForOf]="level" let-i="index" let-next="index+1">
+  <ng-template ngFor let-lvl [ngForOf]="level" let-i="index" let-next="index+1">
 
     <div class="list-group col-md-3" *ngIf="lvl && level_displayed.indexOf(lvl)>=0" id="list_{{lvl}}">
-        <ng-template ngFor let-data [ngForOf]="datas_level[i]">
-            <div class="row list-group-item" [class.active]="level[next] && level[next]==data[params.primary_key]"
-                        id="item_{{data[params.primary_key]}}" (click)="getNextLevel(next, data[params.primary_key])">
-                <div class="col-md-4" *ngIf="buttons && buttons.length > 0">
-                  <ng-template ngFor let-button [ngForOf]="buttons">
-                    <ng-container *ngIf="displayButton(button, data)">
-                      <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>
-                    </ng-container>
-                  </ng-template>
-                </div>
-                <div class="col-md-6">
-                    <span>{{data[name_column]}}</span>
-                </div>
-                <div class="col-md-2">
-                    <ng-template [ngIf]="hasChildren(data[params.primary_key])">
-                      <span class="fa fa-chevron-right fa-2x">
-                      </span>
-                    </ng-template>
-                </div>
-            </div>
-        </ng-template>
+      <ng-template ngFor let-data [ngForOf]="datas_level[i]" let-in="index">
+
+        <div class="row list-group-item" [class.active]="level[next] && level[next]==data[params.primary_key]" id="item_{{data[params.primary_key]}}"
+          (click)="getNextLevel(next, data[params.primary_key])">
+          <div class="col-md-4" *ngIf="buttons && buttons.length > 0">
+
+            <ng-template ngFor let-button [ngForOf]="buttons">
+
+              <ng-container *ngIf="displayButton(button, data)">
+
+                <ng-container *ngIf="button.navigation && buttons_path[lvl] && buttons_path[lvl].length > 0; else simpleButton">
+
+                  <a [routerLink]="[buttons_path[lvl][in]]" class="{{button.class}}" [innerHTML]="button.text"></a>
+
+                </ng-container>
+                <ng-template #simpleButton>
+
+                  <button class="{{button.class}}" (click)="button.action.apply(this.parent_scope,[data])" [innerHTML]="button.text"></button>
+
+                </ng-template>
+
+              </ng-container>
+
+            </ng-template>
+          </div>
+          <div class="col-md-6">
+            <ng-container *ngIf="buttons_path[lvl][in]; else simpleTitle">
+
+              <a [routerLink]="[buttons_path[lvl][in]]" class="detail">{{data[name_column]}}</a>
+
+            </ng-container>
+            <ng-template #simpleTitle>
+
+              <span>{{data[name_column]}}</span>
+
+            </ng-template>
+          </div>
+          <div class="col-md-2">
+
+            <ng-template [ngIf]="hasChildren(data[params.primary_key])">
+
+              <span class="fa fa-chevron-right fa-2x pointer">
+              </span>
+
+            </ng-template>
+          </div>
+        </div>
+
+      </ng-template>
     </div>
+
   </ng-template>
 </div>

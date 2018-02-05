@@ -7,6 +7,7 @@ Le module shared contient les widgets,directives et pipes qui peuvent etre utili
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
@@ -16,7 +17,8 @@ let modules = [
   ReactiveFormsModule,
   HttpModule,
   JsonpModule,
-  DragulaModule
+  DragulaModule,
+  RouterModule
 ];
 
 // les widgets
