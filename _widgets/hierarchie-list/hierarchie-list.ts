@@ -48,7 +48,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       }
       if (this.params !== null) {
         this.root_id = this.params.root_id;
-        if(this.root_id){
+        if (this.root_id) {
           this.level = [];
           this.datas_level = [];
           this.level[0] = this.root_id;
@@ -144,19 +144,19 @@ export class HierarchieListComponent implements OnInit, OnChanges {
     }
 
     /**
-     * Vérifie la totalité des boutons 
+     * Vérifie la totalité des boutons
      * et ajoute un path à suivre si jamais il existe.
-     * Le path à suivre doit être retourné par 
+     * Le path à suivre doit être retourné par
      * la fonction appelée dans le composant parent.
      */
     public updateButtonsPath() {
-      this.level.forEach((level, index) =>{
+      this.level.forEach((level, index) => {
         this.buttons_path[level] = [];
-        if(level && this.level_displayed && this.level_displayed.indexOf(level) >= 0){
+        if (level && this.level_displayed && this.level_displayed.indexOf(level) >= 0) {
           this.datas_level[index].forEach((data)=> {
             this.buttons.forEach((button: HierarchieButton) => {
-              if(button.navigation){
-                  this.buttons_path[level].push(button.action.apply(this.parent_scope,[data]));
+              if (button.navigation) {
+                this.buttons_path[level].push(button.action.apply(this.parent_scope, [data]));
               }
             });
           });
