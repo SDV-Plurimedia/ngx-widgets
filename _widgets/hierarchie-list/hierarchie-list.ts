@@ -60,11 +60,10 @@ export class HierarchieListComponent implements OnInit, OnChanges {
     }
 
     public selectLevel(num, id) {
-      console.log('selectLevel Triggered !');
       if (num > 0) {
         this.selectLevel((num - 1) , this.datas.filter(item => item.id_hierarchie === id)[0].parent);
       }
-      console.log('TODO -> selection du level ', num, id);
+      // TODO selection du level
       this.getNextLevel(num, id);
     }
 
@@ -77,7 +76,6 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     // calcul le niveau suivant si existant
     public getNextLevel(num: number, id: any) {
-      console.log('getNextLevel triggered !');
       if (this.hasChildren(id)) {
         // j'enregistre la position
         this.last_selected_level = {
@@ -97,7 +95,6 @@ export class HierarchieListComponent implements OnInit, OnChanges {
             datas_level[i] = this.datas_level[i];
           }
           this.level = level;
-          console.log('hierarchie-list : ', this.level);
           this.datas_level = datas_level;
         }
         this.getDisplayedLevel();
