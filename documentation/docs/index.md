@@ -884,6 +884,7 @@ Utilisation:
         * **class**: Les classes à affecter au bouton
         * **text**: Le texte (ou html) qui sera affiché dans le bouton
         * **action**: L'action à effectuer au clic sur le bouton
+        * **navigation** : Boolean : Si 'true' alors les boutons sont transformés en balise ```<a>``` avec la directive [routerLink] configuré. Le path à emprunter doit être retourné par la fonction définie par l'action.
 
 # Loader
 
