@@ -10,10 +10,11 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     @Input() params: HierarchieList = null;
     @Input() datas: any[];
-    public root_id: any;
+    public root_id: any = null;
     public name_column: string;
     public parent_scope: any;
     public buttons: HierarchieButton[];
+    public buttons_path: any = {};
 
     public level: any[];
     public level_displayed: any[];
@@ -34,8 +35,8 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       this.datas_level = [];
       this.level[0] = this.root_id;
       this.datas_level[0] = this.getListLevel(0);
+      this.updateButtonsPath();
       this.getDisplayedLevel();
-
     }
 
     ngOnChanges(changes) {
@@ -45,12 +46,17 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       if (changes.params) {
         this.params = changes.params.currentValue;
       }
-      this.root_id = this.params.root_id;
-      this.level = [];
-      this.datas_level = [];
-      this.level[0] = this.root_id;
-      this.datas_level[0] = this.getListLevel(0);
-      this.getDisplayedLevel();
+      if (this.params !== null) {
+        this.root_id = this.params.root_id;
+        if (this.root_id) {
+          this.level = [];
+          this.datas_level = [];
+          this.level[0] = this.root_id;
+          this.datas_level[0] = this.getListLevel(0);
+          this.updateButtonsPath();
+          this.getDisplayedLevel();
+        }
+      }
     }
 
     public selectLevel(num, id) {
@@ -60,6 +66,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
           this.selectLevel((num - 1), item[0].parent);
         }
       }
+      // TODO selection du level
       this.getNextLevel(num, id);
     }
 
@@ -71,7 +78,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
     }
 
     // calcul le niveau suivant si existant
-    private getNextLevel(num: number, id: any) {
+    public getNextLevel(num: number, id: any) {
       if (this.hasChildren(id)) {
         // j'enregistre la position
         this.last_selected_level = {
@@ -94,6 +101,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
           this.datas_level = datas_level;
         }
         this.getDisplayedLevel();
+        this.updateButtonsPath();
         setTimeout(() => {
           let item = this._el.nativeElement.querySelector('#item_' + id);
           let list = this._el.nativeElement.querySelector('#list_' + id);
@@ -135,6 +143,26 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       return true;
     }
 
+    /**
+     * Vérifie la totalité des boutons
+     * et ajoute un path à suivre si jamais il existe.
+     * Le path à suivre doit être retourné par
+     * la fonction appelée dans le composant parent.
+     */
+    public updateButtonsPath() {
+      this.level.forEach((level, index) => {
+        this.buttons_path[level] = [];
+        if (level && this.level_displayed && this.level_displayed.indexOf(level) >= 0) {
+          this.datas_level[index].forEach((data) => {
+            this.buttons.forEach((button: HierarchieButton) => {
+              if (button.navigation) {
+                this.buttons_path[level].push(button.action.apply(this.parent_scope, [data]));
+              }
+            });
+          });
+        }
+      });
+    }
 }
 
 export interface HierarchieButton {
@@ -142,6 +170,7 @@ export interface HierarchieButton {
     class?: string;
     action: (any) => void;
     access?: (any) => boolean;
+    navigation?: boolean;
 }
 
 export interface HierarchieList {

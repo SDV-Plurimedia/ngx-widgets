@@ -1,5 +1,7 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.12 - 07/02/2018
+* ADD: HierarchieList : possibilité d'afficher des balises de navigation à la place des boutons si l'option est configurée correctement
 ## 1.4.11 - 25/01/2018
 * FIX: HierarchieList: Le choix du niveau ne plante plus si le niveau n'existe pas
 
