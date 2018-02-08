@@ -1,20 +1,27 @@
 <table class='table table-striped table-bordered' cellspacing='0' width='100%' #table>
     <thead *ngIf="header">
-    <tr>
-        <ng-container *ngFor=" let champ of structure">
-            <th>{{champ.label}}</th>
-        </ng-container>
-        <th *ngIf="buttons"></th>
-    </tr>
+        <tr>
+            <th *ngIf="checkboxes" class="th_checkbox">
+                <input class="check-all" type="checkbox" (click)="checkAll($event)" [checked]="allVisibleRowsAreChecked()">
+                <span class="custom-checkbox"></span>
+            </th>
+            <ng-container *ngFor=" let champ of structure">
+                <th>{{champ.label}}</th>
+            </ng-container>
+            <th *ngIf="buttons"></th>
+        </tr>
     </thead>
     <tfoot *ngIf="footer">
-    <tr>
-        <ng-container *ngFor="let champ of structure">
-            <th>{{champ.label}}</th>
-        </ng-container>
-        <th *ngIf="buttons"></th>
-    </tr>
-
+        <tr>
+            <th *ngIf="checkboxes" class="th_checkbox">
+                <input class="check-all" type="checkbox" (click)="checkAll($event)" [checked]="allVisibleRowsAreChecked()">
+                <span class="custom-checkbox"></span>
+            </th>
+            <ng-container *ngFor="let champ of structure">
+                <th>{{champ.label}}</th>
+            </ng-container>
+            <th *ngIf="buttons"></th>
+        </tr>
     </tfoot>
 
     <!-- header du tableau avec dragndrop -->
@@ -31,21 +38,25 @@
 
     <!-- contenu du tableau -->
     <ng-template #contenu>
-      <ng-container *ngFor="let ligne of data" >
-          <tr class="dt-body-row" fsgfsgs>
+      <ng-container *ngFor="let ligne of data; let i = index" >
+          <tr class="dt-body-row" [class.hover]="checkboxes" fsgfsgs>
+              <td *ngIf="checkboxes" align="center" (click)="callClickCb(i)">
+                  <input id="checkbox_{{i}}" type="checkbox" class="row-checkbox" (click)="clickRowCheckbox($event, ligne)" [checked]="isChecked(ligne)">
+                  <span class="custom-checkbox"></span>
+              </td>
               <ng-container *ngFor="let champ of structure">
-                  <td *ngIf="champ.template" [innerHTML]="champ.template"></td>
-                  <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)"></td>
-                  <td *ngIf="champ.dynamicClass"><dynamic-td [classComponent]="champ.dynamicClass" [data]="ligne" [scope]="parent_scope"></dynamic-td></td>
-                  <td *ngIf="!champ.template && !champ.inputHTML && !champ.dynamicClass">{{ getValue(ligne, champ.id)}}</td>
+                  <td *ngIf="champ.template" [innerHTML]="champ.template" (click)="callClickCb(i)"></td>
+                  <td *ngIf="champ.inputHTML" [innerHTML]="getValue(ligne, champ.id, true)" (click)="callClickCb(i)"></td>
+                  <td *ngIf="champ.dynamicClass" (click)="callClickCb(i)"><dynamic-td [classComponent]="champ.dynamicClass" [data]="ligne" [scope]="parent_scope"></dynamic-td></td>
+                  <td *ngIf="!champ.template && !champ.inputHTML && !champ.dynamicClass" (click)="callClickCb(i)">{{ getValue(ligne, champ.id)}}</td>
               </ng-container>
-              <td *ngIf="buttons">
+              <td *ngIf="buttons" (click)="callClickCb(i)">
                 <ng-container *ngIf="buttons.dynamicClass; else default_buttons">
                   <dynamic-action [data]="ligne" [scope]="parent_scope" [classComponent]="buttons.dynamicClass"></dynamic-action>
                 </ng-container>
                 <ng-template #default_buttons>
                   <ng-container *ngFor="let button of buttons">
-                    <button class="{{button.class}} form-control" (click)="button.action.apply(parent_scope,[ligne])" [innerHTML]="button.text"></button>
+                    <button class="{{button.class}} form-control" (click)="callActionButton($event, button.action, ligne)" [innerHTML]="button.text"></button>
                   </ng-container>
                 </ng-template>
               </td>
