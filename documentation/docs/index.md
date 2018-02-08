@@ -364,6 +364,22 @@ Dans le constructeur du mode
 
     Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
 
+## Ajout d'une colonne de checkboxes
+    
+Il est possible d'ajouter comme première colonne une colonne de checkboxes pour ce faire, passer en input **checkboxes**
+ qui vaut true et en output **checkedRows**, lors de chaque clic sur une case à cocher les différents élements cochées seront renvoyées.
+ 
+Exemple :
+ 
+     <datatable [structure]="structure"
+                [data]="users"
+                [parent_scope]="scope"
+                [buttons]="buttons"
+                [checkboxes]=true
+                (checkedRows)="deleteManyArray=$event"
+     ></datatable>
+   
+    
 
 # DatePicker
 
