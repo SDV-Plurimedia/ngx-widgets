@@ -307,7 +307,8 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
     */
   public allVisibleRowsAreChecked() {
     if (this.table) {
-      return jQuery(this._element.nativeElement).find('.row-checkbox:checked').length === jQuery(this._element.nativeElement).find('.row-checkbox').length;
+      return jQuery(this._element.nativeElement).find('.row-checkbox:checked').length ===
+          jQuery(this._element.nativeElement).find('.row-checkbox').length;
     } else {
       return false;
     }
