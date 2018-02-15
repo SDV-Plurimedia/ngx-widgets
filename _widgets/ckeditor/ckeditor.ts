@@ -72,6 +72,10 @@ export class CkeditorComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy() {
+    this.initCKeditor = function() { return };
+  }
+
   private initCKeditor() {
     if (this.config) {
       CKEDITOR.replace(this.id, this.config);

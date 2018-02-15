@@ -1,5 +1,7 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.12 - 15/02/18
+* FIX : CKEditor: Le CKEditor arrête son initilisation si le composant est détruit avant la fin.
 ## 1.4.11 - 25/01/2018
 * FIX: HierarchieList: Le choix du niveau ne plante plus si le niveau n'existe pas
 
