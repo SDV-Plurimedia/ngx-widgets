@@ -74,11 +74,11 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.initCKeditor = function() { return };
+    this.initCKeditor = function() { return; };
   }
 
   private initCKeditor() {
-    if(!this.id){
+    if (!this.id) {
       return;
     }
     if (this.config) {
