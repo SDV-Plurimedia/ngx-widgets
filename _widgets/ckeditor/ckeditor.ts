@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   OnChanges,
+  OnDestroy,
   NgZone
 } from '@angular/core';
 import { StaticLoaderService } from '../../_services/static-loader';
@@ -15,7 +16,7 @@ declare var jQuery: any;
   templateUrl: './ckeditor.html',
   styleUrls: ['./ckeditor.css']
 })
-export class CkeditorComponent implements OnChanges {
+export class CkeditorComponent implements OnChanges, OnDestroy {
   @Input() id: string = 'editor';
   @Input() rows: number = 10;
   @Input() disabled: boolean = false;
@@ -72,7 +73,14 @@ export class CkeditorComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy() {
+    this.initCKeditor = function() { return; };
+  }
+
   private initCKeditor() {
+    if (!this.id) {
+      return;
+    }
     if (this.config) {
       CKEDITOR.replace(this.id, this.config);
     } else {
