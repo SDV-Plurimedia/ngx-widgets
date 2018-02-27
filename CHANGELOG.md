@@ -1,6 +1,6 @@
 #Changelog SDV-NG2-Widgets
 
-## 1.4.15 - 27/02/18
+## 1.4.14 - 27/02/18
 * FIX : Rework du composant TabpaneComponent
 ## 1.4.13 - 16/02/18
 * FIX : CKEditor: Le CKEditor arrête son initilisation si le composant est détruit avant la fin.
