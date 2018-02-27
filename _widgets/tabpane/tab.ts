@@ -1,21 +1,34 @@
-import {Component, Host, Input} from '@angular/core';
-import {TabpaneComponent} from './tabpane';
+/**
+ * Angular / Core
+ */
+import { Component, Input } from '@angular/core';
 
+/**
+ * Composant qui gère un onglet d'un tabpane
+ */
 @Component({
-    selector: 'tab',
-    styleUrls: ['./tabpane.css'],
-    template: `
+  selector: 'tab',
+  styleUrls: ['./tabpane.css'],
+  template: `
     <div [class.hidden]="!active" class="class-pane" role="tabpanel">
       <ng-content></ng-content>
     </div>
   `
 })
-
 export class TabComponent {
-  @Input() tabtitle: string;
-  @Input() active = false;
-
-  constructor( @Host() tabs: TabpaneComponent) {
-    tabs.addTab(this);
-  }
+  /**
+   * Le titre de l'onglet
+   * @type {string}
+   */
+  @Input() tabtitle: string = null;
+  /**
+   * Determine si l'onglet et actif ou non (contenu affiché)
+   * @type {boolean}
+   */
+  @Input() active: boolean = false;
+  /**
+   * L'id aléatoire du tabpane parent
+   * @type {number | string}
+   */
+  public parentRandId: number | string = null;
 }
