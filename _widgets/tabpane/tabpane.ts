@@ -96,13 +96,14 @@ export class TabpaneComponent implements AfterContentInit {
       if (
         typeof this.tabs.changes['observers'] === 'undefined' ||
         this.tabs.changes['observers'].length === 0
-      )
+      ) {
         if (this._subTabs) {
           this._subTabs.unsubscribe();
         }
-      this._subTabs = this.tabs.changes.subscribe(() =>
-        this._calcDirectChild()
-      );
+        this._subTabs = this.tabs.changes.subscribe(() =>
+          this._calcDirectChild()
+        );
+      }
     }
   }
 
