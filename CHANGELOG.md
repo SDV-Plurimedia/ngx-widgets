@@ -1,7 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
 ## 1.4.14 - 27/02/18
-* FIX : Rework du composant TabpaneComponent
+* FIX : Rework du composant TabpaneComponent (il peut maintenant recevoir un contenu (les tabs) qui bougent en async)
+
 ## 1.4.13 - 16/02/18
 * FIX : CKEditor: Le CKEditor arrête son initilisation si le composant est détruit avant la fin.
 
@@ -12,7 +13,7 @@
 ## 1.4.11 - 25/01/2018
 * FIX: HierarchieList: Le choix du niveau ne plante plus si le niveau n'existe pas
 
-## 1.4.10 - 23/01/2018
+## 1.4.10 - 23/01/2018
 * FIX: Datatable: Retrait de la méthode destroy dans les interfaces des widgets dynamiques
 
 ## 1.4.9 - 23/01/2018
@@ -46,7 +47,6 @@
 
 ## 1.4.3 - 01/12/2017
 * ADD: FormBuilder: point d'entrée pour widget custom
-
 
 ## 1.4.2 - 21/11/2017
 * FIX: SanitizeHTML in datatable
