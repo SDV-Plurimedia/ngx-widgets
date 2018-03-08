@@ -61,6 +61,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
       this.nb_threads = Math.floor(this.data.length / 1000) + 1;
       this.results = [];
       this.inputValue = '';
+      this.onInputChange(this.inputValue);
       // console.log('nb de threads ', this.nb_threads);
     }
   }
