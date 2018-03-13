@@ -2,11 +2,11 @@
   <div [ngClass]="{'panel-heading': panel_mode, 'card-header': panel_mode}">
     <!-- HEADER -->
     <ul class="nav nav-tabs tab-bar grey-tab" role="tablist">
-      <ng-template ngFor let-tab [ngForOf]="tabs">
+      <ng-container *ngFor="let tab of tabs">
         <li class="nav-item"  [class.active]="tab.active">
           <a class="nav-link" [class.active]="tab.active" data-toggle="tab" role="tab" (click)="setActiveTab(tab)" [innerHTML]="tab.tabtitle"></a>
         </li>
-      </ng-template>
+      </ng-container>
     </ul>
 
   </div>

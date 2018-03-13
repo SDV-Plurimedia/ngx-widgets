@@ -36,7 +36,7 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   @Output() checkedRows: EventEmitter<any> = new EventEmitter();
 
   private table_elem: JQuery;
-  private table: DataTables.DataTable;
+  private table: DataTables.Api;
   private language: any = {
     'sProcessing':     'Traitement en cours...',
     'sSearch':         'Rechercher&nbsp;:',

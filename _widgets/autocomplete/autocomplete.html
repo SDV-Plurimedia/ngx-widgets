@@ -27,9 +27,9 @@
         </div>
 
         <ul class="chosen-results" *ngIf="!disabled">
-            <ng-template ngFor let-item [ngForOf]="results" let-i="index" let-isfirst="first">
+            <ng-container *ngFor="let item of results; let i=index; let isFirst=first">
                 <li (click)="valideItem(item)" class="active-result elem{{i}}" [class.highlighted]="isfirst">{{ item[config.fieldDisplayed] }}</li>
-            </ng-template>
+            </ng-container>
         </ul>
     </div>
 </div>

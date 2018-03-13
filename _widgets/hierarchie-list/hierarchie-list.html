@@ -1,14 +1,14 @@
 <div class="m-right-md m-left-md" *ngIf="params">
-  <ng-template ngFor let-lvl [ngForOf]="level" let-i="index" let-next="index+1">
+  <ng-container *ngFor="let lvl of level; let i=index">
 
     <div class="list-group col-md-3" *ngIf="lvl && level_displayed.indexOf(lvl)>=0" id="list_{{lvl}}">
-      <ng-template ngFor let-data [ngForOf]="datas_level[i]" let-in="index">
+      <ng-container *ngFor="let data of datas_level[i]; let in=index">
 
-        <div class="row list-group-item" [class.active]="level[next] && level[next]==data[params.primary_key]" id="item_{{data[params.primary_key]}}"
-          (click)="getNextLevel(next, data[params.primary_key])">
+        <div class="row list-group-item" [class.active]="level[i+1] && level[i+1]==data[params.primary_key]" id="item_{{data[params.primary_key]}}"
+          (click)="getNextLevel(i+1, data[params.primary_key])">
           <div class="col-md-4" *ngIf="buttons && buttons.length > 0">
 
-            <ng-template ngFor let-button [ngForOf]="buttons">
+            <ng-container *ngFor="let button of buttons">
 
               <ng-container *ngIf="displayButton(button, data)">
 
@@ -25,7 +25,7 @@
 
               </ng-container>
 
-            </ng-template>
+            </ng-container>
           </div>
           <div class="col-md-6">
             <ng-container *ngIf="buttons_path[lvl][in]; else simpleTitle">
@@ -50,8 +50,8 @@
           </div>
         </div>
 
-      </ng-template>
+      </ng-container>
     </div>
 
-  </ng-template>
+  </ng-container>
 </div>

@@ -2,7 +2,7 @@
 
     <ul class="list-group">
 
-        <ng-template ngFor let-data [ngForOf]="sorted_datas">
+        <ng-container *ngFor="let data of sorted_datas">
             <li class="row list-group-item deep{{ indents[data[params.primary_key]] }}" [class.hidden]="isHidden(data[params.primary_key])">
                 <div class="col-lg-1" *ngIf="checkbox">
                     <input type="checkbox" value="{{data[checkbox.column_value]}}" name="checkbox_{{data[params.primary_key]}}"
@@ -21,12 +21,12 @@
                     <span>{{data[name_column]}}</span>
                 </div>
                 <div class="col-lg-1" *ngIf="buttons && buttons.length > 0">
-                    <ng-template ngFor let-button [ngForOf]="buttons">
+                    <ng-container *ngFor="let button of buttons">
                         <button class="{{button.class}}" (click)="button.action.apply(parent_scope,[data])" [innerHTML]="button.text"></button>
-                    </ng-template>
+                    </ng-container>
                 </div>
             </li>
-        </ng-template>
+        </ng-container>
     </ul>
 </div>
 
