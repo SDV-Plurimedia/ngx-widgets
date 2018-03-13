@@ -40,7 +40,7 @@ export class HierarchieListComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes) {
-      if(changes.datas && changes.datas.previousValue && changes.params && changes.params.previousValue) {
+      if (changes.datas && changes.datas.previousValue && changes.params && changes.params.previousValue) {
         if (changes.datas && changes.datas.previousValue && changes.datas.previousValue.length > 0) {
           this.datas = changes.datas.currentValue;
         }
