@@ -35,26 +35,28 @@ export class HierarchieListComponent implements OnInit, OnChanges {
       this.datas_level = [];
       this.level[0] = this.root_id;
       this.datas_level[0] = this.getListLevel(0);
-      this.updateButtonsPath();
       this.getDisplayedLevel();
+      this.updateButtonsPath();
     }
 
     ngOnChanges(changes) {
-      if (changes.datas && changes.datas.previousValue && changes.datas.previousValue.length > 0) {
-        this.datas = changes.datas.currentValue;
-      }
-      if (changes.params) {
-        this.params = changes.params.currentValue;
-      }
-      if (this.params !== null) {
-        this.root_id = this.params.root_id;
-        if (this.root_id) {
-          this.level = [];
-          this.datas_level = [];
-          this.level[0] = this.root_id;
-          this.datas_level[0] = this.getListLevel(0);
-          this.updateButtonsPath();
-          this.getDisplayedLevel();
+      if (changes.datas && changes.datas.previousValue && changes.params && changes.params.previousValue) {
+        if (changes.datas && changes.datas.previousValue && changes.datas.previousValue.length > 0) {
+          this.datas = changes.datas.currentValue;
+        }
+        if (changes.params) {
+          this.params = changes.params.currentValue;
+        }
+        if (this.params !== null) {
+          this.root_id = this.params.root_id;
+          if (this.root_id) {
+            this.level = [];
+            this.datas_level = [];
+            this.level[0] = this.root_id;
+            this.datas_level[0] = this.getListLevel(0);
+            this.getDisplayedLevel();
+            this.updateButtonsPath();
+          }
         }
       }
     }
