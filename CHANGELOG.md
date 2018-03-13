@@ -1,9 +1,13 @@
 #Changelog SDV-NG2-Widgets
 
-## 1.4.14 - 27/02/18
+## 1.4.16 - 13/03/2018
+* FIX : HierarchieList : Fix du onChanges & du onInit
+* FIX : Autocomplete : Relancer la recherche si les datas en input ont changés
+
+## 1.4.14 - 27/02/2018
 * FIX : Rework du composant TabpaneComponent (il peut maintenant recevoir un contenu (les tabs) qui bougent en async)
 
-## 1.4.13 - 16/02/18
+## 1.4.13 - 16/02/2018
 * FIX : CKEditor: Le CKEditor arrête son initilisation si le composant est détruit avant la fin.
 
 ## 1.4.12 - 08/02/2018
