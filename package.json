@@ -1,15 +1,15 @@
 {
-  "name": "sdv-ng2-widgets",
+  "name": "@sdvplurimedia/ngx-widgets",
   "version": "1.4.16",
-  "description": "Angular2 - SDV Widgets",
+  "description": "SDV - Angular Widgets",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:SDV-Plurimedia/sdv-ng2-widgets.git"
+    "url": "git+ssh://git@github.com:SDV-Plurimedia/ngx-widgets.git"
   },
   "scripts": {
     "start": "tsc",
     "lint": "tslint _*/**/*.ts",
-    "copy2test": "cp -r _* example/node_modules/sdv-ng2-widgets/",
+    "copy2test": "cp -r _* example/node_modules/ngx-widgets/",
     "build": "tsc",
     "dts": "tsc --declaration index.ts "
   },
@@ -56,7 +56,7 @@
     "typescript": "~2.3.0"
   },
   "bugs": {
-    "url": "https://github.com/SDV-Plurimedia/sdv-ng2-widgets/issues"
+    "url": "https://github.com/SDV-Plurimedia/ngx-widgets/issues"
   },
   "author": "R&D @ SDV Plurimédia"
 }
