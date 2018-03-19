@@ -4,10 +4,10 @@ import {Injectable} from '@angular/core';
 export class LoaderService {
 
   // gestion du singleton
-  private static instance: LoaderService;
-  private static isCreating: boolean;
+  private static instance: LoaderService = null;
+  private static isCreating: boolean = false;
 
-  private dialog: any;
+  private dialog: any = null;
 
   public static getInstance() {
       if (LoaderService.instance == null) {

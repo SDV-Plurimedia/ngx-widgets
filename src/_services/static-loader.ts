@@ -4,10 +4,10 @@ import {Injectable} from '@angular/core';
 export class StaticLoaderService {
 
   // gestion du singleton
-  private static instance: StaticLoaderService;
-  private static isCreating: boolean;
+  private static instance: StaticLoaderService = null;
+  private static isCreating: boolean = null;
   // liste des scripts déja chargé
-  private static promiseLoaded: Array<Promise<any>>;
+  private static promiseLoaded: Array<Promise<any>> = null;
 
   public static getInstance() {
     if (StaticLoaderService.instance == null) {
