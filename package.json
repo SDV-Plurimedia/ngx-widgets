@@ -1,7 +1,13 @@
 {
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@sdvplurimedia/ngx-widgets",
   "version": "2.0.0",
   "description": "SDV - Angular Widgets",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:SDV-Plurimedia/ngx-widgets.git"
@@ -16,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "moment": "^2.21.0",
+    "ng-packagr": "^2.2.0",
     "ng2-dragula": "^1.5.0",
     "rxjs": "^5.5.0",
     "zone.js": "^0.8.19"
