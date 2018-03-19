@@ -16,8 +16,7 @@
     "start": "tsc",
     "lint": "tslint _*/**/*.ts",
     "copy2test": "cp -r _* example/node_modules/ngx-widgets/",
-    "build": "tsc",
-    "dts": "tsc --declaration index.ts "
+    "build": "ng-packagr -p package.json"
   },
   "license": "MIT",
   "dependencies": {

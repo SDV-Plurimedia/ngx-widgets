@@ -128,7 +128,7 @@ let widgets =  [
   ErrorMessageComponent
 ];
 
-// les directives
+// Lles directives
 import { DNDDirective } from './_directives/dnd';
 import { LazyloadDirective } from './_directives/lazyload';
 import { ProvideParentFormDirective } from './_directives/provide-parent-form';
@@ -141,7 +141,7 @@ let directives = [
   LoadingDirective
 ];
 
-// les pipes
+// Les pipes
 import { BootstrapClassPipe } from './_pipes/bootstrap-class';
 import { HtmlEncoderPipe } from './_pipes/htmlencoder/htmlencoder';
 import { HumanReadableSizePipe } from './_pipes/human-readable-size/human-readable-size';
@@ -160,6 +160,7 @@ let pipes = [
   UcFirstPipe
 ];
 
+// Les services
 import { StaticLoaderService } from './_services/static-loader';
 import { LoaderService } from './_services/loader';
 
