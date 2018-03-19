@@ -1,8 +1,8 @@
 # SDV NG2 Widgets
 
-[![npm download](https://img.shields.io/npm/dt/ngx-widgets.svg)]()
-[![npm version](https://img.shields.io/npm/v/ngx-widgets.svg)]()
-[![npm license](https://img.shields.io/npm/l/ngx-widgets.svg)]()
+[![npm download](https://img.shields.io/npm/dt/@sdvplurimedia/ngx-widgets.svg)]()
+[![npm version](https://img.shields.io/npm/v/@sdvplurimedia/ngx-widgets.svg)]()
+[![npm license](https://img.shields.io/npm/l/@sdvplurimedia/ngx-widgets.svg)]()
 [![Build Status](https://travis-ci.org/SDV-Plurimedia/ngx-widgets.svg?branch=develop)](https://travis-ci.org/SDV-Plurimedia/ngx-widgets)
 
 Pack de widgets pour Angular2 / bootstrap
