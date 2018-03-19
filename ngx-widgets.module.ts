@@ -189,5 +189,5 @@ let services = [
     LoadingMessageComponent
   ]
 })
-export class SDVNg2WidgetsModule {
+export class SDVNgXWidgetsModule {
  }
