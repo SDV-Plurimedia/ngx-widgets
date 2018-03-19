@@ -16,9 +16,17 @@ export { DatepickerComponent } from './_widgets/datepicker/datepicker';
 export { DropdownComponent } from './_widgets/dropdown/dropdown';
 export { FilterComponent, Filter } from './_widgets/filter/filter.component';
 export { GraphComponent } from './_widgets/graph/graph';
+export { AreaChart } from './_widgets/graph/types/area';
+export { BarChart } from './_widgets/graph/types/bar';
+export { DataGraph, SingleData, Color, ColorsForScale, SimpleColor, Graph } from './_widgets/graph/types/commun';
+export { DonutChart } from './_widgets/graph/types/donut';
+export { GaugeChart } from './_widgets/graph/types/gauge';
+export { Periodicite, LineChart } from './_widgets/graph/types/line';
+export { PieChart } from './_widgets/graph/types/pie';
+export { RadialChart } from './_widgets/graph/types/radial';
 export { HierarchieListComponent } from './_widgets/hierarchie-list/hierarchie-list';
 export { LoaderComponent } from './_widgets/loader/loader';
-export { MenuInterneComponent } from './_widgets/menu-interne/menu-interne';
+export { MenuInterneComponent, MenuItemBadge, MenuItem } from './_widgets/menu-interne/menu-interne';
 export { PagerComponent, Pager } from './_widgets/pager/pager';
 export { ProgressBarComponent } from './_widgets/progress-bar/progress-bar';
 export { StatusBarComponent } from './_widgets/status-bar/status-bar';
@@ -28,7 +36,7 @@ export { TabComponent } from './_widgets/tabpane/tab';
 export { TagComponent } from './_widgets/tag/tag';
 export { TouchButtonComponent } from './_widgets/touch-button/touch-button';
 export { TouchButtonLinkComponent } from './_widgets/touch-button/link';
-export { TreeviewComponent } from './_widgets/treeview/treeview';
+export { TreeviewComponent, Treeview } from './_widgets/treeview/treeview';
 export { WizardComponent } from './_widgets/wizard/wizard';
 export { WizardStepComponent } from './_widgets/wizard/step';
 
@@ -54,6 +62,7 @@ export{ LoaderService } from './_services/loader';
 export {DynamicTdInterface} from './_widgets/datatable/_widgets/dynamic-td/dynamic-td.interface';
 export {DynamicActionInterface} from './_widgets/datatable/_widgets/dynamic-action/dynamic-action.interface';
 export {DynamicFieldInterface} from './_widgets/form-builder/_widgets/field-factory/fields/dynamic/dynamic.interface';
+export { HierarchieButton, HierarchieList } from './_widgets/hierarchie-list/hierarchie-list';
 
 // Le module de base
 import { SDVNgXWidgetsModule } from './ngx-widgets.module';
