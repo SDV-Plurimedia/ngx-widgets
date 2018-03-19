@@ -8,6 +8,12 @@
       "entryFile": "src/index.ts"
     }
   },
+  "main": "bundles/sdvplurimedia-ngx-widgets.umd.js",
+  "module": "esm5/sdvplurimedia-ngx-widgets.js",
+  "es2015": "esm2015/sdvplurimedia-ngx-widgets.js",
+  "typings": "sdvplurimedia-ngx-widgets.d.ts",
+  "metadata": "sdvplurimedia-ngx-widgets.metadata.json",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:SDV-Plurimedia/ngx-widgets.git"
@@ -16,7 +22,7 @@
     "start": "tsc",
     "lint": "tslint _*/**/*.ts",
     "copy2test": "cp -r _* example/node_modules/ngx-widgets/",
-    "build": "ng-packagr -p package.json"
+    "build": "ng-packagr -p package.json && cp -r src/public dist/public && cp src/style.css dist/"
   },
   "license": "MIT",
   "dependencies": {
