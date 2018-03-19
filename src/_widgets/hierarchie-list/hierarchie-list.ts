@@ -134,11 +134,11 @@ export class HierarchieListComponent implements OnInit, OnChanges {
 
     /**
      * Vérifie si le bouton doit être affiché
-     * @param {HierarchieButton} button Le bouton à afficher
-     * @param {any} data Les données pour tester
-     * @return {boolean}
+     * @param button Le bouton à afficher
+     * @param data Les données pour tester
+     * @return
      */
-    displayButton(button, data) {
+  displayButton(button: HierarchieButton, data: any): boolean {
       if (button.access) {
         return button.access.apply(this.parent_scope, [data]);
       }

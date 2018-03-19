@@ -27,40 +27,33 @@ import { TabComponent } from './tab';
 export class TabpaneComponent implements AfterContentInit {
   /**
    * Applique ou non une classe css à ce composant
-   * @type {boolean}
    */
   @Input() panel_mode: boolean = false;
   /**
    * Récupération de la totalité des composants TabComponent descendants
    * (composants directes & indirects)
-   * @type {QueryList<TabComponent>}
    */
   @ContentChildren(TabComponent, { descendants: true })
   tabs: QueryList<TabComponent>;
   /**
    * Récupération des composants TabComponent directes
-   * @type {QueryList<TabComponent}
    */
   @ContentChildren(TabComponent, { descendants: false })
   directTabs: QueryList<TabComponent>;
   /**
    * La liste des descendants directes du composant
-   * @type {TabComponent[]}
    */
   private _directChild: TabComponent[] = [];
   /**
    * La subscription aux descendants directes du composant
-   * @type {Subscription}
    */
   private _subDirectTabs: Subscription = null;
   /**
    * La subscription aux descendants indirects du composant
-   * @type {Subscription}
    */
   private _subTabs: Subscription = null;
   /**
    * L'identifiant supposé unique du composant
-   * @type {number | string}
    */
   private _rand: number | string = null;
 
@@ -110,7 +103,7 @@ export class TabpaneComponent implements AfterContentInit {
 
   /**
    * Rend un onglet actif
-   * @param {TabComponent} tab L'onglet à rendre actif
+   * @param tab L'onglet à rendre actif
    */
   public setActiveTab(tab: TabComponent) {
     this.tabs.forEach((t: TabComponent) => (t.active = false));

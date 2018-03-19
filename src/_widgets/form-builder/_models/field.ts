@@ -18,7 +18,7 @@ export class Field {
   public disabledFunction: any = null;
 
   // CSS
-  public field_class: string = ''
+  public field_class: string = '';
   public input_container_class = 'col-md-10';
   public input_class: string = 'form-control';
   public label_class: string = 'col-md-2 control-label';
@@ -84,11 +84,11 @@ export class Field {
   /**
    * Permet d'utiliser une fonction qui affiche/cache un champ
    * Pour cacher, retourner true pour afficher retourner false.
-   * @returns {boolean}
+   * @returns
    */
-  isHidden() {
+  isHidden(): boolean {
     let res: boolean = false;
-    if(this.hiddenFunction) {
+    if (this.hiddenFunction) {
       res = this.hiddenFunction.apply(this.scope, [this]);
     }
     return res;
@@ -97,9 +97,9 @@ export class Field {
   /**
    * Permet d'utiliser une fonction qui passe un champ en disabled ou non.
    * Pour être en disabled, retourner true sinon false.
-   * @returns {boolean}
+   * @returns
    */
-  isDisabled() {
+  isDisabled(): boolean {
     let res: boolean = false;
     if (this.disabledFunction) {
       res = this.disabledFunction.apply(this.scope, [this]);

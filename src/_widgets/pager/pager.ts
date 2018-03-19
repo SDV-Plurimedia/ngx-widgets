@@ -14,13 +14,13 @@ export class Pager {
 
   /**
   * Instanciation de l'objet Pager.
-  * @param {any} _scope - Scope du composant instanciateur (this).
-  * @param {number} _quantity - Nombre d'éléments à paginer.
-  * @param {number} _perPage - Nombre d'éléments à afficher par page.
-  * @param {number} _delta - Nombre de page à afficher en accès direct.
-  * @param {Function} _actionCallback - Méthode que devra implémenter le
+  * @param _scope - Scope du composant instanciateur (this).
+  * @param _quantity - Nombre d'éléments à paginer.
+  * @param _perPage - Nombre d'éléments à afficher par page.
+  * @param _delta - Nombre de page à afficher en accès direct.
+  * @param _actionCallback - Méthode que devra implémenter le
   * composant invoquant le pager.
-  * @param {number} _current - La page courante
+  * @param _current - La page courante
   */
   constructor(private _scope: any,
     private _quantity: number,

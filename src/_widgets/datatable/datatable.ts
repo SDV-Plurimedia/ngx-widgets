@@ -24,12 +24,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   /**
    * [dragulaFunctions permet de s'enregistrer sur les fonctions dragula]
    * Exemple: { dropModel: (val) => {}, over: (val) => {}, out: (val) => {}, }
-   * @return {[type]} [description]
+   * @return [description]
    */
   @Input() dragulaFunctions: any = null;
   /**
    * [dragulaBag permet de définir le nom du bag, important si 2 datatable sont sur la même page]
-   * @return {[type]} [description]
+   * @return [description]
    */
   @Input() dragulaBag: string = 'bag-datatable';
 
@@ -218,7 +218,7 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   /**
    * On rends le html safe pour l'affichage sinon certaines balises (button par ex) ne passent pas.
    * @param html
-   * @returns {SafeHtml}
+   * @returns
    */
   private sanitizeHtml(html): SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(html);
@@ -303,9 +303,9 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
 
   /**
     * Retourne true si toutes les lignes sont cochées
-    * @returns {boolean}
+    * @returns
     */
-  public allVisibleRowsAreChecked() {
+  public allVisibleRowsAreChecked(): boolean {
     if (this.table) {
       return jQuery(this._element.nativeElement).find('.row-checkbox:checked').length ===
           jQuery(this._element.nativeElement).find('.row-checkbox').length;
@@ -317,9 +317,9 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   /**
     * Retourne true si la ligne passée en param est cochée.
     * @param ligne
-    * @returns {boolean}
+    * @returns
     */
-  public isChecked(ligne) {
+  public isChecked(ligne): boolean {
     return this.checkedData.indexOf(ligne) !== -1;
   }
 }

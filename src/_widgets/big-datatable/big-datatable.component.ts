@@ -339,7 +339,7 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
     /**
      * On rends le html safe pour l'affichage sinon certaines balises (button par ex) ne passent pas.
      * @param html
-     * @returns {SafeHtml}
+     * @returns
      */
     public sanitizeHtml(html): SafeHtml {
         return this._sanitizer.bypassSecurityTrustHtml(html);

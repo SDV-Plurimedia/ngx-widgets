@@ -134,7 +134,6 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
 
   /**
    * Override the default $removeEmpty
-   * @type {[type]}
    */
   private changeRemoveEmpty($removeEmpty) {
     let keys = Object.keys($removeEmpty);

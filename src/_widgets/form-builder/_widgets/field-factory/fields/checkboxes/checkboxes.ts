@@ -26,9 +26,9 @@ export class FieldCheckboxesComponent extends FieldComponent implements AfterVie
    * Mets également les bonnes valeurs en fonctions des checkboxes séléctionnées dans le model. (pas true ou false, mais la valeur réelle).
    * @param event
    * @param value
-   * @returns {boolean}
+   * @returns
    */
-  checkValidity(event, value) {
+  checkValidity(event, value): boolean {
     let valid: boolean = true;
 
     if (event.target.checked) {

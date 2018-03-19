@@ -22,7 +22,7 @@ export class FieldComponent implements OnInit {
    * Vérifie la validité d'un champ par le biais d'une méthode de callback ou d'une méthode définie d'un helper.
    * @param event
    * @param displayMessage
-   * @returns {boolean}
+   * @returns
    */
   checkValidity(event, displayMessage: boolean = true): boolean {
 
@@ -69,7 +69,7 @@ export class FieldComponent implements OnInit {
   /**
    * Fonction permettant de gérer le cas des widgets (datepicker, ckeditor et autocomplete)
    * Quand ils sont en required (car pas géré par ngForm)
-    * @returns {boolean}
+    * @returns
    */
   specificInputCheck(): boolean {
     let valid: boolean = true;

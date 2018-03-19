@@ -19,9 +19,9 @@ export class FieldAutocompleteComponent extends FieldComponent implements AfterV
    * La gestion doit se faire la dedans.
    * @param event
    * @param add
-   * @returns {boolean}
+   * @returns
    */
-  checkValidity(event, add: boolean = true) {
+  checkValidity(event, add: boolean = true): boolean {
     let valid: boolean;
     if(add) {
       valid = this.field.add.apply(this.field.scope, [event]);

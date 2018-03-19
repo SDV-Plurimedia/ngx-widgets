@@ -45,9 +45,9 @@ export class FormBuilder {
 
   /**
    * Vérifie la validité du formulaire.
-   * @returns {boolean}
+   * @returns
    */
-  public isValid() {
+  public isValid(): boolean {
     let valid: boolean = true;
     if (this.ngForm.form.valid) {
       if (this.type === 'classic') {
@@ -69,9 +69,9 @@ export class FormBuilder {
   /**
    * Prends un tableau de Field en paramètre et vérifie qu'aucun ne soit invalide.
    * @param fields
-   * @returns {boolean}
+   * @returns
    */
-  private validFields(fields: Field[]) {
+  private validFields(fields: Field[]): boolean {
     let valid: boolean = true;
     for (let field of fields) {
       if (field.invalid) {
