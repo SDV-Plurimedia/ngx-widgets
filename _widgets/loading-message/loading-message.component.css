@@ -1,0 +1,10 @@
+.simple-loader {
+  color: #c2c2c2;
+  text-align: center;
+}
+
+.pulsate {
+  animation: pulsate 5s ease-in-out infinite;
+  -webkit-animation: pulsate 5s ease-in-out infinite;
+  opacity: 0.3;
+}

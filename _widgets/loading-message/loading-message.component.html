@@ -1,0 +1,29 @@
+<ng-container [ngSwitch]="type">
+    <ng-template [ngSwitchCase]="'list'">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="javascript:void(null)" class="pulsate">
+              <span class="fa fa-circle-o-notch  fa-lg fa-pulse"></span> Chargement en cours...
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+    <ng-template [ngSwitchCase]="'panel'">
+      <div class="panel-body">
+        <div class="row">
+          <h3 class="pulsate col-md-3 col-xs-12">
+            <span class="fa  fa-circle-o-notch fa-lg fa-pulse"></span> Chargement en cours...
+          </h3>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template ngSwitchDefault>
+      <div class="col-xs-12 col-md-4 col-md-push-4 simple-loader">
+        <h3 class="pulsate">
+          <i class="fa fa-circle-o-notch fa-spin fa-lg"></i> Chargement en cours...
+        </h3>
+      </div>
+    </ng-template>
+  </ng-container>

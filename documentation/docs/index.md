@@ -902,8 +902,9 @@ Utilisation:
         * **action**: L'action à effectuer au clic sur le bouton
         * **navigation** : Boolean : Si 'true' alors les boutons sont transformés en balise ```<a>``` avec la directive [routerLink] configuré. Le path à emprunter doit être retourné par la fonction définie par l'action.
 
-# Loader
+# Loader 
 
+**à remplacer par la directive loading**
 Le widget loader permet de cacher facilement le contenu d'un bloc durant son chargement
 
 ![Loader](./img/loader.png)
@@ -916,6 +917,16 @@ Exemple:
     <loader [condition]="!ready" [type]="'panel'">
       Mon Contenu
     </loader>
+
+# Loading (Directive) 
+La directive permet d'afficher le contenu après qu'une condition soit vérifiée.
+Comme le composant directive, on peut lui préciser un type 'list' ou 'panel'.
+
+Exemple:
+
+    <ng-container*loading="condition;type:'panel'">
+      Mon Contenu
+    </ng-container>
 
 # Menu interne
 

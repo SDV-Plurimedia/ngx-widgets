@@ -39,6 +39,7 @@ import { FilterComponent, Filter } from './_widgets/filter/filter.component';
 import { GraphComponent } from './_widgets/graph/graph';
 import { HierarchieListComponent } from './_widgets/hierarchie-list/hierarchie-list';
 import { LoaderComponent } from './_widgets/loader/loader';
+import { LoadingMessageComponent } from './_widgets/loading-message/loading-message.component';
 import { MenuInterneComponent } from './_widgets/menu-interne/menu-interne';
 import { PagerComponent, Pager } from './_widgets/pager/pager';
 import { ProgressBarComponent } from './_widgets/progress-bar/progress-bar';
@@ -91,6 +92,7 @@ let widgets =  [
   GraphComponent,
   HierarchieListComponent,
   LoaderComponent,
+  LoadingMessageComponent,
   MenuInterneComponent,
   PagerComponent,
   ProgressBarComponent,
@@ -130,11 +132,13 @@ let widgets =  [
 import { DNDDirective } from './_directives/dnd';
 import { LazyloadDirective } from './_directives/lazyload';
 import { ProvideParentFormDirective } from './_directives/provide-parent-form';
+import { LoadingDirective } from './_directives/loading.directive';
 
 let directives = [
   DNDDirective,
   LazyloadDirective,
-  ProvideParentFormDirective
+  ProvideParentFormDirective,
+  LoadingDirective
 ];
 
 // les pipes
@@ -180,6 +184,9 @@ let services = [
   ],
   providers: [
     ...services
+  ], 
+  entryComponents: [
+    LoadingMessageComponent
   ]
 })
 export class SDVNg2WidgetsModule {
