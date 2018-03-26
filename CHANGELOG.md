@@ -1,5 +1,7 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.17 - 26/03/2018
+* ADD: Nouvelle directive loading `*loading="condition(;type:'panel|list')"`
 ## 1.4.16 - 13/03/2018
 * FIX : HierarchieList : Fix du onChanges & du onInit
 * FIX : Autocomplete : Relancer la recherche si les datas en input ont changés
