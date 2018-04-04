@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+# beta.1 - 04/04/18
+* ADD : Possibilité d'utiliser les propriétés 'allowedContent' & 'disallowedContent' pour un ckeditor dont la configuration est récupéré depuis Mongo.
+
 ## 1.4.17 - 26/03/2018
 * ADD: Nouvelle directive loading `*loading="condition(;type:'panel|list')"`
 ## 1.4.16 - 13/03/2018
