@@ -1,6 +1,6 @@
 {
   "name": "@sdvplurimedia/ngx-widgets",
-  "version": "1.4.17",
+  "version": "beta.1",
   "description": "SDV - Angular Widgets",
   "repository": {
     "type": "git",
