@@ -1,3 +1,6 @@
-<div *ngIf="disabled" [innerHTML]="content"></div>
-
-<textarea name="{{id}}" id="{{id}}" rows="{{rows}}" [(ngModel)]="content" [disabled]="disabled" *ngIf="!disabled" (keyup)="textChanged()"></textarea>
+<ng-container *ngIf="disabled; else notDisabled">
+  <div [innerHTML]="value | safe:'html'"></div>
+</ng-container>
+<ng-template #notDisabled>
+  <textarea name="{{id}}" id="{{id}}" rows="{{rows}}" [(ngModel)]="value" (keyup)="textChanged()"></textarea>
+</ng-template>

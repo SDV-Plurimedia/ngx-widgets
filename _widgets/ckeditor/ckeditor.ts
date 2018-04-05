@@ -32,14 +32,11 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
   private debounceTime = 500;
 
   constructor(private zone: NgZone) {}
-  public _value = '';
-  get content(): any {
-    return this._value;
-  }
+  public value = '';
   @Input()
   set content(v) {
-    if (v !== this._value) {
-      this._value = v;
+    if (v !== this.value) {
+      this.value = v;
       if (this.instance) {
         if (this.debounceTimeoutOut) {
           clearTimeout(this.debounceTimeoutOut);
@@ -82,6 +79,27 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
       return;
     }
     if (this.config) {
+      /**
+       * Chargement de la classe CKEDITOR.dtd pour la règle 'allowedContent'
+       * Le chargement de cette classe est indispensable au bon fonctionnement de la règle 'disallowedContent'
+       *
+       * Exemple de configuration mongo :
+       *
+       * "allowedContent" : {
+       *  "allContent" : {
+       *    "elements" : "return CKEDITOR.dtd",
+       *    "attributes" : true,
+       *    "styles" : true,
+       *    "classes" : true
+       *  }
+       * }
+       */
+      if (this.config && this.config.allowedContent && this.config.allowedContent.allContent) {
+        let f = Function(this.config.allowedContent.allContent.elements);
+        this.config.allowedContent['$1'] = this.config.allowedContent.allContent;
+        this.config.allowedContent['$1']['elements'] = f();
+        delete this.config.allowedContent.allContent;
+      }
       CKEDITOR.replace(this.id, this.config);
     } else {
       CKEDITOR.replace(this.id);
@@ -113,8 +131,8 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
     }
     this.debounceTimeoutIn = setTimeout(() => {
       this.zone.run(() => {
-        this._value = this.instance.getData();
-        this.contentChange.emit(this._value);
+        this.value = this.instance.getData();
+        this.contentChange.emit(this.value);
         this.debounceTimeoutIn = null;
       });
     }, this.debounceTime);

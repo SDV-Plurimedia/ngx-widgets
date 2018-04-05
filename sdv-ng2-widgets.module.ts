@@ -145,6 +145,7 @@ import { KeysPipe } from './_pipes/keys';
 import { StringShortenedPipe } from './_pipes/string-shortened';
 import { TimestampToDatePipe } from './_pipes/timestamp-to-date';
 import { UcFirstPipe } from './_pipes/ucfirst';
+import { SafePipe } from './_pipes/safe';
 
 let pipes = [
   BootstrapClassPipe,
@@ -153,7 +154,8 @@ let pipes = [
   KeysPipe,
   StringShortenedPipe,
   TimestampToDatePipe,
-  UcFirstPipe
+  UcFirstPipe,
+  SafePipe
 ];
 
 import { StaticLoaderService } from './_services/static-loader';

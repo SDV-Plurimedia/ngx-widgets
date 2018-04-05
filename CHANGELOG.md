@@ -1,5 +1,7 @@
 #Changelog SDV-NG2-Widgets
 
+## 1.4.17-beta.1 - 05/04/2018
+* FIX : ckedtior disallowedContent - unstable input
 ## 1.4.16 - 13/03/2018
 * FIX : HierarchieList : Fix du onChanges & du onInit
 * FIX : Autocomplete : Relancer la recherche si les datas en input ont changés
