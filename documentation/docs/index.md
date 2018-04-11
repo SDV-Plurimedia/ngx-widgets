@@ -1,6 +1,6 @@
-**SDV** Ng2 Widget est un pack de widget adapté pour bootstrap en angular2
+**SDV** NgX Widgets est un pack de widget adapté pour bootstrap en angular5+
 
-Les widgets génériques sont définis dans le paquet [sdv-ng2-widgets](https://gitlab.sdv.fr/rnd/sdv-ng2-widgets)
+Les widgets génériques sont définis dans le paquet [@sdvplurimedia/ngx-widgets](https://github.com/SDV-Plurimedia/ngx-widgets)
 
 # Autocomplete
 
@@ -41,15 +41,15 @@ Ce widget est utilisé dans le widget autocomplete, cependant, il est possible d
                               [disabled]="false"
                               (delete)="deleteItem($item)">
   </autocomplete-display-items>
-  
+
 Voici sa configuration :
-  
+
   * **[class]**: *string* - la classe CSS à appliquer aux différents items
   * **[items]**: *Array* - les différents items qu'il faut afficher
   * **[field]**: *string* - le champ à afficher pour nos items
   * **[disabled]**: *boolean* - si true, alors on ne pourra pas supprimer les items
   * **(delete)**: *Function* - fonction appelée lors du clic sur la croix pour supprimer
-  
+
 ![AutocompleteDisplayItems__](./img/autocomplete-display-items.png)
 
 # BigDatatable
@@ -139,7 +139,7 @@ Exemple de structure :
 
 Pour l'instancier :
 
-    import {BigDatatable} from 'sdv-ng2-widgets/_widgets/big-datatable/big-datatable.component';
+    import {BigDatatable} from '@sdvplurimedia/ngx-widgets';
     [...]
     this.bigdata = new BigDatatable(this.config, this.structure, this.scope);
 
@@ -289,7 +289,7 @@ Il est également possible de fournir du contenu HTML généré dynamiquement, p
     2. Générer le HTML qui corresponds.
     3. L'affecter à cette propriété.
 
-Il est également possible de fournir un widget pour une cellule donnée, pour ce faire : 
+Il est également possible de fournir un widget pour une cellule donnée, pour ce faire :
 
 
     public structure = [
@@ -300,15 +300,15 @@ Il est également possible de fournir un widget pour une cellule donnée, pour c
 
 Ce widget peut implémenter l'interface mise à disposition (il n'est pas nécessaire de mettre les balises "td" au sein de ce widget):
 
-    import {DynamicTdInterface} from 'sdv-ng2-widgets';
+    import {DynamicTdInterface} from '@sdvplurimedia/ngx-widgets';
 
 Pour les boutons, on peut également fournir un widget, pour ce faire, l'objet bouton fournit doit être formaté comme ceci :
 
-    
+
     public buttons = {
         dynamicClass: MyButtonComponent
-      }; 
-     
+      };
+
 **ATTENTION : N'oubliez pas d'ajouter ces widgets dans les entryComponents de votre ngModule.**
 
 Dans mon model
@@ -365,12 +365,12 @@ Dans le constructeur du mode
     Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
 
 ## Ajout d'une colonne de checkboxes
-    
+
 Il est possible d'ajouter comme première colonne une colonne de checkboxes pour ce faire, passer en input **checkboxes**
  qui vaut true et en output **checkedRows**, lors de chaque clic sur une case à cocher les différents élements cochées seront renvoyées.
- 
+
 Exemple :
- 
+
      <datatable [structure]="structure"
                 [data]="users"
                 [parent_scope]="scope"
@@ -378,8 +378,8 @@ Exemple :
                 [checkboxes]=true
                 (checkedRows)="deleteManyArray=$event"
      ></datatable>
-   
-    
+
+
 
 # DatePicker
 
@@ -643,8 +643,8 @@ sur un des champs du **model**, il faut soit :
 
 Une interface a été mise à disposition pour les widgets dynamic, il suffit pour cela de l'utiliser dans votre widget :
 
-    import {DynamicFieldInterface} from 'sdv-ng2-widgets';
-    
+    import {DynamicFieldInterface} from '@sdvplurimedia/ngx-widgets';
+
 **ATTENTION : N'oubliez pas d'ajouter ce widget dans les entryComponents de votre ngModule.**
 
 ###### Email<a id="email"></a>
@@ -764,7 +764,7 @@ Utilisation
 ```
 
 ```ts
-import { BarChart } from 'sdv-ng2-widgets/_widgets/graph/types/bar';
+import { BarChart } from '@sdvplurimedia/ngx-widgets';
 
 ...
 
@@ -815,7 +815,7 @@ Utilisation
 ```
 
 ```ts
-import { LineChart, Periodicite } from 'sdv-ng2-widgets/_widgets/graph/types/line';
+import { LineChart, Periodicite } from '@sdvplurimedia/ngx-widgets';
 
 ...
 
@@ -902,7 +902,7 @@ Utilisation:
         * **action**: L'action à effectuer au clic sur le bouton
         * **navigation** : Boolean : Si 'true' alors les boutons sont transformés en balise ```<a>``` avec la directive [routerLink] configuré. Le path à emprunter doit être retourné par la fonction définie par l'action.
 
-# Loader 
+# Loader
 
 **à remplacer par la directive loading**
 Le widget loader permet de cacher facilement le contenu d'un bloc durant son chargement
@@ -918,7 +918,7 @@ Exemple:
       Mon Contenu
     </loader>
 
-# Loading (Directive) 
+# Loading (Directive)
 La directive permet d'afficher le contenu après qu'une condition soit vérifiée.
 Comme le composant directive, on peut lui préciser un type 'list' ou 'panel'.
 
@@ -936,7 +936,7 @@ Ce widget permet d'ajouter un second niveau de navigation, à l'intérieur d'un 
 
 Il se définit en lui fournissant au moins une liste d'item, exemple:
 ```
-    import {MenuItem, MenuItemBadge} from "sdv-ng2-widgets";
+    import {MenuItem, MenuItemBadge} from "@sdvplurimedia/ngx-widgets";
     ...
     private menu_items = [
       new MenuItem({

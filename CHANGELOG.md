@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 2.0.0
+* BC: Passage au format [APF](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit)
+
 ## 1.4.17 - 26/03/2018
 * ADD: Nouvelle directive loading `*loading="condition(;type:'panel|list')"`
 ## 1.4.16 - 13/03/2018

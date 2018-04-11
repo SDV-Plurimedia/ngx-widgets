@@ -1,5 +1,5 @@
-site_name: SDV NG2 Widgets
-site_description: SDV NG2 Widgets est un pack de widgets pour angular2 avec bootstrap
+site_name: SDV NgX Widgets
+site_description: SDV NgX Widgets est un pack de widgets pour angular5+ avec bootstrap
 copyright: "&copy; SdV Plurimédia"
 theme: readthedocs
 site_dir: ./dist

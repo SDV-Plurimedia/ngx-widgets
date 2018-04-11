@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SDV NG2 Widgets</title>
+  <title>SDV NgX Widgets</title>
   
 
   <link rel="shortcut icon" href="./img/favicon.ico">
@@ -39,7 +39,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="icon icon-home"> SDV NG2 Widgets</a>
+        <a href="index.html" class="icon icon-home"> SDV NgX Widgets</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -57,6 +57,9 @@
             <ul>
             
                 <li class="toctree-l3"><a href="#autocomplete">Autocomplete</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#autocompletedisplayitems">AutocompleteDisplayItems</a></li>
                 
             
                 <li class="toctree-l3"><a href="#bigdatatable">BigDatatable</a></li>
@@ -82,6 +85,8 @@
             
                 <li class="toctree-l3"><a href="#datatable">Datatable</a></li>
                 
+                    <li><a class="toctree-l4" href="#ajout-dune-colonne-de-checkboxes">Ajout d'une colonne de checkboxes</a></li>
+                
             
                 <li class="toctree-l3"><a href="#datepicker">DatePicker</a></li>
                 
@@ -106,6 +111,9 @@
                 
             
                 <li class="toctree-l3"><a href="#loader">Loader</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#loading-directive">Loading (Directive)</a></li>
                 
             
                 <li class="toctree-l3"><a href="#menu-interne">Menu interne</a></li>
@@ -156,7 +164,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">SDV NG2 Widgets</a>
+        <a href="index.html">SDV NgX Widgets</a>
       </nav>
 
       
@@ -178,8 +186,8 @@
           <div role="main">
             <div class="section">
               
-                <p><strong>SDV</strong> Ng2 Widget est un pack de widget adapté pour bootstrap en angular2</p>
-<p>Les widgets génériques sont définis dans le paquet <a href="https://gitlab.sdv.fr/rnd/sdv-ng2-widgets">sdv-ng2-widgets</a></p>
+                <p><strong>SDV</strong> NgX Widgets est un pack de widget adapté pour bootstrap en angular5+</p>
+<p>Les widgets génériques sont définis dans le paquet <a href="https://github.com/SDV-Plurimedia/ngx-widgets">@sdvplurimedia/ngx-widgets</a></p>
 <h1 id="autocomplete">Autocomplete</h1>
 <p><img alt="Champ d'autocomplete" src="./img/autocomplete.png" /></p>
 <p>Le composant d'autocomplete doit être appelé de la façon suivante:</p>
@@ -200,6 +208,7 @@
 <li><strong>displayItem</strong>: <em>Boolean</em> - Si true, alors on affiche les différents élements que l'on ajoute à droite du placeholder. Vaut false par défaut.</li>
 <li><strong>displayItems</strong>: <em>Array</em> - Tableau qui contient les différents élements à ajouter à droite du placeholder.</li>
 <li><strong>displayItemClass</strong>: <em>String</em> - Classe CSS pour les élements à afficher à droite du placeholder.</li>
+<li><strong>onlyShowDisplayItems</strong>: <em>boolean</em> - Si true, on affiche pas l'autocomplete mais uniquement les items définis dans displayItems (ne pas oublier de configurer <strong>fieldDisplayed</strong>)</li>
 <li><strong>customSearch</strong>: <em>Void</em> - Fonction personnalisée pour effectuer une recherche sur des données distantes. (Doit renvoyer un Observable)</li>
 <li><strong>scope</strong>: A utiliser avec customSearch, permet de définir la portée de la fonction.</li>
 </ul>
@@ -207,7 +216,25 @@
 <li><strong>(valid)</strong>: <em>Function</em> - fonction appelée lorsque le champ est validé sur un resultat existant.</li>
 <li><strong>(create)</strong>: <em>Function</em> - fonction appelée lorsqu'on fait "ENTREE" sur un texte inexistant.</li>
 <li><strong>(delete)</strong>: <em>Function</em> - fonction appelée lors de la suppression d'un résultat.</li>
+<li><strong>[disabled]</strong>: <em>boolean</em> - si true alors l'autocomplete passe dans l'état disabled.</li>
 </ul>
+<h1 id="autocompletedisplayitems">AutocompleteDisplayItems</h1>
+<p>Ce widget est utilisé dans le widget autocomplete, cependant, il est possible de l'utiliser sans passer par l'autocomplete. Exemple :</p>
+<p><autocomplete-display-items [class]="'badge'"
+                              [items]="[...]"
+                              [field]="'name'"
+                              [disabled]="false"
+                              (delete)="deleteItem($item)">
+  </autocomplete-display-items></p>
+<p>Voici sa configuration :</p>
+<ul>
+<li><strong>[class]</strong>: <em>string</em> - la classe CSS à appliquer aux différents items</li>
+<li><strong>[items]</strong>: <em>Array</em> - les différents items qu'il faut afficher</li>
+<li><strong>[field]</strong>: <em>string</em> - le champ à afficher pour nos items</li>
+<li><strong>[disabled]</strong>: <em>boolean</em> - si true, alors on ne pourra pas supprimer les items</li>
+<li><strong>(delete)</strong>: <em>Function</em> - fonction appelée lors du clic sur la croix pour supprimer</li>
+</ul>
+<p><img alt="AutocompleteDisplayItems__" src="./img/autocomplete-display-items.png" /></p>
 <h1 id="bigdatatable">BigDatatable</h1>
 <p>Ce composant est une solution alternative au composant Datatable. Il permet de gérer une grande quantité de données.
 Il utilise le composant <strong>Pager</strong> et le composant <strong>Filtre</strong>, cependant il peut fonctionner sans ceux-ci.
@@ -239,11 +266,10 @@ Pour un bon fonctionnement de ce composant, il est néanmois conseillé de dispo
 <li>
 <p><strong>filter_config</strong> - <strong>Array</strong> : Correspond à <strong>config</strong> de <strong>Filtre</strong>. Voir sa configuration.</p>
 </li>
-<li>
-<p><strong>tr</strong> -Object** : Contient soit une propriété :</p>
-<ul>
+<li><strong>tr</strong> -Object** : Contient soit une propriété :<ul>
 <li><strong>class</strong> : La classe à appliquer sur les tr</li>
 <li><strong>function</strong> : Une fonction qui sera appliquée sur <strong>parent_scope</strong> qui renvera la classe à appliquer sur le tr.</li>
+<li><strong>rowCallback</strong> : Une fonction qui sera appliquée lors du clic sur une ligne.</li>
 </ul>
 </li>
 <li>
@@ -317,7 +343,7 @@ plusieurs types de colonne existent, pour les différencier un attribut <strong>
 </code></pre>
 <p><img alt="BigDatatable__" src="./img/big-datatable.png" /></p>
 <p>Pour l'instancier :</p>
-<pre><code>import {BigDatatable} from 'sdv-ng2-widgets/_widgets/big-datatable/big-datatable.component';
+<pre><code>import {BigDatatable} from '@sdvplurimedia/ngx-widgets';
 [...]
 this.bigdata = new BigDatatable(this.config, this.structure, this.scope);
 </code></pre>
@@ -406,7 +432,7 @@ Pour son utilisation voir à travers le service <a href="#breadcrumb-fil-dariane
 <p>Exemple de component:</p>
 <pre><code>public structure = [
     { id: "id", label: "ID"},
-    { id: "name", label: "Nom du champ"}
+    { id: "name", label: "Nom du champ"},
 ];
 
 public buttons = [
@@ -433,7 +459,7 @@ public data_tab = [{id: 1, name: "Antoine"}];
 <p>La définition de la structure est la suivante :</p>
 <p><code>{public structure = [
   { id: "id", label: "ID"},
-  { id: "liste_lapins", label: "Mes Lapins", inputHTML: true}
+  { id: "liste_lapins", label: "Mes Lapins", inputHTML: true},
 ];</code></p>
 </li>
 <li>
@@ -445,6 +471,22 @@ public data_tab = [{id: 1, name: "Antoine"}];
 </ol>
 </li>
 </ul>
+<p>Il est également possible de fournir un widget pour une cellule donnée, pour ce faire :</p>
+<pre><code>public structure = [
+  { id: "id", label: "ID"},
+  { id: "liste_lapins", label: "Mes Lapins", inputHTML: true},
+  { id: "dynamic", label: "Dynamic", dynamicClass: MyDynamicComponent}
+];
+</code></pre>
+<p>Ce widget peut implémenter l'interface mise à disposition (il n'est pas nécessaire de mettre les balises "td" au sein de ce widget):</p>
+<pre><code>import {DynamicTdInterface} from '@sdvplurimedia/ngx-widgets';
+</code></pre>
+<p>Pour les boutons, on peut également fournir un widget, pour ce faire, l'objet bouton fournit doit être formaté comme ceci :</p>
+<pre><code>public buttons = {
+    dynamicClass: MyButtonComponent
+  };
+</code></pre>
+<p><strong>ATTENTION : N'oubliez pas d'ajouter ces widgets dans les entryComponents de votre ngModule.</strong></p>
 <p>Dans mon model</p>
 <pre><code>public lapins: Lapin[]; // Les différents objets Lapin
 </code></pre>
@@ -496,6 +538,18 @@ public onOut(value) {
 
 Les fonctions sont enregistré sur les méthodes du dragulaService et executée dans le contexte du parent_score.
 </code></pre>
+<h2 id="ajout-dune-colonne-de-checkboxes">Ajout d'une colonne de checkboxes</h2>
+<p>Il est possible d'ajouter comme première colonne une colonne de checkboxes pour ce faire, passer en input <strong>checkboxes</strong>
+ qui vaut true et en output <strong>checkedRows</strong>, lors de chaque clic sur une case à cocher les différents élements cochées seront renvoyées.</p>
+<p>Exemple :</p>
+<pre><code> &lt;datatable [structure]="structure"
+            [data]="users"
+            [parent_scope]="scope"
+            [buttons]="buttons"
+            [checkboxes]=true
+            (checkedRows)="deleteManyArray=$event"
+ &gt;&lt;/datatable&gt;
+</code></pre>
 <h1 id="datepicker">DatePicker</h1>
 <p>Ce widget permet d'afficher un champ de texte qui fait apparaître un calendrier.</p>
 <p><img alt="DatePicker" src="./img/datepicker.png" /></p>
@@ -520,6 +574,7 @@ Les fonctions sont enregistré sur les méthodes du dragulaService et executée 
  * un état avancé, où plusieurs champs de recherche sont présent selon ce qui a été configuré.</p>
 <p>La configuration est la suivante :
 <em> <strong>config</strong>
+    * <strong>launch_search_on_init</strong> -<strong>boolean</strong> - <strong>default = true</strong> : Si false, alors la recherche ne sera pas lancée lors du chargement de la page.
     * <strong>advanced_mode</strong> - <strong>boolean</strong> - <strong>default = false</strong> : Si true, alors le filtre sera dans l'état "Filtre avancé".
     * <strong>global_search</strong> - <strong>string</strong> - <strong>default = ''</strong> : Le texte qui est dans l'input de recherche lorsque le filtre es dans l'état "Filtre simple".
     * <strong>callback</strong>      : La fonction qui sera appellée lors de la validation du filtre. Sera appliquée sur <strong>parent_scope</strong>
@@ -740,6 +795,10 @@ sur un des champs du <strong>model</strong>, il faut soit :</p>
 <li>Le faire dans le composant (**this.model[this.field.id]="bidule")</li>
 <li>Avoir un Output() updateModel qui va s'occuper d'émettre la nouvelle valeur</li>
 </ul>
+<p>Une interface a été mise à disposition pour les widgets dynamic, il suffit pour cela de l'utiliser dans votre widget :</p>
+<pre><code>import {DynamicFieldInterface} from '@sdvplurimedia/ngx-widgets';
+</code></pre>
+<p><strong>ATTENTION : N'oubliez pas d'ajouter ce widget dans les entryComponents de votre ngModule.</strong></p>
 <h6 id="email">Email<a id="email"></a></h6>
 <p>Un input email. La validité de l'email est gérée par une directive Angular.
 <em> <strong>min_length</strong> - <strong>number</strong> - <strong>default = 1</strong> -La longueur minimale du champ
@@ -831,7 +890,7 @@ public scope = this;
 <pre><code class="html">&lt;graph [graph]=&quot;views&quot;&gt;&lt;/graph&gt;
 </code></pre>
 
-<pre><code class="ts">import { BarChart } from 'sdv-ng2-widgets/_widgets/graph/types/bar';
+<pre><code class="ts">import { BarChart } from '@sdvplurimedia/ngx-widgets';
 
 ...
 
@@ -880,7 +939,7 @@ this.views = new BarChart(views_data, simple_color, 'bar_chart', 250, 'Vues uniq
 <pre><code class="html">&lt;graph [graph]=&quot;views&quot;&gt;&lt;/graph&gt;
 </code></pre>
 
-<pre><code class="ts">import { LineChart, Periodicite } from 'sdv-ng2-widgets/_widgets/graph/types/line';
+<pre><code class="ts">import { LineChart, Periodicite } from '@sdvplurimedia/ngx-widgets';
 
 ...
 
@@ -966,13 +1025,15 @@ dans les datas</li>
 <li><strong>class</strong>: Les classes à affecter au bouton</li>
 <li><strong>text</strong>: Le texte (ou html) qui sera affiché dans le bouton</li>
 <li><strong>action</strong>: L'action à effectuer au clic sur le bouton</li>
+<li><strong>navigation</strong> : Boolean : Si 'true' alors les boutons sont transformés en balise <code>&lt;a&gt;</code> avec la directive [routerLink] configuré. Le path à emprunter doit être retourné par la fonction définie par l'action.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <h1 id="loader">Loader</h1>
-<p>Le widget loader permet de cacher facilement le contenu d'un bloc durant son chargement</p>
+<p><strong>à remplacer par la directive loading</strong>
+Le widget loader permet de cacher facilement le contenu d'un bloc durant son chargement</p>
 <p><img alt="Loader" src="./img/loader.png" /></p>
 <ul>
 <li><strong>condition</strong> : condition d'affichage de la roue de chargement, quand la condition est vrai on affiche le ng-content,mais tant que la condition est false on affiche le loader</li>
@@ -983,11 +1044,19 @@ dans les datas</li>
   Mon Contenu
 &lt;/loader&gt;
 </code></pre>
+<h1 id="loading-directive">Loading (Directive)</h1>
+<p>La directive permet d'afficher le contenu après qu'une condition soit vérifiée.
+Comme le composant directive, on peut lui préciser un type 'list' ou 'panel'.</p>
+<p>Exemple:</p>
+<pre><code>&lt;ng-container*loading="condition;type:'panel'"&gt;
+  Mon Contenu
+&lt;/ng-container&gt;
+</code></pre>
 <h1 id="menu-interne">Menu interne</h1>
 <p>Ce widget permet d'ajouter un second niveau de navigation, à l'intérieur d'un widge de page.</p>
 <p><img alt="Menu Interne" src="./img/menu_interne.png" /></p>
 <p>Il se définit en lui fournissant au moins une liste d'item, exemple:</p>
-<pre><code>    import {MenuItem, MenuItemBadge} from &quot;sdv-ng2-widgets&quot;;
+<pre><code>    import {MenuItem, MenuItemBadge} from &quot;@sdvplurimedia/ngx-widgets&quot;;
     ...
     private menu_items = [
       new MenuItem({
@@ -1202,5 +1271,5 @@ dans les datas</li>
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2017-12-13 18:12:00.255045
+Build Date UTC : 2018-04-11 10:03:00.524548
 -->

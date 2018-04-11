@@ -58,6 +58,9 @@ npm start
 ## Publication d'une nouvelle version
 
 * Modifier le package.json avec le nouveau numéro
-* `yarn build``
+* Modifier le CHANGELOG.md pour indiquer les modifications
+* `yarn build`
 * `cd dist`
 * `npm publish`
+* `git tag X.X.X`
+* `git push --tags`
