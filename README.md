@@ -55,4 +55,9 @@ npm install
 npm start
 ```
 
-Example:
+## Publication d'une nouvelle version
+
+* Modifier le package.json avec le nouveau numéro
+* `yarn build``
+* `cd dist`
+* `npm publish`
