@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@sdvplurimedia/ngx-widgets",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "SDV - Angular Widgets",
   "ngPackage": {
     "lib": {
@@ -25,12 +25,6 @@
     "build": "ng-packagr -p package.json && cp -r src/public dist/public && cp src/style.css dist/"
   },
   "license": "MIT",
-  "dependencies": {
-    "moment": "^2.21.0",
-    "ng2-dragula": "^1.5.0",
-    "rxjs": "^5.5.0",
-    "zone.js": "^0.8.19"
-  },
   "peerDependencies": {
     "@angular/animations": ">=5.2.8",
     "@angular/common": ">=5.2.8",
@@ -38,20 +32,25 @@
     "@angular/core": ">=5.2.8",
     "@angular/forms": ">=5.2.8",
     "@angular/http": ">=5.2.8",
-    "@angular/router": ">=5.2.8",
     "@angular/platform-browser": ">=5.2.8",
-    "@angular/platform-browser-dynamic": ">=5.2.8"
+    "@angular/platform-browser-dynamic": ">=5.2.8",
+    "@angular/router": ">=5.2.8",
+    "moment": "^2.21.0",
+    "ng2-dragula": "^1.5.0",
+    "rxjs": "^5.5.0",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/animations": ">=5.2.8",
     "@angular/common": ">=5.2.8",
     "@angular/compiler": ">=5.2.8",
+    "@angular/compiler-cli": ">=5.2.8",
     "@angular/core": ">=5.2.8",
     "@angular/forms": ">=5.2.8",
     "@angular/http": ">=5.2.8",
-    "@angular/router": ">=5.2.8",
     "@angular/platform-browser": ">=5.2.8",
     "@angular/platform-browser-dynamic": ">=5.2.8",
+    "@angular/router": ">=5.2.8",
     "@types/bootbox": "^4.4.29",
     "@types/bootstrap-switch": "0.0.29",
     "@types/ckeditor": "0.0.33",
@@ -62,6 +61,7 @@
     "@types/jquery-knob": "^1.2.28",
     "@types/morris.js": "^0.5.5",
     "@types/raphael": "^2.1.30",
+    "ng2-dragula": "^1.5.0",
     "codelyzer": "~4.0.1",
     "ng-packagr": "^2.2.0",
     "tslint": "~5.9.1",
