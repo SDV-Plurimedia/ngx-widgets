@@ -22,7 +22,7 @@ export class LoadingDirective implements OnChanges {
 
   ngOnChanges(changes) {
     console.log(changes);
-    if (this.loading) {      
+    if (this.loading) {
       this.viewContainer.clear();
       this.viewContainer.createEmbeddedView(this.template);
     } else {

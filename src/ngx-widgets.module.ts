@@ -185,7 +185,7 @@ let services = [
   ],
   providers: [
     ...services
-  ], 
+  ],
   entryComponents: [
     LoadingMessageComponent
   ]
