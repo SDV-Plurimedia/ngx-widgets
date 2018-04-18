@@ -8,7 +8,7 @@ export class ValidatorHelper {
    * @param model le model
    * @returns
    */
-  static checkNumber(field, model: any): boolean {
+  static checkNumber(field: Field, model: any): boolean {
     let valid: boolean = true;
 
     if (field.required) {
@@ -48,10 +48,12 @@ export class ValidatorHelper {
    * @param model
    * @returns
    */
-  static checkUrl(field, model): boolean {
+  static checkUrl(field: Field, model: any): boolean {
     let valid: boolean = true;
-    let regexp = new RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})');
-    valid = regexp.test(model[field.id]);
+    if (model[field.id] !== '') {
+      let regexp = new RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})');
+      valid = regexp.test(model[field.id]);
+    }
     return valid;
   }
 
