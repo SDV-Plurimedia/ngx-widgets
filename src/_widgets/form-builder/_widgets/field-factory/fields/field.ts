@@ -48,7 +48,7 @@ export class FieldComponent implements OnInit {
           break;
 
           default:
-            valid = ('VALID' === this.form.ngForm.controls[this.field.id]._status);
+            valid = ('VALID' === this.form.ngForm.controls[this.field.id].status);
           break;
         }
       } else {
