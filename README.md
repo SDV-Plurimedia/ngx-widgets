@@ -59,6 +59,7 @@ npm start
 
 * Modifier le package.json avec le nouveau numéro
 * Modifier le CHANGELOG.md pour indiquer les modifications
+* `git commit -am "version X.X.X"`
 * `yarn build`
 * `cd dist`
 * `npm publish`
