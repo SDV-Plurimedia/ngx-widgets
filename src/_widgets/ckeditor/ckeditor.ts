@@ -82,6 +82,27 @@ export class CkeditorComponent implements OnChanges, OnDestroy {
       return;
     }
     if (this.config) {
+      /**
+       * Chargement de la classe CKEDITOR.dtd pour la règle 'allowedContent'
+       * Le chargement de cette classe est indispensable au bon fonctionnement de la règle 'disallowedContent'
+       *
+       * Exemple de configuration mongo :
+       *
+       * "allowedContent" : {
+       *  "allContent" : {
+       *    "elements" : "return CKEDITOR.dtd",
+       *    "attributes" : true,
+       *    "styles" : true,
+       *    "classes" : true
+       *  }
+       * }
+       */
+      if (this.config && this.config.allowedContent && this.config.allowedContent.allContent) {
+        let f = Function(this.config.allowedContent.allContent.elements);
+        this.config.allowedContent['$1'] = this.config.allowedContent.allContent;
+        this.config.allowedContent['$1']['elements'] = f();
+        delete this.config.allowedContent.allContent;
+      }
       CKEDITOR.replace(this.id, this.config);
     } else {
       CKEDITOR.replace(this.id);
