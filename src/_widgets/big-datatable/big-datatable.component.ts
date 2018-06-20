@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
-import {Filter} from '../filter/filter.component';
-import {Pager} from '../pager/pager';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { Component, OnInit, EventEmitter, Input, Output, OnDestroy, ElementRef, OnChanges, AfterViewInit, AfterViewChecked, DoCheck } from '@angular/core';
+import { Filter } from '../filter/filter.component';
+import { Pager } from '../pager/pager';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 /**
@@ -127,6 +127,11 @@ export class BigDatatable {
 
     public searched: boolean = false; // Passe à true lors de la première recherche.
 
+    // Checkboxes
+    public checkboxes: boolean = false;
+    // Champ a placer dans la value des checkboxes pour chaque ligne. Exemple : id_element.
+    public checkboxes_value: string = null;
+
     constructor(config, structure, scope) {
         this.config = config;
         this.structure = structure;
@@ -138,7 +143,7 @@ export class BigDatatable {
         if (this.config.tr) {
             this.tr = this.config.tr;
         } else {
-            this.tr = { class: ''};
+            this.tr = { class: '' };
         }
 
         // On récupère la config de la pagination.
@@ -159,7 +164,7 @@ export class BigDatatable {
             if (this.config.sort) {
                 this.sort = {
                     field: this.config.sort.field || null,
-                    asc: (typeof(this.config.sort.asc) === 'boolean' ? this.config.sort.asc : true)
+                    asc: (typeof (this.config.sort.asc) === 'boolean' ? this.config.sort.asc : true)
                 };
             } else {
                 this.sort = {
@@ -187,7 +192,10 @@ export class BigDatatable {
         this.colspan = this.structure.length + (this.config.buttons ? 1 : 0);
 
         // Les boutons
-        if (this.config.buttons) { this.buttons = this.config.buttons;  }
+        if (this.config.buttons) { this.buttons = this.config.buttons; }
+
+        if (this.config.checkboxes) { this.checkboxes = this.config.checkboxes; }
+        if (this.config.checkboxes_value) { this.checkboxes_value = this.config.checkboxes_value; }
 
         // Création du filtre.
         this.filter = new Filter(this.scope, this.filter_config);
@@ -218,7 +226,7 @@ export class BigDatatable {
     /**
      * La fonction qui s'occupe de poster le filtre & la pagination.
      */
-    public postFilter(reset_pager: boolean = false) {
+    public postFilter(reset_pager: boolean = false) {
 
         if (this.config.filter_has_display_items) {
             // Pas besoin de vérifier du côté serveur qu'on divise par un nombre négatif ou par 0.
@@ -250,14 +258,14 @@ export class BigDatatable {
                 // this.pagination_config.callback = this.pageChange;
                 // On instancie le pager si ce n'est pas encore fait
                 if (this.pager === null || reset_pager) {
-                    this.pager = new Pager( this,
+                    this.pager = new Pager(this,
                         this.pagination_config.total,
                         this.pagination_config.per_page,
                         this.config.pagination_config.delta,
                         this.pageChange,
                         this.pagination_config.current_page);
                 }
-                for (let object of result['data']) {
+                for (let object of result['data']) {
                     this.data.push(object);
                 }
                 this.message.emit('success');
@@ -290,8 +298,8 @@ export class BigDatatable {
      * Vérifie la structure.
      * Enfaite, si on a pas renseigné "state" pour une celule, on le définit à 1 par défaut.
      */
-    private checkStructure() {
-        for (let i = 0; i < this.structure.length; i++) {
+    private checkStructure() {
+        for (let i = 0; i < this.structure.length; i++) {
             if (typeof this.structure[i].state === 'undefined') {
                 this.structure[i].state = 1;
             }
@@ -323,10 +331,18 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
 
     @Input() bigdata: BigDatatable;
     @Output() message = new EventEmitter();  // Renvoie une string success ou error.
+    @Output() checkedRows: EventEmitter<any> = new EventEmitter();
 
-    constructor(private _sanitizer: DomSanitizer) {}
+    private checkedData = [];
+    private newState: boolean = null;
+    public allVisibleRowsAreChecked: boolean = false;
+
+    constructor(private _sanitizer: DomSanitizer, private _element: ElementRef) { }
 
     ngOnInit() {
+        if (this.bigdata.checkboxes) {
+            this.initMainCheckbox();
+        }
         this.bigdata.setMessage(this.message);
     }
 
@@ -343,6 +359,104 @@ export class BigDatatableComponent implements OnInit, OnDestroy {
      */
     public sanitizeHtml(html): SafeHtml {
         return this._sanitizer.bypassSecurityTrustHtml(html);
+    }
+
+    /**
+     * On réinitialise les données liées aux checkboxes.
+     */
+    private initMainCheckbox() {
+        this.allVisibleRowsAreChecked = this.getAllVisibleRowsAreChecked();
+        this._element.nativeElement.querySelectorAll('.check-all').forEach(elem => {
+            elem.setAttribute('checked', this.allVisibleRowsAreChecked.toString());
+        });
+    }
+
+    /**
+     * Séléctionne ou déséléctionne toutes les lignes de la page courante.
+     */
+    public checkAll(event) {
+        event.stopPropagation();
+        this.newState = event.target.checked;
+        this.allVisibleRowsAreChecked = event.target.checked;
+        this._element.nativeElement.querySelectorAll('input.row-checkbox[type="checkbox"]').forEach(elem => {
+            if (elem.checked !== this.newState) {
+                elem.click();
+            }
+            elem.setAttribute('checked', this.newState);
+        });
+        this.checkedRows.emit(this.checkedData);
+        this.newState = null;
+    }
+
+    /**
+     * Coche la checkbox de la ligne passée en param.
+     * @param ligne
+     */
+    public checkOne(row) {
+        if (this.bigdata.checkboxes) {
+            if (this.newState !== null) { // On coche (si newState est différent de null c'est qu'on a coché un bouton pour
+                // tous cocher).
+                if (this.newState) {
+                    if (!this.isChecked(row)) { // Si elle est pas encore cochée, on la coche
+                        this.checkedData.push(row);
+                    }
+                } else {
+                    if (this.isChecked(row)) {
+                        this.checkedData.splice(this.checkedData.indexOf(row), 1);
+                    }
+                }
+            } else if (!this.isChecked(row)) {
+                this.checkedData.push(row);
+                this.checkedRows.emit(this.checkedData);
+            } else { // On décoche
+                this.checkedData.splice(this.checkedData.indexOf(row), 1);
+                this.checkedRows.emit(this.checkedData);
+            }
+        }
+    }
+
+    /**
+      * Délenché lors du clic sur une checkbox dans une ligne. Pour que la case soit bien cochée.
+      * @param event
+      * @param row
+      */
+    public clickRowCheckbox(event, row) {
+        event.stopPropagation();
+        this.checkOne(row);
+    }
+
+    /**
+      * Quand on clic sur une autre case du tr, on déclenche l'event de la checkbox correspondante.
+      * @param i
+      */
+    public callClickCb(i) {
+        this._element.nativeElement.querySelectorAll('#checkbox_' + i).forEach(elem => {
+            elem.click();
+        });
+    }
+
+    /**
+      * Retourne true si toutes les lignes sont cochées
+      * @returns
+      */
+    public getAllVisibleRowsAreChecked(): boolean {
+        if (this.bigdata) {
+            let nbRowWithCheckbox = document.querySelectorAll('.row-checkbox').length;
+            let nbRowChecked = document.querySelectorAll('.row-checkbox:checked').length;
+            return nbRowChecked ===
+                nbRowWithCheckbox && nbRowWithCheckbox !== 0;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+      * Retourne true si la ligne passée en param est cochée.
+      * @param ligne
+      * @returns
+      */
+    public isChecked(ligne): boolean {
+        return this.checkedData.indexOf(ligne) !== -1;
     }
 
 }

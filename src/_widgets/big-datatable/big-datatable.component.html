@@ -16,6 +16,10 @@
 
         <!-- L'entête des colonnes -->
         <tr>
+            <th *ngIf="bigdata?.checkboxes" class="th_checkbox">
+                <input class="check-all" type="checkbox" (click)="checkAll($event)" [checked]="allVisibleRowsAreChecked">
+                <span class="custom-checkbox"></span>
+            </th>
             <ng-container *ngFor="let column of bigdata.structure">
                 <th [ngClass]="'clickable th_datatable th_' + (column.size ? column.size : 0)" (click)="bigdata.changeTri(column.id)" *ngIf="bigdata.can_sort">
                     {{ column.label }}
@@ -37,9 +41,13 @@
 
         <tbody>
         <ng-container *ngIf="bigdata.data">
-            <ng-container *ngFor="let object of bigdata.data">
+            <ng-container *ngFor="let object of bigdata.data; let i = index">
                 <tr [ngClass]="bigdata.tr.function ? bigdata.tr.function.apply(bigdata.parent_scope, [object]) : bigdata.tr.class"
                     (click)="bigdata.clickOnRow(object)">
+                    <td *ngIf="bigdata.checkboxes" align="center" (click)="callClickCb(i)">
+                        <input id="checkbox_{{i}}" type="checkbox" class="row-checkbox" (click)="clickRowCheckbox($event, object)" [checked]="isChecked(ligne)" [value]="bigdata.checkboxes_value ? object[bigdata.checkboxes_value] : i">
+                        <span class="custom-checkbox"></span>
+                    </td>
                     <!-- Les propriétés "normales" -->
                     <ng-container *ngFor="let column of bigdata.structure;">
                         <!-- NORMAL -->
@@ -132,6 +140,10 @@
         <ng-container *ngIf="bigdata.pagination_bottom">
             <tfoot>
             <tr>
+                <th *ngIf="bigdata?.checkboxes" class="th_checkbox">
+                    <input class="check-all" type="checkbox" (click)="checkAll($event)" [checked]="allVisibleRowsAreChecked">
+                    <span class="custom-checkbox"></span>
+                </th>
                 <th [attr.colspan]="bigdata.colspan" class="th_pagination">
                     <!-- <pagination [max_page]="bigdata.pagination_config.max_page"
                                 [item_per_page]="bigdata.pagination_config.item_per_page"
