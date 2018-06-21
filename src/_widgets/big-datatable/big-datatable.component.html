@@ -140,10 +140,6 @@
         <ng-container *ngIf="bigdata.pagination_bottom">
             <tfoot>
             <tr>
-                <th *ngIf="bigdata?.checkboxes" class="th_checkbox">
-                    <input class="check-all" type="checkbox" (click)="checkAll($event)" [checked]="allVisibleRowsAreChecked">
-                    <span class="custom-checkbox"></span>
-                </th>
                 <th [attr.colspan]="bigdata.colspan" class="th_pagination">
                     <!-- <pagination [max_page]="bigdata.pagination_config.max_page"
                                 [item_per_page]="bigdata.pagination_config.item_per_page"
