@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output, OnDestroy, ElementRef, OnChanges, AfterViewInit, AfterViewChecked, DoCheck } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, OnDestroy, ElementRef } from '@angular/core';
 import { Filter } from '../filter/filter.component';
 import { Pager } from '../pager/pager';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
