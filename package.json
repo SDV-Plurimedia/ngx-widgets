@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@sdvplurimedia/ngx-widgets",
-  "version": "2.0.1",
+  "version": "2.0.2-beta.1",
   "description": "SDV - Angular Widgets",
   "ngPackage": {
     "lib": {
