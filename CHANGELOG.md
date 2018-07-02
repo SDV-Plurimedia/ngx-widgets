@@ -1,6 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
-# 2.0.1
+# 2.0.2
+* ADD : Ajout des checkboxes sur le bigdatatable
+## 2.0.1
 * ADD : Added ckedtior config rules for Allowed / DisallowedContent
 ## 2.0.0
 * BC: Passage au format [APF](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit)
