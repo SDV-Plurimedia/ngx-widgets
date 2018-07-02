@@ -91,6 +91,8 @@ La configuration est la suivante :
         * **text** - **string** : Le texte qui sera dans le boutons, peut être du HTML.
         * **class** - **string** : La classe qui sera associé au bouton.
         * **action** : La méthode qui sera appellée lors du clic sur le bouton. Sera appliquée sur **parent_scope**
+    * **checkboxes** - **boolean** Si true ajout d'une colonne avec des checkbox. False par défaut
+    * **checkboxes_value** - **string** (Optionnel) Le champ utilisé pour définir la value du checkbox. Exemple : '_id'
 
 * **parent_scope** : Le composant parent.
 
