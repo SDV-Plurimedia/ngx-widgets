@@ -1,14 +1,20 @@
 #Changelog SDV-NG2-Widgets
 
+# 2.0.3
+* UPD : Autocomplete : Les caractères spéciaux (&, !, ? etc) ne sont plus retiré au moment de la recherche
+
 # 2.0.2
-* ADD : Ajout des checkboxes sur le bigdatatable
+* ADD : Bigdatatable : Ajout des checkboxes
+
 ## 2.0.1
-* ADD : Added ckedtior config rules for Allowed / DisallowedContent
+* ADD : CKEditor : Ajout de règle de configuration pour autorisé/refusé le contenu
+
 ## 2.0.0
 * BC: Passage au format [APF](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit)
 
 ## 1.4.17 - 26/03/2018
 * ADD: Nouvelle directive loading `*loading="condition(;type:'panel|list')"`
+
 ## 1.4.16 - 13/03/2018
 * FIX : HierarchieList : Fix du onChanges & du onInit
 * FIX : Autocomplete : Relancer la recherche si les datas en input ont changés
