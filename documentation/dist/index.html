@@ -3,32 +3,29 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SDV NgX Widgets est un pack de widgets pour angular5+ avec bootstrap">
   
-  <title>SDV NgX Widgets</title>
-  
-
   <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
+  <title>Accueil - SDV NgX Widgets</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="./css/highlight.css">
   <link href="./css/extra.css" rel="stylesheet">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "None";
+    var mkdocs_page_name = "Accueil";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/index.html";
   </script>
   
   <script src="./js/jquery-2.1.1.min.js"></script>
   <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
 </head>
 
@@ -48,7 +45,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
           
             <li>
     <li class="toctree-l1 current">
@@ -291,6 +288,8 @@ Pour un bon fonctionnement de ce composant, il est néanmois conseillé de dispo
 <li><strong>action</strong> : La méthode qui sera appellée lors du clic sur le bouton. Sera appliquée sur <strong>parent_scope</strong></li>
 </ul>
 </li>
+<li><strong>checkboxes</strong> - <strong>boolean</strong> Si true ajout d'une colonne avec des checkbox. False par défaut</li>
+<li><strong>checkboxes_value</strong> - <strong>string</strong> (Optionnel) Le champ utilisé pour définir la value du checkbox. Exemple : '_id'</li>
 </ul>
 </li>
 <li>
@@ -1129,13 +1128,15 @@ Comme le composant directive, on peut lui préciser un type 'list' ou 'panel'.</
 </li>
 </ul>
 <h1 id="pagination">Pagination</h1>
-<p>La pagination permet de générer une pagination.
- * <strong>item_per_page</strong> - <strong>number</strong> - <strong>default = 10</strong> : Le nombre d'élement que l'on veut afficher sur chaque page.
- * <strong>page</strong> - <strong>number</strong> - <strong>default = 1</strong> : La page courante.
- * <strong>max_page</strong> - <strong>number</strong> - <strong>default = 1</strong> : Le nombre de page qu'il y a en tous.
- * <strong>callback</strong> : La fonction à appeller en cas de changement de page, cette fonction sera appellée sur <strong>parent_scope</strong>.
- * <strong>parent_scope</strong> : L'élement sur lequel la fonction <strong>callback</strong> va s'appliquer.
- * <strong>delta</strong> - <strong>number</strong> - <strong>default = 5</strong> : Le nombre de page précédent et suivant <strong>page</strong> que l'on vera à l'écran.</p>
+<p>La pagination permet de générer une pagination.</p>
+<ul>
+<li><strong>item_per_page</strong> - <strong>number</strong> - <strong>default = 10</strong> : Le nombre d'élement que l'on veut afficher sur chaque page.</li>
+<li><strong>page</strong> - <strong>number</strong> - <strong>default = 1</strong> : La page courante.</li>
+<li><strong>max_page</strong> - <strong>number</strong> - <strong>default = 1</strong> : Le nombre de page qu'il y a en tous.</li>
+<li><strong>callback</strong> : La fonction à appeller en cas de changement de page, cette fonction sera appellée sur <strong>parent_scope</strong>.</li>
+<li><strong>parent_scope</strong> : L'élement sur lequel la fonction <strong>callback</strong> va s'appliquer.</li>
+<li><strong>delta</strong> - <strong>number</strong> - <strong>default = 5</strong> : Le nombre de page précédent et suivant <strong>page</strong> que l'on vera à l'écran.</li>
+</ul>
 <p><img alt="Pagination__" src="./img/pagination.png" /></p>
 <p>Exemple d'appel dans un template :</p>
 <pre><code>&lt;pagination [max_page]="max_page"
@@ -1255,21 +1256,22 @@ Comme le composant directive, on peut lui préciser un type 'list' ou 'panel'.</
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
       
     </span>
 </div>
+    <script src="./js/theme.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.14.0
-Build Date UTC : 2018-04-11 10:03:00.524548
+MkDocs version : 0.16.1
+Build Date UTC : 2018-07-23 15:29:40
 -->

@@ -1011,6 +1011,7 @@ Utilisation:
 # Pagination
 
 La pagination permet de générer une pagination.
+
  * **item_per_page** - **number** - **default = 10** : Le nombre d'élement que l'on veut afficher sur chaque page.
  * **page** - **number** - **default = 1** : La page courante.
  * **max_page** - **number** - **default = 1** : Le nombre de page qu'il y a en tous.
