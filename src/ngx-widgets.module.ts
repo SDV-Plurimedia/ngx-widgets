@@ -24,7 +24,10 @@ let modules = [
 // les widgets
 import { AutocompleteDisplayItemsComponent } from './_widgets/autocomplete/_widgets/autocomplete-display-items/autocomplete-display-items';
 import { AutocompleteComponent } from './_widgets/autocomplete/autocomplete';
-import { BigDatatableComponent, BigDatatable } from './_widgets/big-datatable/big-datatable.component';
+import {
+  BigDatatableComponent,
+  BigDatatable
+} from './_widgets/big-datatable/big-datatable.component';
 import { BlocCardComponent } from './_widgets/bloc-card/bloc-card';
 import { Button3dComponent } from './_widgets/button-3d/button-3d';
 import { ChevronComponent } from './_widgets/chevron/chevron';
@@ -55,26 +58,26 @@ import { WizardComponent } from './_widgets/wizard/wizard';
 import { WizardStepComponent } from './_widgets/wizard/step';
 
 // FormBuilder
-import { FieldFactoryComponent} from './_widgets/form-builder/_widgets/field-factory/field-factory';
-import { FieldComponent} from './_widgets/form-builder/_widgets/field-factory/fields/field';
-import { FieldAutocompleteComponent} from './_widgets/form-builder/_widgets/field-factory/fields/autocomplete/autocomplete';
-import { FieldCheckboxComponent} from './_widgets/form-builder/_widgets/field-factory/fields/checkbox/checkbox';
-import { FieldCheckboxesComponent} from './_widgets/form-builder/_widgets/field-factory/fields/checkboxes/checkboxes';
-import { FieldCKEditorComponent} from './_widgets/form-builder/_widgets/field-factory/fields/ckeditor/ckeditor';
-import { FieldDatepickerComponent} from './_widgets/form-builder/_widgets/field-factory/fields/datepicker/datepicker';
-import { FieldEmailComponent} from './_widgets/form-builder/_widgets/field-factory/fields/email/email';
-import { FieldNumberComponent} from './_widgets/form-builder/_widgets/field-factory/fields/number/number';
-import { FieldPasswordComponent} from './_widgets/form-builder/_widgets/field-factory/fields/password/password';
-import { FieldRadiosComponent} from './_widgets/form-builder/_widgets/field-factory/fields/radios/radios';
-import { FieldSelectComponent} from './_widgets/form-builder/_widgets/field-factory/fields/select/select';
-import { FieldTextComponent} from './_widgets/form-builder/_widgets/field-factory/fields/text/text';
-import { FieldTextareaComponent} from './_widgets/form-builder/_widgets/field-factory/fields/textarea/textarea';
-import { FieldUrlComponent} from './_widgets/form-builder/_widgets/field-factory/fields/url/url';
-import { FieldDynamicComponent} from './_widgets/form-builder/_widgets/field-factory/fields/dynamic/dynamic';
-import { FormBuilderComponent} from './_widgets/form-builder/form-builder';
-import { ErrorMessageComponent} from './_widgets/form-builder/_widgets/error-message/error-message';
+import { FieldFactoryComponent } from './_widgets/form-builder/_widgets/field-factory/field-factory';
+import { FieldComponent } from './_widgets/form-builder/_widgets/field-factory/fields/field';
+import { FieldAutocompleteComponent } from './_widgets/form-builder/_widgets/field-factory/fields/autocomplete/autocomplete';
+import { FieldCheckboxComponent } from './_widgets/form-builder/_widgets/field-factory/fields/checkbox/checkbox';
+import { FieldCheckboxesComponent } from './_widgets/form-builder/_widgets/field-factory/fields/checkboxes/checkboxes';
+import { FieldCKEditorComponent } from './_widgets/form-builder/_widgets/field-factory/fields/ckeditor/ckeditor';
+import { FieldDatepickerComponent } from './_widgets/form-builder/_widgets/field-factory/fields/datepicker/datepicker';
+import { FieldEmailComponent } from './_widgets/form-builder/_widgets/field-factory/fields/email/email';
+import { FieldNumberComponent } from './_widgets/form-builder/_widgets/field-factory/fields/number/number';
+import { FieldPasswordComponent } from './_widgets/form-builder/_widgets/field-factory/fields/password/password';
+import { FieldRadiosComponent } from './_widgets/form-builder/_widgets/field-factory/fields/radios/radios';
+import { FieldSelectComponent } from './_widgets/form-builder/_widgets/field-factory/fields/select/select';
+import { FieldTextComponent } from './_widgets/form-builder/_widgets/field-factory/fields/text/text';
+import { FieldTextareaComponent } from './_widgets/form-builder/_widgets/field-factory/fields/textarea/textarea';
+import { FieldUrlComponent } from './_widgets/form-builder/_widgets/field-factory/fields/url/url';
+import { FieldDynamicComponent } from './_widgets/form-builder/_widgets/field-factory/fields/dynamic/dynamic';
+import { FormBuilderComponent } from './_widgets/form-builder/form-builder';
+import { ErrorMessageComponent } from './_widgets/form-builder/_widgets/error-message/error-message';
 
-let widgets =  [
+let widgets = [
   AutocompleteDisplayItemsComponent,
   AutocompleteComponent,
   BigDatatableComponent,
@@ -145,7 +148,7 @@ let directives = [
 import { BootstrapClassPipe } from './_pipes/bootstrap-class';
 import { HtmlEncoderPipe } from './_pipes/htmlencoder/htmlencoder';
 import { HumanReadableSizePipe } from './_pipes/human-readable-size/human-readable-size';
-import { KeysPipe } from './_pipes/keys';
+import { KeysPipe } from './_pipes/keys';
 import { StringShortenedPipe } from './_pipes/string-shortened';
 import { TimestampToDatePipe } from './_pipes/timestamp-to-date';
 import { UcFirstPipe } from './_pipes/ucfirst';
@@ -164,31 +167,13 @@ let pipes = [
 import { StaticLoaderService } from './_services/static-loader';
 import { LoaderService } from './_services/loader';
 
-let services = [
-  StaticLoaderService,
-  LoaderService
-];
+let services = [StaticLoaderService, LoaderService];
 
 @NgModule({
-  imports: [
-    ...modules
-  ],
-  declarations: [
-    ...widgets,
-    ...pipes,
-    ...directives
-  ],
-  exports: [
-    ...widgets,
-    ...pipes,
-    ...directives
-  ],
-  providers: [
-    ...services
-  ],
-  entryComponents: [
-    LoadingMessageComponent
-  ]
+  imports: [...modules],
+  declarations: [...widgets, ...pipes, ...directives],
+  exports: [...widgets, ...pipes, ...directives],
+  providers: [...services],
+  entryComponents: [LoadingMessageComponent]
 })
-export class SDVNgXWidgetsModule {
- }
+export class SDVNgXWidgetsModule {}

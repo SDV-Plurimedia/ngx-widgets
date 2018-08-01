@@ -1,9 +1,12 @@
 #Changelog SDV-NG2-Widgets
 
-# 2.0.3
+## 2.0.3 
+* UPD: Dragula 1.5.0 -> 2.0.0
+
+## 2.0.3
 * UPD : Autocomplete : Les caractères spéciaux (&, !, ? etc) ne sont plus retiré au moment de la recherche
 
-# 2.0.2
+## 2.0.2
 * ADD : Bigdatatable : Ajout des checkboxes
 
 ## 2.0.1
