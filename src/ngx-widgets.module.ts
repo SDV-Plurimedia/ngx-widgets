@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+import { DragulaModule } from 'ng2-dragula';
 
 let modules = [
   CommonModule,
@@ -17,7 +17,7 @@ let modules = [
   ReactiveFormsModule,
   HttpModule,
   JsonpModule,
-  DragulaModule,
+  DragulaModule.forRoot(),
   RouterModule
 ];
 

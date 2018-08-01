@@ -1,7 +1,16 @@
-import {Component, ElementRef, IterableDiffers, Input, DoCheck, OnDestroy, OnInit,
-        Output, EventEmitter} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import {
+  Component,
+  ElementRef,
+  IterableDiffers,
+  Input,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
   selector: 'datatable',
@@ -9,7 +18,6 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   styleUrls: ['./datatable.css']
 })
 export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
-
   @Input() data: Array<any>;
   @Input() structure: Array<any>;
   @Input() buttons: Array<any> = null;
@@ -38,25 +46,28 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   private table_elem: JQuery;
   private table: DataTables.Api;
   private language: any = {
-    'sProcessing':     'Traitement en cours...',
-    'sSearch':         'Rechercher&nbsp;:',
-    'sLengthMenu':     'Afficher _MENU_ &eacute;l&eacute;ments',
-    'sInfo':           'Affichage de l\'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments',
-    'sInfoEmpty':      'Affichage de l\'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment',
-    'sInfoFiltered':   '(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)',
-    'sInfoPostFix':    '',
-    'sLoadingRecords': 'Chargement en cours...',
-    'sZeroRecords':    'Aucun &eacute;l&eacute;ment &agrave; afficher',
-    'sEmptyTable':     'Aucune donn&eacute;e disponible dans le tableau',
-    'oPaginate': {
-      'sFirst':      'Premier',
-      'sPrevious':   'Pr&eacute;c&eacute;dent',
-      'sNext':       'Suivant',
-      'sLast':       'Dernier'
+    sProcessing: 'Traitement en cours...',
+    sSearch: 'Rechercher&nbsp;:',
+    sLengthMenu: 'Afficher _MENU_ &eacute;l&eacute;ments',
+    sInfo:
+      "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    sInfoEmpty:
+      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    sInfoFiltered: '(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)',
+    sInfoPostFix: '',
+    sLoadingRecords: 'Chargement en cours...',
+    sZeroRecords: 'Aucun &eacute;l&eacute;ment &agrave; afficher',
+    sEmptyTable: 'Aucune donn&eacute;e disponible dans le tableau',
+    oPaginate: {
+      sFirst: 'Premier',
+      sPrevious: 'Pr&eacute;c&eacute;dent',
+      sNext: 'Suivant',
+      sLast: 'Dernier'
     },
-    'oAria': {
-      'sSortAscending':  ': activer pour trier la colonne par ordre croissant',
-      'sSortDescending': ': activer pour trier la colonne par ordre d&eacute;croissant'
+    oAria: {
+      sSortAscending: ': activer pour trier la colonne par ordre croissant',
+      sSortDescending:
+        ': activer pour trier la colonne par ordre d&eacute;croissant'
     }
   };
 
@@ -68,32 +79,34 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   public checkedData = [];
 
   constructor(
-      private _element: ElementRef,
-      private differs: IterableDiffers,
-      private _sanitizer: DomSanitizer,
-      private _dragulaService: DragulaService
+    private _element: ElementRef,
+    private differs: IterableDiffers,
+    private _sanitizer: DomSanitizer,
+    private _dragulaService: DragulaService
   ) {
     this.differ = differs.find([]).create(null);
   }
 
   public ngOnInit() {
-
     if (
       // si le bag n'existe pas encore (donc uniquement la premiere fois)
-      !this._dragulaService.find(this.dragulaBag)
+      !this._dragulaService.find(this.dragulaBag) &&
       // si des fonctions de dragNDrop sont envoyé
-      && this.dragulaFunctions ) {
-        console.log('Enregistrement des fonctions de drag', this.dragulaFunctions);
-        let sub = null;
-        // Pour chaque fonction dragula donné en input, on s'enregistre
-        Object.keys(this.dragulaFunctions).forEach( (functionName) => {
-          sub = this._dragulaService[functionName].subscribe((value) => {
-              this.dragulaFunctions[functionName].apply(this.parent_scope, [value]);
-          });
-          this.subscriptions.push(sub);
+      this.dragulaFunctions
+    ) {
+      console.log(
+        'Enregistrement des fonctions de drag',
+        this.dragulaFunctions
+      );
+      let sub = null;
+      // Pour chaque fonction dragula donné en input, on s'enregistre
+      Object.keys(this.dragulaFunctions).forEach((functionName) => {
+        sub = this._dragulaService[functionName].subscribe((value) => {
+          this.dragulaFunctions[functionName].apply(this.parent_scope, [value]);
         });
-   }
-
+        this.subscriptions.push(sub);
+      });
+    }
   }
 
   /*
@@ -114,8 +127,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
       ordering: this.ordering,
       info: this.info,
       initComplete: (settings, json) => {
-        jQuery(this._element.nativeElement).find('.dataTables_paginate li').addClass('page-item');
-        jQuery(this._element.nativeElement).find('.dataTables_paginate li a').addClass('page-link');
+        jQuery(this._element.nativeElement)
+          .find('.dataTables_paginate li')
+          .addClass('page-item');
+        jQuery(this._element.nativeElement)
+          .find('.dataTables_paginate li a')
+          .addClass('page-link');
       }
     };
 
@@ -125,12 +142,10 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
         targets.push(this.structure.length + 1);
       }
       datatableConfig['order'] = [[1, 'asc']]; // Par défaut le sort est présent sur la 1ère colonne.
-      datatableConfig['columnDefs'] = [
-        {orderable: false, targets: targets}
-      ];
+      datatableConfig['columnDefs'] = [{ orderable: false, targets: targets }];
     } else if (this.buttons) {
       datatableConfig['columnDefs'] = [
-        {orderable: false, targets: this.structure.length}
+        { orderable: false, targets: this.structure.length }
       ];
     }
 
@@ -143,8 +158,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
     /** On surveille le dom pour ne pas perdre les classes bootstrap4*/
     if (document.querySelector('.dataTables_paginate') != null) {
       let mut = new MutationObserver((mutations, muta) => {
-        jQuery(this._element.nativeElement).find('.dataTables_paginate li').addClass('page-item');
-        jQuery(this._element.nativeElement).find('.dataTables_paginate li a').addClass('page-link');
+        jQuery(this._element.nativeElement)
+          .find('.dataTables_paginate li')
+          .addClass('page-item');
+        jQuery(this._element.nativeElement)
+          .find('.dataTables_paginate li a')
+          .addClass('page-link');
       });
 
       mut.observe(document.querySelector('.dataTables_paginate'), {
@@ -152,7 +171,6 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
         childList: true
       });
     }
-
   }
 
   public ngOnDestroy() {
@@ -160,13 +178,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
     this.destroyTable(true);
 
     if (this._dragulaService.find(this.dragulaBag)) {
-        this._dragulaService.destroy(this.dragulaBag);
+      this._dragulaService.destroy(this.dragulaBag);
     }
 
     this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
     });
-
   }
 
   // Custom change detection
@@ -209,7 +226,6 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
       } else {
         return res;
       }
-
     } catch (e) {
       return '-- valeur introuvable --';
     }
@@ -241,7 +257,9 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   private initMainCheckbox() {
     this.checkedData = [];
     this.newState = null;
-    jQuery(this._element.nativeElement).find('.check-all').prop('checked', this.allVisibleRowsAreChecked());
+    jQuery(this._element.nativeElement)
+      .find('.check-all')
+      .prop('checked', this.allVisibleRowsAreChecked());
   }
 
   /**
@@ -250,8 +268,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   public checkAll(event) {
     event.stopPropagation();
     this.newState = event.target.checked;
-    jQuery(this._element.nativeElement).find('.dt-body-row input[type="checkbox"]').click();
-    jQuery(this._element.nativeElement).find('.dt-body-row input[type="checkbox"]').prop('checked', this.newState);
+    jQuery(this._element.nativeElement)
+      .find('.dt-body-row input[type="checkbox"]')
+      .click();
+    jQuery(this._element.nativeElement)
+      .find('.dt-body-row input[type="checkbox"]')
+      .prop('checked', this.newState);
     this.checkedRows.emit(this.checkedData);
     this.newState = null;
   }
@@ -262,10 +284,12 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
    */
   public checkOne(row) {
     if (this.checkboxes) {
-      if (this.newState !== null) { // On coche (si newState est différent de null c'est qu'on a coché un bouton pour
+      if (this.newState !== null) {
+        // On coche (si newState est différent de null c'est qu'on a coché un bouton pour
         // tous cocher).
         if (this.newState) {
-          if (!this.isChecked(row)) { // Si elle est pas encore cochée, on la coche
+          if (!this.isChecked(row)) {
+            // Si elle est pas encore cochée, on la coche
             this.checkedData.push(row);
           }
         } else {
@@ -276,7 +300,8 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
       } else if (!this.isChecked(row)) {
         this.checkedData.push(row);
         this.checkedRows.emit(this.checkedData);
-      } else { // On décoche
+      } else {
+        // On décoche
         this.checkedData.splice(this.checkedData.indexOf(row), 1);
         this.checkedRows.emit(this.checkedData);
       }
@@ -284,41 +309,46 @@ export class DatatableComponent implements DoCheck, OnDestroy, OnInit {
   }
 
   /**
-    * Délenché lors du clic sur une checkbox dans une ligne. Pour que la case soit bien cochée.
-    * @param event
-    * @param row
-    */
+   * Délenché lors du clic sur une checkbox dans une ligne. Pour que la case soit bien cochée.
+   * @param event
+   * @param row
+   */
   public clickRowCheckbox(event, row) {
     event.stopPropagation();
     this.checkOne(row);
   }
 
   /**
-    * Quand on clic sur une autre case du tr, on déclenche l'event de la checkbox correspondante.
-    * @param i
-    */
+   * Quand on clic sur une autre case du tr, on déclenche l'event de la checkbox correspondante.
+   * @param i
+   */
   public callClickCb(i) {
-    jQuery(this._element.nativeElement).find('#checkbox_' + i).click();
+    jQuery(this._element.nativeElement)
+      .find('#checkbox_' + i)
+      .click();
   }
 
   /**
-    * Retourne true si toutes les lignes sont cochées
-    * @returns
-    */
+   * Retourne true si toutes les lignes sont cochées
+   * @returns
+   */
   public allVisibleRowsAreChecked(): boolean {
     if (this.table) {
-      return jQuery(this._element.nativeElement).find('.row-checkbox:checked').length ===
-          jQuery(this._element.nativeElement).find('.row-checkbox').length;
+      return (
+        jQuery(this._element.nativeElement).find('.row-checkbox:checked')
+          .length ===
+        jQuery(this._element.nativeElement).find('.row-checkbox').length
+      );
     } else {
       return false;
     }
   }
 
   /**
-    * Retourne true si la ligne passée en param est cochée.
-    * @param ligne
-    * @returns
-    */
+   * Retourne true si la ligne passée en param est cochée.
+   * @param ligne
+   * @returns
+   */
   public isChecked(ligne): boolean {
     return this.checkedData.indexOf(ligne) !== -1;
   }
