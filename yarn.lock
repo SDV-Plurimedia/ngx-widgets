@@ -99,6 +99,10 @@
   dependencies:
     "@types/jquery" "*"
 
+"@types/dragula@^2.1.33":
+  version "2.1.33"
+  resolved "https://registry.yarnpkg.com/@types/dragula/-/dragula-2.1.33.tgz#63a694bd8a5fb7bfa570778a12a069be98462919"
+
 "@types/jquery-knob@^1.2.28":
   version "1.2.31"
   resolved "https://registry.yarnpkg.com/@types/jquery-knob/-/jquery-knob-1.2.31.tgz#11e8bb9f549a6ff3b321a44f55fe10ef38bf3560"
@@ -1673,10 +1677,11 @@ ng-packagr@^2.2.0:
     uglify-js "^3.3.20"
     update-notifier "^2.3.0"
 
-ng2-dragula@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-1.5.0.tgz#12a221d7a34fc629cc74dc98efb26448290eb6e5"
+ng2-dragula@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-2.0.2.tgz#00d9bc93319eddbb24b7c7128fa54a05074d28db"
   dependencies:
+    "@types/dragula" "^2.1.33"
     dragula "^3.7.2"
 
 node-gyp@^3.3.1:

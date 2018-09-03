@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@sdvplurimedia/ngx-widgets",
-  "version": "2.0.3-beta.1",
+  "version": "2.0.4-beta.3",
   "description": "SDV - Angular Widgets",
   "ngPackage": {
     "lib": {
@@ -36,7 +36,7 @@
     "@angular/platform-browser-dynamic": ">=5.2.8",
     "@angular/router": ">=5.2.8",
     "moment": "^2.21.0",
-    "ng2-dragula": "^1.5.0",
+    "ng2-dragula": "^2.0.0",
     "rxjs": "^5.5.0",
     "zone.js": "^0.8.19"
   },
@@ -61,9 +61,9 @@
     "@types/jquery-knob": "^1.2.28",
     "@types/morris.js": "^0.5.5",
     "@types/raphael": "^2.1.30",
-    "ng2-dragula": "^1.5.0",
     "codelyzer": "~4.0.1",
     "ng-packagr": "^2.2.0",
+    "ng2-dragula": "^2.0.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
   },
