@@ -1,10 +1,9 @@
 #Changelog SDV-NG2-Widgets
 
-## 2.0.3 
+## 2.0.4
 * UPD: Dragula 1.5.0 -> 2.0.0
-
-## 2.0.3
 * UPD : Autocomplete : Les caractères spéciaux (&, !, ? etc) ne sont plus retiré au moment de la recherche
+* BC: Changement de nom pour la directive loading qui devient sdv_loading.
 
 ## 2.0.2
 * ADD : Bigdatatable : Ajout des checkboxes
