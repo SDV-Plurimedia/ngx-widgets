@@ -1,5 +1,8 @@
 #Changelog SDV-NG2-Widgets
 
+## 2.0.5
+* FIX: Retrait de cnsole.log dans la directive loading.
+
 ## 2.0.4
 * UPD: Dragula 1.5.0 -> 2.0.0
 * UPD : Autocomplete : Les caractères spéciaux (&, !, ? etc) ne sont plus retiré au moment de la recherche
